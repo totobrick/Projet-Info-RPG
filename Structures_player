@@ -6,5 +6,3 @@ typedef struct{
   int arme; //1,2,3,4
   int replique; //0,1
 }Joueur;
-
-rtgiopy
