@@ -1,0 +1,16 @@
+#include<stdio.h>
+
+typedef struct{
+    int zombie;
+    int troll;
+    int harpie;
+    int basilic;
+} monstre;
+
+typedef struct{
+    int cache;
+    monstre m;
+    int tresor;
+    int totem;
+    //evenement????
+} Case;
