@@ -21,5 +21,7 @@ typedef struct{
     int totem;
     relique r;
     int portail;
+    int mur;
+    int event;
     //evenement????
 } Case;
