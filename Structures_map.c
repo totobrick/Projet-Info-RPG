@@ -1,10 +1,10 @@
 #include<stdio.h>
 
 typedef struct{
-    int zombie;
-    int troll;
-    int harpie;
-    int basilic;
+    int zombie;  // 1
+    int troll;   // 2
+    int harpie;  // 3
+    int basilic; // 4
 } monstre;
 
 typedef struct{
