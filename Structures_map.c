@@ -15,7 +15,7 @@ typedef struct{
 } relique;
 
 typedef struct{
-    int cache;
+    int cache; //0=cache 1= case visible
     monstre m;
     int tresor;
     int totem;
