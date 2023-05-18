@@ -6,3 +6,6 @@
 } event;
 
 if (malus==1 && neutral==0 && shop==0 && bonus==0)
+if (malus==0 && neutral==1 && shop==0 && bonus==0)
+if (malus==0 && neutral==0 && shop==1 && bonus==0)
+if (malus==0 && neutral==0 && shop==0 && bonus==1)
