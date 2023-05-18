@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <time.h>
-#include <stlib.h>
-
 void board (card tab, int size);
 void init_wall (card tab, int size);
 void init_card (card tab, int size);
