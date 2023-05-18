@@ -22,12 +22,16 @@ Le mage :
 "m" (code ASCII 109)
 "Ψ" (code ASCII 936)
 "Ϟ" (code ASCII 990)
+  
+  ranger
+"Ψ" (code ASCII 936) : Ce caractère ressemble à une flèche stylisée ou à un symbole de pouvoir, ce qui peut évoquer l'image d'un ranger expert en tir à l'arc.
 
-Le ranger :
+"®" (code ASCII 174) : Ce caractère peut représenter un ranger avec son emblème ou son insigne, symbolisant son statut et son affiliation.
 
-"R" (code ASCII 82)
-"r" (code ASCII 114)
-"Ř" (code ASCII 344)
-"Ɍ" (code ASCII 428)
+"⌠" (code ASCII 9184) : Ce caractère ressemble à une silhouette en mouvement, évoquant l'image d'un ranger agile et capable de se déplacer rapidement dans la nature.
+
+"҉" (code ASCII 1137) : Ce caractère peut représenter un ranger avec son équipement, comme un arc et des flèches, ou une ceinture de munitions.
+
+"Ô" (code ASCII 212) : Ce caractère peut évoquer l'image d'un ranger portant une capuche ou un chapeau, symbole de sa connexion avec la nature.
 
   
