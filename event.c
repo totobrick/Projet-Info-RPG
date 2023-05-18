@@ -33,9 +33,12 @@ if (malus==0 && neutral==1 && shop==0 && bonus==0)
 if (malus==0 && neutral==0 && shop==1 && bonus==0)
     
     srand (time(NULL));
+           
     
     
     
 if (malus==0 && neutral==0 && shop==0 && bonus==1)
     
     srand (time(NULL));    
+           
+           printf("
