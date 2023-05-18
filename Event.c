@@ -15,27 +15,34 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
     
  //  printf ("Vous repérez au loin un vieux magicien sénil. Vous tentez de vous approchez, pour savoir  si tous va bien. Lorsque vous êtes assez proche pour voir son visage, il vous regarde droits dans les yeux et vous hurle: VOUS NE PASSEREZ PAS! (la case évenemnt devient définitivement une case mur)");
 }
-if (malus==0 && neutral==1 && shop==0 && bonus==0)
+      else if (malus==0 && neutral==1 && shop==0 && bonus==0){
    
-    printf ("Un spectacle d'horreur se déroule devant vous! Un pauvre poisson clown, hors de l'eau semble pleurer, tous en ne pouvant pas respirer. Il semble répeter sans cesse ces mêmes mots: Vous n'avez pas vu mon fils? Vous n'avez pas vu mon fils? Vous n'avez pas vu mon...  Le manque d'oxygen a eu raison de lui. Vous avez désormais un nouvelle objectif. après être sorti victorieux de ce labyrinthe infernal, vous vous metterez à la recherche de ce fameux fils.");
+          printf ("Un spectacle d'horreur se déroule devant vous! Un pauvre poisson clown, hors de l'eau semble pleurer, tout en ne pouvant pas respirer. Il semble répeter sans cesse ces mêmes mots: Vous n'avez pas vu mon fils? Vous n'avez pas vu mon fils? Vous n'avez pas vu mon...  Le manque d'oxygen a eu raison de lui. Vous avez désormais un nouvelle objectif. après être sorti victorieux de ce labyrinthe infernal, vous vous metterez à la recherche de ce fameux fils.");
 
-    printf ("Vous croisez un enorme tuyaux fait de métal . Intrigué, vous vous approchez et entendez une étrange voix dans votre tête: Il faut suivre le conduit. Ne sacchant ce qu'est ce fameux «conduit», vous continuez votre route.");
+          printf ("Vous croisez un enorme tuyaux fait de métal . Intrigué, vous vous approchez et entendez une étrange voix dans votre tête: Il faut suivre le conduit. Ne sacchant ce qu'est ce fameux «conduit», vous continuez votre route.");
             
-    printf ("Un homme au loin vous demande comment rejoindre «Sunny». Il a les cheveux vert, comme si de la mousse lui avait poussé sur la tête. Il porte trois sabres au niveau de la ceinture, il parrait vraiment louche. Vous lui montrez une direction aléatoire en espérant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle étrange rencontre!");
+          printf ("Un homme au loin vous demande comment rejoindre «Sunny». Il a les cheveux vert, comme si de la mousse lui avait poussé sur la tête. Il porte trois sabres au niveau de la ceinture, il parrait vraiment louche. Vous lui montrez une direction aléatoire en espérant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle étrange rencontre!");
 
-    printf(" 
+          printf(" 
            //essayer les code qui fonctione le mieux pour la musique
+                  
+          printf("Vous voyez une sorte de scientifique au loin. En essayant de vous approchez, vous voyez une sorte d'écran apparaître avec marqué dessus «Fun value invalide». voyant que vous ne pouvez bas continuer, vous décidez d'abandoner et de continuer votre périple.")
            
-    printf("Vous voyez une sorte de scientifique au loin. En essayant de vous approchez, vous voyez une sorte d'écran apparaître avec marqué dessus «Fun value invalide». voyant que vous ne pouvez bas continuer, vous décidez d'abandoner et de continuer votre périple.")
+          printf("Vous trouvez un parchemin ancien! Quel secret cache t-il? Vous l'ouvrez et contemplez. Il est écrit «Seul Link peut vaincre Ganon.». De part le faite que vous ne vous nommez pas Link ni Ganon, vous jeté ce torchon inutile.")
+           }
            
-    printf("Vous trouvez un parchemin ancien! Quel secret cache t-il? Vous l'ouvrez et contemplez. Il est écrit «Seul Link peut vaincre Ganon.». De part le faite que vous ne vous nommez pas Link ni Ganon, vous jeté ce torchon inutile.")
-
-           
-if (malus==0 && neutral==0 && shop==1 && bonus==0)
+               else if (malus==0 && neutral==0 && shop==1 && bonus==0){
            
     
+}
     
-    
-if (malus==0 && neutral==0 && shop==0 && bonus==1)  
+                        else if (malus==0 && neutral==0 && shop==0 && bonus==1)  {
            
-           printf("En vous balladant, vous tomber sur une étrange famille de 
+                                 printf("En vous balladant, vous tomber sur une étrange famille de 
+                  }
+                  
+                  
+                  else(){
+                  printf("Problème, l'évenement n'a pas pus être lancé!)
+                  
+                  }
