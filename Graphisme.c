@@ -27,3 +27,20 @@ Le mage :
 "Ô" (code ASCII 212) : Ce caractère peut évoquer l'image d'un ranger portant une capuche ou un chapeau, symbole de sa connexion avec la nature.
 
   
+Couleur:
+
+#include <stdio.h>
+
+int main() {
+    // Séquence d'échappement ANSI pour définir la couleur du texte en rouge
+    printf("\033[31mTexte en rouge\033[0m\n");
+
+    // Séquence d'échappement ANSI pour définir la couleur du fond en bleu et la couleur du texte en blanc
+    printf("\033[44;37mTexte sur fond bleu\033[0m\n");
+
+    return 0;
+}
+
+/*Dans cet exemple, nous utilisons la séquence d'échappement \033[ pour indiquer le début d'une séquence d'échappement ANSI. Ensuite, nous utilisons des codes spécifiques pour définir les attributs de texte,
+tels que la couleur du texte et du fond. Le code 31 indique la couleur rouge, le code 44 indique le fond bleu et le code 37 indique le texte blanc. La séquence d'échappement \033[0m est utilisée pour réinitialiser
+les attributs de texte par défaut.*/
