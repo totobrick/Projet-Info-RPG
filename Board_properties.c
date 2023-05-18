@@ -26,8 +26,8 @@ typedef struct{
 void board (card tab, int size);
 void init_wall (card tab, int size);
 void init_card (card tab, int size);
-void hidden_box(card tab, int size);
-void show_board (card tab, int size);
+//void hidden_box(card tab, int size);
+//void show_board (card tab, int size);
 
 /*_________________________________________________________________________________________________*/
 
@@ -35,7 +35,7 @@ void board (card* tab, int size){
     init_wall(tab, size);
     init_card(tab, size);
     
-    show_board (tab, size);
+    //show_board (tab, size);
 }
 
 /*_________________________________________________________________________________________________*/
