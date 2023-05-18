@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-enum Armes { TORCHE = 1, BOUCLIER = 2, HACHE = 3, ARC = 4 };
+enum Armes { TORCHE = 1, BOUCLIER = 2, HACHE = 3, ARC = 4 };            //ATTENTION aux =1,2,3,4, je pense qu'il n'est pas nécessaire
 enum Ennemis { BASILIC = 1, ZOMBIE = 2, TROLL = 3, HARPIE = 4 };
 
 void vide_buffer() {
@@ -56,7 +56,7 @@ int main() {
     printf("2. Bouclier\n");
     printf("3. Hache\n");
     printf("4. Arc\n");
-      do {
+    do {
         printf("Votre choix: ");
         verif = scanf("%d", &arme);
         vide_buffer();
@@ -67,7 +67,7 @@ verif=0;
     printf("2. Zombie\n");
     printf("3. Troll\n");
     printf("4. Harpie\n");
-       do {
+    do {
         printf("Votre choix:  ");
         verif = scanf("%d", &ennemi);
         vide_buffer();
