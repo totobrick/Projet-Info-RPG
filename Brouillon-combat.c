@@ -60,7 +60,7 @@ int main() {
         printf("Votre choix: ");
         verif = scanf("%d", &arme);
         vide_buffer();
-    } while (arme != 1 && arme != 2 && arme != 3 && arme != 4 || arme != 1);
+    } while (arme != 1 && arme != 2 && arme != 3 && arme != 4 || verif != 1);
 verif=0;
     printf("Choisissez votre ennemi : \n");
     printf("1. Basilic\n");
@@ -71,7 +71,7 @@ verif=0;
         printf("Votre choix:  ");
         verif = scanf("%d", &ennemi);
         vide_buffer();
-    } while (ennemi != 1 && ennemi != 2 && ennemi != 3 && ennemi != 4 || ennemi != 1);
+    } while (ennemi != 1 && ennemi != 2 && ennemi != 3 && ennemi != 4 || verif != 1);
 
     combat(arme, ennemi);
 
