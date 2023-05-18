@@ -17,7 +17,7 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
     
  //  printf ("Vous repérez au loin un vieux magicien sénil. Vous tentez de vous approchez, pour savoir  si tous va bien. Lorsque vous êtes assez proche pour voir son visage, il vous regarde droits dans les yeux et vous hurle: VOUS NE PASSEREZ PAS! (la case évenemnt devient définitivement une case mur)\n");
 }
-if (malus==0 && neutral==1 && shop==0 && bonus==0)
+else if (malus==0 && neutral==1 && shop==0 && bonus==0)
     
     srand (time(NULL));
 
@@ -34,7 +34,7 @@ if (malus==0 && neutral==1 && shop==0 && bonus==0)
            
     printf("Vous trouvez un parchemin ancien ! Quel secret cache t-il ? \nVous l'ouvrez et le contemplez. Il est écrit : « Seul Link peut vaincre Ganon. ». Du fait que vous ne vous nommez ni Link, ni Ganon, vous jetez ce torchon inutile.\n");
 
-if (malus==0 && neutral==0 && shop==1 && bonus==0){
+else if (malus==0 && neutral==0 && shop==1 && bonus==0){
     
     srand (time(NULL));
 }
@@ -42,11 +42,12 @@ if (malus==0 && neutral==0 && shop==1 && bonus==0){
     
     
     
-if (malus==0 && neutral==0 && shop==0 && bonus==1){
+else if (malus==0 && neutral==0 && shop==0 && bonus==1){
     
     srand (time(NULL));    
            
            printf("En vous baladant, vous tombez sur une étrange famille de deux squelettes. L'un petit, portant des habits rouge et blanc. Son frère, plus petit, porte un sweet à capuche bleuet et un pantalon noir. Pour éviter tout combat inutile, vous attendez un peu que le temps passe.");
+    
                   }
 
                   else(){
