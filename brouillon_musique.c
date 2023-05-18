@@ -60,7 +60,7 @@ void openURL(const char* url) {
 }
 
 int main() {
-    const char* rickRollURL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";  // Lien vers la vidéo de Rick Astley
+    const char* rickRollURL = "https://youtu.be/xLGktQmtR5A";  // Lien vers la vidéo de Rick Astley
 
     printf("Cliquez pour voir quelque chose d'incroyable !\n");
 
@@ -79,7 +79,7 @@ int main() {
 #include <unistd.h>
 
 int main() {
-    const char* rickRollURL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";  // Lien vers la vidéo de Rick Astley
+    const char* rickRollURL = "https://youtu.be/xLGktQmtR5A";  // Lien vers la vidéo de Rick Astley
 
     const char* browser = "xdg-open";  // Commande pour ouvrir l'URL avec le navigateur par défaut sur Linux
 
