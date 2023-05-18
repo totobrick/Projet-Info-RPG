@@ -26,9 +26,9 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
           printf(" 
            //essayer les code qui fonctione le mieux pour la musique
                   
-          printf("Vous voyez une sorte de scientifique au loin. En essayant de vous approchez, vous voyez une sorte d'écran apparaître avec marqué dessus «Fun value invalide». voyant que vous ne pouvez bas continuer, vous décidez d'abandoner et de continuer votre périple.")
+          printf("Vous voyez une sorte de scientifique au loin. En essayant de vous approchez, vous voyez une sorte d'écran apparaître avec marqué dessus «Fun value invalide». voyant que vous ne pouvez bas continuer, vous décidez d'abandoner et de continuer votre périple.");
            
-          printf("Vous trouvez un parchemin ancien! Quel secret cache t-il? Vous l'ouvrez et contemplez. Il est écrit «Seul Link peut vaincre Ganon.». De part le faite que vous ne vous nommez pas Link ni Ganon, vous jeté ce torchon inutile.")
+          printf("Vous trouvez un parchemin ancien! Quel secret cache t-il? Vous l'ouvrez et contemplez. Il est écrit «Seul Link peut vaincre Ganon.». De part le faite que vous ne vous nommez pas Link ni Ganon, vous jeté ce torchon inutile.");
            }
            
                else if (malus==0 && neutral==0 && shop==1 && bonus==0){
@@ -43,6 +43,6 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
                   
                   
                   else(){
-                  printf("Problème, l'évenement n'a pas pus être lancé!)
+                  printf("Problème, l'évenement n'a pas pus être lancé!);
                   
                   }
