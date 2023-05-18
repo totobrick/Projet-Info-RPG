@@ -27,7 +27,8 @@ if (malus==0 && neutral==1 && shop==0 && bonus==0)
             
     printf ("Un homme au loin vous demande comment rejoindre «Sunny». Il a les cheveux vert, comme si de la mousse lui avait poussé sur la tête. Il porte trois sabres au niveau de la ceinture, il parrait vraiment louche. Vous lui montrez une direction aléatoire en espérant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle étrange rencontre!");
 
-    printf("
+    printf(" 
+           //essayer les code qui fonctione le mieux pour la musique
 
 if (malus==0 && neutral==0 && shop==1 && bonus==0)
     
