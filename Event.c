@@ -34,7 +34,7 @@ else if (malus==0 && neutral==1 && shop==0 && bonus==0){
 }
 else if (malus==0 && neutral==0 && shop==0 && bonus==1){
            
-           printf("Vous rencontrez au détour de ce labyrinthe un vieil homme. Il prétend être le directeur d'un lycée spécialisé en magie très connu: le Lycée Magique George Pompidou. Il exprime même l'envie de vous faire entrer dans son lycée, dans la classe de « Nintendor ». Vous acceptez, et par conséquent, il se mit à hurlé: «100.000 point pour Nintendor! ».")
+           printf("Vous rencontrez au détour de ce labyrinthe un vieil homme. Il prétend être le directeur d'un lycée spécialisé en magie très connu : le Lycée Magique George Pompidou. Il exprime même l'envie de vous faire entrer dans son lycée, dans la classe de « Nintendor ». Vous acceptez, et par conséquent, il se mit à hurler : « 100.000 points pour Nintendor! ».")
                   }
 
                   else(){
