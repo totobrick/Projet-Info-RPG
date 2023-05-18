@@ -10,3 +10,27 @@ int main(){
   }
   return 0;
 }
+
+/*
+void show_board (card* tab, int size){
+    if (size<=0){
+        exit(1);
+    }
+    for (int i=0 ; i<size ; i++){
+        for (int j=0 ; j<size ; j++){
+            printf("	", tab[i][j]);		//A COMPLETER
+        }
+        printf("\n", tab[i][j]);			//A COMPLETER
+    }
+}
+
+void hidden_box(card* tab, int size){
+    if (size<=0){
+        exit(1);
+    }
+    for (int i=0 ; i<size ; i++){
+        tab[i][0].hidden=0;
+        for (int j=0 ; j<size ; j++){
+            tab[i][j].hidden=0;
+        }
+    }*/
