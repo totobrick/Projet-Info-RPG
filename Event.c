@@ -23,8 +23,8 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
             
           printf ("Un homme au loin vous demande comment rejoindre «Sunny». Il a les cheveux vert, comme si de la mousse lui avait poussé sur la tête. Il porte trois sabres au niveau de la ceinture, il parrait vraiment louche. Vous lui montrez une direction aléatoire en espérant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle étrange rencontre!");
 
-          printf (" 
-           //essayer les code qui fonctione le mieux pour la musique
+          printf ("   /*essayer les code qui fonctione le mieux pour la musique*/");
+     
                   
           printf ("Vous voyez une sorte de scientifique au loin. En essayant de vous approchez, vous voyez une sorte d'écran apparaître avec marqué dessus «Fun value invalide». voyant que vous ne pouvez bas continuer, vous décidez d'abandoner et de continuer votre périple.");
            
