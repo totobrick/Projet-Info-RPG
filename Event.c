@@ -1,6 +1,5 @@
 typedef struct{
     int neutral;    // 0=non et 1=oui 
-    int shop;       // 0=non et 1=oui 
     int malus;      // 0=non et 1=oui 
     int bonus;      // 0=non et 1=oui 
 } event;
@@ -32,13 +31,7 @@ else if (malus==0 && neutral==1 && shop==0 && bonus==0)
 
     printf("Vous trouvez un parchemin ancien ! Quel secret cache t-il ? \nVous l'ouvrez et le contemplez. Il est écrit : « Seul Link peut vaincre Ganon. ». Du fait que vous ne vous nommez ni Link, ni Ganon, vous jetez ce torchon inutile.\n");
 
-else if (malus==0 && neutral==0 && shop==1 && bonus==0){
-    
-    
-}
-           
-    
-    
+
     
 else if (malus==0 && neutral==0 && shop==0 && bonus==1){
            
