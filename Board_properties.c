@@ -37,6 +37,7 @@ typedef struct{
 
 void board (card tab, int size){
     init_wall(tab, size);
+    init_card(tab,size);
 }
 
 /*_________________________________________________________________________________________________*/
