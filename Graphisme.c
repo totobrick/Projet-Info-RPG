@@ -8,43 +8,19 @@
 
 "@" (code ASCII 64) : Ce caractère peut représenter un voleur dans une position furtive ou accroupie, prêt à agir rapidement.
 
-"Ϡ" (code ASCII 1008) : Ce caractère ressemble à une silhouette penchée ou furtive, ce qui peut évoquer l'image d'un voleur.
 
   Le chevalier :
-♞" (code ASCII 9822) : Ce caractère ressemble à une silhouette de cavalier, évoquant l'image d'un chevalier à cheval.
-
-"█" (code ASCII 9608) : Ce caractère peut représenter un chevalier en armure, avec sa silhouette imposante.
-
-"⚔" (code ASCII 9876) : Ce caractère symbolise une épée croisée, représentant l'arme emblématique du chevalier.
-
-"♜" (code ASCII 9812) : Ce caractère ressemble à une tour d'échecs, qui peut être utilisée pour représenter un chevalier en raison de sa nature défensive et stratégique.
-
-"⌇" (code ASCII 8983) : Ce caractère peut représenter un chevalier brandissant une lance, symbolisant la cavalerie et le combat monté.
 
 "Ø" (code ASCII 216) : Ce caractère ressemble à un bouclier, représentant la protection et la défense du chevalier.
   
 Le mage :
 
-"Φ" (code ASCII 934) : Ce caractère ressemble à un symbole mystique ou magique, évoquant l'image d'un mage avec ses pouvoirs ésotériques.
 
 "§" (code ASCII 167) : Ce caractère peut représenter un livre de sorts, symbolisant la connaissance et la maîtrise des incantations d'un mage.
 
-"☽" (code ASCII 9789) : Ce caractère ressemble à un croissant de lune, évoquant l'image d'un mage lié à la magie lunaire ou aux forces célestes.
-
-"∆" (code ASCII 8710) : Ce caractère peut représenter un symbole de transformation ou de manipulation d'énergie, en lien avec les pouvoirs magiques d'un mage.
-
-"≋" (code ASCII 8779) : Ce caractère ressemble à une vague ou à une onde, symbolisant la manipulation des forces élémentaires par un mage.
-
-"✪" (code ASCII 10026) : Ce caractère peut représenter une étoile, évoquant l'image d'un mage avec des pouvoirs éblouissants ou cosmiques.
-  
   ranger
-"Ψ" (code ASCII 936) : Ce caractère ressemble à une flèche stylisée ou à un symbole de pouvoir, ce qui peut évoquer l'image d'un ranger expert en tir à l'arc.
 
 "®" (code ASCII 174) : Ce caractère peut représenter un ranger avec son emblème ou son insigne, symbolisant son statut et son affiliation.
-
-"⌠" (code ASCII 9184) : Ce caractère ressemble à une silhouette en mouvement, évoquant l'image d'un ranger agile et capable de se déplacer rapidement dans la nature.
-
-"҉" (code ASCII 1137) : Ce caractère peut représenter un ranger avec son équipement, comme un arc et des flèches, ou une ceinture de munitions.
 
 "Ô" (code ASCII 212) : Ce caractère peut évoquer l'image d'un ranger portant une capuche ou un chapeau, symbole de sa connexion avec la nature.
 
