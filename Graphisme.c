@@ -25,10 +25,17 @@
   
 Le mage :
 
-"M" (code ASCII 77)
-"m" (code ASCII 109)
-"Ψ" (code ASCII 936)
-"Ϟ" (code ASCII 990)
+"Φ" (code ASCII 934) : Ce caractère ressemble à un symbole mystique ou magique, évoquant l'image d'un mage avec ses pouvoirs ésotériques.
+
+"§" (code ASCII 167) : Ce caractère peut représenter un livre de sorts, symbolisant la connaissance et la maîtrise des incantations d'un mage.
+
+"☽" (code ASCII 9789) : Ce caractère ressemble à un croissant de lune, évoquant l'image d'un mage lié à la magie lunaire ou aux forces célestes.
+
+"∆" (code ASCII 8710) : Ce caractère peut représenter un symbole de transformation ou de manipulation d'énergie, en lien avec les pouvoirs magiques d'un mage.
+
+"≋" (code ASCII 8779) : Ce caractère ressemble à une vague ou à une onde, symbolisant la manipulation des forces élémentaires par un mage.
+
+"✪" (code ASCII 10026) : Ce caractère peut représenter une étoile, évoquant l'image d'un mage avec des pouvoirs éblouissants ou cosmiques.
   
   ranger
 "Ψ" (code ASCII 936) : Ce caractère ressemble à une flèche stylisée ou à un symbole de pouvoir, ce qui peut évoquer l'image d'un ranger expert en tir à l'arc.
