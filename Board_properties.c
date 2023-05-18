@@ -18,7 +18,10 @@ typedef struct{
     int grimoire;
     int dagger;			//dagger = dague
 } relic;
-	
+
+typedef struct{
+	int mur;	//1=oui 0=non
+	int hidden;	//0=cache 1= case visible
     monster m;
     int treasure;
     int totem;
