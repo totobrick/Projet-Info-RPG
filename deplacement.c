@@ -4,7 +4,7 @@ int deplacement_joueur = 0;
 int deplacement_case = 0;
 
 
-printf("Maintenant choisissez une direction :"\n)
+printf("Maintenant choisissez une direction :",\n)
 printf(\t,\t,"Haut")
 
 
