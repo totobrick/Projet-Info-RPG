@@ -56,9 +56,9 @@ void show_board (space tab, int size){
 }
 
 void return_box(space tab, int size){
-	for (int i=1 ; i<(size-1) ; i++){
-		tab[i][0].mur=1;
-		for (int j=1 ; j<(size-1) ; j++){
-			tab[i][j].mur=0;
+	for (int i=0 ; i<size ; i++){
+		tab[i][0].hidden=0;
+		for (int j=0 ; j<size ; j++){
+			tab[i][j].hidden=0;
 		}
 }
