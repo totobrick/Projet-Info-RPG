@@ -11,7 +11,7 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
     printf(" ");
            //essayer les code qui fonctione le mieux pour la musique
     
-    printf ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle.")
+    printf ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle.\n")
         //change la case en monstre harpy et lance le combat. la case devient définitivement une harpy.
     
     printf ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tous à coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!!. À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, malgré tous avec l'honneur d'un grand guerrier!\n");
@@ -24,7 +24,7 @@ else if (malus==0 && neutral==1 && shop==0 && bonus==0){
 
     printf ("Vous croisez un énorme tuyau fait de métal. Intrigué, vous vous approchez et entendez une étrange voix dans votre tête : Il faut suivre le conduit. Ne sachant ce qu'est ce fameux « conduit », vous continuez votre route.\n");
             
-    printf ("Un homme au loin vous demande comment rejoindre « Sunny ». Il a les cheveux verts, comme si de la mousse lui avait poussé sur la tête. Il porte trois sabres au niveau de la ceinture, il paraît vraiment louche. Vous lui montrez une direction aléatoire en espérant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle étrange rencontre !");
+    printf ("Un homme au loin vous demande comment rejoindre « Sunny ». Il a les cheveux verts, comme si de la mousse lui avait poussé sur la tête. Il porte trois sabres au niveau de la ceinture, il paraît vraiment louche. Vous lui montrez une direction aléatoire en espérant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle étrange rencontre !\n");
            
     printf("Vous voyez une sorte de scientifique au loin. En essayant de vous approcher, vous voyez une sorte d'écran apparaître avec marqué dessus : « Fun value invalid ». \nVoyant que vous ne pouvez bas continuer, vous décidez d'abandonner et de continuer votre périple.\n");
                    
@@ -38,6 +38,6 @@ else if (malus==0 && neutral==0 && shop==0 && bonus==1){
                   }
 
                   else(){
-                  printf ("Problème ! L'évenement n'a pas pu être lancé !");
+                  printf ("Problème ! L'évenement n'a pas pu être lancé !\n");
                   }
  }
