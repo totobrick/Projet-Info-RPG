@@ -2,9 +2,8 @@
 #include <time.h>
 #include <stlib.h>
 
-#define SIZE 8		//tableau 6x6
-
 void board (card tab, int size);
+void init_wall (card tab, int size);
 void hidden_box(card tab, int size);
 void show_board (card tab, int size);
 
@@ -34,8 +33,7 @@ typedef struct{
     //evenement????
 } card;
 
-
-void board (card tab, int size){
+void init_wall (card tab, int size){
 	if (size<=0){
 		exit(1);
 	}
@@ -52,6 +50,10 @@ void board (card tab, int size){
 	for (int j=0; j<size ; j++){
 		tab[size-1][j].wall=1;
 	}
+}
+
+void board (card tab, int size){
+	init_wall(tab, size);
 }
 
 void show_board (card tab, int size){
