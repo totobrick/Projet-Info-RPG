@@ -4,34 +4,42 @@
 
 void board (card tab, int size);
 void init_wall (card tab, int size);
+void init_card (card tab, int size);
 void hidden_box(card tab, int size);
 void show_board (card tab, int size);
 
 typedef struct{
-    int zombie;  // 1, < Torche
-    int troll;   // 2, < Hache
-    int harpy;  // 3, < Arc
-    int basilisk; // 4, < Bouclier				basilisk = basilic 
+    int zombie;     // 1, < Torche
+    int troll;      // 2, < Hache
+    int harpy;      // 3, < Arc
+    int basilisk;   // 4, < Bouclier				basilisk = basilic 
 } monster;
 
 typedef struct{
-    int stick;      	//stick = baton
-    int sword;      	//sword = epee
-    int grimoire;
-    int dagger;			//dagger = dague
+    int stick;      	//1=oui 0=non               stick = baton
+    int sword;      	//1=oui 0=non               sword = epee
+    int grimoire;       //1=oui 0=non
+    int dagger;			//1=oui 0=non               dagger = dague
 } relic;
 
 typedef struct{
-    int wall;    //1=oui 0=non
-    int hidden; //0=cache 1=case visible
+    int wall;       //1=oui 0=non
+    int hidden;     //1=case visible  0=case cache
+    int treasure;   //1=oui 0=non
+    int totem;      //1=oui 0=non
+    int portal;     //1=oui 0=non			        portal = portail
+    int event;          //evenement????
     monster m;
-    int treasure;
-    int totem;
     relic r;
-    int portal;			//portal = portail
-    int event;
-    //evenement????
 } card;
+
+/*_________________________________________________________________________________________________*/
+
+void board (card tab, int size){
+    init_wall(tab, size);
+}
+
+/*_________________________________________________________________________________________________*/
 
 void init_wall (card tab, int size){
     if (size<=0){
@@ -52,8 +60,30 @@ void init_wall (card tab, int size){
     }
 }
 
-void board (card tab, int size){
-    init_wall(tab, size);
+void init_card (card tab, int size){
+    if (size<=0){
+        exit(1);
+    }
+    for (int i=0 ; i<size ; i++){
+        for (int j=0 ; j<size ; j++){
+            tab[i][j].hidden = 0;
+            tab[i][j].treasure = 0;
+            tab[i][j].totem = 0;
+            tab[i][j].portal = 0;
+            tab[i][j].event = 0;
+            //monster :
+            tab[i][j].m.zombie = 0;
+            tab[i][j].m.troll = 0;
+            tab[i][j].m.harpy = 0;
+            tab[i][j].m.basilisk = 0;
+            //relic :
+            tab[i][j].r.stick = 0;
+            tab[i][j].r.sword = 0;
+            tab[i][j].r.grimoire = 0;
+            tab[i][j].r.dagger = 0;
+        }
+    }
+    
 }
 
 void show_board (card tab, int size){
