@@ -1,9 +1,3 @@
-void board (card tab, int size);
-void init_wall (card tab, int size);
-void init_card (card tab, int size);
-void hidden_box(card tab, int size);
-void show_board (card tab, int size);
-
 typedef struct{
     int zombie;     // 1, < Torche
     int troll;      // 2, < Hache
@@ -29,37 +23,43 @@ typedef struct{
     relic r;
 } card;
 
+void board (card tab, int size);
+void init_wall (card tab, int size);
+void init_card (card tab, int size);
+void hidden_box(card tab, int size);
+void show_board (card tab, int size);
+
 /*_________________________________________________________________________________________________*/
 
-void board (card tab, int size){            //ATTENTION : type card* car on est dans void
+void board (card* tab, int size){
     init_wall(tab, size);
-    init_card(tab,size);
+    init_card(tab, size);
     
     show_board (tab, size);
 }
 
 /*_________________________________________________________________________________________________*/
 
-void init_wall (card tab, int size){
+void init_wall (card* tab, int size){
     if (size<=0){
         exit(1);
     }
     for (int j=0; j<size ; j++){
-        tab[0][j].wall=1;
+        (*(tab + 0*size + j)).wall=1;
     }
     for (int i=1 ; i<(size-1) ; i++){
-        tab[i][0].wall=1;
+        (*(tab + i*size + 0)).wall=1;
         for (int j=1 ; j<(size-1) ; j++){
-            tab[i][j].wall=0;
+            (*(tab + i*size + j)).wall=0;
         }
-        tab[i][7].wall=1;
+        (*(tab + i*size + 7)).wall=1;
     }
     for (int j=0; j<size ; j++){
-        tab[size-1][j].wall=1;
+        (*(tab + (size-1)*size + j)).wall=1;
     }
 }
-
-void init_card (card tab, int size){
+/*
+void init_card (card* tab, int size){
     if (size<=0){
         exit(1);
     }
@@ -85,7 +85,7 @@ void init_card (card tab, int size){
     
 }
 
-void show_board (card tab, int size){
+void show_board (card* tab, int size){
     if (size<=0){
         exit(1);
     }
@@ -97,7 +97,7 @@ void show_board (card tab, int size){
     }
 }
 
-void hidden_box(card tab, int size){
+void hidden_box(card* tab, int size){
     if (size<=0){
         exit(1);
     }
@@ -106,5 +106,5 @@ void hidden_box(card tab, int size){
         for (int j=0 ; j<size ; j++){
             tab[i][j].hidden=0;
         }
-    }
+    }*/
 
