@@ -58,33 +58,32 @@ void init_wall (card* tab, int size){
         (*(tab + (size-1)*size + j)).wall=1;
     }
 }
-/*
+
 void init_card (card* tab, int size){
     if (size<=0){
         exit(1);
     }
     for (int i=0 ; i<size ; i++){
         for (int j=0 ; j<size ; j++){
-            tab[i][j].hidden = 0;
-            tab[i][j].treasure = 0;
-            tab[i][j].totem = 0;
-            tab[i][j].portal = 0;
-            tab[i][j].event = 0;
+            (*(tab +  i*size + j)).hidden = 0;
+            (*(tab +  i*size + j)).treasure = 0;
+            (*(tab +  i*size + j)).totem = 0;
+            (*(tab +  i*size + j)).portal = 0;
+            (*(tab +  i*size + j)).event = 0;
             //monster :
-            tab[i][j].m.zombie = 0;
-            tab[i][j].m.troll = 0;
-            tab[i][j].m.harpy = 0;
-            tab[i][j].m.basilisk = 0;
+            (*(tab +  i*size + j)).m.zombie = 0;
+            (*(tab +  i*size + j)).m.troll = 0;
+            (*(tab +  i*size + j)).m.harpy = 0;
+            (*(tab +  i*size + j)).m.basilisk = 0;
             //relic :
-            tab[i][j].r.stick = 0;
-            tab[i][j].r.sword = 0;
-            tab[i][j].r.grimoire = 0;
-            tab[i][j].r.dagger = 0;
+            (*(tab +  i*size + j)).r.stick = 0;
+            (*(tab +  i*size + j)).r.sword = 0;
+            (*(tab +  i*size + j)).r.grimoire = 0;
+            (*(tab +  i*size + j)).r.dagger = 0;
         }
     }
-    
 }
-
+/*
 void show_board (card* tab, int size){
     if (size<=0){
         exit(1);
