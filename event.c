@@ -25,6 +25,8 @@ if (malus==0 && neutral==1 && shop==0 && bonus==0)
 
     printf ("Vous croisez un enorme tuyaux fait de métal . Intrigué, vous vous approchez et entendez une étrange voix dans votre tête: Il faut suivre le conduit. Ne sacchant ce qu'est ce fameux «conduit», vous continuez votre route.");
             
+    printf ("Un homme au loin vous demande comment rejoindre «Sunny» 
+
 if (malus==0 && neutral==0 && shop==1 && bonus==0)
     
     srand (time(NULL));
