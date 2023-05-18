@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include<stdio.h>
 
 int deplacement_joueur;
 int deplacement_case;
