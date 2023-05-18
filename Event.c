@@ -38,7 +38,7 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
     
                         else if (malus==0 && neutral==0 && shop==0 && bonus==1)  {
            
-                                 printf ("En vous balladant, vous tomber sur une étrange famille de 
+                                 printf ("En vous balladant, vous tomber sur une étrange famille de deux squelettes. Lun petit, portant des habits rouges et blancs. Son frère, plus petit, porte un sweet à capuche bleuet un pantalon noir. Pour éviter tous combat inutile, vous attendez un peu que le temps passe.
                   }
                   
                   
