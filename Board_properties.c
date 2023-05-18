@@ -34,48 +34,48 @@ typedef struct{
 } card;
 
 void init_wall (card tab, int size){
-	if (size<=0){
-		exit(1);
-	}
-	for (int j=0; j<size ; j++){
-		tab[0][j].wall=1;
-	}
-	for (int i=1 ; i<(size-1) ; i++){
-		tab[i][0].wall=1;
-		for (int j=1 ; j<(size-1) ; j++){
-			tab[i][j].wall=0;
-		}
-		tab[i][7].wall=1;
-	}
-	for (int j=0; j<size ; j++){
-		tab[size-1][j].wall=1;
-	}
+    if (size<=0){
+        exit(1);
+    }
+    for (int j=0; j<size ; j++){
+        tab[0][j].wall=1;
+    }
+    for (int i=1 ; i<(size-1) ; i++){
+        tab[i][0].wall=1;
+        for (int j=1 ; j<(size-1) ; j++){
+            tab[i][j].wall=0;
+        }
+        tab[i][7].wall=1;
+    }
+    for (int j=0; j<size ; j++){
+        tab[size-1][j].wall=1;
+    }
 }
 
 void board (card tab, int size){
-	init_wall(tab, size);
+    init_wall(tab, size);
 }
 
 void show_board (card tab, int size){
-	if (size<=0){
-		exit(1);
-	}
-	for (int i=0 ; i<size ; i++){
-		for (int j=0 ; j<size ; j++){
-			printf("	", tab[i][j]);		//A COMPLETER
-		}
-		printf("\n", tab[i][j]);			//A COMPLETER
-	}
+    if (size<=0){
+        exit(1);
+    }
+    for (int i=0 ; i<size ; i++){
+        for (int j=0 ; j<size ; j++){
+            printf("	", tab[i][j]);		//A COMPLETER
+        }
+        printf("\n", tab[i][j]);			//A COMPLETER
+    }
 }
 
 void hidden_box(card tab, int size){
-	if (size<=0){
-		exit(1);
-	}
-	for (int i=0 ; i<size ; i++){
-		tab[i][0].hidden=0;
-		for (int j=0 ; j<size ; j++){
-			tab[i][j].hidden=0;
-		}
-}
+    if (size<=0){
+        exit(1);
+    }
+    for (int i=0 ; i<size ; i++){
+        tab[i][0].hidden=0;
+        for (int j=0 ; j<size ; j++){
+            tab[i][j].hidden=0;
+        }
+    }
 
