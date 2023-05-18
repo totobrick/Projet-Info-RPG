@@ -1,12 +1,13 @@
 //nombre joueur, 
 #include <stdio.h>
-#include <time.h>
 #include <stlib.h>
+#include <time.h>
+
 
 #define SIZE 8		//tableau 6x6
 
 int main(){
-    srand(time(NULL));
+    board = malloc(sizeof(card)*8*8);
     
     return 0;
 }
