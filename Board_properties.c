@@ -1,7 +1,9 @@
 #include <stdio.h>
 #define SIZE 8		//tableau 6x6
 
-#include<stdio.h>
+void board (card tab, int size);
+void hidden_box(card tab, int size);
+void show_board (card tab, int size);
 
 typedef struct{
     int zombie;  // 1, < Torche
@@ -27,10 +29,13 @@ typedef struct{
     int portal;			//portal = portail
     int event;
     //evenement????
-} space;
+} card;
 
 
-void board (space tab, int size){
+void board (card tab, int size){
+	if (size<=0){
+		exit(1);
+	}
 	for (int j=0; j<size ; j++){
 		tab[0][j].mur=1;
 	}
@@ -46,7 +51,10 @@ void board (space tab, int size){
 	}
 }
 
-void show_board (space tab, int size){
+void show_board (card tab, int size){
+	if (size<=0){
+		exit(1);
+	}
 	for (int i=0 ; i<size ; i++){
 		for (int j=0 ; j<size ; j++){
 			printf("	", tab[i][j]);		//A COMPLETER
@@ -55,7 +63,10 @@ void show_board (space tab, int size){
 	}
 }
 
-void return_box(space tab, int size){
+void hidden_box(card tab, int size){
+	if (size<=0){
+		exit(1);
+	}
 	for (int i=0 ; i<size ; i++){
 		tab[i][0].hidden=0;
 		for (int j=0 ; j<size ; j++){
