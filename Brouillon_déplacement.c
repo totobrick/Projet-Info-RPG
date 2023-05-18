@@ -1,3 +1,4 @@
+// Faire un scanf de ce fichier pour entrer la direction
 #include <stdio.h>
 
 #define ROWS 5
