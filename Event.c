@@ -38,6 +38,6 @@ else if (malus==0 && neutral==0 && shop==0 && bonus==1){
                   }
 
                   else(){
-                  printf ("Problème ! L'évenement n'a pas pu être lancé !);
+                  printf ("Problème ! L'évenement n'a pas pu être lancé !");
                   }
  }
