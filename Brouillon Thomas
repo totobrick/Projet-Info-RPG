@@ -1,1 +1,12 @@
-
+int main(){
+  card* game;
+  game = malloc(SIZE*SIZE*sizeof(card));
+  board(game, SIZE);
+  for (int i=0 ; i<SIZE ; i++){
+        printf("\n    Ligne n°%d\n",i);
+        for (int j=0 ; j<SIZE ; j++){
+            printf("[%d,%d,%d,%d,%d,%d,   %d,%d,%d,%d,   %d,%d,%d,%d]\n",(*(game + i*SIZE + j)).wall, (*(game + i*SIZE + j)).hidden, (*(game + i*SIZE + j)).treasure, (*(game + i*SIZE + j)).totem, (*(game + i*SIZE + j)).portal, (*(game + i*SIZE + j)).event, (*(game + i*SIZE + j)).m.zombie, (*(game + i*SIZE + j)).m.troll, (*(game + i*SIZE + j)).m.harpy, (*(game + i*SIZE + j)).m.basilisk, (*(game + i*SIZE + j)).r.stick, (*(game + i*SIZE + j)).r.sword, (*(game + i*SIZE + j)).r.grimoire, (*(game + i*SIZE + j)).r.dagger);
+        }
+  }
+  return 0;
+}
