@@ -1,6 +1,6 @@
 //code pour lancé une musique
 
-/* #include <SDL2/SDL.h>
+ #include <SDL2/SDL.h>
 
 int main() {
     // Initialisation de la bibliothèque SDL
@@ -43,11 +43,11 @@ int main() {
     SDL_Quit();
 
     return 0;
-}*/
+}
 
 
 //code pour lancé un rick roll
-/*
+
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -72,10 +72,10 @@ int main() {
 
     return 0;
 }
-*/
+
 
 //rick roll bis
-/*
+
 #include <unistd.h>
 
 int main() {
@@ -89,4 +89,3 @@ int main() {
     return 0;
 }
 
-*/
