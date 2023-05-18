@@ -12,7 +12,7 @@ typedef struct{
     int zombie;  // 1, < Torche
     int troll;   // 2, < Hache
     int harpy;  // 3, < Arc
-    int basilisk; // 4, < Bouclier				basilisk = basilic
+    int basilisk; // 4, < Bouclier				basilisk = basilic 
 } monster;
 
 typedef struct{
