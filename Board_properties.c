@@ -23,7 +23,7 @@ typedef struct{
 } relic;
 
 typedef struct{
-    int mur;    //1=oui 0=non
+    int wall;    //1=oui 0=non
     int hidden; //0=cache 1=case visible
     monster m;
     int treasure;
@@ -40,17 +40,17 @@ void board (card tab, int size){
 		exit(1);
 	}
 	for (int j=0; j<size ; j++){
-		tab[0][j].mur=1;
+		tab[0][j].wall=1;
 	}
 	for (int i=1 ; i<(size-1) ; i++){
-		tab[i][0].mur=1;
+		tab[i][0].wall=1;
 		for (int j=1 ; j<(size-1) ; j++){
-			tab[i][j].mur=0;
+			tab[i][j].wall=0;
 		}
-		tab[i][7].mur=1;
+		tab[i][7].wall=1;
 	}
 	for (int j=0; j<size ; j++){
-		tab[size-1][j].mur=1;
+		tab[size-1][j].wall=1;
 	}
 }
 
