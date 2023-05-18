@@ -11,7 +11,7 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
     printf(" ");
            //essayer les code qui fonctione le mieux pour la musique
     
-    printf ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle")
+    printf ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle.")
         //change la case en monstre harpy et lance le combat. la case devient définitivement une harpy.
     
     printf ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tous à coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!!. À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, malgré tous avec l'honneur d'un grand guerrier!\n");
