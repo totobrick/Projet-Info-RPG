@@ -1,4 +1,4 @@
-      typedef struct{
+typedef struct{
     int neutral;    // 0=non et 1=oui 
     int shop;       // 0=non et 1=oui 
     int malus;      // 0=non et 1=oui 
@@ -19,7 +19,7 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
 }
 if (malus==0 && neutral==1 && shop==0 && bonus==0)
     
-       srand (time(NULL));
+    srand (time(NULL));
 
     printf ("Un spectacle d'horreur se déroule devant vous ! Un pauvre poisson-clown hors de l'eau semble pleurer tout en ne pouvant pas respirer.\nIl semble répéter sans cesse ces mêmes mots :\n                    « Vous n'avez pas vu mon fils ? Vous n'avez pas vu mon fils ? Vous n'avez pas vu mon... » \nLe manque d'oxygen a eu raison de lui. Vous avez désormais un nouvel objectif : après être sorti victorieux de ce labyrinthe infernal, vous vous mettrez à la recherche de ce fameux fils.\n");
 
@@ -48,7 +48,7 @@ if (malus==0 && neutral==0 && shop==0 && bonus==1){
            
            printf("En vous baladant, vous tombez sur une étrange famille de deux squelettes. L'un petit, portant des habits rouge et blanc. Son frère, plus petit, porte un sweet à capuche bleuet et un pantalon noir. Pour éviter tout combat inutile, vous attendez un peu que le temps passe.");
                   }
-                                    
+
                   else(){
                   printf ("Problème ! L'évenement n'a pas pu être lancé !);
                   
