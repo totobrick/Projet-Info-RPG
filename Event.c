@@ -11,7 +11,8 @@ if (malus==1 && neutral==0 && shop==0 && bonus==0){
     printf(" ");
            //essayer les code qui fonctione le mieux pour la musique
     
-    printf ("Une harpie sauvage apparaît! 
+    printf ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle")
+        //change la case en monstre harpy et lance le combat. la case devient définitivement une harpy.
     
     printf ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tous à coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!!. À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, malgré tous avec l'honneur d'un grand guerrier!\n");
   
@@ -27,7 +28,7 @@ else if (malus==0 && neutral==1 && shop==0 && bonus==0){
             
     printf ("Un homme au loin vous demande comment rejoindre « Sunny ». Il a les cheveux verts, comme si de la mousse lui avait poussé sur la tête. Il porte trois sabres au niveau de la ceinture, il paraît vraiment louche. Vous lui montrez une direction aléatoire en espérant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle étrange rencontre !");
            
-    printf("Vous voyez une sorte de scientifique au loin. En essayant de vous approcher, vous voyez une sorte d'écran apparaître avec marqué dessus : « Fun value invalide ». \nVoyant que vous ne pouvez bas continuer, vous décidez d'abandonner et de continuer votre périple.\n");
+    printf("Vous voyez une sorte de scientifique au loin. En essayant de vous approcher, vous voyez une sorte d'écran apparaître avec marqué dessus : « Fun value invalid ». \nVoyant que vous ne pouvez bas continuer, vous décidez d'abandonner et de continuer votre périple.\n");
                    
     printf("En vous baladant, vous tombez sur une étrange famille de deux squelettes. L'un petit, portant des habits rouge et blanc. Son frère, plus petit, porte un sweet à capuche bleuet et un pantalon noir. Pour éviter tout combat inutile, vous attendez un peu que le temps passe.");
 
@@ -35,7 +36,7 @@ else if (malus==0 && neutral==1 && shop==0 && bonus==0){
 }
 else if (malus==0 && neutral==0 && shop==0 && bonus==1){
            
-           printf("Vous rencontrez au détour de ce labyrinthe un vieil homme. Il prétend être le directeur d'un lycée spécialisé en magie très connu: le lycée magique George Pompidou. Il exprime même l'envie de vous faire entrer dans son lycée, dans la classe de « Nintendor ». Vous acceptez, et par conséquent, il se mit à hurlé: «100.000 point pour Nintendor! ».")
+           printf("Vous rencontrez au détour de ce labyrinthe un vieil homme. Il prétend être le directeur d'un lycée spécialisé en magie très connu: le Lycée Magique George Pompidou. Il exprime même l'envie de vous faire entrer dans son lycée, dans la classe de « Nintendor ». Vous acceptez, et par conséquent, il se mit à hurlé: «100.000 point pour Nintendor! ».")
                   }
 
                   else(){
