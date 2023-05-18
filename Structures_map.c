@@ -1,15 +1,15 @@
 #include<stdio.h>
 
 typedef struct{
-    int zombie;  // 1
-    int troll;   // 2
-    int harpie;  // 3
-    int basilic; // 4
+    int zombie;  // 1, < Torche
+    int troll;   // 2, < Hache
+    int harpie;  // 3, < Arc
+    int basilic; // 4, < Bouclier
 } monstre;
 
 typedef struct{
-    int baton;
-    int epee;
+    int baton;      
+    int epee;      
     int grimoire;
     int dague;    
 } relique;
