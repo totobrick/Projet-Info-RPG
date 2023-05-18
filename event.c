@@ -23,8 +23,14 @@ if (malus==0 && neutral==1 && shop==0 && bonus==0)
 
     printf ("Un spectacle d'horreur se déroule devant vous! Un pauvre poisson clown, hors de l'eau semble pleurer, tous en ne pouvant pas respirer. Il semble répeter sans cesse ces mêmes mots: Vous n'avez pas vu mon fils? Vous n'avez pas vu mon fils? Vous n'avez pas vu mon...  Le manque d'oxygen a eu raison de lui. Vous avez désormais un nouvelle objectif. après être sorti victorieux de ce labyrinthe infernal, vous vous metterez à la recherche de ce fameux fils.");
 
-
+    printf ("Vous croisez un enorme tuyaux fait de métal . Intrigué, vous vous approchez et entendez une étrange voix dans votre tête: Il faut suivre le conduit. Ne sacchant ce qu'est ce fameux «conduit», vous continuez votre route.");
+            
 if (malus==0 && neutral==0 && shop==1 && bonus==0)
+    
+    srand (time(NULL));
+    
+    
+    
 if (malus==0 && neutral==0 && shop==0 && bonus==1)
     
-    
+    srand (time(NULL));    
