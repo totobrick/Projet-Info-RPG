@@ -8,16 +8,20 @@ typedef struct{
 }Joueur;
 
 
-void vide_buffer(){
-  while (getchar()!='/n'){
-  }
-}
-int main() {
-  int class;
-  int verif;
-  do{
-    printf("Quelle est votre classe?");
-    verif=scanf("%d",&class);
-    vide_buffer();
-  }while(class !=1 || class !=2 || class !=3 || class !=4 || verif !=1);
+#include <stdio.h>
 
+void vide_buffer() {
+    int c;
+    while ((c = getchar()) != '\n') {
+    }
+}
+
+int main() {
+    int classe;
+    int verif = 0;
+
+    do {
+        printf("Quelle est votre classe ? ");
+        verif = scanf("%d", &classe);
+        vide_buffer();
+    } while (classe != 1 && classe != 2 && classe != 3 && classe != 4 || verif != 1);
