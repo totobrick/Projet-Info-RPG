@@ -1,5 +1,7 @@
 //logo et couleur
 
+
+Voleur
 "T" (code ASCII 84) : Ce caractère peut représenter un voleur de manière stylisée, avec ses bras étendus pour symboliser la discrétion et la rapidité.
 
 "%" (code ASCII 37) : Ce caractère peut représenter un voleur avec son masque ou son bandeau sur le visage, symbolisant l'anonymat et la clandestinité.
