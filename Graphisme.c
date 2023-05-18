@@ -11,11 +11,18 @@
 "Ϡ" (code ASCII 1008) : Ce caractère ressemble à une silhouette penchée ou furtive, ce qui peut évoquer l'image d'un voleur.
 
   Le chevalier :
+♞" (code ASCII 9822) : Ce caractère ressemble à une silhouette de cavalier, évoquant l'image d'un chevalier à cheval.
 
-"K" (code ASCII 75)
-"k" (code ASCII 107)
-"Ø" (code ASCII 216)
-"þ" (code ASCII 254)
+"█" (code ASCII 9608) : Ce caractère peut représenter un chevalier en armure, avec sa silhouette imposante.
+
+"⚔" (code ASCII 9876) : Ce caractère symbolise une épée croisée, représentant l'arme emblématique du chevalier.
+
+"♜" (code ASCII 9812) : Ce caractère ressemble à une tour d'échecs, qui peut être utilisée pour représenter un chevalier en raison de sa nature défensive et stratégique.
+
+"⌇" (code ASCII 8983) : Ce caractère peut représenter un chevalier brandissant une lance, symbolisant la cavalerie et le combat monté.
+
+"Ø" (code ASCII 216) : Ce caractère ressemble à un bouclier, représentant la protection et la défense du chevalier.
+  
 Le mage :
 
 "M" (code ASCII 77)
