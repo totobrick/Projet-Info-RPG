@@ -4,8 +4,8 @@ int deplacement_joueur = 0;
 int deplacement_case = 0;
 
 
-printf("Maintenant choisissez une direction :",\n)
-printf(\t,\t,"Haut")
+printf("Maintenant choisissez une direction :",\n);
+printf(\t,\t,"Haut");
 
 
 
@@ -15,7 +15,7 @@ printf(\t,\t,"Haut")
 
 while (deplacement_joueur != deplacement_case){
      break
-     printf("Maintenant choisissez une direction :")
+     printf("Maintenant choisissez une direction :");
      scanf("%d",deplacement_joueur);
      if deplacement_joueur == 8; // déplacement vers le Haut
      if deplacement_joueur == 2; // déplacement vers le Bas
