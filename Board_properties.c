@@ -57,6 +57,7 @@ void init_wall (card* tab, int size){
     for (int j=0; j<size ; j++){
         (*(tab + (size-1)*size + j)).wall=1;
     }
+    printf("Initialisation des murs terminée");
 }
 
 void init_card (card* tab, int size){
@@ -82,6 +83,7 @@ void init_card (card* tab, int size){
             (*(tab +  i*size + j)).r.dagger = 0;
         }
     }
+    printf("Initialisation des cartes terminée");
 }
 /*
 void show_board (card* tab, int size){
