@@ -35,9 +35,11 @@ typedef struct{
 
 /*_________________________________________________________________________________________________*/
 
-void board (card tab, int size){
+void board (card tab, int size){            //ATTENTION : type card* car on est dans void
     init_wall(tab, size);
     init_card(tab,size);
+    
+    show_board (tab, size);
 }
 
 /*_________________________________________________________________________________________________*/
