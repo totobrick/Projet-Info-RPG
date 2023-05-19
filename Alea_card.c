@@ -1,3 +1,5 @@
+void generate_board (card tab[][], int size);
+
 void generate_board (card tab[][], int size){       //ATTENTION METTRE EN POINTEUR
     char cards[] = { 'b' , 'b' , 'b' , 'b' , 'z' , 'z' , 'z' , 'z' , 't' , 't' , 't' , 't' , 'h' , 'h' , 'h' , 'h' , 'E' , 'B' , 'G' , 'D' , 'C' , 'C' , 'T' , 'T' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' };
     int remaining_card = 32;                               // remaining_card = cartes_restantes
