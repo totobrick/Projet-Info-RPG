@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#define ROWS 5
-#define COLS 5
+#define ROWS 6
+#define COLS 6
 
 void afficherTableau(int tableau[ROWS][COLS]) {
     for (int i = 0; i < ROWS; i++) {
