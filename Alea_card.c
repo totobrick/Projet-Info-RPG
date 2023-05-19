@@ -1,3 +1,5 @@
+//A MODIFIER : mettre le portail, prendre en compte la place des joueurs (4 cases vides)
+
 void generate_board (card* tab, int size);
 
 void generate_board (card* tab, int size){       //ATTENTION METTRE EN POINTEUR
