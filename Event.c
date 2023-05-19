@@ -1,8 +1,3 @@
-typedef struct{
-    int neutral;    // 0=non et 1=oui 
-    int malus;      // 0=non et 1=oui 
-} event;
-
 
 int m1, m2, m3, m4, n1, n2, n3, n4, n5, n6, n7 = 1;
 
