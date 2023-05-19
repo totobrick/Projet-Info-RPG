@@ -1,6 +1,6 @@
-void generate_board (card tab[][], int size);
+void generate_board (card* tab, int size);
 
-void generate_board (card tab[][], int size){       //ATTENTION METTRE EN POINTEUR
+void generate_board (card* tab, int size){       //ATTENTION METTRE EN POINTEUR
     char cards[] = { 'b' , 'b' , 'b' , 'b' , 'z' , 'z' , 'z' , 'z' , 't' , 't' , 't' , 't' , 'h' , 'h' , 'h' , 'h' , 'E' , 'B' , 'G' , 'D' , 'C' , 'C' , 'T' , 'T' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' };
     int remaining_card = 32;                               // remaining_card = cartes_restantes
     /*
@@ -31,40 +31,40 @@ void generate_board (card tab[][], int size){       //ATTENTION METTRE EN POINTE
                 int alea= rand() % remaining_card;
                 //Les 4 monstres
                 if(cards[alea] == 'b'){
-                    tab[i][j].m.basilisk = 1;
+                    (*(tab + i*size + j)).m.basilisk = 1;
                 }
                 else if(cards[alea] == 'z'){
-                    tab[i][j].m.zombie = 1;
+                    (*(tab + i*size + j)).m.zombie = 1;
                 }
                 else if(cards[alea] == 't'){
-                    tab[i][j].m.troll = 1;
+                    (*(tab + i*size + j)).m.troll = 1;
                 }
                 else if(cards[alea] == 'h'){
-                    tab[i][j].m.harpy = 1;
+                    (*(tab + i*size + j)).m.harpy = 1;
                 }
                 //Les 4 armes antiques
                 else if(cards[alea] == 'E'){
-                    tab[i][j].r.sword = 1;
+                    (*(tab + i*size + j)).r.sword = 1;
                 }
                 else if(cards[alea] == 'B'){
-                    tab[i][j].r.stick = 1;
+                    (*(tab + i*size + j)).r.stick = 1;
                 }
                 else if(cards[alea] == 'G'){
-                    tab[i][j].r.grimoire = 1;
+                    (*(tab + i*size + j)).r.grimoire = 1;
                 }
                 else if(cards[alea] == 'D'){
-                    tab[i][j].r.dagger = 1;
+                    (*(tab + i*size + j)).r.dagger = 1;
                 }
                 // coffre et totem
                 else if(cards[alea] == 'C'){
-                    tab[i][j].treasure = 1;
+                    (*(tab + i*size + j)).treasure = 1;
                 }
                 else if(cards[alea] == 'T'){
-                    tab[i][j].totem = 1;
+                    (*(tab + i*size + j)).totem = 1;
                 }
                 // événement
                 else if(cards[alea] == 'e'){
-                    tab[i][j].event = 1;
+                    (*(tab + i*size + j)).event = 1;
                 }
                 else {
                     printf(" OUPS ! Le jeu n'a pas pu être créé. La carte générée aléatoirement n'est pas dans le paquet.\n");
