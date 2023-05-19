@@ -7,7 +7,7 @@ typedef struct{
 
 
 if (malus==1 && neutral==0 && shop==0 && bonus==0){
-    
+    rand() %101;
     printf(" ");
            //essayer les code qui fonctione le mieux pour la musique
     
