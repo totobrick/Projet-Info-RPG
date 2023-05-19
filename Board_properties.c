@@ -18,10 +18,15 @@ typedef struct{
     int treasure;   //1=oui 0=non
     int totem;      //1=oui 0=non
     int portal;     //1=oui 0=non			        portal = portail
-    int event;          //evenement????
+    int event;     //1=oui 0=non 
     monster m;
     relic r;
 } card;
+
+typedef struct{
+    int neutral;    // 0=non et 1=oui 
+    int malus;      // 0=non et 1=oui 
+} event;
 
 void board (card tab, int size);
 void init_wall (card tab, int size);
