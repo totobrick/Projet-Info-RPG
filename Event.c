@@ -7,7 +7,7 @@ if (malus==1 && neutral==0){
     
     if (randmalus == 0 && m1==1){
     
-    printf(" ");
+    printf(" ... /n/n Sérieusement...?/n ");
            //essayer les code qui fonctione le mieux pour la musique
         m1 = 0;
         return;
@@ -22,7 +22,8 @@ if (malus==1 && neutral==0){
         if (randmalus == 2 && m3==1){
             
     printf ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tous à coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!!. À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, malgré tous avec l'honneur d'un grand guerrier!\n");
-     m3=0;
+            life = 0;
+            m3=0;
          return;
         }
         if (randmalus == 3 && m4==1){
