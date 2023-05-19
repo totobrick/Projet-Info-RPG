@@ -28,11 +28,11 @@ typedef struct{
     int malus;      // 0=non et 1=oui 
 } event;
 
-void board (card tab, int size);
-void init_wall (card tab, int size);
-void init_card (card tab, int size);
-//void hidden_box(card tab, int size);
-//void show_board (card tab, int size);
+void board (card* tab, int size);
+void init_wall (card* tab, int size);
+void init_card (card* tab, int size);
+//void hidden_box(card* tab, int size);
+//void show_board (card* tab, int size);
 
 /*_________________________________________________________________________________________________*/
 
