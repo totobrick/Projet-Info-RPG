@@ -7,7 +7,7 @@ typedef struct{
 int m1, m2, m3, m4, n1, n2, n3, n4, n5, n6, n7 = 1;
 
 if (malus==1 && neutral==0){
-    
+    do{
    int randmalus = rand() %101;
     
     if (randmalus < 26 && m1==1){
@@ -36,6 +36,7 @@ if (malus==1 && neutral==0){
             m4=0;
             return;
 }
+    }   while(m1==1 && m2==1 && m3==1 && m4==1)
 }
 else if (malus==0 && neutral==1){
    
