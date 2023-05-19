@@ -8,7 +8,7 @@ void vide_buffer() {
     while ((c = getchar()) != '\n') {
     }
 }
-t
+
 void combat(int weapon, int enemy) {
     switch (enemy) {
         case BASILISK:
