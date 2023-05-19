@@ -1,4 +1,4 @@
-void generate_board (card tab[][], int size){
+void generate_board (card tab[][], int size){       //ATTENTION METTRE EN POINTEUR
     char cards[] = { 'b' , 'b' , 'b' , 'b' , 'z' , 'z' , 'z' , 'z' , 't' , 't' , 't' , 't' , 'h' , 'h' , 'h' , 'h' , 'E' , 'B' , 'G' , 'D' , 'C' , 'C' , 'T' , 'T' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' };
     int remaining_card = 32;                               // remaining_card = cartes_restantes
     /*
@@ -68,7 +68,6 @@ void generate_board (card tab[][], int size){
                     printf(" OUPS ! Le jeu n'a pas pu être créé. La carte générée aléatoirement n'est pas dans le paquet.\n");
                     exit(1);
                 }
-
                 cards[alea] = cards[remaining_card-1];
                 remaining_card = remaining_card -1;
             }
