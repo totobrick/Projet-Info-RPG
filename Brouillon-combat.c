@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-enum Armes { TORCHE = 1, BOUCLIER = 2, HACHE = 3, ARC = 4 };            //ATTENTION aux =1,2,3,4, je pense qu'il n'est pas nécessaire
-enum Ennemis { BASILIC = 1, ZOMBIE = 2, TROLL = 3, HARPIE = 4 };
+enum Weapons { TORCH = 1, SHIELD = 2, AXE = 3, BOW = 4 };            //ATTENTION aux =1,2,3,4, je pense qu'il n'est pas nécessaire
+enum Enemies { BASILISK = 1, ZOMBIE = 2, TROLL = 3, HARPY = 4 };
 
 void vide_buffer() {
     int c;
@@ -9,31 +9,31 @@ void vide_buffer() {
     }
 }
 
-void combat(int arme, int ennemi) {
-    switch (ennemi) {
-        case BASILIC:
-            if (arme == BOUCLIER) {
+void combat(int weapon, int enemy) {
+    switch (enemy) {
+        case BASILISK:
+            if (weapon == SHIELD) {
                 printf("Le Basilic est vaincu !\n");
             } else {
                 printf("Game Over ! Le Basilic vous a tué.\n");
             }
             break;
         case ZOMBIE:
-            if (arme == TORCHE) {
+            if (weapon == TORCH) {
                 printf("Le Zombie est vaincu !\n");
             } else {
                 printf("Game Over ! Le Zombie vous a tué.\n");
             }
             break;
         case TROLL:
-            if (arme == HACHE) {
+            if (weapon == AXE) {
                 printf("Le Troll est vaincu !\n");
             } else {
                 printf("Game Over ! Le Troll vous a tué.\n");
             }
             break;
-        case HARPIE:
-            if (arme == ARC) {
+        case HARPY:
+            if (weapon == BOW) {
                 printf("La Harpie est vaincue !\n");
             } else {
                 printf("Game Over ! La Harpie vous a tué.\n");
@@ -46,8 +46,8 @@ void combat(int arme, int ennemi) {
 }
 
 int main() {
-    int arme;
-    int ennemi; 
+    int weapon;
+    int enemy; 
     int verif = 0;
   
 
@@ -58,9 +58,9 @@ int main() {
     printf("4. Arc\n");
     do {
         printf("Votre choix: ");
-        verif = scanf("%d", &arme);
+        verif = scanf("%d", &weapon);
         vide_buffer();
-    } while (arme != 1 && arme != 2 && arme != 3 && arme != 4 || verif != 1);
+    } while (weapon != 1 && weapon != 2 && weapon != 3 && weapon != 4 || verif != 1);
 verif=0;
     printf("Choisissez votre ennemi : \n");
     printf("1. Basilic\n");
@@ -69,11 +69,11 @@ verif=0;
     printf("4. Harpie\n");
     do {
         printf("Votre choix:  ");
-        verif = scanf("%d", &ennemi);
+        verif = scanf("%d", &enemy);
         vide_buffer();
-    } while (ennemi != 1 && ennemi != 2 && ennemi != 3 && ennemi != 4 || verif != 1);
+    } while (enemy != 1 && enemy != 2 && enemy != 3 && enemy != 4 || verif != 1);
 
-    combat(arme, ennemi);
+    combat(weapon, enemy);
 
     return 0;
 }
