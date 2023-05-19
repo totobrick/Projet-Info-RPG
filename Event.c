@@ -14,22 +14,26 @@ if (malus==1 && neutral==0){
     printf(" ");
            //essayer les code qui fonctione le mieux pour la musique
         m1 = 0;
+        return;
     }
         if (randmalus > 25 && randmalus < 51 && m2=1){
             
     printf ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle.\n")
         //change la case en monstre harpy et lance le combat. la case devient définitivement une harpy.
         m2=0;
+            return;
             }
-        if (randmalus > 51 && randmalus < 76  && m3=1){
+        if (randmalus > 50 && randmalus < 76  && m3=1){
             
     printf ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tous à coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!!. À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, malgré tous avec l'honneur d'un grand guerrier!\n");
      m3=0;
+         return;
         }
         if (randmalus > 75 && m4=1){
         
     printf ("Vous croisez une espèce de grosse tortue avec plein de pics sur sa carapace, et qui crache du feu. Elle vous regarde, et vous demande si vous n'avez pas vu une princesse blonde en robe rose. Vous lui dites que non, et par colère, il vous vole 10 petites étoiles! (si vous possédiez votre relique, elle est retournée à son point d'emplacement)\n");
             m4=0;
+            return;
 }
 }
 else if (malus==0 && neutral==1){
