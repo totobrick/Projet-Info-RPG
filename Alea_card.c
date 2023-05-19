@@ -1,4 +1,6 @@
 //A MODIFIER : mettre le portail, prendre en compte la place des joueurs (4 cases vides)
+//      ->mettre ce qu'il y a sur cases J1, J2, J3, J4 sur les 4 dernières cases pour libérer la place aux 4 joueurs
+//PB : le jeu n'est pas ALEATOIRE !
 
 void generate_board (card* tab, int size);
 
