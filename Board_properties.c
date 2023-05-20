@@ -30,9 +30,8 @@ typedef struct{
 
 void board (card* tab, int size);
 void init_wall (card* tab, int size);
-void init_card (card* tab, int size);
-//void hidden_box(card* tab, int size);
-//void show_board (card* tab, int size);
+void init_board (card* tab, int size);
+void init_card(card* card1);
 
 /*_________________________________________________________________________________________________*/
 
@@ -65,28 +64,32 @@ void init_wall (card* tab, int size){
     printf("Initialisation des murs terminée.\n");
 }
 
-void init_card (card* tab, int size){
+void init_board (card* tab, int size){
     if (size<=0){
         exit(1);
     }
     for (int i=0 ; i<size ; i++){
         for (int j=0 ; j<size ; j++){
-            (*(tab +  i*size + j)).hidden = 0;
-            (*(tab +  i*size + j)).treasure = 0;
-            (*(tab +  i*size + j)).totem = 0;
-            (*(tab +  i*size + j)).portal = 0;
-            (*(tab +  i*size + j)).event = 0;
-            //monster :
-            (*(tab +  i*size + j)).m.zombie = 0;
-            (*(tab +  i*size + j)).m.troll = 0;
-            (*(tab +  i*size + j)).m.harpy = 0;
-            (*(tab +  i*size + j)).m.basilisk = 0;
-            //relic :
-            (*(tab +  i*size + j)).r.stick = 0;
-            (*(tab +  i*size + j)).r.sword = 0;
-            (*(tab +  i*size + j)).r.grimoire = 0;
-            (*(tab +  i*size + j)).r.dagger = 0;
+            init_card(tab +  i*size + j);
         }
     }
     printf("Initialisation des cartes terminée.\n");
+}
+
+void init_card(card* card1){
+    (*card1).hidden = 0;
+    (*card1).treasure = 0;
+    (*card1).totem = 0;
+    (*card1).portal = 0;
+    (*card1).event = 0;
+    //monster :
+    (*card1).m.zombie = 0;
+    (*card1).m.troll = 0;
+    (*card1).m.harpy = 0;
+    (*card1).m.basilisk = 0;
+    //relic :
+    (*card1).r.stick = 0;
+    (*card1).r.sword = 0;
+    (*card1).r.grimoire = 0;
+    (*card1).r.dagger = 0;
 }
