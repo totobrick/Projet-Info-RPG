@@ -1,1 +1,54 @@
+#include <stdio.h>
 
+// Structure pour représenter un joueur
+typedef struct {
+    char nom[20];
+    int classe;
+    int tresor;
+    int relique;
+} Joueur;
+
+// Fonction pour vérifier si le joueur a obtenu le trésor et la relique correspondant à sa classe
+int checkTreasure(Joueur joueur) {
+    int victoire = 0;
+
+    switch (joueur.classe) {
+        case 1: // Guerrier
+            if (joueur.tresor == 1 && joueur.relique == 1) {
+                victoire = 1;
+            }
+            break;
+        case 2: // Ranger
+            if (joueur.tresor == 2 && joueur.relique == 2) {
+                victoire = 1;
+            }
+            break;
+        case 3: // Magicien
+            if (joueur.tresor == 3 && joueur.relique == 3) {
+                victoire = 1;
+            }
+            break;
+        case 4: // Voleur
+            if (joueur.tresor == 4 && joueur.relique == 4) {
+                victoire = 1;
+            }
+            break;
+    }
+
+    return victoire;
+}
+
+int main() {
+    Joueur joueur;
+    joueur.classe = 1; // Exemple: Guerrier
+    joueur.tresor = 1; // Exemple: Trésor de l'épée
+    joueur.relique = 1; // Exemple: Relique de l'épée
+
+    if (checkTreasure(joueur)) {
+        printf("Félicitations! Le joueur a obtenu le trésor et la relique correspondant à sa classe.\n");
+    } else {
+        printf("Désolé, le joueur n'a pas obtenu le trésor et la relique correspondant à sa classe.\n");
+    }
+
+    return 0;
+}
