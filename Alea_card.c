@@ -96,9 +96,9 @@ void generate_board (card* tab, int size){
             }
         }
     }
-    invert_card( tab+1*size+3 , tab+6*size+3);
-    invert_card( tab+3*size+6 , tab+6*size+5);
-    invert_card( tab+4*size+1 , tab+6*size+6);
+    invert_card( tab + 1*size + 3 , tab + 6*size + 3);
+    invert_card( tab + 3*size + 6 , tab + 6*size + 5);
+    invert_card( tab + 4*size + 1 , tab + 6*size + 6);
 }
 
 
