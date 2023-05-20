@@ -10,4 +10,11 @@ int main(){
     
     free(board);                                //restitution espace mémoire
     return 0;
+    
+    
+    if (checkTreasure(player)) {
+        printf("Félicitations! Le joueur a obtenu le trésor et la relique correspondant à sa classe.\n");
+    } else {
+        printf("Désolé, le joueur n'a pas obtenu le trésor et la relique correspondant à sa classe.\n");
+    }
 }
