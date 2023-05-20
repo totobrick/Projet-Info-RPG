@@ -11,8 +11,6 @@ typedef struct{
 }Joueur;
 
 
-#include <stdio.h>
-
 void vide_buffer() {
     int c;
     while ((c = getchar()) != '\n') {
