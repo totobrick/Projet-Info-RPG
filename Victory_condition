@@ -3,48 +3,48 @@
 // Structure pour représenter un joueur
 typedef struct {
     char nom[20];
-    int classe;
-    int tresor;
-    int relique;
-} Joueur;
+    int class;
+    int treasure;
+    int relic;
+} Player;
 
 // Fonction pour vérifier si le joueur a obtenu le trésor et la relique correspondant à sa classe
-int checkTreasure(Joueur joueur) {
-    int victoire = 0;
+int checkTreasure(Player player) {
+    int victory = 0;
 
-    switch (joueur.classe) {
+    switch (player.class) {
         case 1: // Guerrier
-            if (joueur.tresor == 1 && joueur.relique == 1) {
-                victoire = 1;
+            if (player.treasure == 1 && player.relic == 1) {
+                victory = 1;
             }
             break;
         case 2: // Ranger
-            if (joueur.tresor == 2 && joueur.relique == 2) {
-                victoire = 1;
+            if (player.treasure == 2 && player.relic == 2) {
+                victory = 1;
             }
             break;
         case 3: // Magicien
-            if (joueur.tresor == 3 && joueur.relique == 3) {
-                victoire = 1;
+            if (player.treasure == 3 && player.relic == 3) {
+                victory = 1;
             }
             break;
         case 4: // Voleur
-            if (joueur.tresor == 4 && joueur.relique == 4) {
-                victoire = 1;
+            if (player.treasure == 4 && player.relic == 4) {
+                victory = 1;
             }
             break;
     }
 
-    return victoire;
+    return victory;
 }
 
 int main() {
-    Joueur joueur;
-    joueur.classe = 1; // Exemple: Guerrier
-    joueur.tresor = 1; // Exemple: Trésor de l'épée
-    joueur.relique = 1; // Exemple: Relique de l'épée
+    Player player;
+    player.class = 1; // Exemple: Guerrier
+    player.treasure = 1; // Exemple: Trésor de l'épée
+    player.relic = 1; // Exemple: Relique de l'épée
 
-    if (checkTreasure(joueur)) {
+    if (checkTreasure(player)) {
         printf("Félicitations! Le joueur a obtenu le trésor et la relique correspondant à sa classe.\n");
     } else {
         printf("Désolé, le joueur n'a pas obtenu le trésor et la relique correspondant à sa classe.\n");
