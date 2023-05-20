@@ -7,8 +7,6 @@ void invert_card(card card1, card card2);
 
 void invert_card(card* card1, card* card2){
     card* transit_card = malloc(sizeof(card));
-    /*(*transit_card).wall= 0;
-    init_card(transit_card);*/
     //transit_card = card1
     (*transit_card).hidden = (*card1).hidden;
     (*transit_card).treasure = (*card1).treasure;
