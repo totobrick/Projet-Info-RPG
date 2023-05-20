@@ -5,10 +5,62 @@
 void generate_board (card* tab, int size);
 void invert_card(card card1, card card2);
 
-void invert_card(card card1, card card2){
-    card transit_card = card1;
-    card1= card2;
-    card2=transit_card;
+void invert_card(card* card1, card* card2){
+    card* transit_card = malloc(sizeof(card));
+    /*(*transit_card).wall= 0;
+    init_card(transit_card);*/
+    //transit_card = card1
+    (*transit_card).hidden = (*card1).hidden;
+    (*transit_card).treasure = (*card1).treasure;
+    (*transit_card).totem = (*card1).totem;
+    (*transit_card).portal = (*card1).portal;
+    (*transit_card).event = (*card1).event;
+            //monster
+    (*transit_card).m.zombie = (*card1).m.zombie;
+    (*transit_card).m.troll = (*card1).m.troll;
+    (*transit_card).m.harpy = (*card1).m.harpy;
+    (*transit_card).m.basilisk = (*card1).m.basilisk;
+            //relic
+    (*transit_card).r.stick = (*card1).r.stick;
+    (*transit_card).r.sword = (*card1).r.sword;
+    (*transit_card).r.grimoire = (*card1).r.grimoire;
+    (*transit_card).r.dagger = (*card1).r.dagger;
+
+    //card1=card2
+    (*card1).hidden = (*card2).hidden;
+    (*card1).treasure = (*card2).treasure;
+    (*card1).totem = (*card2).totem;
+    (*card1).portal = (*card2).portal;
+    (*card1).event = (*card2).event;
+            //monster
+    (*card1).m.zombie = (*card2).m.zombie;
+    (*card1).m.troll = (*card2).m.troll;
+    (*card1).m.harpy = (*card2).m.harpy;
+    (*card1).m.basilisk = (*card2).m.basilisk;
+            //relic
+    (*card1).r.stick = (*card2).r.stick;
+    (*card1).r.sword = (*card2).r.sword;
+    (*card1).r.grimoire = (*card2).r.grimoire;
+    (*card1).r.dagger = (*card2).r.dagger;
+
+    //card2=transit_card
+    (*card2).hidden = (*transit_card).hidden;
+    (*card2).treasure = (*transit_card).treasure;
+    (*card2).totem = (*transit_card).totem;
+    (*card2).portal = (*transit_card).portal;
+    (*card2).event = (*transit_card).event;
+            //monster
+    (*card2).m.zombie = (*transit_card).m.zombie;
+    (*card2).m.troll = (*transit_card).m.troll;
+    (*card2).m.harpy = (*transit_card).m.harpy;
+    (*card2).m.basilisk = (*transit_card).m.basilisk;
+            //relic
+    (*card2).r.stick = (*transit_card).r.stick;
+    (*card2).r.sword = (*transit_card).r.sword;
+    (*card2).r.grimoire = (*transit_card).r.grimoire;
+    (*card2).r.dagger = (*transit_card).r.dagger;
+    
+    free(transit_card);
 }
 
 void generate_board (card* tab, int size){
