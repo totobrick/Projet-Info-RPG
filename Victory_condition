@@ -37,18 +37,3 @@ int checkTreasure(Player player) {
 
     return victory;
 }
-
-int main() {
-    Player player;
-    player.class = 1; // Exemple: Guerrier
-    player.treasure = 1; // Exemple: Trésor de l'épée
-    player.relic = 1; // Exemple: Relique de l'épée
-
-    if (checkTreasure(player)) {
-        printf("Félicitations! Le joueur a obtenu le trésor et la relique correspondant à sa classe.\n");
-    } else {
-        printf("Désolé, le joueur n'a pas obtenu le trésor et la relique correspondant à sa classe.\n");
-    }
-
-    return 0;
-}
