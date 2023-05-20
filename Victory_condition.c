@@ -6,7 +6,7 @@ typedef struct{
   int class; //Magicien, guerrier, ranger, voleur
   int weapon; //1,2,3,4
   int relic; //0,1
-  int treasure; //trésore
+  int treasure; //trésore = case, donc pas sur de devoir le mettre en structure player
   int life; // 0=mort 1=vivant
   int x; // place x dans le tableau entre 0 et 7
   int y; // place y dans le tableau entre 0 et 7
