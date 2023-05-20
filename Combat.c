@@ -79,3 +79,8 @@ verif=0;
 }
 
  
+void resetPlayerPosition(int* posX, int* posY) {
+    *posX = 0;
+    *posY = 0;
+    printf("Player's position reset to (0, 0).\n");
+}
