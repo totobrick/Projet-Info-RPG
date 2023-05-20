@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-enum Weapons { TORCH = 1, SHIELD = 2, AXE = 3, BOW = 4 };            //ATTENTION aux =1,2,3,4, je pense qu'il n'est pas nécessaire
+enum Weapons { TORCH = 1, SHIELD = 2, AXE = 3, BOW = 4 };            //ATTENTION aux =1,2,3,4, je pense qu'il n'est pas nécessaire (non necessaire pour les ennemies, mais pour les armes si car cela facilite le programme) 
 enum Enemies { BASILISK = 1, ZOMBIE = 2, TROLL = 3, HARPY = 4 };
 
 void vide_buffer() {
