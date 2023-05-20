@@ -37,7 +37,7 @@ void init_card(card* card1);
 
 void board (card* tab, int size){
     init_wall(tab, size);
-    init_card(tab, size);
+    init_board(tab, size);
     
     //show_board (tab, size);
 }
