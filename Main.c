@@ -19,4 +19,4 @@ int main(){
     } else {
         printf("Désolé, le joueur n'a pas obtenu le trésor et la relique correspondant à sa classe.\n");
     }
-}
+} // à ne surtout pas enlever et à lier dans le futur
