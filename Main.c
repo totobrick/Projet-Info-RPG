@@ -1,5 +1,7 @@
 //nombre joueur, 
 
+
+
 int main(){
     card* board;                                //allocation espace mémoire
     board = malloc(sizeof(card)*8*8);           // board est l'adresse de la 1ere case du tableau
