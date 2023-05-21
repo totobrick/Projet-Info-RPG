@@ -89,14 +89,14 @@ void init_board (card* tab, int size){
 void init_card(card* card1){
     (*card1).hidden = 0;
     for (int i=0 ; i<4 ; i++){
-        (*card1)[i] = 0;
+        (*card1).type[i] = 0;
     }
     //monster :
     for (int i=0 ; i<4 ; i++){
-        (*card1).m[i] = 0;
+        (*card1).m.type[i] = 0;
     }
     //relic :
     for (int i=0 ; i<4 ; i++){
-        (*card1).r[i] = 0;
+        (*card1).r.type[i] = 0;
     }
 }
