@@ -1,7 +1,3 @@
-//A MODIFIER : mettre le portail, prendre en compte la place des joueurs (4 cases vides)
-//      ->mettre ce qu'il y a sur cases J1, J2, J3, J4 sur les 4 dernières cases pour libérer la place aux 4 joueurs
-//PB : le jeu n'est pas ALEATOIRE !
-
 void invert_card(card* card1, card* card2);
 void generate_board (card* tab, int size);
 
@@ -30,7 +26,6 @@ void invert_card(card* card1, card* card2){
         (*card2).m.type[i] = (*transit_card).m.type[i];     //monster
         (*card2).r.type[i] = (*transit_card).r.type[i];     //relic
     }
-    
     free(transit_card);
 }
 
