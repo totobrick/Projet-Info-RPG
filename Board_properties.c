@@ -1,24 +1,33 @@
 typedef struct{
-    int zombie;     // 1, < Torche
-    int troll;      // 2, < Hache
-    int harpy;      // 3, < Arc
-    int basilisk;   // 4, < Bouclier				basilisk = basilic 
+    int type[4];
+        /*
+        type[0] = zombie        (1=oui 0=non)                           <- 1.Torche
+        type[1] = troll         (1=oui 0=non)                           <- 2.Hache
+        type[2] = harpy         (1=oui 0=non)                           <- 3.Arc
+        type[3] = basilisk      (1=oui 0=non)       basilisk = basilic  <- 4.Bouclier
+        */ 
 } monster;
 
 typedef struct{
-    int stick;      	//1=oui 0=non               stick = baton
-    int sword;      	//1=oui 0=non               sword = epee
-    int grimoire;       //1=oui 0=non
-    int dagger;			//1=oui 0=non               dagger = dague
+    int type[4];
+        /*
+        type[0] = stick         (1=oui 0=non)       stick = baton
+        type[1] = sword         (1=oui 0=non)       sword = epee
+        type[2] = grimoire      (1=oui 0=non)
+        type[3] = dagger        (1=oui 0=non)       dagger = dague
+        */           
 } relic;
 
 typedef struct{
     int wall;       //1=oui 0=non
     int hidden;     //1=case visible  0=case cache
-    int treasure;   //1=oui 0=non
-    int totem;      //1=oui 0=non
-    int portal;     //1=oui 0=non			        portal = portail
-    int event;     //1=oui 0=non 
+    int type[4];
+        /*
+        type[0] = treasure      (1=oui 0=non)
+        type[1] = totem         (1=oui 0=non)
+        type[2] = portal        (1=oui 0=non)       portal = portail
+        type[3] = event         (1=oui 0=non)
+        */
     monster m;
     relic r;
 } card;
@@ -32,13 +41,15 @@ void board (card* tab, int size);
 void init_wall (card* tab, int size);
 void init_board (card* tab, int size);
 void init_card(card* card1);
+void invert_card(card* card1, card* card2);
+void generate_board (card* tab, int size);
 
 /*_________________________________________________________________________________________________*/
 
 void board (card* tab, int size){
     init_wall(tab, size);
     init_board(tab, size);
-    
+    generate_board(tab, size);
     //show_board (tab, size);
 }
 
@@ -78,18 +89,9 @@ void init_board (card* tab, int size){
 
 void init_card(card* card1){
     (*card1).hidden = 0;
-    (*card1).treasure = 0;
-    (*card1).totem = 0;
-    (*card1).portal = 0;
-    (*card1).event = 0;
-    //monster :
-    (*card1).m.zombie = 0;
-    (*card1).m.troll = 0;
-    (*card1).m.harpy = 0;
-    (*card1).m.basilisk = 0;
-    //relic :
-    (*card1).r.stick = 0;
-    (*card1).r.sword = 0;
-    (*card1).r.grimoire = 0;
-    (*card1).r.dagger = 0;
+    for (int i=0 ; i<4 ; i++){
+        (*card1).type[i] = 0;
+        (*card1).m.type[i] = 0;         //monster
+        (*card1).r.type[i] = 0;         //relic
+    }
 }
