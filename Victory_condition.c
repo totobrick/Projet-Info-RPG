@@ -10,7 +10,7 @@ typedef struct{
   int life; // 0=mort 1=vivant
   int x; // place x dans le tableau entre 0 et 7
   int y; // place y dans le tableau entre 0 et 7
-}Joueur;
+}Player;
 
 // Fonction pour vérifier si le joueur a obtenu le trésor et la relique correspondant à sa classe
 int checkTreasure(Player player) {
