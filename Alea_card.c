@@ -2,8 +2,8 @@
 //      ->mettre ce qu'il y a sur cases J1, J2, J3, J4 sur les 4 dernières cases pour libérer la place aux 4 joueurs
 //PB : le jeu n'est pas ALEATOIRE !
 
+void invert_card(card* card1, card* card2);
 void generate_board (card* tab, int size);
-void invert_card(card card1, card card2);
 
 void invert_card(card* card1, card* card2){
     card* transit_card = malloc(sizeof(card));
@@ -67,44 +67,44 @@ void generate_board (card* tab, int size){
                 int alea= rand() % remaining_card;
                 // événement
                 if(cards[alea] == 'e'){
-                    (*(tab + i*size + j)).event = 1;
+                    (*(tab + i*size + j)).type[3] = 1;
                 }
                 //Les 4 monstres
                 else if(cards[alea] == 'b'){
-                    (*(tab + i*size + j)).m.basilisk = 1;
+                    (*(tab + i*size + j)).m.type[3] = 1;
                 }
                 else if(cards[alea] == 'z'){
-                    (*(tab + i*size + j)).m.zombie = 1;
+                    (*(tab + i*size + j)).m.type[0] = 1;
                 }
                 else if(cards[alea] == 't'){
-                    (*(tab + i*size + j)).m.troll = 1;
+                    (*(tab + i*size + j)).m.type[1] = 1;
                 }
                 else if(cards[alea] == 'h'){
-                    (*(tab + i*size + j)).m.harpy = 1;
+                    (*(tab + i*size + j)).m.type[2] = 1;
                 }
                 // coffre et totem
                 else if(cards[alea] == 'C'){
-                    (*(tab + i*size + j)).treasure = 1;
+                    (*(tab + i*size + j)).type[0] = 1;
                 }
                 else if(cards[alea] == 'T'){
-                    (*(tab + i*size + j)).totem = 1;
+                    (*(tab + i*size + j)).type[1] = 1;
                 }
                 //Les 4 armes antiques
                 else if(cards[alea] == 'E'){
-                    (*(tab + i*size + j)).r.sword = 1;
+                    (*(tab + i*size + j)).r.type[1] = 1;
                 }
                 else if(cards[alea] == 'B'){
-                    (*(tab + i*size + j)).r.stick = 1;
+                    (*(tab + i*size + j)).r.type[0] = 1;
                 }
                 else if(cards[alea] == 'G'){
-                    (*(tab + i*size + j)).r.grimoire = 1;
+                    (*(tab + i*size + j)).r.type[2] = 1;
                 }
                 else if(cards[alea] == 'D'){
-                    (*(tab + i*size + j)).r.dagger = 1;
+                    (*(tab + i*size + j)).r.type[3] = 1;
                 }
                 //portail
                 else if(cards[alea] == 'P'){
-                    (*(tab + i*size + j)).portal = 1;
+                    (*(tab + i*size + j)).type[2] = 1;
                 }
                 
                 else {
@@ -123,6 +123,3 @@ void generate_board (card* tab, int size){
     invert_card( tab + 3*size + 6 , tab + 6*size + 5);
     invert_card( tab + 4*size + 1 , tab + 6*size + 6);
 }
-
-
-
