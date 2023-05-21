@@ -23,17 +23,17 @@ int checkTreasure(Player player) {
             }
             break;
         case 2: // Ranger
-            if (player.treasure == 2 && player.relic == 2) {
+            if (player.treasure == 1 && player.relic == 1) {
                 victory = 1;
             }
             break;
         case 3: // Magicien
-            if (player.treasure == 3 && player.relic == 3) {
+            if (player.treasure == 1 && player.relic == 1) {
                 victory = 1;
             }
             break;
         case 4: // Voleur
-            if (player.treasure == 4 && player.relic == 4) {
+            if (player.treasure == 1 && player.relic == 1) {
                 victory = 1;
             }
             break;
