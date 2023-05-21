@@ -11,30 +11,24 @@ void invert_card(card* card1, card* card2){
     (*transit_card).hidden = (*card1).hidden;
     for (int i=0 ; i<4 ; i++){
         (*transit_card).type[i] = (*card1).type[i];
-            //monster
-        (*transit_card).m.type[i] = (*card1).m.type[i];
-            //relic
-        (*transit_card).r.type[i] = (*card1).r.type[i];
+        (*transit_card).m.type[i] = (*card1).m.type[i];     //monster
+        (*transit_card).r.type[i] = (*card1).r.type[i];     //relic
     }
 
     //card1=card2
     (*card1).hidden = (*card2).hidden;
     for (int i=0 ; i<4 ; i++){
         (*card1).type[i] = (*card2).type[i];
-            //monster
-        (*card1).m.type[i] = (*card2).m.type[i];
-            //relic
-        (*card1).r.type[i] = (*card2).r.type[i];
+        (*card1).m.type[i] = (*card2).m.type[i];            //monster
+        (*card1).r.type[i] = (*card2).r.type[i];            //relic
     }
 
     //card2=transit_card
     (*card2).hidden = (*transit_card).hidden;
     for (int i=0 ; i<4 ; i++){
         (*card2).type[i] = (*transit_card).type[i];
-            //monster
-        (*card2).m.type[i] = (*transit_card).m.type[i];
-            //relic
-        (*card2).r.type[i] = (*transit_card).r.type[i];
+        (*card2).m.type[i] = (*transit_card).m.type[i];     //monster
+        (*card2).r.type[i] = (*transit_card).r.type[i];     //relic
     }
     
     free(transit_card);
