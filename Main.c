@@ -1,5 +1,8 @@
 //nombre joueur, 
-
+void resetPlayerPosition(int* posX, int* posY) {
+    *posX = 0;
+    *posY = 0;
+    printf("Player's position reset to (0, 0).\n");
 
 
 int main(){
@@ -20,8 +23,4 @@ int main(){
         printf("Désolé, le joueur n'a pas obtenu le trésor et la relique correspondant à sa classe.\n");
     }
  // à ne surtout pas enlever et à lier dans le futur
-void resetPlayerPosition(int* posX, int* posY) {
-    *posX = 0;
-    *posY = 0;
-    printf("Player's position reset to (0, 0).\n");
 }
