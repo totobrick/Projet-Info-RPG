@@ -52,5 +52,3 @@ void init_board (card* tab, int size);
 void init_card(card* card1);
 void invert_card(card* card1, card* card2);
 void generate_board (card* tab, int size);
-void invert_card(card* card1, card* card2);
-void generate_board (card* tab, int size);
