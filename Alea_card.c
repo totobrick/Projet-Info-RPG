@@ -1,6 +1,3 @@
-void invert_card(card* card1, card* card2);
-void generate_board (card* tab, int size);
-
 void invert_card(card* card1, card* card2){
     card* transit_card = malloc(sizeof(card));
     //transit_card = card1
