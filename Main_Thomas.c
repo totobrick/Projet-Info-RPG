@@ -1,3 +1,12 @@
+/*_________________________________________________________________________________________________*/
+void board (card* tab, int size){
+    init_wall(tab, size);
+    init_board(tab, size);
+    generate_board(tab, size);
+    //show_board (tab, size);
+}
+/*_________________________________________________________________________________________________*/
+
 int main(){
     srand(time(NULL));
     card* game; 
