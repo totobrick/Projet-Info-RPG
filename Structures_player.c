@@ -7,8 +7,8 @@ typedef struct{
   int relic; //0,1
   int treasure;
   int life; // 0=mort 1=vivant
-  int x; // place x dans le tableau entre 0 et 7
-  int y; // place y dans le tableau entre 0 et 7
+  int x; // place x dans le tableau entre 1 et 6
+  int y; // place y dans le tableau entre 1 et 6
 }Player;
 
 
