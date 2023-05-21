@@ -1,7 +1,7 @@
 
-int m1, m2, m3, m4, n1, n2, n3, n4, n5, n6, n7 = 1;
+int e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11 = 1;
 
-if (malus==1 && neutral==0){
+if (event == 1){
     do{
    int randmalus = rand() %4;
     
