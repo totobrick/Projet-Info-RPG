@@ -1,8 +1,9 @@
 int main(){
-  card* game;
-  game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
-  board(game, SIZE);
-  for (int i=0 ; i<SIZE ; i++){
+    srand(time(NULL));
+    card* game; 
+    game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
+    board(game, SIZE);
+    for (int i=0 ; i<SIZE ; i++){
         printf("\n    Ligne n°%d\n",i);
         for (int j=0 ; j<SIZE ; j++){
             printf("[%d,%d,%d,%d,%d,%d,   %d,%d,%d,%d,   %d,%d,%d,%d]\n",(*(game + i*SIZE + j)).wall, (*(game + i*SIZE + j)).hidden, (*(game + i*SIZE + j)).type[0], (*(game + i*SIZE + j)).type[1], (*(game + i*SIZE + j)).type[2], (*(game + i*SIZE + j)).type[3], (*(game + i*SIZE + j)).m.type[0], (*(game + i*SIZE + j)).m.type[1], (*(game + i*SIZE + j)).m.type[2], (*(game + i*SIZE + j)).m.type[3], (*(game + i*SIZE + j)).r.type[0], (*(game + i*SIZE + j)).r.type[1], (*(game + i*SIZE + j)).r.type[2], (*(game + i*SIZE + j)).r.type[3]);
