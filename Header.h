@@ -7,3 +7,6 @@
 
 #define SIZE 8              //tableau 6x6
 
+//Création tableau (Thomas)
+void invert_card(card* card1, card* card2);
+void generate_board (card* tab, int size);
