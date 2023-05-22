@@ -1,4 +1,11 @@
 #include <stdio.h>
+
+void resetPlayerPosition(Player* p) {
+    (*p).x = (*p).x_init;
+    (*p).y = (*p).y_init;
+    printf("Position du joueur %s réinitialisé.\n",(*p).nom);
+}
+
 void vide_buffer() {
     int c;
     while ((c = getchar()) != '\n') {
