@@ -73,4 +73,4 @@ void init_card(card* card1);
 void invert_card(card* card1, card* card2);
 void generate_board (card* tab, int size);
 void board (card* tab, int size);
-void resetPlayerPosition(int* posX, int* posY);
+void resetPlayerPosition(Player* p);
