@@ -9,13 +9,23 @@
 typedef struct{
   char nom[100]; //ATTENTION depasement tableau
   int class; //Magicien, guerrier, ranger, voleur
-  int type[4]; //0=Torche, 1=Shield, 2=Axe, 3=bow
+  weapons w; //0=Torche, 1=Shield, 2=Axe, 3=bow
   int relic; //0,1
   int treasure; //0=non, 1=oui
   int life; // 0=mort 1=vivant
   int x; // place x dans le tableau entre 1 et 6
   int y; // place y dans le tableau entre 1 et 6
 }Player;
+
+typedef struct{
+    int type[4];
+        /*
+        type[0] = torch        (1=oui 0=non)                           <- 1.zombie
+        type[1] = axe         (1=oui 0=non)                           <- 2.troll
+        type[2] = bow         (1=oui 0=non)                           <- 3.harpy
+        type[3] = shield       (1=oui 0=non)                          <- 4.basilisk
+        */ 
+} weapons;
 
 typedef struct{
     int type[4];
