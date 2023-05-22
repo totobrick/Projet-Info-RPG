@@ -7,29 +7,29 @@ void vide_buffer() {
 
 void combat(int weapon, int enemy) {
     switch (enemy) {
-        case BASILISK:
-            if (weapon == SHIELD) {
+        case type[0]:
+            if (P.w.type[0]==1) {
                 printf("Le Basilic est vaincu !\n");
             } else {
                 printf("Game Over ! Le Basilic vous a tué.\n");
             }
             break;
-        case ZOMBIE:
-            if (weapon == TORCH) {
+        case type[1]:
+            if (P.w.type[1]==1 {
                 printf("Le Zombie est vaincu !\n");
             } else {
                 printf("Game Over ! Le Zombie vous a tué.\n");
             }
             break;
-        case TROLL:
-            if (weapon == AXE) {
+        case type[2]:
+            if (P.w.type[2]==1) {
                 printf("Le Troll est vaincu !\n");
             } else {
                 printf("Game Over ! Le Troll vous a tué.\n");
             }
             break;
-        case HARPY:
-            if (weapon == BOW) {
+        case type[3]:
+            if (P.w.type[3]==1) {
                 printf("La Harpie est vaincue !\n");
             } else {
                 printf("Game Over ! La Harpie vous a tué.\n");
@@ -95,19 +95,19 @@ verif=0;
         vide_buffer();
     } while (enemy != 1 && enemy != 2 && enemy != 3 && enemy != 4 || verif != 1);
     
-        if (weapon == 1){
+        if (enemy == 1){
         c.m.type[0] = 1;
         c.m.type[1] = 0;
         c.m.type[2] = 0;
         c.m.type[3] = 0;
     }
-    else if (weapon == 2){
+    else if (enemy == 2){
         c.m.type[0] = 0;
         c.m.type[1] = 1;
         c.m.type[2] = 0;
         c.m.type[3] = 0;
     }
-    else if (weapon == 3){
+    else if (enemy == 3){
         c.m.type[0] = 0;
         c.m.type[1] = 0;
         c.m.type[2] = 1;
