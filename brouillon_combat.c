@@ -5,7 +5,7 @@ void vide_buffer() {
     }
 }
 
-void combat(int weapon, int enemy) {
+void combat(Player p, card c) {
     switch (enemy) {
         case type[0]:
             if (P.w.type[0]==1) {
@@ -42,14 +42,14 @@ void combat(int weapon, int enemy) {
 }
 
 int main() {
-    int weapon;
-    int enemy; 
+    card c;
+    Player P;
     int verif = 0;
   
 
     printf("Choisissez votre arme : \n");
-    printf("1. Torche\n");
-    printf("2. Bouclier\n");
+    printf("1. Bouclier\n");
+    printf("2. Torche\n");
     printf("3. Hache\n");
     printf("4. Arc\n");
     do {
@@ -58,25 +58,25 @@ int main() {
         vide_buffer();
     } while (weapon != 1 && weapon != 2 && weapon != 3 && weapon != 4 || verif != 1);
 verif=0;
-    if (weapon == 1){
+    if (weapon == 1){       //bouclier
         P.w.type[0] = 1;
         P.w.type[1] = 0;
         P.w.type[2] = 0;
         P.w.type[3] = 0;
     }
-    else if (weapon == 2){
+    else if (weapon == 2){          //Torche
         P.w.type[0] = 0;
         P.w.type[1] = 1;
         P.w.type[2] = 0;
         P.w.type[3] = 0;
     }
-    else if (weapon == 3){
+    else if (weapon == 3){          //hache
         P.w.type[0] = 0;
         P.w.type[1] = 0;
         P.w.type[2] = 1;
         P.w.type[3] = 0;
     }
-    else(){
+    else(){                             //arc
         P.w.type[0] = 0;
         P.w.type[1] = 0;
         P.w.type[2] = 0;
