@@ -3,18 +3,17 @@
 #include <unistd.h>         //pour la musique
 #include <stdlib.h>
 
-
 #define SIZE 8              //tableau 6x6
 
 typedef struct{
-  char nom[100]; //ATTENTION depasement tableau
-  int class; //Magicien, guerrier, ranger, voleur
-  weapons w; //0=Torche, 1=Shield, 2=Axe, 3=bow
-  int relic; //0,1
-  int treasure; //0=non, 1=oui
-  int life; // 0=mort 1=vivant
-  int x; // place x dans le tableau entre 1 et 6
-  int y; // place y dans le tableau entre 1 et 6
+    char nom[100];            //ATTENTION depasement tableau
+    int class;                //Magicien, guerrier, ranger, voleur
+    weapons w;                //0=Torche, 1=Shield, 2=Axe, 3=bow
+    int relic;                //0,1
+    int treasure;             //0=non, 1=oui
+    int life;                 // 0=mort 1=vivant
+    int x;                    // place x dans le tableau entre 1 et 6
+    int y;                    // place y dans le tableau entre 1 et 6
 }Player;
 
 typedef struct{
@@ -66,9 +65,9 @@ typedef struct{
     int malus;      // 0=non et 1=oui 
 } event;
 
-void board (card* tab, int size);
 void init_wall (card* tab, int size);
 void init_board (card* tab, int size);
 void init_card(card* card1);
 void invert_card(card* card1, card* card2);
 void generate_board (card* tab, int size);
+void board (card* tab, int size);
