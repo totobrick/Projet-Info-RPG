@@ -5,15 +5,15 @@ void vide_buffer() {
     }
 }
 
-//ALEXIS VERSION
-/*void combat(Player P, card c) {
+void combat(Player P, card c) {
     if (c.m.type[0] == 1){
     
     if(P.w.type[0] == 1){
      printf("Le Basilic est vaincu !\n");
     }
     else(){
-    
+     printf("Game Over ! Le Basilic vous a tué.\n");
+     
     }
     }
     else if (c.m.type[1] == 1){
@@ -21,7 +21,8 @@ void vide_buffer() {
      printf("Le Zombie est vaincu !\n");
     }
     else(){
-    
+     printf("Game Over ! Le Zombie vous a tué.\n");
+     
     }
     }
     else if (c.m.type[2] == 1){
@@ -29,7 +30,8 @@ void vide_buffer() {
      printf("Le Troll est vaincu !\n");
     }
     else(){
-    
+     printf("Game Over ! Le Troll vous a tué.\n");
+     
     }
     }
     else(){
@@ -37,11 +39,11 @@ void vide_buffer() {
      printf("La Harpie est vaincu !\n");
     }
     else(){
-    
+     printf("Game Over ! La Harpie vous a tué.\n");
+     
     }
     }
     }
-*/
 
 int main() {
     card c;
