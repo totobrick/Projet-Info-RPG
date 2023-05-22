@@ -48,16 +48,16 @@ les attributs de texte par défaut.*/
 
 
 //Joueur
-printf("\U0001F9D9");//Mage emoticon
+printf("\U0001F9D9");//Mage (la magie du plomb)emoticon
 printf("\U0001F93A");//Chevalier (escrime) emoticon
-printf("\U0000265E");//Chevalier (chess) emoticons
-printf("\U0001F47A");//Voleur (mask de démon japonais) emoticon
-printf("\U0001F3C3");//Ranger (personne qui court) emoticon
+printf("\U0000265E");//Chevalier (chess (Echec et mat)) emoticons
+printf("\U0001F47A");//Voleur (mask de démon japonais (fait attention à la lune!)) emoticon
+printf("\U0001F3C3");//Ranger (personne qui court (who are you running from?)) emoticon
 
 //Monstre
 printf("\U0001F9DF");//Zombie (OH MAN!)emoticon
 printf("\U0001F40D");//Basilique (serpent (SNEK)) emoticon
-printf("\U0001F426");//Harpie (oiseau) emoticon
+printf("\U0001F426");//Harpie (oiseau (attention traveau pour cause d'un mur de glace)) emoticon
 printf("\U0001F479");//Troll (démon japonais) emoticon
 
 //Reliques
@@ -67,7 +67,7 @@ printf("\U00002694");//Epee (croisée (une ne suffisait pas ?)) emoticon
 printf("\U0001F3D1");//Baton (cross de hockey) emoticon
 
 //Maps
-printf("\U0000274C");//Mur (croix rouge) emoticon
+printf("\U0000274C");//Mur (croix rouge (ZEVENT?)) emoticon
 printf("\U0001F540");//Spawn emoticon
 printf("\U000026E9");//Portail (Torii (UWU)) emoticon
 printf("\U0001F5FF");//Totem (GIGA Chad Totem) emoticon
