@@ -44,3 +44,18 @@ int main() {
 /*Dans cet exemple, nous utilisons la séquence d'échappement \033[ pour indiquer le début d'une séquence d'échappement ANSI. Ensuite, nous utilisons des codes spécifiques pour définir les attributs de texte,
 tels que la couleur du texte et du fond. Le code 31 indique la couleur rouge, le code 44 indique le fond bleu et le code 37 indique le texte blanc. La séquence d'échappement \033[0m est utilisée pour réinitialiser
 les attributs de texte par défaut.*/
+
+
+
+//Joueur
+printf("\U0001F9D9"); //mage emoticon
+printf("\U0001F93A");//chevalier (escrime) emoticon
+//Monstre
+printf("\U0001F9DF");//zombie emoticon
+printf("\U0001F40D");//Basilique (serpent) emoticon
+printf("\U0001F426");//harpie (oiseau) emoticon
+
+
+
+
+
