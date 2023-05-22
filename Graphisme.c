@@ -50,10 +50,21 @@ les attributs de texte par défaut.*/
 //Joueur
 printf("\U0001F9D9"); //mage emoticon
 printf("\U0001F93A");//chevalier (escrime) emoticon
+printf("\U0000265E");//chevalier (chess) emoticons
 //Monstre
 printf("\U0001F9DF");//zombie emoticon
 printf("\U0001F40D");//Basilique (serpent) emoticon
 printf("\U0001F426");//harpie (oiseau) emoticon
+
+//Reliques
+printf("\U0001F5E1");//Dague emoticon
+printf("\U0001F4D6");//Livre (ouvert) emoticon
+printf("\U00002694");//épee (croisée) emoticons
+
+//Maps
+printf("\U0000274C"); //mur emoticons
+
+
 
 
 
