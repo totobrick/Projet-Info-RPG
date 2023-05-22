@@ -5,7 +5,8 @@ void vide_buffer() {
     }
 }
 
-void combat(Player P, card c) {
+//ALEXIS VERSION
+/*void combat(Player P, card c) {
     switch (c.m) {
         case type[0]:
             if (P.w.type[0]==1) {
@@ -39,7 +40,7 @@ void combat(Player P, card c) {
             printf("Ennemi non reconnu !\n");
             break;
     }
-}
+}*/
 
 int main() {
     card c;
