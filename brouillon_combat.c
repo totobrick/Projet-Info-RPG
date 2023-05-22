@@ -96,28 +96,28 @@ verif=0;
     } while (enemy != 1 && enemy != 2 && enemy != 3 && enemy != 4 || verif != 1);
     
         if (weapon == 1){
-        P.w.type[0] = 1;
-        P.w.type[1] = 0;
-        P.w.type[2] = 0;
-        P.w.type[3] = 0;
+        c.m.type[0] = 1;
+        c.m.type[1] = 0;
+        c.m.type[2] = 0;
+        c.m.type[3] = 0;
     }
     else if (weapon == 2){
-        P.w.type[0] = 0;
-        P.w.type[1] = 1;
-        P.w.type[2] = 0;
-        P.w.type[3] = 0;
+        c.m.type[0] = 0;
+        c.m.type[1] = 1;
+        c.m.type[2] = 0;
+        c.m.type[3] = 0;
     }
     else if (weapon == 3){
-        P.w.type[0] = 0;
-        P.w.type[1] = 0;
-        P.w.type[2] = 1;
-        P.w.type[3] = 0;
+        c.m.type[0] = 0;
+        c.m.type[1] = 0;
+        c.m.type[2] = 1;
+        c.m.type[3] = 0;
     }
     else(){
-        P.w.type[0] = 0;
-        P.w.type[1] = 0;
-        P.w.type[2] = 0;
-        c.type[3] = 1;   
+        c.m.type[0] = 0;
+        c.m.type[1] = 0;
+        c.m.type[2] = 0;
+        c.m.type[3] = 1;   
     }
    
     combat(weapon, enemy);
