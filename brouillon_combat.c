@@ -5,8 +5,8 @@ void vide_buffer() {
     }
 }
 
-void combat(Player p, card c) {
-    switch (enemy) {
+void combat(Player P, card c) {
+    switch (c.m) {
         case type[0]:
             if (P.w.type[0]==1) {
                 printf("Le Basilic est vaincu !\n");
