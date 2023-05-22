@@ -20,7 +20,7 @@ void combat(Player P, card c) {
     }
     else(){
      printf("Game Over ! Le Basilic vous a tué.\n");
-     
+     resetPlayerPosition( &P);
     }
     }
     else if (c.m.type[1] == 1){
@@ -29,7 +29,7 @@ void combat(Player P, card c) {
     }
     else(){
      printf("Game Over ! Le Zombie vous a tué.\n");
-     
+     resetPlayerPosition( &P);
     }
     }
     else if (c.m.type[2] == 1){
@@ -38,7 +38,7 @@ void combat(Player P, card c) {
     }
     else(){
      printf("Game Over ! Le Troll vous a tué.\n");
-     
+     resetPlayerPosition( &P);
     }
     }
     else(){
@@ -47,7 +47,7 @@ void combat(Player P, card c) {
     }
     else(){
      printf("Game Over ! La Harpie vous a tué.\n");
-     
+     resetPlayerPosition( &P);
     }
     }
     }
@@ -131,7 +131,7 @@ verif=0;
         c.m.type[3] = 1;   
     }
    
-    combat(weapon, enemy);
+    combat(&P,&c);
 
     return 0;
 }
