@@ -7,40 +7,41 @@ void vide_buffer() {
 
 //ALEXIS VERSION
 /*void combat(Player P, card c) {
-    switch (c.m) {
-        case type[0]:
-            if (P.w.type[0]==1) {
-                printf("Le Basilic est vaincu !\n");
-            } else {
-                printf("Game Over ! Le Basilic vous a tué.\n");
-            }
-            break;
-        case type[1]:
-            if (P.w.type[1]==1 {
-                printf("Le Zombie est vaincu !\n");
-            } else {
-                printf("Game Over ! Le Zombie vous a tué.\n");
-            }
-            break;
-        case type[2]:
-            if (P.w.type[2]==1) {
-                printf("Le Troll est vaincu !\n");
-            } else {
-                printf("Game Over ! Le Troll vous a tué.\n");
-            }
-            break;
-        case type[3]:
-            if (P.w.type[3]==1) {
-                printf("La Harpie est vaincue !\n");
-            } else {
-                printf("Game Over ! La Harpie vous a tué.\n");
-            }
-            break;
-        default:
-            printf("Ennemi non reconnu !\n");
-            break;
+    if (c.m.type[0] == 1){
+    
+    if(P.w.type[0] == 1){
+    
     }
-}*/
+    else(){
+    
+    }
+    }
+    else if (c.m.type[1] == 1){
+    if(P.w.type[1] == 1){
+    
+    }
+    else(){
+    
+    }
+    }
+    else if (c.m.type[2] == 1){
+    if(P.w.type[2] == 1){
+    
+    }
+    else(){
+    
+    }
+    }
+    else(){
+    if(P.w.type[3] == 1){
+    
+    }
+    else(){
+    
+    }
+    }
+    }
+*/
 
 int main() {
     card c;
