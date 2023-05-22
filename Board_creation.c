@@ -1,3 +1,5 @@
+#include "Header.h"
+
 void invert_card(card* card1, card* card2){
     card* transit_card = malloc(sizeof(card));
     //transit_card = card1
