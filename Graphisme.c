@@ -48,25 +48,42 @@ les attributs de texte par défaut.*/
 
 
 //Joueur
-printf("\U0001F9D9"); //mage emoticon
-printf("\U0001F93A");//chevalier (escrime) emoticon
-printf("\U0000265E");//chevalier (chess) emoticons
+printf("\U0001F9D9");//Mage emoticon
+printf("\U0001F93A");//Chevalier (escrime) emoticon
+printf("\U0000265E");//Chevalier (chess) emoticons
+printf("\U0001F47A");//Voleur (mask de démon japonais) emoticon
+printf("\U0001F3C3");//Ranger (personne qui court) emoticon
+
 //Monstre
-printf("\U0001F9DF");//zombie emoticon
-printf("\U0001F40D");//Basilique (serpent) emoticon
-printf("\U0001F426");//harpie (oiseau) emoticon
+printf("\U0001F9DF");//Zombie (OH MAN!)emoticon
+printf("\U0001F40D");//Basilique (serpent (SNEK)) emoticon
+printf("\U0001F426");//Harpie (oiseau) emoticon
+printf("\U0001F479");//Troll (démon japonais) emoticon
 
 //Reliques
 printf("\U0001F5E1");//Dague emoticon
 printf("\U0001F4D6");//Livre (ouvert) emoticon
-printf("\U00002694");//épee (croisée) emoticons
+printf("\U00002694");//Epee (croisée (une ne suffisait pas ?)) emoticon
+printf("\U0001F3D1");//Baton (cross de hockey) emoticon
 
 //Maps
-printf("\U0000274C"); //mur emoticons
+printf("\U0000274C");//Mur (croix rouge) emoticon
+printf("\U0001F540");//Spawn emoticon
+printf("\U000026E9");//Portail (Torii (UWU)) emoticon
+printf("\U0001F5FF");//Totem (GIGA Chad Totem) emoticon
+printf("\U0001F4B0");//Trésor (sac d'argent (Dubai)) emoticon
+
+//Armes
+printf("\U0001FA93");//Hache (pompier) emoticon
+printf("\U0001F3F9");//Arc (flèche dans le genou) emoticon
+printf("\U000026E8");//Bouclier (oui le monde est contre toi)emoticon
+printf("\U0001F56F");//Torche (bougie) emoticon
+
+//Statut
+printf("\U0001F480");//Mort (game over) emoticon
+printf("\U0001F3C6");//Trophée (victoire) emoticon
 
 
-
-
-
+// site : https://unicode-explorer.com/emoji/
 
 
