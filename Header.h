@@ -14,6 +14,8 @@ typedef struct{
     int life;                 // 0=mort 1=vivant
     int x;                    // place x dans le tableau entre 1 et 6
     int y;                    // place y dans le tableau entre 1 et 6
+    int x_init;                //place initiale
+    int y_init;                //place initiale
 }Player;
 
 typedef struct{
