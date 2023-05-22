@@ -59,8 +59,31 @@ int main() {
     } while (weapon != 1 && weapon != 2 && weapon != 3 && weapon != 4 || verif != 1);
 verif=0;
     if (weapon == 1){
-        
+        P.w.type[0] = 1;
+        P.w.type[1] = 0;
+        P.w.type[2] = 0;
+        P.w.type[3] = 0;
     }
+    else if (weapon == 2){
+        P.w.type[0] = 0;
+        P.w.type[1] = 1;
+        P.w.type[2] = 0;
+        P.w.type[3] = 0;
+    }
+    else if (weapon == 3){
+        P.w.type[0] = 0;
+        P.w.type[1] = 0;
+        P.w.type[2] = 1;
+        P.w.type[3] = 0;
+    }
+    else(){
+        P.w.type[0] = 0;
+        P.w.type[1] = 0;
+        P.w.type[2] = 0;
+        P.w.type[3] = 1;   
+    }
+    
+   
     printf("Choisissez votre ennemi : \n");
     printf("1. Basilic\n");
     printf("2. Zombie\n");
@@ -71,7 +94,32 @@ verif=0;
         verif = scanf("%d", &enemy);
         vide_buffer();
     } while (enemy != 1 && enemy != 2 && enemy != 3 && enemy != 4 || verif != 1);
-
+    
+        if (weapon == 1){
+        P.w.type[0] = 1;
+        P.w.type[1] = 0;
+        P.w.type[2] = 0;
+        P.w.type[3] = 0;
+    }
+    else if (weapon == 2){
+        P.w.type[0] = 0;
+        P.w.type[1] = 1;
+        P.w.type[2] = 0;
+        P.w.type[3] = 0;
+    }
+    else if (weapon == 3){
+        P.w.type[0] = 0;
+        P.w.type[1] = 0;
+        P.w.type[2] = 1;
+        P.w.type[3] = 0;
+    }
+    else(){
+        P.w.type[0] = 0;
+        P.w.type[1] = 0;
+        P.w.type[2] = 0;
+        c.type[3] = 1;   
+    }
+   
     combat(weapon, enemy);
 
     return 0;
