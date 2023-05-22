@@ -11,8 +11,7 @@ if (event == 1){
        
         const char* rickRollURL = "https://youtu.be/xLGktQmtR5A";  // Lien vers la vidéo de Rick Astley en 8 bit
     const char* browser = "xdg-open";  // Commande pour ouvrir l'URL avec le navigateur par défaut sur Linux
-    // Lancement du navigateur avec l'URL du Rick Roll
-    execlp(browser, browser, rickRollURL, NULL);
+    execlp(browser, browser, rickRollURL, NULL); // Lancement du navigateur avec l'URL du Rick Roll
         
         e1 = 0;
         return;
@@ -71,7 +70,7 @@ if (event == 1){
     
         if (randevent==8 && e9==1){
     
-    printf("En vous baladant, vous tombez sur une étrange famille de deux squelettes. L'un petit, portant des habits rouge et blanc. Son frère, plus petit, porte un sweet à capuche bleuet et un pantalon noir. Pour éviter tout combat inutile, vous attendez un peu que le temps passe.");
+    printf("En vous baladant, vous tombez sur une étrange famille de deux squelettes. L'un petit, portant des habits rouge et blanc. Son frère, plus petit, porte un sweet à capuche bleuet et un pantalon noir. Pour éviter tout combat inutile, vous attendez un peu que le temps passe.\n");
         e9=0;
             return;
         }
@@ -85,7 +84,7 @@ if (event == 1){
             
         if (randevent==10 && e11==1){
             
-    printf("Vous rencontrez au détour de ce labyrinthe un vieil homme. Il prétend être le directeur d'un lycée spécialisé en magie très connu : le Lycée Magique George Pompidou. Il exprime même l'envie de vous faire entrer dans son lycée, dans la classe de « Nintendor ». Vous acceptez, et par conséquent, il se mit à hurler : « 100.000 points pour Nintendor! ».")
+    printf("Vous rencontrez au détour de ce labyrinthe un vieil homme. Il prétend être le directeur d'un lycée spécialisé en magie très connu : le Lycée Magique George Pompidou. Il exprime même l'envie de vous faire entrer dans son lycée, dans la classe de « Nintendor ». Vous acceptez, et par conséquent, il se mit à hurler : « 100.000 points pour Nintendor! »\n.")
             e11=0
         return;
         }
