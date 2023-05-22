@@ -20,7 +20,8 @@ if (event == 1){
         if (randevent == 1 && e2==1){
             
     printf ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle.\n")
-        card.m.type[
+        c.type[3]=0;
+        c.m.type[2]=1;
         //change la case en monstre harpy et lance le combat. la case devient définitivement une harpy.
         e2=0;
             return;
