@@ -1,15 +1,11 @@
 #include <stdio.h>
-
-enum Weapons { TORCH = 0, SHIELD = 1, AXE = 2, BOW = 3 };            //ATTENTION aux =1,2,3,4, je pense qu'il n'est pas nécessaire (non necessaire pour les ennemies, mais pour les armes si car cela facilite le programme) 
-enum Enemies { BASILISK = 0, ZOMBIE = 1, TROLL = 2, HARPY = 3 };
-
 void vide_buffer() {
     int c;
     while ((c = getchar()) != '\n') {
     }
 }
 
-void combat(int weapon-1, int enemy-1) {
+void combat(int weapon, int enemy) {
     switch (enemy) {
         case BASILISK:
             if (weapon == SHIELD) {
@@ -62,6 +58,9 @@ int main() {
         vide_buffer();
     } while (weapon != 1 && weapon != 2 && weapon != 3 && weapon != 4 || verif != 1);
 verif=0;
+    if (weapon == 1){
+        
+    }
     printf("Choisissez votre ennemi : \n");
     printf("1. Basilic\n");
     printf("2. Zombie\n");
