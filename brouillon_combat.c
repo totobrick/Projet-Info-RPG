@@ -10,7 +10,7 @@ void vide_buffer() {
     if (c.m.type[0] == 1){
     
     if(P.w.type[0] == 1){
-    
+     printf("Le Basilic est vaincu !\n");
     }
     else(){
     
@@ -18,7 +18,7 @@ void vide_buffer() {
     }
     else if (c.m.type[1] == 1){
     if(P.w.type[1] == 1){
-    
+     printf("Le Zombie est vaincu !\n");
     }
     else(){
     
@@ -26,7 +26,7 @@ void vide_buffer() {
     }
     else if (c.m.type[2] == 1){
     if(P.w.type[2] == 1){
-    
+     printf("Le Troll est vaincu !\n");
     }
     else(){
     
@@ -34,7 +34,7 @@ void vide_buffer() {
     }
     else(){
     if(P.w.type[3] == 1){
-    
+     printf("La Harpie est vaincu !\n");
     }
     else(){
     
