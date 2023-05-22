@@ -9,7 +9,7 @@ void vide_buffer() {
     }
 }
 
-void combat(int weapon, int enemy) {
+void combat(int weapon-1, int enemy-1) {
     switch (enemy) {
         case BASILISK:
             if (weapon == SHIELD) {
