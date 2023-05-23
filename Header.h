@@ -17,6 +17,9 @@ typedef struct{
     int x_init;                //place initiale
     int y_init;                //place initiale
     int move;                  //prend +1 à chaque fin de tour
+    int chrono;                // temps de la partie pour ce joueur
+    int slay;                  //nombre de monstre tué
+    int reversed;              //nombre case retourné
 }Player;
 
 typedef struct{
