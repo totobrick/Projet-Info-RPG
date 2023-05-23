@@ -6,7 +6,7 @@ FILE *fichier = fopen("Score.txt", "a"); //le mode 'a' ajoute du texte à la fin
   if (fichier == NULL) {
     printf("Impossible d'ouvrir le fichier.\n");
     return 1; // Quitter le programme en cas d'erreur
-}le mode 
+} 
 
     fprintf(fichier, " /t  /t /n");  //il faut reflechir pour mettre le nom et rajouter une variable "coup" qui prend +1 à chaque fin de tour. de plus il faut mettre le temps de la partie je crois.
    fclose(fichier);
