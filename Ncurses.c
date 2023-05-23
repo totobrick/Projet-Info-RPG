@@ -1,8 +1,11 @@
 /*SOURCES :
 https://arnaud-feltz.developpez.com/tutoriels/ncurses/?page=premier_pas
 https://www.sbarjatiya.com/notes_wiki/index.php/Using_ncurses_library_with_C
+
 POUR COMPILER :		gcc -o exe_ncurses Nucurses.c -lncurses
 	-> l'extension -lncurses à la fin est essentielle
+Pour compiler TOUS les fichiers du dossier :
+	-> gcc -o *.c (pas top mais ca marche)
 */
 #include <ncurses.h>
 
@@ -10,11 +13,12 @@ int main(){
 	initscr();		//initscr() : configure la mémoire et efface l'écran
 	
 	raw();
-		/* cbreak() :  désactive la mise en mémoire tampon de ligne et le traitement des caractères d'effacement/de suppression (?)
-		   raw() : interdit à Ctrl C de sortir du programme
+	noecho();
+		/* cbreak() : pas imp, caractères entrés par utilisateur sont direct utilisables par le prgrm (sans attendre nouvelle ligne de code)
+		   raw() : caractères directs utilisables par prgrm, Ctrl+C ne sort pas du programme
+		   noecho() : caractères saisis ne sont pas affichés à l'écran
 		   
 		*/
-	
 	
 	
 	int x=5, y=2;
