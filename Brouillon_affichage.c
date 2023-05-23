@@ -1,6 +1,20 @@
 #include <stdio.h>
 #include <ncurses.h>
 
+#include "Header.h"
+
+void play();
+void move(Player* p);
+
+void play(){
+    //number of players
+    //enter identity
+    //choose arm
+    move(p);        //p est le player, on aura besoin de ses coordonnées et son arme
+
+}
+
+
 int main(){
     initscr();
     //raw();
@@ -34,7 +48,7 @@ int main(){
     int menu = 1;                           //menu=1 -> on est dans le menu     menu=0 -> on n'est plus dans le menu (ds le jeu par ex)
     int menu_select = 1;                    //les menus à sélectionner vont de 1 à 4
     wprintw(win, "-> NOUVELLE PARTIE <-\n");
-    wprintw(win,"Charger une partie\n");
+    wprintw(win,"Charger une partie\n");    //ATTENTION : ou afficher le scoreboard ????
     wprintw(win,"Règles\n");
     wprintw(win,"Sortir\n");
     //refresh();
