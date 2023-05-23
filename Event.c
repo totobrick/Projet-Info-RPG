@@ -35,7 +35,7 @@ void(card* c, Player* P){
     printf ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tous à coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!!. À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, malgré tous avec l'honneur d'un grand guerrier!\n");
             P.life = 0;
             printf("Game over!\n");
-            
+            resetPlayerPosition(P);
             e3=0;
          return;
         }
