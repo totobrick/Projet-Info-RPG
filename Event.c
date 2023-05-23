@@ -97,3 +97,66 @@ if (event == 1){
 } while(e1==1 && e2==1 && e3==1 && e4==1 && e5==1 && e6==1 && e7==1 && e8==1 && e9==1 && e10==1 && e11==1);
                   
  }
+
+
+/*
+c
+Copy code
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+typedef struct {
+    int life;
+    int relic;
+} Player;
+
+typedef struct {
+    int type[4];
+    struct {
+        int type[3];
+    } m;
+} card;
+
+void playGame(int event) {
+    int e1 = 1, e2 = 1, e3 = 1, e4 = 1, e5 = 1, e6 = 1, e7 = 1, e8 = 1, e9 = 1, e10 = 1, e11 = 1;
+    Player P;
+    card c;
+
+    if (event == 1) {
+        do {
+            int randevent = rand() % 11;
+
+            if (randevent == 0 && e1 == 1) {
+                printf(" ... \n\nSérieusement...?\n");
+
+                const char* rickRollURL = "https://youtu.be/xLGktQmtR5A";  // Lien vers la vidéo de Rick Astley en 8 bits
+                const char* browser = "xdg-open";  // Commande pour ouvrir l'URL avec le navigateur par défaut sur Linux
+                system(browser, browser, rickRollURL); // Lancement du navigateur avec l'URL du Rick Roll
+
+                e1 = 0;
+                return;
+            } else if (randevent == 1 && e2 == 1) {
+                printf("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle.\n");
+                c.type[3] = 0;
+                c.m.type[2] = 1;
+                //change la case en monstre harpy et lance le combat. la case devient définitivement une harpy.
+                e2 = 0;
+                return;
+            } else if (randevent == 2 && e3 == 1) {
+                printf("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tout à coup, vous le voyez courir en hurlant: LEEROY JENKINS!!! À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, mais avec l'honneur d'un grand guerrier!\n");
+                P.life = 0;
+                printf("Game over!\n");
+                e3 = 0;
+                return;
+            } else if (randevent == 3 && e4 == 1) {
+                printf("Vous croisez une espèce de grosse tortue avec plein de pics sur sa carapace, et qui crache du feu. Elle vous regarde, et vous demande si vous n'avez pas vu une princesse blonde en robe rose. Vous lui dites que non, et par colère, il vous vole 10 petites étoiles! (si vous possédiez votre relique, elle est retournée à son point d'emplacement)\n");
+                if (P.relic == 1) {
+                    P.relic = 0;
+                }
+                e4 = 0;
+                return;
+            } else if (randevent == 4 && e5 == 1) {
+                printf("Un spectacle d'horreur se déroule devant vous ! Un pauvre poisson-clown hors de l'eau semble pleurer tout en ne pouvant pas
+                
+                */
