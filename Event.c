@@ -38,8 +38,8 @@ if (event == 1){
         if (randevent == 3 && e4==1){
         
     printf ("Vous croisez une espèce de grosse tortue avec plein de pics sur sa carapace, et qui crache du feu. Elle vous regarde, et vous demande si vous n'avez pas vu une princesse blonde en robe rose. Vous lui dites que non, et par colère, il vous vole 10 petites étoiles! (si vous possédiez votre relique, elle est retournée à son point d'emplacement)\n");
-           if (relic == 1){
-            relic = 0; 
+           if (P.relic == 1){
+            P.relic = 0; 
            }
             e4=0;
             return;
