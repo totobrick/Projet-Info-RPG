@@ -4,7 +4,9 @@ int e1 = 1, e2 = 1, e3 = 1, e4 = 1, e5 = 1, e6 = 1, e7 = 1, e8 = 1, e9 = 1, e10 
 Player P;
 card c;
 
-if (event == 1){
+void(card* c, Player* P){
+
+//if (event == 1){
     do{
    int randevent = rand() %11;
     
@@ -33,6 +35,7 @@ if (event == 1){
     printf ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tous à coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!!. À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, malgré tous avec l'honneur d'un grand guerrier!\n");
             P.life = 0;
             printf("Game over!\n");
+            
             e3=0;
          return;
         }
@@ -97,4 +100,5 @@ if (event == 1){
                   }
 } while(e1==1 && e2==1 && e3==1 && e4==1 && e5==1 && e6==1 && e7==1 && e8==1 && e9==1 && e10==1 && e11==1);
                   
- }
+// }
+}
