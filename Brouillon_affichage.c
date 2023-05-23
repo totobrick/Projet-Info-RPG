@@ -28,14 +28,16 @@ int main(){
     width = 30;
     
     //MENU
-    WINDOW* win = newwin (height, width, start_y, start_x); // newwin (height, width, start_y, start_x)
+    WINDOW* win = newwin (height, width, start_y, start_x);
     refresh();
-    int menu_select = 1;                    //les menus vont de 1 à 4
-    printw("NOUVELLE PARTIE <-");
-    printw("Charger une partie");
-    printw("Règles");
-    printw("Sortir");
-    while(!EXIT){
+    int menu = 1;                           //menu=1 -> on est dans le menu     menu=0 -> on n'est plus dans le menu (ds le jeu par ex)
+    int menu_select = 1;                    //les menus à sélectionner vont de 1 à 4
+    wprintw(win, "-> NOUVELLE PARTIE <-\n");
+    wprintw(win,"Charger une partie\n");
+    wprintw(win,"Règles\n");
+    wprintw(win,"Sortir\n");
+    refresh();
+    while(!EXIT){                           //ATTENTION : !EXIT ?? int EXIT avant ??
         if (key_pressed == KEY_UP){         //ATTENTION : int key_pressed ?????
             menu_select --;
         }
@@ -49,7 +51,25 @@ int main(){
             menu_select = 1;
         }
     }
+    // FAIRE changement taille texte qd on est dessus
     
+    if (key_pressed == vk_enter){
+        switch(menu_select){
+            case 1:
+                //a faire
+                break;
+            case 2:
+                //a faire
+                break;
+            case 3:
+                //a faire
+                break;
+            case 4:
+                endwin();
+                EXIT = true;
+                break;
+        }
+    }
     
     
     
