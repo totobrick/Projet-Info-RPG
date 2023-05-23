@@ -27,6 +27,7 @@ int main(){
     height = 5;
     width = 30;
     
+    //MENU
     WINDOW* win = newwin (height, width, start_y, start_x); // newwin (height, width, start_y, start_x)
     refresh();
     int menu_select = 1;                    //les menus vont de 1 à 4
@@ -35,11 +36,17 @@ int main(){
     printw("Règles");
     printw("Sortir");
     while(!EXIT){
-        if (key_pressed == KEY_UP){
+        if (key_pressed == KEY_UP){         //ATTENTION : int key_pressed ?????
             menu_select --;
         }
         if (key_pressed == KEY_DOWN){
             menu_select ++;
+        }
+        if (menu_select <=0){
+            menu_select = 4;
+        }
+        if (menu_select >=4){
+            menu_select = 1;
         }
     }
     
