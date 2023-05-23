@@ -5,7 +5,7 @@ int main(){
     initscr();
     //raw();
     noecho();
-    keypad(stdscreen, TRUE);            //l'usage des flèches haut, bas, droite, gauche est activé
+    keypad(stdscreen, TRUE);            // active la prise en charge des touches spéciales (comme les flèches)
     
     move(2,5);
     printw(" @@@@@@@  @@@ @@@             @@@@@@@@@@   @@@@@@@@  @@@@@@@@@@    @@@@@@   @@@@@@@   @@@ @@@     @@@@@@@   @@@@@@@    @@@@@@@@  \n");
@@ -37,7 +37,8 @@ int main(){
     wprintw(win,"Charger une partie\n");
     wprintw(win,"Règles\n");
     wprintw(win,"Sortir\n");
-    refresh();
+    //refresh();
+    wrefresh(win);
     while(!EXIT){                           //ATTENTION : !EXIT ?? int EXIT avant ??
         if (key_pressed == KEY_UP){         //ATTENTION : int key_pressed ?????
             menu_select --;
@@ -82,7 +83,8 @@ int main(){
                 exit(103);
                 break;
         }
-        refresh();
+        //refresh();
+        wrefresh(win);
     }
     
     if (key_pressed == vk_enter){
@@ -94,7 +96,7 @@ int main(){
                 //a faire
                 break;
             case 3:
-                //a faire
+                //affiche le readme
                 break;
             case 4:
                 endwin();
