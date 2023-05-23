@@ -1,3 +1,5 @@
+// VOIR LE CAS OU JOUR ENTOURE DE 4 MURS/CARTES RETOURNEES -> retour case départ et on retourne les cartes 
+
 #include <stdio.h>
 #include <ncurses.h>
 
