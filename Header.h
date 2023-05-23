@@ -6,23 +6,6 @@
 #define SIZE 8              //tableau 6x6
 
 typedef struct{
-    char nom[100];            //ATTENTION depasement tableau
-    int class;                //Magicien, guerrier, ranger, voleur
-    weapons w;                //0=Torche, 1=Shield, 2=Axe, 3=bow
-    int relic;                //0,1
-    int treasure;             //0=non, 1=oui
-    int life;                 // 0=mort 1=vivant
-    int x;                    // place x dans le tableau entre 1 et 6
-    int y;                    // place y dans le tableau entre 1 et 6
-    int x_init;                //place initiale
-    int y_init;                //place initiale
-    int move;                  //prend +1 à chaque fin de tour
-    int chrono;                // temps de la partie pour ce joueur
-    int slay;                  //nombre de monstre tué
-    int reversed;              //nombre case retourné
-}Player;
-
-typedef struct{
     int type[4];
         /*
         type[0] = torch        (1=oui 0=non)                           <- 1.zombie
@@ -53,6 +36,28 @@ typedef struct{
 } relic;
 
 typedef struct{
+    int neutral;    // 0=non et 1=oui 
+    int malus;      // 0=non et 1=oui 
+} event;
+
+typedef struct{
+    char nom[100];            //ATTENTION depasement tableau
+    int class;                //Magicien, guerrier, ranger, voleur
+    weapons w;                //0=Torche, 1=Shield, 2=Axe, 3=bow
+    int relic;                //0,1
+    int treasure;             //0=non, 1=oui
+    int life;                 // 0=mort 1=vivant
+    int x;                    // place x dans le tableau entre 1 et 6
+    int y;                    // place y dans le tableau entre 1 et 6
+    int x_init;                //place initiale
+    int y_init;                //place initiale
+    int move;                  //prend +1 à chaque fin de tour
+    int chrono;                // temps de la partie pour ce joueur
+    int slay;                  //nombre de monstre tué
+    int reversed;              //nombre case retourné
+}Player;
+
+typedef struct{
     int wall;       //1=oui 0=non
     int hidden;     //1=case visible  0=case cache
     int type[4];
@@ -65,11 +70,6 @@ typedef struct{
     monster m;
     relic r;
 } card;
-
-typedef struct{
-    int neutral;    // 0=non et 1=oui 
-    int malus;      // 0=non et 1=oui 
-} event;
 
 void init_wall (card* tab, int size);
 void init_board (card* tab, int size);
