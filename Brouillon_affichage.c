@@ -51,7 +51,7 @@ int main(){
         if (menu_select >=4){
             menu_select = 1;
         }
-        
+        // Changement taille texte qd on est dessus
         switch(menu_select){
             case 1 :
                 wprintw(win, "-> NOUVELLE PARTIE <-\n");
@@ -82,8 +82,8 @@ int main(){
                 exit(103);
                 break;
         }
+        refresh();
     }
-    // FAIRE changement taille texte qd on est dessus
     
     if (key_pressed == vk_enter){
         switch(menu_select){
@@ -124,7 +124,7 @@ int main(){
     */
     
     /*
-        printw(" $$$$$$\ $$\     $$\       $$\      $$\                                                             $$$$$$$\  $$$$$$$\   $$$$$$\  \n");
+    printw(" $$$$$$\ $$\     $$\       $$\      $$\                                                             $$$$$$$\  $$$$$$$\   $$$$$$\  \n");
     printw("$$  __$$\\$$\   $$  |      $$$\    $$$ |                                                            $$  __$$\ $$  __$$\ $$  __$$\ \n");
     printw("$$ /  \__|\$$\ $$  /       $$$$\  $$$$ | $$$$$$\  $$$$$$\$$$$\   $$$$$$\   $$$$$$\  $$\   $$\       $$ |  $$ |$$ |  $$ |$$ /  \__|\n");
     printw("$$ |       \$$$$  /$$$$$$\ $$\$$\$$ $$ |$$  __$$\ $$  _$$  _$$\ $$  __$$\ $$  __$$\ $$ |  $$ |      $$$$$$$  |$$$$$$$  |$$ |$$$$\ \n");
