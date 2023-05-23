@@ -6,9 +6,63 @@
 void play();
 void move(Player* p);
 
+//Déplace joueur sur une case du tableau
+void move(Player* p, card* tab, int size){
+    do{
+        int authorize=1;
+        /* indique si le joueur a le droit de se déplacer sur la case où il veut aller
+            authorize = 0       -> c'est un mur ou une carte retournée
+            authorize = 1       -> c'est ok
+        */
+        int key = getch();
+        if (key!=KEY_UP && key!=KEY_DOWN && key!=KEY_RIGHT && key!=KEY_LEFT){
+            authorize = 0;
+        }
+            switch (key){           //Vérifie que la saisie de déplacement est correcte (pas de char) et possible (pas vers un wall)
+                case KEY_UP :
+                    if ( (*(tab + (p.y+1)*size + p.x)).wall == 1 || (*(tab + (p.y+1)*size + p.x)).hidden == 1 ){        //interdiction de déplacement
+                        authorize = 0;
+                    }
+                    else{                                                                                               //le joueur va sur la case
+                        (*p).y = (*p).y + 1;
+                    }
+                    break;
+                case KEY_DOWN :
+                    if ( (*(tab + (p.y-1)*size + p.x)).wall == 1 || (*(tab + (p.y-1)*size + p.x)).hidden == 1 ){
+                        authorize = 0;
+                    }
+                    else{                                                                                               //le joueur va sur la case
+                        (*p).y = (*p).y - 1;
+                    }
+                    break;
+                case KEY_RIGHT :
+                    if ( (*(tab + (p.y)*size + p.x+1)).wall == 1 || (*(tab + (p.y)*size + p.x+1)).hidden == 1 ){
+                        authorize = 0;
+                    }
+                    else{                                                                                               //le joueur va sur la case
+                        (*p).x = (*p).x + 1;
+                    }
+                    break;
+                case KEY_LEFT :
+                    if ( (*(tab + (p.y)*size + p.x-1)).wall == 1 || (*(tab + (p.y)*size + p.x-1)).hidden == 1 ){
+                        authorize = 0;
+                    }
+                    else{                                                                                               //le joueur va sur la case
+                        (*p).x = (*p).x - 1;
+                    }
+                    break;
+                default :
+                    printw("ERREUR au moment de la saisie de déplacement du joueur. Veuillez réessayer avec les flèches haut, bas, droite ou gauche");
+                    break;
+            }
+    } while(authorize==0);           //tant qu'on ne rencontre pas un mur. ATTENTION au cas où le oueur est coincé entre 4 murs !!! -> le faire mourir.
+    refresh();
+}
+
 void play(){
     //number of players
     //enter identity
+    //création tableau
     //choose arm
     move(p);        //p est le player, on aura besoin de ses coordonnées et son arme
 
