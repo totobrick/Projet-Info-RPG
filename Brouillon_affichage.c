@@ -39,7 +39,9 @@ int main(){
     wprintw(win,"Sortir\n");
     //refresh();
     wrefresh(win);
-    while(!EXIT){                           //ATTENTION : !EXIT ?? int EXIT avant ??
+    int EXIT = 0;                           // EXIT = false -> on reste dans le menu        EXIT = true -> on va ailleurs que dans le menu
+    while(!EXIT){
+        //getch();
         if (key_pressed == KEY_UP){         //ATTENTION : int key_pressed ?????
             menu_select --;
         }
@@ -85,24 +87,29 @@ int main(){
         }
         //refresh();
         wrefresh(win);
+        if (key_pressed == vk_enter){
+            Exit = 1;
+        }
     }
     
-    if (key_pressed == vk_enter){
-        switch(menu_select){
-            case 1:
-                //a faire
-                break;
-            case 2:
-                //a faire
-                break;
-            case 3:
-                //affiche le readme
-                break;
-            case 4:
-                endwin();
-                EXIT = true;
-                break;
-        }
+    
+    
+    
+
+switch(menu_select){
+        case 1:
+            //a faire
+            break;
+        case 2:
+            //a faire
+            break;
+        case 3:
+            //affiche le readme
+            break;
+        case 4:
+            endwin();
+            EXIT = true;
+            break;
     }
     
     
