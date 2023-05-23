@@ -7,7 +7,8 @@ FILE *fichier = fopen("Score.txt", "a"); //le mode 'a' ajoute du texte à la fin
     printf("Impossible d'ouvrir le fichier.\n");
     return 1; // Quitter le programme en cas d'erreur
 }le mode 
-fprintf(fichier, " /t  /t /n");  //il faut reflechir pour mettre le nom et rajouter une variable "coup" qui prend +1 à chaque fin de tour. de plus il faut mettre le temps de la partie je crois.
+
+    fprintf(fichier, " /t  /t /n");  //il faut reflechir pour mettre le nom et rajouter une variable "coup" qui prend +1 à chaque fin de tour. de plus il faut mettre le temps de la partie je crois.
    fclose(fichier);
   
    FILE *fichier = fopen("Score.txt", "r");
@@ -35,9 +36,6 @@ fprintf(fichier, " /t  /t /n");  //il faut reflechir pour mettre le nom et rajou
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NOMBRE_DE_VALEURS 100
-#define NOMBRE_DE_VALEURS_A_CONSERVER 10
-
 int compare(const void *a, const void *b) {
     return (*(int *)a - *(int *)b);
 }
@@ -49,24 +47,31 @@ int main() {
         return 1;
     }
 
-    int valeurs[NOMBRE_DE_VALEURS];
-    int plus_petites_valeurs[NOMBRE_DE_VALEURS_A_CONSERVER];
+    int *valeurs = NULL;
+    int taille_tableau = 0;
+    int capacite_tableau = 10;
     int i;
 
-    for (i = 0; i < NOMBRE_DE_VALEURS; i++) {
-        fscanf(fichier, "%d", &valeurs[i]);
+    while (!feof(fichier)) {
+        int valeur;
+        fscanf(fichier, "%d", &valeur);
+
+        if (taille_tableau >= capacite_tableau) {
+            capacite_tableau *= 2;
+            valeurs = realloc(valeurs, capacite_tableau * sizeof(int));
+        }
+
+        valeurs[taille_tableau] = valeur;
+        taille_tableau++;
     }
 
-    qsort(valeurs, NOMBRE_DE_VALEURS, sizeof(int), compare);
+    qsort(valeurs, taille_tableau, sizeof(int), compare);
 
-    for (i = 0; i < NOMBRE_DE_VALEURS_A_CONSERVER; i++) {
-        plus_petites_valeurs[i] = valeurs[i];
+    for (i = 0; i < 10 && i < taille_tableau; i++) {
+        printf("%d\n", valeurs[i]);
     }
 
-    for (i = 0; i < NOMBRE_DE_VALEURS_A_CONSERVER; i++) {
-        printf("%d\n", plus_petites_valeurs[i]);
-    }
-
+    free(valeurs);
     fclose(fichier);
     return 0;
 }
