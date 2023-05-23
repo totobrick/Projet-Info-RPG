@@ -16,6 +16,7 @@ typedef struct{
     int y;                    // place y dans le tableau entre 1 et 6
     int x_init;                //place initiale
     int y_init;                //place initiale
+    int move;                  //prend +1 à chaque fin de tour
 }Player;
 
 typedef struct{
