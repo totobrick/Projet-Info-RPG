@@ -1,7 +1,5 @@
 #include "Header.h"
 
-#include "Header.h"
-
 void init_wall (card* tab, int size){
     if (size<=0){
         exit(1);
