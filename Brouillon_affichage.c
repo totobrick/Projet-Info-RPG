@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <ncurses.h>
 
 int main(){
@@ -19,7 +20,7 @@ int main(){
     printw(" :: :: :     :                 :      :    : :: ::    :      :     : :  :    :   : :     :         :   : :   :         :: :: :\n");
     refresh();
     
-    int y_max, x_max;
+    int y_max, x_max;                                       // y_max = nbre de lignes de la fenêtre     x_max = nbre de colonnes de la fenêtre
     getmaxyx(stdscr, y_max, x_max);                         // mesure le nbre de lignes (y_max) et de colonnes (x_max) qui peuvent être affichés
     int height, width, start_y, start_x;
     start_x = x_max/2;
@@ -49,6 +50,37 @@ int main(){
         }
         if (menu_select >=4){
             menu_select = 1;
+        }
+        
+        switch(menu_select){
+            case 1 :
+                wprintw(win, "-> NOUVELLE PARTIE <-\n");
+                wprintw(win,"Charger une partie\n");
+                wprintw(win,"Règles\n");
+                wprintw(win,"Sortir\n");
+                break;
+            case 2 :
+                wprintw(win, "Nouvelle partie\n");
+                wprintw(win,"-> CHARGER UNE PARTIE <-\n");
+                wprintw(win,"Règles\n");
+                wprintw(win,"Sortir\n");
+                break;
+            case 3 :
+                wprintw(win, "Nouvelle partie\n");
+                wprintw(win,"Charger une partie\n");
+                wprintw(win,"-> REGLES <-\n");
+                wprintw(win,"Sortir\n");
+                break;
+            case 4 :
+                wprintw(win, "Nouvelle partie\n");
+                wprintw(win,"Charger une partie\n");
+                wprintw(win,"Règles\n");
+                wprintw(win,"-> SORTIR <-\n");
+                break;
+            default :
+                printf("ERREUR d'affichage menu.");
+                exit(103);
+                break;
         }
     }
     // FAIRE changement taille texte qd on est dessus
