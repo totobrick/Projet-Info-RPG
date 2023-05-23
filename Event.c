@@ -43,7 +43,7 @@ if (event == 1){
            }
             e4=0;
             return;
-    
+        }
     if (randevent==4 && e5==1){
         
     printf ("Un spectacle d'horreur se déroule devant vous ! Un pauvre poisson-clown hors de l'eau semble pleurer tout en ne pouvant pas respirer.\n Il semble répéter sans cesse ces mêmes mots :\n   « Vous n'avez pas vu mon fils ?/n Vous n'avez pas vu mon fils ?/n Vous n'avez pas vu mon... » \nLe manque d'oxygen a eu raison de lui. Vous avez désormais un nouvel objectif : après être sorti victorieux de ce labyrinthe infernal, vous vous mettrez à la recherche de ce fameux « fils ».\n");
@@ -91,8 +91,9 @@ if (event == 1){
             e11=0;
         return;
         }
-} while(e1==1 && e2==1 && e3==1 && e4==1 && e5==1 && e6==1 && e7==1 && e8==1 && e9==1 && e10==1 && e11==1)
-                  else{
+        else{
                   printf ("Problème ! L'évenement n'a pas pu être lancé !\n");
                   }
+} while(e1==1 && e2==1 && e3==1 && e4==1 && e5==1 && e6==1 && e7==1 && e8==1 && e9==1 && e10==1 && e11==1);
+                  
  }
