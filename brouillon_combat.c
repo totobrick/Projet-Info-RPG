@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 void resetPlayerPosition(Player* p) {
     (*p).x = (*p).x_init;
     (*p).y = (*p).y_init;
@@ -18,7 +16,7 @@ void combat(Player P, card c) {
     if(P.w.type[0] == 1){
      printf("Le Basilic est vaincu !\n");
     }
-    else(){
+    else{
      printf("Game Over ! Le Basilic vous a tué.\n");
      resetPlayerPosition( &P);
     }
@@ -27,7 +25,7 @@ void combat(Player P, card c) {
     if(P.w.type[1] == 1){
      printf("Le Zombie est vaincu !\n");
     }
-    else(){
+    else{
      printf("Game Over ! Le Zombie vous a tué.\n");
      resetPlayerPosition( &P);
     }
@@ -36,16 +34,16 @@ void combat(Player P, card c) {
     if(P.w.type[2] == 1){
      printf("Le Troll est vaincu !\n");
     }
-    else(){
+    else{
      printf("Game Over ! Le Troll vous a tué.\n");
      resetPlayerPosition( &P);
     }
     }
-    else(){
+    else{
     if(P.w.type[3] == 1){
      printf("La Harpie est vaincu !\n");
     }
-    else(){
+    else{
      printf("Game Over ! La Harpie vous a tué.\n");
      resetPlayerPosition( &P);
     }
@@ -56,7 +54,8 @@ int main() {
     card c;
     Player P;
     int verif = 0;
-  
+  int weapon=0;
+  int enemy=0;
 
     printf("Choisissez votre arme : \n");
     printf("1. Bouclier\n");
@@ -87,7 +86,7 @@ verif=0;
         P.w.type[2] = 1;
         P.w.type[3] = 0;
     }
-    else(){                             //arc
+    else{                             //arc
         P.w.type[0] = 0;
         P.w.type[1] = 0;
         P.w.type[2] = 0;
@@ -124,15 +123,14 @@ verif=0;
         c.m.type[2] = 1;
         c.m.type[3] = 0;
     }
-    else(){
+    else{
         c.m.type[0] = 0;
         c.m.type[1] = 0;
         c.m.type[2] = 0;
         c.m.type[3] = 1;   
     }
    
-    combat(&P,&c);
+    combat(P,c);
 
     return 0;
 }
-
