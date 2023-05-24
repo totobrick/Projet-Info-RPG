@@ -20,6 +20,7 @@ int main {
   int number_of_players=0;
   Player P;
   card c;
+  Portal p;
   
   P.timer=0  
     
@@ -85,6 +86,14 @@ int main {
             combat(P,c)
         }
         
+        if (c.p==1){
+            Portal(P,c)
+        }
+         
+        if (c.t==1){
+            Totem(P,c)
+        }
+         
         P.move++
       } // while joueur
 endTime = time(NULL);
