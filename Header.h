@@ -59,6 +59,7 @@ typedef struct{
     int chest;                 //nombre de trésore trouvé.    Attention à pas confondre avec "treasure"
     int Score_victory;         //nombre de victoire accumulé 
     int timer;                 //timer du temps du joueur dans une partie
+  //  int Card;                 il faudrait pas ça pour savoir sur quelle case se trouve le perso?
 }Player;
 
 
