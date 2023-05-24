@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "Header.h"
 int main(){ //juste pour tester sur place mercredi ou vendrdi
   
 FILE *fichier = fopen("Score.txt", "a"); //le mode 'a' ajoute du texte à la fin du fichier
