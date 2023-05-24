@@ -19,3 +19,17 @@ void teleport(Player P, card c) {
         printf("Le joueur n'est pas sur l'un des totems, aucune téléportation n'a eu lieu.\n");
     }
 }
+
+
+if(Totem1=0 && Totem2=0){
+                        Totem1= *(tab + i*size + j)
+                    }
+                    else{
+                        Totem2= *(tab + i*size + j)
+                    }
+
+
+int main {
+    int Totem1 = 0;
+    int Totem2 = 0;
+}
