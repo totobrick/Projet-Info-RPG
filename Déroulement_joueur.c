@@ -83,19 +83,20 @@ int main {
        
  /*---------------------------------- ETAPE 3 --------------------------------------*/
         if (c.m==1){
-            combat(P,c)
+            combat(P,c);
         }
         
         if (c.p==1){
-            Portal(P,c)
+            Portal(P,c);
         }
          
         if (c.e==
          
         if (c.t==1){
-            Totem(P,c)
+            Totem(P,c);
+            P.life=0;
         }
-         
+        P.life=1;
         P.move++
       } // while joueur
 endTime = time(NULL);
