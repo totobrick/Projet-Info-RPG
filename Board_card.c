@@ -96,8 +96,8 @@ void generate_board (card* tab, int size){
             'P' = portail   (x1)
     */
     //le tableau tab est déjà initialisé dans une fonction précédente, pas besoin de le faire ici
-    for (int i=1 ; i<(size-1) ; i++){
-        for (int j=1 ; j<(size-1) ; j++){
+    for (int i=1 ; i<(size-1) ; i++){                   //Lignes tableau
+        for (int j=1 ; j<(size-1) ; j++){               //Colonnes tableau
             if (remaining_card > 0){
                 int alea= rand() % remaining_card;
                 // événement
