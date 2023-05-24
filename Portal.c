@@ -1,6 +1,6 @@
 #include "Header.h"
 
-void Portal (Player* P, card* tab){
+void Portal (Player* P, card* tab, int size){
 do{
  
  int new_direction_x = 0;
