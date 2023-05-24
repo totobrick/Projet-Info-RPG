@@ -1,4 +1,14 @@
 #include "Header.h"
-Player p
+Player P
 
-while 
+int main {
+  while (P.life==1 && ){
+  
+  
+  }
+
+
+
+
+
+}
