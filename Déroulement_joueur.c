@@ -14,6 +14,7 @@ int main {
   int verif = 0;
   int weapon=0;
   int enemy=0;
+  int direction;  
   Player P;
   card c;
   
@@ -68,7 +69,10 @@ verif=0;
     }
     
 /*----------------------------------ETAPE 2--------------------------------------*/
-      
+      printf("Enter a direction (2: Down, 8: Up, 4: Left, 6: Right): ");
+      scanf("%d", &direction);
+      move(table, &posX, &posY, direction);
+       
   
   
   } // while
