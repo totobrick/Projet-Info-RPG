@@ -20,7 +20,7 @@ int main {
   
   while (P.life==1 && P.relic==0 || P.treasure==0){
   
-/*----------------------------------ETAPE 1--------------------------------------*/
+/*---------------------------------- ETAPE 1 --------------------------------------*/
                    
     printf("Choisissez votre arme : \n");
     printf("1. Bouclier\n");
@@ -68,13 +68,20 @@ verif=0;
         P.w.type[3] = 1;   
     }
     
-/*----------------------------------ETAPE 2--------------------------------------*/
-      printf("Enter a direction (2: Down, 8: Up, 4: Left, 6: Right): ");
-      scanf("%d", &direction);
-      move(table, &posX, &posY, direction);
+/*---------------------------------- ETAPE 2 --------------------------------------*/
+    printf("Enter a direction (2: Down, 8: Up, 4: Left, 6: Right): ");
+    scanf("%d", &direction);
+    move(table, &posX, &posY, direction);
        
-  
-  
+ /*---------------------------------- ETAPE 3 --------------------------------------*/
+    if (c.m==1){
+       combat(P,c)
+       }
+      
+      
+      
+      
+      
   } // while
 
 
