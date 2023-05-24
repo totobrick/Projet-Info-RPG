@@ -1,6 +1,7 @@
 #include "Header.h"
 
 
+
 void vide_buffer() {
     int c;
     while ((c = getchar()) != '\n') {
@@ -66,9 +67,7 @@ verif=0;
         P.w.type[3] = 1;   
     }
     
-  
-  
-  
+
   
   
   } // while
