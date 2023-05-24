@@ -84,4 +84,5 @@ void generate_board (card* tab, int size);
 void board (card* tab, int size);
 void resetPlayerPosition(Player* p);
 void move(int table[ROWS][COLS], int* posX, int* posY, int direction);
-void event(card* c, Player* P){
+void event(card* c, Player* P);
+void Exchang_Totem (Player P, card c,card new_card,card tempo);
