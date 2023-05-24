@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "Header.h"
 
 #define ROWS 6
 #define COLS 6
