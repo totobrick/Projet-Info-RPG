@@ -22,6 +22,8 @@ void vide_buffer() {
 void move(int table[ROWS][COLS], int* posX, int* posY, int direction) {
     int deltaX = 0;
     int deltaY = 0;
+    int verif = 0;
+    int direction;
     
     // Determine the movement based on the direction
     switch (direction) {
@@ -64,10 +66,12 @@ void move(int table[ROWS][COLS], int* posX, int* posY, int direction) {
     
     displayTable(table);
     
-    int direction;
+        do {
         printf("Enter a direction (2: Down, 8: Up, 4: Left, 6: Right): ");
-        scanf("%d", &direction);
-        
+        verif = scanf("%d", &direction);
+        vide_buffer();
+    } while (direction != 2 && direction != 4 && direction != 6 && direction != 8 || verif != 1);
+    
         // Move based on the direction entered by the user
         move(table, &posX, &posY, direction);
         //displayTable(table);
