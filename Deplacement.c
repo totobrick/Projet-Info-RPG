@@ -10,6 +10,15 @@ void displayTable(int table[ROWS][COLS]) {
     }
 }
 */
+
+
+void vide_buffer() {
+    int c;
+    while ((c = getchar()) != '\n') {
+    }
+}
+
+
 void move(int table[ROWS][COLS], int* posX, int* posY, int direction) {
     int deltaX = 0;
     int deltaY = 0;
