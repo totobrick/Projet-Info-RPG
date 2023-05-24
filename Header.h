@@ -19,10 +19,10 @@ typedef struct{
 typedef struct{
     int type[4];
         /*
-        type[0] = zombie        (1=oui 0=non)                           <- 1.Torche
-        type[1] = troll         (1=oui 0=non)                           <- 2.Hache
-        type[2] = harpy         (1=oui 0=non)                           <- 3.Arc
-        type[3] = basilisk      (1=oui 0=non)       basilisk = basilic  <- 4.Bouclier
+        type[0] = basilisk     (1=oui 0=non)                          <- 1.Bouclier
+        type[1] = zombie     (1=oui 0=non)                            <- 2.Torche
+        type[2] = troll       (1=oui 0=non)                           <- 3.Hache
+        type[3] = harpy    (1=oui 0=non)       basilisk = basilic     <- 4. Arc
         */ 
 } monster;
 
