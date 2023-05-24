@@ -56,6 +56,7 @@ typedef struct{
     int chrono;                // temps de la partie pour ce joueur
     int slay;                  //nombre de monstre tué
     int reversed;              //nombre case retourné
+    int chest;                 //nombre de trésore trouvé.    Attention à pas confondre avec "treasure"
 }Player;
 
 
