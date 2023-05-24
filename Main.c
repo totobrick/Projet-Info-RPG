@@ -1,3 +1,5 @@
+#include "Header.h"
+
 //nombre joueur, 
 void resetPlayerPosition(int* posX, int* posY) {
     *posX = 0;
