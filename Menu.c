@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "Header.h"
 
 void afficherMenu() {
     int choix;
