@@ -109,7 +109,7 @@ int main(){
     int menu = 1;                           //menu=1 -> on est ds menu     menu=0 -> on n'est plus ds menu (ds le jeu par ex)
     int menu_select = 1;                    //les menus à sélectionner vont de 1 à 4
     wprintw(win, "-> NOUVELLE PARTIE <-\n");
-    wprintw(win,"Charger une partie\n");    //ATTENTION : ou afficher le scoreboard ????
+    wprintw(win,"Charger une partie\n");    //ATTENTION : ou Afficher le scoreboard ????
     wprintw(win,"Règles\n");
     wprintw(win,"Sortir\n");
     //refresh();
