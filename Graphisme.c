@@ -1,7 +1,7 @@
   
 Couleur:
 
-#include <stdio.h>
+#include "Header.h"
 
 int main() {
     // Séquence d'échappement ANSI pour définir la couleur du texte en rouge
