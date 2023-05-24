@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include "Header.h"
 
 void vide_buffer() {
     int c;
