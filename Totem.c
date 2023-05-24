@@ -1,35 +1,36 @@
 #include "Header.h"
-extern int Totem1;
-extern int Totem2;
 
-void teleport(Player P, card c) {
-
-    // Vérification si le joueur est sur l'un des totems
-    if (P.x==Totem1 && P.y==Totem1) {
-        // Téléportation vers le deuxième totem
-        P.X=Totem2
-        P.y=Totem2
-        printf("Le joueur a été téléporté vers le deuxième totem.\n");
-    } else if (P.x==Totem2 && P.y==Totem2) {
-        // Téléportation vers le premier totem
-        P.X=Totem1
-        P.y=Totem1
-        printf("Le joueur a été téléporté vers le premier totem.\n");
-    } else {
-        printf("Le joueur n'est pas sur l'un des totems, aucune téléportation n'a eu lieu.\n");
-    }
+void Exchang_Totem (Player P, card c) {
+    
+        do{
+ 
+ int new_direction_x = 0;
+  int new_direction_y = 0;
+  do{
+  printf("Choisissez les coordonnés x, entre 1 et 6, vers laquel le totem va être échanger");
+  verif = scanf ("%d", &new_direction_x);
+  vide_buffer();
+  }while ( verif != 1 && new_direction_x<1 && new_direction_x>6);
+ verif=0; 
+ 
+ do{
+  printf("Choisissez les coordonnés y, entre 1 et 6, vers laquel le totem va être échanger");
+  verif = scanf ("%d", &new_direction_y);
+  vide_buffer();
+  }while ( verif != 1 && new_direction_y<1 && new_direction_y>6);
+ verif=0
+    
+card new_card = tab [new_direction_x] [new_direction_y];
+temporary_variable = card.c
+             }while(new_card.wall == 1 && new_card == [1] [3] && new_card == [4] [1] && new_card == [3] [6] && new_card == [6] [4]);
 }
 
 
-if(Totem1=0 && Totem2=0){
-                        Totem1= *(tab + i*size + j)
-                    }
-                    else{
-                        Totem2= *(tab + i*size + j)
-                    }
 
 
 int main {
-    int Totem1 = 0;
-    int Totem2 = 0;
+    card c;
+    Player P;
+    int card new_card;
+    int temporary_variable;
 }
