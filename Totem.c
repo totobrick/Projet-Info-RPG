@@ -5,26 +5,17 @@ extern int Totem2;
 void teleport(Player P, card c) {
 
     // Vérification si le joueur est sur l'un des totems
-    if (c.P) {
+    if (P.x==Totem1 && P.y==Totem1) {
         // Téléportation vers le deuxième totem
-        grid[totem1_x][totem1_y] = 0;
-        grid[totem2_x][totem2_y] = 2;
+        P.X=Totem2
+        P.y=Totem2
         printf("Le joueur a été téléporté vers le deuxième totem.\n");
-    } else if (player_x == totem2_x && player_y == totem2_y) {
+    } else if (P.x==Totem2 && P.y==Totem2) {
         // Téléportation vers le premier totem
-        grid[totem2_x][totem2_y] = 0;
-        grid[totem1_x][totem1_y] = 2;
+        P.X=Totem1
+        P.y=Totem1
         printf("Le joueur a été téléporté vers le premier totem.\n");
     } else {
         printf("Le joueur n'est pas sur l'un des totems, aucune téléportation n'a eu lieu.\n");
     }
-}
-
-
-
-int main {
-
-
-
-
 }
