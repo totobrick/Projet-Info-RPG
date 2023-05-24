@@ -1,8 +1,15 @@
 #include "Header.h"
 
+void vide_buffer() {
+    int c;
+    while ((c = getchar()) != '\n') {
+    }
+}
+
+
 void afficherMenu() {
     int choix;
-
+int verif = 0;
     do {
         printf("\nMenu :\n");
         printf("1. Jouer\n");
@@ -10,8 +17,8 @@ void afficherMenu() {
         printf("3. Sortir\n");
         printf("Choisissez une option : ");
       
-        scanf("%d", &choix);
-
+        verif = scanf("%d", &choix);
+vide_buffer();
         switch (choix) {
             case 1:
                 printf("Lancement du jeu...\n");
@@ -28,7 +35,7 @@ void afficherMenu() {
                 printf("Option invalide. Veuillez choisir une option valide.\n");
                 break;
         }
-    } while (choix != 3);
+    } while (choix != 3 && verif != 1);
 }
 
 int main() {
