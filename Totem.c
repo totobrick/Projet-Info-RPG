@@ -23,9 +23,9 @@ void Exchang_Totem (Player P, card c,card new_card,card tempo) {
 card new_card = tab [new_direction_x] [new_direction_y];
              }while(new_card.wall == 1 && new_card == [1] [3] && new_card == [4] [1] && new_card == [3] [6] && new_card == [6] [4]);
     
-    card tempo = card new_card
-    card new_card = card c
-    card c = card tempo
+    card tempo = card new_card;
+    card new_card = card c;
+    card c = card tempo;
 }
 
 
