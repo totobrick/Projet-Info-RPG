@@ -14,13 +14,19 @@ int main {
   int verif = 0;
   int weapon=0;
   int enemy=0;
+  time_t startTime, endTime;
+  int running = 0;
+  int input;
   int direction;
   int number_of_players_who_played=0;
   int number_of_players=0;
   Player P;
   card c;
   
+  P.timer=0  
+    
  while(number_of_players<number_of_players_who_played){
+     startTime = time(NULL);
      while (P.life==1 && P.relic==0 || P.treasure==0){
   
 /*---------------------------------- ETAPE 1 --------------------------------------*/
@@ -80,10 +86,13 @@ int main {
         if (c.m==1){
             combat(P,c)
         }
-      
+        
         P.move++
       } // while joueur
-     
+endTime = time(NULL);
+double elapsedTime = difftime(endTime, startTime);
+P.timer=P.timer + elapsedTime;
+P.move=0;    
 number_of_players_who_played++
 } //while manche
 
