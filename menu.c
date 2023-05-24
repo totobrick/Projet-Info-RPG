@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <string.h>
+#include "Header.h"
 
 void afficherTexteCentre(const char *texte, int largeur) {
     int longueur = strlen(texte);
