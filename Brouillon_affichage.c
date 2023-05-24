@@ -1,21 +1,22 @@
 // VOIR LE CAS OU JOUR ENTOURE DE 4 MURS/CARTES RETOURNEES -> retour case départ et on retourne les cartes 
-
 #include <stdio.h>
+#include <stdlib.h>
 #include <ncurses.h>
 
-#include "Header.h"
 
-void play();
-void move(Player* p);
+//#include "Header.h"
 
+//void play();
+//void perso_move(Player* p);
+/*
 //Déplace joueur sur une case du tableau
-void move(Player* p, card* tab, int size){
+void perso_move(Player* p, card* tab, int size){
     do{
         int authorize=1;
-        /* indique si le joueur a le droit de se déplacer sur la case où il veut aller
-            authorize = 0       -> c'est un mur ou une carte retournée
-            authorize = 1       -> c'est ok
-        */
+        // indique si le joueur a le droit de se déplacer sur la case où il veut aller
+        //    authorize = 0       -> c'est un mur ou une carte retournée
+        //    authorize = 1       -> c'est ok
+        
         int key = getch();
         if (key!=KEY_UP && key!=KEY_DOWN && key!=KEY_RIGHT && key!=KEY_LEFT){
             authorize = 0;
@@ -66,18 +67,18 @@ void play(){
     //enter identity
     //création tableau
     //choose arm
-    move(p);        //p est le player, on aura besoin de ses coordonnées et son arme
+    perso_move(p);        //p est le player, on aura besoin de ses coordonnées et son arme
 
 }
-
+*/
 
 int main(){
     initscr();
     //raw();
     noecho();
-    keypad(stdscreen, TRUE);            // active la prise en charge des touches spéciales (comme les flèches)
+    keypad(stdscr, TRUE);            // active la prise en charge des touches spéciales (comme les flèches)
     
-    move(2,5);
+    move(5,0);
     printw(" @@@@@@@  @@@ @@@             @@@@@@@@@@   @@@@@@@@  @@@@@@@@@@    @@@@@@   @@@@@@@   @@@ @@@     @@@@@@@   @@@@@@@    @@@@@@@@  \n");
     printw("@@@@@@@@  @@@ @@@             @@@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@ @@@     @@@@@@@@  @@@@@@@@  @@@@@@@@@  \n");
     printw("!@@       @@! !@@             @@! @@! @@!  @@!       @@! @@! @@!  @@!  @@@  @@!  @@@  @@! !@@     @@!  @@@  @@!  @@@  !@@        \n");
@@ -92,16 +93,20 @@ int main(){
     
     int y_max, x_max;                                       // y_max = nbre de lignes de la fenêtre     x_max = nbre de colonnes de la fenêtre
     getmaxyx(stdscr, y_max, x_max);                         // mesure le nbre de lignes (y_max) et de colonnes (x_max) qui peuvent être affichés
+    move(y_max-1, 0);
+    printw("Appuyer sur q (minuscule) pour sortir du jeu.\n");
+    refresh();
+    move(15,0);						//on replace le curseur après le logo de jeu
+    
     int height, width, start_y, start_x;
-    start_x = x_max/2;
-    start_y = 15;
-    height = 5;
+    start_x = x_max/2 - 10;
+    start_y = 25;
+    height = 10;
     width = 30;
     
     //MENU
     WINDOW* win = newwin (height, width, start_y, start_x);
-    refresh();
-    int menu = 1;                           //menu=1 -> on est dans le menu     menu=0 -> on n'est plus dans le menu (ds le jeu par ex)
+    int menu = 1;                           //menu=1 -> on est ds menu     menu=0 -> on n'est plus ds menu (ds le jeu par ex)
     int menu_select = 1;                    //les menus à sélectionner vont de 1 à 4
     wprintw(win, "-> NOUVELLE PARTIE <-\n");
     wprintw(win,"Charger une partie\n");    //ATTENTION : ou afficher le scoreboard ????
@@ -109,21 +114,31 @@ int main(){
     wprintw(win,"Sortir\n");
     //refresh();
     wrefresh(win);
+    
     int EXIT = 0;                           // EXIT = false -> on reste dans le menu        EXIT = true -> on va ailleurs que dans le menu
-    while(!EXIT){
-        //getch();
+    do{
+        int key_pressed = getch();
+        if (key_pressed == (int)'q'){	//en entrant q : on sort du jeu
+        	endwin();
+        	return 0;
+        }
         if (key_pressed == KEY_UP){         //ATTENTION : int key_pressed ?????
             menu_select --;
+            printw("Key_up appuyé\n");
+            refresh();
         }
         if (key_pressed == KEY_DOWN){
             menu_select ++;
+            printw("Key_down appuyé\n");
+            refresh();
         }
         if (menu_select <=0){
             menu_select = 4;
         }
-        if (menu_select >=4){
+        if (menu_select >4){
             menu_select = 1;
         }
+        wclear(win);
         // Changement taille texte qd on est dessus
         switch(menu_select){
             case 1 :
@@ -155,17 +170,19 @@ int main(){
                 exit(103);
                 break;
         }
-        //refresh();
+        refresh();
         wrefresh(win);
-        if (key_pressed == vk_enter){
-            Exit = 1;
+        if (key_pressed == '\n'){
+            EXIT = 1;
         }
-    }
+    }while(!EXIT);
+    endwin();
+    return 0;
+}   
     
     
     
-    
-
+/*
 switch(menu_select){
         case 1:
             //a faire
@@ -180,16 +197,14 @@ switch(menu_select){
             endwin();
             EXIT = true;
             break;
-    }
+}*/
     
     
     
         
     
     
-    endwin();
-    return 0;
-}
+
     /*
     printw(" ____     __    __                                                               ____    ____    ____     \n");
     printw("/\  _`\  /\ \  /\ \        /'\_/`\                                              /\  _`\ /\  _`\ /\  _`\    \n");
