@@ -25,36 +25,36 @@ void move(int table[ROWS][COLS], int* posX, int* posY, int direction) {
     int verif = 0;
     int direction;
     
-    // Determine the movement based on the direction
+    // Determine le mouvement basé sur la direction
     switch (direction) {
-        case 2: // Down
+        case 2: // Bas
             deltaX = 1;
             break;
-        case 8: // Up
+        case 8: // Haut
             deltaX = -1;
             break;
-        case 4: // Left
+        case 4: // Gauche
             deltaY = -1;
             break;
-        case 6: // Right
+        case 6: // Droite
             deltaY = 1;
             break;
         default:
-            printf("Invalid direction!\n");
+            printf("Direction Invalide!\n");
             return;
     }
     
-    // Calculate the new coordinates
+    // calcule les nouvelle coordonné
     int newPosX = *posX + deltaX;
     int newPosY = *posY + deltaY;
     
-    // Check if the new coordinates are valid
+    // check si les nouvelles coordonné sont bonnes
     if (newPosX >= 0 && newPosX < ROWS && newPosY >= 0 && newPosY < COLS) {
         // Move to the new cell
         *posX = newPosX;
         *posY = newPosY;
     } else {
-        printf("Invalid move!\n");
+        printf("Mouvement Invalide!\n");
     }
 //}
 
@@ -67,12 +67,12 @@ void move(int table[ROWS][COLS], int* posX, int* posY, int direction) {
     displayTable(table);
     
         do {
-        printf("Enter a direction (2: Down, 8: Up, 4: Left, 6: Right): ");
+        printf("entrer un direction (2: Bas, 8: Haut, 4: Gauche, 6: Droite): ");
         verif = scanf("%d", &direction);
         vide_buffer();
     } while (direction != 2 && direction != 4 && direction != 6 && direction != 8 || verif != 1);
     
-        // Move based on the direction entered by the user
+        // Move basé sur la direction choisi du joueur
         move(table, &posX, &posY, direction);
         //displayTable(table);
 //}
