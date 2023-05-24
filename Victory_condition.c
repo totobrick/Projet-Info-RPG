@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "Header.h"
 
 // Structure pour représenter un joueur
 typedef struct{
