@@ -123,13 +123,6 @@ void generate_board (card* tab, int size){
                 }
                 else if(cards[alea] == 'T'){
                     (*(tab + i*size + j)).type[1] = 1;
-                    
-                    if(Totem1=0 && Totem2=0){
-                        Totem1= *(tab + i*size + j)
-                    }
-                    else{
-                        Totem2= *(tab + i*size + j)
-                    }
                 }
                 //Les 4 armes antiques
                 else if(cards[alea] == 'E'){
@@ -164,9 +157,4 @@ void generate_board (card* tab, int size){
     invert_card( tab + 1*size + 3 , tab + 6*size + 3);
     invert_card( tab + 3*size + 6 , tab + 6*size + 5);
     invert_card( tab + 4*size + 1 , tab + 6*size + 6);
-}
-
-int main {
-    int Totem1 = 0;
-    int Totem2 = 0;
 }
