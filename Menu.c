@@ -9,6 +9,7 @@ void afficherMenu() {
         printf("2. Afficher le scoreboard\n");
         printf("3. Sortir\n");
         printf("Choisissez une option : ");
+      
         scanf("%d", &choix);
 
         switch (choix) {
