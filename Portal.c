@@ -1,6 +1,8 @@
 #include "Header.h"
 
 void Portal (Player P, card c){
+do{
+ 
  int new_direction_x = 0;
   int new_direction_y = 0;
   do{
@@ -17,6 +19,8 @@ void Portal (Player P, card c){
   }while ( verif != 1 && new_direction_y<1 && new_direction_y>6);
  verif=0
  
+card new_card = tab [new_direction_x] [new_direction_y];
   
- 
+  
+      }while(new_card.wall == 1 && new_card == [1] [3] && new_card == [4] [1] && new_card == [3] [6] && new_card == [6] [4]);
 }
