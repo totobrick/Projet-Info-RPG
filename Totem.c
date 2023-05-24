@@ -1,6 +1,6 @@
 #include "Header.h"
 
-void Exchang_Totem (Player P, card c) {
+void Exchang_Totem (Player P, card c,card new_card,card tempo) {
     
         do{
  
@@ -21,8 +21,11 @@ void Exchang_Totem (Player P, card c) {
  verif=0
     
 card new_card = tab [new_direction_x] [new_direction_y];
-temporary_variable = card.c
              }while(new_card.wall == 1 && new_card == [1] [3] && new_card == [4] [1] && new_card == [3] [6] && new_card == [6] [4]);
+    
+    card tempo = card new_card
+    card new_card = card c
+    card c = card tempo
 }
 
 
@@ -31,6 +34,7 @@ temporary_variable = card.c
 int main {
     card c;
     Player P;
-    int card new_card;
-    int temporary_variable;
+    card new_card;
+    card tempo;
+
 }
