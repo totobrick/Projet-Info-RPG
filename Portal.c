@@ -1,6 +1,6 @@
 #include "Header.h"
 
-void Portal (/*Player P*/, card* c){
+void Portal (Player* P, card* tab){
 do{
  
  int new_direction_x = 0;
@@ -21,6 +21,7 @@ do{
  
 card new_card = tab [new_direction_x] [new_direction_y];
   
-  
       }while(new_card.wall == 1 && new_card == [1] [3] && new_card == [4] [1] && new_card == [3] [6] && new_card == [6] [4]);
+ 
+ 
 }
