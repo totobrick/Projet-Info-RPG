@@ -90,6 +90,8 @@ int main {
             Portal(P,c)
         }
          
+        if (c.e==
+         
         if (c.t==1){
             Totem(P,c)
         }
