@@ -22,7 +22,7 @@ void Portal (Player* P, card* tab, int size){
  
 card new_card = tab [new_direction_x] [new_direction_y];
   
-      }while (new_card.wall == 1 && )
+      }while (new_card.wall == 1 && new_card.hidden == 1 );
  P.x = new_direction_x;
  P.y = new_direction_y;
  
