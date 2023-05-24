@@ -58,6 +58,7 @@ typedef struct{
     int reversed;              //nombre case retourné
 }Player;
 
+
 typedef struct{
     int wall;       //1=oui 0=non
     int hidden;     //1=case visible  0=case cache
