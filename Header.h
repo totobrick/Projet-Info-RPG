@@ -9,10 +9,10 @@
 typedef struct{
     int type[4];
         /*
-        type[0] = torch        (1=oui 0=non)                           <- 1.zombie
-        type[1] = axe         (1=oui 0=non)                           <- 2.troll
-        type[2] = bow         (1=oui 0=non)                           <- 3.harpy
-        type[3] = shield       (1=oui 0=non)                          <- 4.basilisk
+        type[0] = shield       (1=oui 0=non)                           <- 1.zombie
+        type[1] =  torch       (1=oui 0=non)                           <- 2.troll
+        type[2] =   axe        (1=oui 0=non)                           <- 3.harpy
+        type[3] =   bow        (1=oui 0=non)                          <- 4.basilisk
         */ 
 } weapons;
 
