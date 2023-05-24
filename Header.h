@@ -44,7 +44,7 @@ typedef struct{
 typedef struct{
     char nom[100];            //ATTENTION depasement tableau
     int class;                //Magicien, guerrier, ranger, voleur
-    weapons w;                //0=Torche, 1=Shield, 2=Axe, 3=bow
+    weapons w;                //1=Shield, 1=Shield, 2=Axe, 3=bow
     int relic;                //0,1
     int treasure;             //0=non, 1=oui
     int life;                 // 0=mort 1=vivant
