@@ -15,8 +15,6 @@ int main {
   int weapon=0;
   int enemy=0;
   time_t startTime, endTime;
-  int running = 0;
-  int input;
   int direction;
   int number_of_players_who_played=0;
   int number_of_players=0;
