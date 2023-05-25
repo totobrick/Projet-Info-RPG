@@ -628,6 +628,8 @@ int main(){
 		
 	    int nmb_player = nb_player(win2);
 		Player* p1, p2, p3, p4;
+	    	
+	    	//INITIALISATION DES 4 JOUEURS
 		create__player (p1);				//Crée l'identité d'1 joueur
 		(*p1).life = 1;                 // 0=mort 1=vivant
 		(*p1).x = 3;                    // place x dans le tableau entre 1 et 6
@@ -635,7 +637,7 @@ int main(){
 		(*p1).x_init = 3;                //place initiale
 		(*p1).y_init = 1;                //place initiale
 	    	
-	    create__player (p2);				//Crée l'identité d'1 joueur
+	    	create__player (p2);				//Crée l'identité d'1 joueur
 		(*p2).life = 0;                 // 0=mort 1=vivant
 		(*p2).x = 1;                    // place x dans le tableau entre 1 et 6
 		(*p2).y = 4;                    // place y dans le tableau entre 1 et 6
