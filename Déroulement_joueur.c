@@ -23,6 +23,29 @@ int main {
   card tab;
   Portal p;
   P.timer=0  
+      
+      
+    do {
+            printf("Combien êtes vous à jouer ?\n");
+            verif = scanf("%d", number_of_players );
+            vide_buffer();
+        } while (number_of_players>=2 && number_of_players<=4 || verif != 1);
+        verif=0;
+    
+for (int i = 0; number_of_players>i; i++){
+        do {
+            printf("Choisissez votre Classe : \n");
+            printf("1. Magicien\n");
+            printf("2. Guerrier\n");
+            printf("3. Ranger\n");
+            printf("4. Voleur\n");
+            printf("Votre choix: ");
+            verif = scanf("%d", P.class );
+            vide_buffer();
+        } while (P.class != 1 && P.class != 2 && P.class != 3 && P.class != 4 || verif != 1);
+        verif=0;
+} //for 
+      
     
  while(number_of_players<number_of_players_who_played || victory==1){
      startTime = time(NULL);
