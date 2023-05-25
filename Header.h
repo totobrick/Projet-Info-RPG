@@ -85,5 +85,6 @@ void board (card* tab, int size);
 void resetPlayerPosition(Player* p);
 void move(int table[ROWS][COLS], int* posX, int* posY, int direction);
 void event(card* c, Player* P);
+int checkTreasure(Player player);
 void Exchang_Totem (Player P, card c,card new_card,card tempo);
 void Portal (Player* P, card* tab, int size);
