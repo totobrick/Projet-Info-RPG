@@ -306,6 +306,7 @@ void create_player(Player* p){
     } while (c != '1' && c != '2' && c != '3' && c != '4');
     (*p).class = c;
     (*p).relic = 0;                //0,1
+	(*p).treasure = 0;             //0=non, 1=oui
     (*p).move = 0;                  //prend +1 à chaque fin de tour
     (*p).chrono = 0;                // temps de la partie pour ce joueur
     (*p).slay = 0;                  //nombre de monstre tué
@@ -628,20 +629,35 @@ int main(){
 	    int nmb_player = nb_player(win2);
 		Player* p1, p2, p3, p4;
 		create__player (p1);				//Crée l'identité d'1 joueur
-	    	(*p1).treasure = 0;             //0=non, 1=oui
 		(*p1).life = 1;                 // 0=mort 1=vivant
 		(*p1).x = 3;                    // place x dans le tableau entre 1 et 6
 		(*p1).y = 1;                    // place y dans le tableau entre 1 et 6
 		(*p1).x_init = 3;                //place initiale
 		(*p1).y_init = 1;                //place initiale
 	    	
-	    	create__player (p2);				//Crée l'identité d'1 joueur
-	    	(*p1).treasure = 0;             //0=non, 1=oui
-		(*p1).life = 1;                 // 0=mort 1=vivant
-		(*p1).x = 3;                    // place x dans le tableau entre 1 et 6
-		(*p1).y = 1;                    // place y dans le tableau entre 1 et 6
-		(*p1).x_init = 3;                //place initiale
-		(*p1).y_init = 1;                //place initiale
+	    create__player (p2);				//Crée l'identité d'1 joueur
+		(*p2).life = 0;                 // 0=mort 1=vivant
+		(*p2).x = 1;                    // place x dans le tableau entre 1 et 6
+		(*p2).y = 4;                    // place y dans le tableau entre 1 et 6
+		(*p2).x_init = 1;                //place initiale
+		(*p2).y_init = 4;                //place initiale
+		
+		if (nmb_player >= 3){
+			create__player (p3);				//Crée l'identité d'1 joueur
+			(*p3).life = 0;                 // 0=mort 1=vivant
+			(*p3).x = 4;                    // place x dans le tableau entre 1 et 6
+			(*p3).y = 6;                    // place y dans le tableau entre 1 et 6
+			(*p3).x_init = 4;                //place initiale
+			(*p3).y_init = 6;                //place initiale
+		}
+		if (nmb_player == 4){
+			create__player (p4);				//Crée l'identité d'1 joueur
+			(*p4).life = 0;                 // 0=mort 1=vivant
+			(*p4).x = 4;                    // place x dans le tableau entre 1 et 6
+			(*p4).y = 6;                    // place y dans le tableau entre 1 et 6
+			(*p4).x_init = 4;                //place initiale
+			(*p4).y_init = 6;                //place initiale
+		}
 	    	
 		for (int i=0 ; i<nmb_player ; i++){
 			
