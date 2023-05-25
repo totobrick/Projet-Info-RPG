@@ -306,7 +306,7 @@ void create_player(Player* p){
     } while (c != '1' && c != '2' && c != '3' && c != '4');
     (*p).class = c;
     (*p).relic = 0;                //0,1
-	(*p).treasure = 0;             //0=non, 1=oui
+    (*p).treasure = 0;             //0=non, 1=oui
     (*p).move = 0;                  //prend +1 à chaque fin de tour
     (*p).chrono = 0;                // temps de la partie pour ce joueur
     (*p).slay = 0;                  //nombre de monstre tué
@@ -626,10 +626,10 @@ int main(){
     
     if(menu_select==1){
 		
-	    int nmb_player = nb_player(win2);
-		Player* p1, p2, p3, p4;
-	    	
-	    	//INITIALISATION DES 4 JOUEURS
+        int nmb_player = nb_player(win2);
+        Player* p1, p2, p3, p4;
+	
+        //INITIALISATION DES 4 JOUEURS
 		create__player (p1);				//Crée l'identité d'1 joueur
 		(*p1).life = 1;                 // 0=mort 1=vivant
 		(*p1).x = 3;                    // place x dans le tableau entre 1 et 6
@@ -637,7 +637,7 @@ int main(){
 		(*p1).x_init = 3;                //place initiale
 		(*p1).y_init = 1;                //place initiale
 	    	
-	    	create__player (p2);				//Crée l'identité d'1 joueur
+        create__player (p2);				//Crée l'identité d'1 joueur
 		(*p2).life = 0;                 // 0=mort 1=vivant
 		(*p2).x = 1;                    // place x dans le tableau entre 1 et 6
 		(*p2).y = 4;                    // place y dans le tableau entre 1 et 6
@@ -664,23 +664,31 @@ int main(){
 		for (int i=0 ; i<nmb_player ; i++){
 			
 		}
-        card* game;
-        WINDOW* win2 = newwin(10,100, 20,0);
         
+        WINDOW* win_game = newwin(20,100, 5, 15);           //fenêtre du plateau de jeu
+        card* game;
         game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
 	if (game == NULL){
-		printf("Problème d'allocation de mémoire pour la création du tableau du jeu.\n");
-		exit(10);
+	    printf("Problème d'allocation de mémoire pour la création du tableau du jeu.\n");
+	    exit(10);
 	}
+    Player* tab_player[] = {p1, p2, p3, p4}             //tableau où il y a les 4 joueurs
+    int r=-1                                             //rang dans le tableau
 	do{
-            
-        } while
+        r++;
+        r = r%4;
+        (*tab_player[r]).life = 1;
+        do{
+        //play(tab_player[r]);      -> créer procédure "JOUER"  -> *tab_player[r]).life==0
+        } while( (*tab_player[r]).life==1 );
+        
+    } while ( (*tab_player[r]).relic!=1 || (*tab_player[r]).treasure!=1 );      //condition de victoire d'un joueur
 	    
 	board(game, SIZE);
 	show_board(game, SIZE);
 	do{
-		choose_weapon(Player* p, WINDOW* win);
-		getch();
+	    choose_weapon(Player* p, WINDOW* win);
+	    getch();
 	}while(p.life==1);				//tant que joueur en vie et n'a pas gagné
             
     else if (menu_select==2){
