@@ -153,7 +153,6 @@ void init_card(card* card1){
     }
 }
 
-
 void invert_card(card* card1, card* card2){
     card* transit_card = malloc(sizeof(card));
     //transit_card = card1
@@ -414,11 +413,11 @@ void show_board(card* tab, int size){
 		for (int j=1 ; j<(size-1) ; j++){
 			move(i*4, j*10);
 			if((*(tab + i*size + j)).hidden == 0){
-				printw("\U000025A0");	//logo carte
+				addch('\u25A0');					// Affiche le caractère du carré plein
 			}
 			else{
 				if((*(tab + i*size + j)).type[0] == 1){			//trésor
-				    printw("\U0001F4B0");
+				    addstr("\u{1F4B0}");
 				}
 				else if((*(tab + i*size + j)).type[1] == 1){		//totem
 				    printw("\U0001F5FF");
