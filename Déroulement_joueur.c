@@ -24,7 +24,7 @@ int main {
   
   P.timer=0  
     
- while(number_of_players<number_of_players_who_played){
+ while(number_of_players<number_of_players_who_played || victory==1){
      startTime = time(NULL);
      while (P.life==1 && P.relic==0 || P.treasure==0){
         printw("%d",game,"\n");
@@ -85,6 +85,7 @@ int main {
  /*---------------------------------- ETAPE 3 --------------------------------------*/
         if (c.m==1){
             combat(P,c);
+            P.slay++
         }
         
         if (c.p==1){
@@ -104,11 +105,18 @@ int main {
       } // while joueur
 endTime = time(NULL);
 double elapsedTime = difftime(endTime, startTime);
-P.timer=P.timer + elapsedTime;
-P.move=0;    
-number_of_players_who_played++;
-     
+P.timer=P.timer + elapsedTime; 
+if (checkTreasure(P)==1){
+    return
+    }
+else if (checkTreasure(P)==0 && number_of_players_who_played==number_of_players){
+    number_of_players_who_played=0
+    }
+    number_of_players_who_played++;
 } //while manche
 
+printw("%d",game,"\n");
+printf("Le joueur, %s, a gagné",P.nom);
+P.Score_victory++
 
 } // main
