@@ -76,19 +76,29 @@ typedef struct{
     relic r;
 } card;
 
+// INITIALISATION DU JEU
 void init_wall (card* tab, int size);
 void init_board (card* tab, int size);
 void init_card(card* card1);
 void invert_card(card* card1, card* card2);
 void generate_board (card* tab, int size);
 void board (card* tab, int size);
+
+// AVANT DE JOUER
+int nb_player (WINDOW* win);
+
+// DURANT LE JEU
+void choose_weapon(Player* p, WINDOW* win);
+void return_card(Player* p, card* c)
+void perso_move(Player* p, card* tab, int size);
+void show_board (card* tab, int size);
+
 void resetPlayerPosition(Player* p);
 //void move(int table[ROWS][COLS], int* posX, int* posY, int direction);
 //void event(card* c, Player* P);
 int checkTreasure(Player player);
 void Exchang_Totem (Player P, card c,card new_card,card tempo);
 void Portal (Player* P, card* tab, int size);
-void show_board (card* tab, int size);
 void updateScore(FILE* fichier, Player P);
 
 /*_________________________________________________________________________________________________*/
@@ -100,7 +110,7 @@ void board (card* tab, int size){
 }
 /*_________________________________________________________________________________________________*/
 
-// INITIALISATION du jeu
+				// INITIALISATION DU JEU
 
 void init_wall (card* tab, int size){
     if (size<=0){
@@ -262,14 +272,75 @@ void generate_board (card* tab, int size){
     invert_card( tab + 4*size + 1 , tab + 6*size + 6);
 }
 
+/*_________________________________________________________________________________________________*/
+				// AVANT DE JOUER
+				
+int nb_player (WINDOW* win){
+	do{
+		wprintw(win, "Combien de joueurs êtes-vous (entre 2 et 4) : ");
+		wrefresh(win);
+		int choice = getch();
+	} while(choice=!2 && choice=!3 && choice=!4);
+	return choice;
+}
+
+
+/*_________________________________________________________________________________________________*/
+				// DURANT LE JEU
+
+
 void return_card(Player* p, card* c){		//le joueur a déjà son arme !
 	(*c).hidden = 1;
 	refresh();
 	
+	
 
 }
 
-//#include "Header.h"
+void choose_weapon(Player* p, WINDOW* win){
+        wprintw(win, "Choisissez votre arme : \n");
+        wprintw(win, "    1. Bouclier\n");
+        wprintw(win, "    2. Torche\n");
+        wprintw(win, "    3. Hache\n");
+        wprintw(win, "    4. Arc\n");
+        wrefresh(win);
+    
+        do {
+            wprintw(win, "Votre choix : ");
+            wrefresh(win);
+            int choice = getch();
+        } while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
+
+        if (choice == '1'){               //bouclier
+            p.w.type[0] = 1;
+            p.w.type[1] = 0;
+            p.w.type[2] = 0;
+            p.w.type[3] = 0;
+        }
+    
+        else if (choice == '2'){          //Torche
+            p.w.type[0] = 0;
+            p.w.type[1] = 1;
+            p.w.type[2] = 0;
+            p.w.type[3] = 0;
+        }
+    
+        else if (choice == '3'){          //hache
+            p.w.type[0] = 0;
+            p.w.type[1] = 0;
+            p.w.type[2] = 1;
+            p.w.type[3] = 0;
+        }
+    
+    
+        else{                           //arc
+            p.w.type[0] = 0;
+            p.w.type[1] = 0;
+            p.w.type[2] = 0;
+            p.w.type[3] = 1;   
+        }
+}
+
 
 //void play();
 //void perso_move(Player* p);
@@ -523,14 +594,23 @@ int main(){
     switch(menu_select){
         case 1:
             //a faire
-	    game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
+            WINDOW* win2 = newwin(10,100, 20,0);
+            int nmb_player = nb_player(win2);
+            game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
 	    if (game == NULL){
 		printf("Problème d'allocation de mémoire pour la création du tableau du jeu.\n");
 		exit(10);
 	    }
+	    do{
+            
+            } while
+	    
 	    board(game, SIZE);
 	    show_board(game, SIZE);
-	    getch();
+	    do{
+		    choose_weapon(Player* p, WINDOW* win);
+		    getch();
+	    }while(p.life==1);				//tant que joueur en vie et n'a pas gagné
             break;
             
         case 2:
