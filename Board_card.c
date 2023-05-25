@@ -1,5 +1,14 @@
 #include "Header.h"
 
+/*_________________________________________________________________________________________________*/
+void board (card* tab, int size){
+    init_wall(tab, size);
+    init_board(tab, size);
+    generate_board(tab, size);
+    //show_board (tab, size);
+}
+/*_________________________________________________________________________________________________*/
+
 void init_wall (card* tab, int size){
     if (size<=0){
         exit(1);
