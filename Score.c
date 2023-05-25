@@ -1,5 +1,4 @@
 #include "Header.h"
-int main(){ //juste pour tester sur place mercredi ou vendrdi
   
   void Score_creator(Player P){
 FILE *fichier = fopen("Score.txt", "a+"); //le mode 'a' ajoute du texte à la fin du fichier
@@ -14,8 +13,6 @@ FILE *fichier = fopen("Score.txt", "a+"); //le mode 'a' ajoute du texte à la fi
     
     
   fclose(fichier);
- // return 0;
-  }
 
 void updateScore(FILE* fichier, Player P) {
     FILE* fichierTemp = fopen("temp.txt", "w");
@@ -41,14 +38,9 @@ void updateScore(FILE* fichier, Player P) {
     fclose(fichier);
     fclose(fichierTemp);
 
-    remove("donnees.txt");
-    rename("temp.txt", "donnees.txt");
+    remove("Score.txt");
+    rename("temp.txt", "Score.txt");
 }
-
-int main() {
-
-   
-    
 
     // Lecture du fichier pour afficher les employés et leurs salaires mis à jour
     rewind(fichier); // Rembobiner le fichier au début
@@ -60,9 +52,6 @@ int main() {
         sscanf(ligne, "%d %s %f", &id, nom, &salaire);
         printf("ID : %d, Nom : %s, Salaire : %.2f\n", id, nom, salaire);
     }
-
-    fclose(fichier);
-
     return 0;
 }
 } //void
