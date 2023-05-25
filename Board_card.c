@@ -167,3 +167,16 @@ void generate_board (card* tab, int size){
     invert_card( tab + 3*size + 6 , tab + 6*size + 5);
     invert_card( tab + 4*size + 1 , tab + 6*size + 6);
 }
+
+
+void show_board (card* tab, int size){
+    if (size<=0){
+        exit(1);
+    }
+    for (int i=0 ; i<size ; i++){
+        for (int j=0 ; j<size ; j++){
+            tab.hidden=1;
+        }
+    }
+
+}
