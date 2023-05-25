@@ -27,7 +27,7 @@ int main {
  while(number_of_players<number_of_players_who_played){
      startTime = time(NULL);
      while (P.life==1 && P.relic==0 || P.treasure==0){
-  
+        printw("%d",game,"\n");
 /*---------------------------------- ETAPE 1 --------------------------------------*/
                    
         printf("Choisissez votre arme : \n");
@@ -80,6 +80,7 @@ int main {
         printf("Enter a direction (2: Down, 8: Up, 4: Left, 6: Right): ");
         scanf("%d", &direction);
         move(table, &posX, &posY, direction);
+        printf("%d",game,"\n");
        
  /*---------------------------------- ETAPE 3 --------------------------------------*/
         if (c.m==1){
@@ -106,6 +107,7 @@ double elapsedTime = difftime(endTime, startTime);
 P.timer=P.timer + elapsedTime;
 P.move=0;    
 number_of_players_who_played++;
+     
 } //while manche
 
 
