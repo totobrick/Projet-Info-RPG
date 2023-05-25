@@ -2,9 +2,10 @@
 
 int main(){
     srand(time(NULL));
-    card* game; 
+    card* game = NULL; 
     game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
     if (game == NULL){
+        printf("Problème d'allocation de mémoire pour la création du tableau du jeu.\n");
         exit(10);
     }
     board(game, SIZE);
