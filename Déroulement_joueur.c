@@ -35,7 +35,7 @@ int main {
     for (int i = 0; number_of_players>i; i++){
         do {
             printf("comment vous appellez-vous?\n");
-            verif = scanf("%d", P.class );
+            verif = scanf("%d", P.nom );
             vide_buffer();
         } while ( || verif != 1);
         verif=0;
