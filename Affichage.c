@@ -86,6 +86,7 @@ void board (card* tab, int size);
 
 // AVANT DE JOUER
 int nb_player (WINDOW* win);
+void create_players(int nb_player, Player* p1, Player* p2, Player* p3, Player* p4);
 
 // DURANT LE JEU
 void choose_weapon(Player* p, WINDOW* win);
@@ -283,6 +284,44 @@ int nb_player (WINDOW* win){
 	return choice;
 }
 
+void create_players(int nb_player, Player* p1, Player* p2, Player* p3, Player* p4){
+	int height = 15;
+	int width = 100;
+	int start_y = 10;
+	int start_x = 10;
+	WINDOW* win = newwin(height, width, start_y, start_x);
+	wprintw(win, "Entrez votre pseudo : ");
+	wrefresh(win);
+	wgetnstr(win, (*p1).nom, 99)		//récupère au max 99 caractères -> pas de dépassement
+	wclear(win);
+	do {
+            wprintw(win,"Choisissez votre Classe : \n");
+            wprintw(win,"    1. Magicien\n");
+            wprintw(win,"    2. Guerrier\n");
+            wprintw(win,"    3. Ranger\n");
+            wprintw(win,"    4. Voleur\n");
+            wprintw(win,"Votre choix: ");
+			wrefresh(win);
+            int c = getch();
+    } while (c != '1' && P.class != '2' && P.class != '3' && P.class != '4');
+	(*p1).class = c;
+	int relic = 0;                //0,1
+    (*p1).move = 0;                  //prend +1 à chaque fin de tour
+    (*p1).chrono = 0;                // temps de la partie pour ce joueur
+    (*p1).slay = 0;                  //nombre de monstre tué
+    (*p1).reversed = 0;              //nombre case retourné
+    int chest = 0;                 //nombre de trésore trouvé.    Attention à pas confondre avec "treasure"
+    int Score_victory = 0;         //nombre de victoire accumulé
+    (*p1).timer = 0;                 //timer du temps du joueur dans une partie
+	
+	
+	
+	free(win);
+	
+		
+		
+
+}
 
 /*_________________________________________________________________________________________________*/
 				// DURANT LE JEU
@@ -589,42 +628,45 @@ int main(){
     }while(!EXIT);
     
     clear();
-    card* game;
-    switch(menu_select){
-        case 1:
-            //a faire
-            WINDOW* win2 = newwin(10,100, 20,0);
-            int nmb_player = nb_player(win2);
-            game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
-	    if (game == NULL){
+    
+    if(menu_select==1){
+		
+	    int nmb_player = nb_player(win2);
+		Player* p1, p2, p3, p4;
+		create__players(nmb_player, p1, p2, p3, p4);				//Crée l'identité de tous les joueurs
+		for (int i=0 ; i<nmb_player ; i++){
+			
+		}
+        card* game;
+        WINDOW* win2 = newwin(10,100, 20,0);
+        
+        game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
+	if (game == NULL){
 		printf("Problème d'allocation de mémoire pour la création du tableau du jeu.\n");
 		exit(10);
-	    }
-	    do{
+	}
+	do{
             
-            } while
+        } while
 	    
-	    board(game, SIZE);
-	    show_board(game, SIZE);
-	    do{
-		    choose_weapon(Player* p, WINDOW* win);
-		    getch();
-	    }while(p.life==1);				//tant que joueur en vie et n'a pas gagné
-            break;
+	board(game, SIZE);
+	show_board(game, SIZE);
+	do{
+		choose_weapon(Player* p, WINDOW* win);
+		getch();
+	}while(p.life==1);				//tant que joueur en vie et n'a pas gagné
             
-        case 2:
-            //a faire
-            break;
+    else if (menu_select==2){
+
+    	}
             
-        case 3:
-            //affiche le readme
-            break;
+        else if (menu_select==3){
+		//affiche le readme
+    	}
             
-        case 4:
+        else{						//SORTIR du jeu
             endwin();
             return 0;
-            break;
-            
 	}
     
     free(game);
