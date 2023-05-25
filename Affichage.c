@@ -680,7 +680,7 @@ int main(){
         (*tab_player[r]).life = 1;
         do{
         //play(tab_player[r]);      -> créer procédure "JOUER"  -> *tab_player[r]).life==0
-        } while( (*tab_player[r]).life==1 );
+        } while( (*tab_player[r]).life==1 );		// ET TANT QU'IL N'EST PAS COINCE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
     } while ( (*tab_player[r]).relic!=1 || (*tab_player[r]).treasure!=1 );      //condition de victoire d'un joueur
 	    
