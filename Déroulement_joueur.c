@@ -20,8 +20,8 @@ int main {
   int number_of_players=0;
   Player P;
   card c;
+  card tab;
   Portal p;
-  
   P.timer=0  
     
  while(number_of_players<number_of_players_who_played || victory==1){
@@ -114,7 +114,7 @@ else if (checkTreasure(P)==0 && number_of_players_who_played==number_of_players)
     }
     number_of_players_who_played++;
 } //while manche
-
+show_board (tab,int size);
 printw("%d",game,"\n");
 printf("Le joueur, %s, a gagné",P.nom);
 P.Score_victory++
