@@ -1,7 +1,7 @@
 // VOIR LE CAS OU JOUR ENTOURE DE 4 MURS/CARTES RETOURNEES -> retour case départ et on retourne les cartes 
 #include <stdio.h>
 #include <stdlib.h>
-#include <ncurses.h>
+#include <ncurses.h> 
 
 #define SIZE 8              //tableau 6x6
 
