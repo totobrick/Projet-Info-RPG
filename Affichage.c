@@ -86,7 +86,7 @@ void board (card* tab, int size);
 
 // AVANT DE JOUER
 int nb_player (WINDOW* win);
-void create_players(int nb_player, Player* p1, Player* p2, Player* p3, Player* p4);
+void create_player(Player* p);
 
 // DURANT LE JEU
 void choose_weapon(Player* p, WINDOW* win);
@@ -284,7 +284,7 @@ int nb_player (WINDOW* win){
 	return choice;
 }
 
-void create_players(int nb_player, Player* p1, Player* p2, Player* p3, Player* p4){
+void create_player(Player* p){
 	int height = 15;
 	int width = 100;
 	int start_y = 10;
@@ -292,7 +292,7 @@ void create_players(int nb_player, Player* p1, Player* p2, Player* p3, Player* p
 	WINDOW* win = newwin(height, width, start_y, start_x);
 	wprintw(win, "Entrez votre pseudo : ");
 	wrefresh(win);
-	wgetnstr(win, (*p1).nom, 99)		//récupère au max 99 caractères -> pas de dépassement
+	wgetnstr(win, (*p).nom, 99)		//récupère au max 99 caractères -> pas de dépassement
 	wclear(win);
 	do {
             wprintw(win,"Choisissez votre Classe : \n");
@@ -301,26 +301,20 @@ void create_players(int nb_player, Player* p1, Player* p2, Player* p3, Player* p
             wprintw(win,"    3. Ranger\n");
             wprintw(win,"    4. Voleur\n");
             wprintw(win,"Votre choix: ");
-			wrefresh(win);
+	    wrefresh(win);
             int c = getch();
-    } while (c != '1' && P.class != '2' && P.class != '3' && P.class != '4');
-	(*p1).class = c;
-	int relic = 0;                //0,1
-    (*p1).move = 0;                  //prend +1 à chaque fin de tour
-    (*p1).chrono = 0;                // temps de la partie pour ce joueur
-    (*p1).slay = 0;                  //nombre de monstre tué
-    (*p1).reversed = 0;              //nombre case retourné
-    int chest = 0;                 //nombre de trésore trouvé.    Attention à pas confondre avec "treasure"
-    int Score_victory = 0;         //nombre de victoire accumulé
-    (*p1).timer = 0;                 //timer du temps du joueur dans une partie
+    } while (c != '1' && c != '2' && c != '3' && c != '4');
+    (*p).class = c;
+    (*p).relic = 0;                //0,1
+    (*p).move = 0;                  //prend +1 à chaque fin de tour
+    (*p).chrono = 0;                // temps de la partie pour ce joueur
+    (*p).slay = 0;                  //nombre de monstre tué
+    (*p).reversed = 0;              //nombre case retourné
+    (*p).chest = 0;                 //nombre de trésore trouvé.    Attention à pas confondre avec "treasure"
+    (*p).Score_victory = 0;         //nombre de victoire accumulé
+    (*p).timer = 0;                 //timer du temps du joueur dans une partie
 	
-	
-	
-	free(win);
-	
-		
-		
-
+    free(win);
 }
 
 /*_________________________________________________________________________________________________*/
@@ -633,7 +627,22 @@ int main(){
 		
 	    int nmb_player = nb_player(win2);
 		Player* p1, p2, p3, p4;
-		create__players(nmb_player, p1, p2, p3, p4);				//Crée l'identité de tous les joueurs
+		create__player (p1);				//Crée l'identité d'1 joueur
+	    	(*p1).treasure = 0;             //0=non, 1=oui
+		(*p1).life = 1;                 // 0=mort 1=vivant
+		(*p1).x = 3;                    // place x dans le tableau entre 1 et 6
+		(*p1).y = 1;                    // place y dans le tableau entre 1 et 6
+		(*p1).x_init = 3;                //place initiale
+		(*p1).y_init = 1;                //place initiale
+	    	
+	    	create__player (p2);				//Crée l'identité d'1 joueur
+	    	(*p1).treasure = 0;             //0=non, 1=oui
+		(*p1).life = 1;                 // 0=mort 1=vivant
+		(*p1).x = 3;                    // place x dans le tableau entre 1 et 6
+		(*p1).y = 1;                    // place y dans le tableau entre 1 et 6
+		(*p1).x_init = 3;                //place initiale
+		(*p1).y_init = 1;                //place initiale
+	    	
 		for (int i=0 ; i<nmb_player ; i++){
 			
 		}
