@@ -88,3 +88,4 @@ void event(card* c, Player* P);
 int checkTreasure(Player player);
 void Exchang_Totem (Player P, card c,card new_card,card tempo);
 void Portal (Player* P, card* tab, int size);
+void show_board (card* tab, int size);
