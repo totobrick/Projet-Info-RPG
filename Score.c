@@ -7,9 +7,14 @@ FILE *fichier = fopen("Score.txt", "a+"); //le mode 'a' ajoute du texte à la fi
     printf("Erreur\n");
     return 1; // Quitter le programme en cas d'erreur
 } 
-     updateScore(fichier, Player P);
     
-      fprintf(fichier, "%s /t %d /t %d /t %d /t %d /t %d /t %d /n",  P.nom, P.class, P.move, P.reversed, P.slay, P.chest, P.Score_victory);
+    if (P.class == 1){
+     char job [10];
+      
+    }
+     updateScore(fichier, Player P, );
+    
+      fprintf(fichier, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  P.nom, P.class, P.move, P.reversed, P.slay, P.chest, P.Score_victory);
     
     
   fclose(fichier);
@@ -23,12 +28,16 @@ void updateScore(FILE* fichier, Player P) {
 
     char ligne[100];
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
-        int idFichier;
-        char nomFichier[50];
-        float salaireFichier;
-        sscanf(ligne, "%d %s %f", &idFichier, nomFichier, &salaireFichier);
+        char player_name[100];
+        char player_class[10];
+        int player_move;
+        int player_reversed;
+        int player_slay;
+        int player_chest;
+        int player_score_victory;
+        sscanf(ligne, ""%s /t %d /t %d /t %d /t %d /t %d /t %d /n", &idFichier, nomFichier, &salaireFichier);
 
-        if (idFichier == id) {
+        if (player_name == P.name) {
             fprintf(fichierTemp, "%d %s %.2f\n", id, nomFichier, nouveauSalaire);
         } else {
             fprintf(fichierTemp, "%d %s %.2f\n", idFichier, nomFichier, salaireFichier);
