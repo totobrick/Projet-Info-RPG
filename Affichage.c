@@ -3,12 +3,269 @@
 #include <stdlib.h>
 #include <ncurses.h>
 
+#define SIZE 8              //tableau 6x6
+
+
+typedef struct{
+    int type[4];
+        /*
+        type[0] = shield       (1=oui 0=non)                           <- 1.basilisk
+        type[1] =  torch       (1=oui 0=non)                           <- 2.zombie
+        type[2] =   axe        (1=oui 0=non)                           <- 3.troll
+        type[3] =   bow        (1=oui 0=non)                          <- 4.harpy
+        */ 
+} weapons;
+
+typedef struct{
+    int type[4];
+        /*
+        type[0] = basilisk     (1=oui 0=non)                          <- 1.Bouclier
+        type[1] = zombie     (1=oui 0=non)                            <- 2.Torche
+        type[2] = troll       (1=oui 0=non)                           <- 3.Hache
+        type[3] = harpy    (1=oui 0=non)       basilisk = basilic     <- 4. Arc
+        */ 
+} monster;
+
+typedef struct{
+    int type[4];
+        /*
+        type[0] = stick         (1=oui 0=non)       stick = baton
+        type[1] = sword         (1=oui 0=non)       sword = epee
+        type[2] = grimoire      (1=oui 0=non)
+        type[3] = dagger        (1=oui 0=non)       dagger = dague
+        */           
+} relic;
+
+typedef struct{
+    int neutral;    // 0=non et 1=oui 
+    int malus;      // 0=non et 1=oui 
+} event;
+
+typedef struct{
+    char nom[100];            //ATTENTION depasement tableau
+    int class;                //Magicien, guerrier, ranger, voleur
+    weapons w;                //1=Bouclier, 1=Torche, 2=Hache, 3=Arc
+    int relic;                //0,1
+    int treasure;             //0=non, 1=oui
+    int life;                 // 0=mort 1=vivant
+    int x;                    // place x dans le tableau entre 1 et 6
+    int y;                    // place y dans le tableau entre 1 et 6
+    int x_init;                //place initiale
+    int y_init;                //place initiale
+    int move;                  //prend +1 à chaque fin de tour
+    int chrono;                // temps de la partie pour ce joueur
+    int slay;                  //nombre de monstre tué
+    int reversed;              //nombre case retourné
+    int chest;                 //nombre de trésore trouvé.    Attention à pas confondre avec "treasure"
+    int Score_victory;         //nombre de victoire accumulé 
+    int timer;                 //timer du temps du joueur dans une partie
+}Player;
+
+
+typedef struct{
+    int wall;       //1=oui 0=non
+    int hidden;     //1=case visible  0=case cache
+    int type[4];
+        /*
+        type[0] = treasure      (1=oui 0=non)
+        type[1] = totem         (1=oui 0=non)
+        type[2] = portal        (1=oui 0=non)       portal = portail
+        type[3] = event         (1=oui 0=non)
+        */
+    monster m;
+    relic r;
+} card;
+
+void init_wall (card* tab, int size);
+void init_board (card* tab, int size);
+void init_card(card* card1);
+void invert_card(card* card1, card* card2);
+void generate_board (card* tab, int size);
+void board (card* tab, int size);
+void resetPlayerPosition(Player* p);
+//void move(int table[ROWS][COLS], int* posX, int* posY, int direction);
+//void event(card* c, Player* P);
+int checkTreasure(Player player);
+void Exchang_Totem (Player P, card c,card new_card,card tempo);
+void Portal (Player* P, card* tab, int size);
+void show_board (card* tab, int size);
+void updateScore(FILE* fichier, Player P);
+
+/*_________________________________________________________________________________________________*/
+void board (card* tab, int size){
+    init_wall(tab, size);
+    init_board(tab, size);
+    generate_board(tab, size);
+    //show_board (tab, size);
+}
+/*_________________________________________________________________________________________________*/
+
+void init_wall (card* tab, int size){
+    if (size<=0){
+        exit(1);
+    }
+    for (int j=0; j<size ; j++){
+        (*(tab + 0*size + j)).wall=1;
+    }
+    for (int i=1 ; i<(size-1) ; i++){
+        (*(tab + i*size + 0)).wall=1;
+        for (int j=1 ; j<(size-1) ; j++){
+            (*(tab + i*size + j)).wall=0;
+        }
+        (*(tab + i*size + 7)).wall=1;
+    }
+    for (int j=0; j<size ; j++){
+        (*(tab + (size-1)*size + j)).wall=1;
+    }
+    printf("Initialisation des murs terminée.\n");
+}
+
+void init_board (card* tab, int size){
+    if (size<=0){
+        exit(1);
+    }
+    for (int i=0 ; i<size ; i++){
+        for (int j=0 ; j<size ; j++){
+            init_card(tab +  i*size + j);
+        }
+    }
+    printf("Initialisation des cartes terminée.\n");
+}
+
+void init_card(card* card1){
+    (*card1).hidden = 0;
+    for (int i=0 ; i<4 ; i++){
+        (*card1).type[i] = 0;
+        (*card1).m.type[i] = 0;         //monster
+        (*card1).r.type[i] = 0;         //relic
+    }
+}
+
+
+void invert_card(card* card1, card* card2){
+    card* transit_card = malloc(sizeof(card));
+    //transit_card = card1
+    (*transit_card).hidden = (*card1).hidden;
+    for (int i=0 ; i<4 ; i++){
+        (*transit_card).type[i] = (*card1).type[i];
+        (*transit_card).m.type[i] = (*card1).m.type[i];     //monster
+        (*transit_card).r.type[i] = (*card1).r.type[i];     //relic
+    }
+
+    //card1=card2
+    (*card1).hidden = (*card2).hidden;
+    for (int i=0 ; i<4 ; i++){
+        (*card1).type[i] = (*card2).type[i];
+        (*card1).m.type[i] = (*card2).m.type[i];            //monster
+        (*card1).r.type[i] = (*card2).r.type[i];            //relic
+    }
+
+    //card2=transit_card
+    (*card2).hidden = (*transit_card).hidden;
+    for (int i=0 ; i<4 ; i++){
+        (*card2).type[i] = (*transit_card).type[i];
+        (*card2).m.type[i] = (*transit_card).m.type[i];     //monster
+        (*card2).r.type[i] = (*transit_card).r.type[i];     //relic
+    }
+    free(transit_card);
+}
+
+void generate_board (card* tab, int size){
+    char cards[] = { 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'b' , 'b' , 'b' , 'b' , 'z' , 'z' , 'z' , 'z' , 't' , 't' , 't' , 't' , 'h' , 'h' , 'h' , 'h' , 'C' , 'C' , 'T' , 'T' , 'E' , 'B' , 'G' , 'D', 'P' };
+    int remaining_card = 32;                               // remaining_card = cartes_restantes
+    /*
+    cards[] est le tableau de toutes nos 32 cartes à placer aléatoirement sur un plateau de 36.
+    Voici le détail de ces cartes :
+        -> Les 7 événements :
+            'e' = événement (x7)
+        -> Les 16 monstres :
+            'b' = basilic   (x4)
+            'z' = zombie    (x4)
+            't' = troll     (x4)
+            'h' = harpie    (x4)
+        -> Les 2 coffres au trésor :
+            'C' = coffre    (x2)
+        -> Les 2 totems :
+            'T' = totem     (x2)
+        -> Les 4 armes antiques (reliques) :
+            'E' = épée      (x1)
+            'B' = bâton     (x1)
+            'G' = grimoire  (x1)
+            'D' = dague     (x1)
+        -> 1 portail de téléportation :
+            'P' = portail   (x1)
+    */
+    //le tableau tab est déjà initialisé dans une fonction précédente, pas besoin de le faire ici
+    for (int i=1 ; i<(size-1) ; i++){                   //Lignes tableau
+        for (int j=1 ; j<(size-1) ; j++){               //Colonnes tableau
+            if (remaining_card > 0){
+                int alea= rand() % remaining_card;
+                // événement
+                if(cards[alea] == 'e'){
+                    (*(tab + i*size + j)).type[3] = 1;
+                }
+                //Les 4 monstres
+                else if(cards[alea] == 'b'){
+                    (*(tab + i*size + j)).m.type[3] = 1;
+                }
+                else if(cards[alea] == 'z'){
+                    (*(tab + i*size + j)).m.type[0] = 1;
+                }
+                else if(cards[alea] == 't'){
+                    (*(tab + i*size + j)).m.type[1] = 1;
+                }
+                else if(cards[alea] == 'h'){
+                    (*(tab + i*size + j)).m.type[2] = 1;
+                }
+                // coffre et totem
+                else if(cards[alea] == 'C'){
+                    (*(tab + i*size + j)).type[0] = 1;
+                }
+                else if(cards[alea] == 'T'){
+                    (*(tab + i*size + j)).type[1] = 1;
+                }
+                //Les 4 armes antiques
+                else if(cards[alea] == 'E'){
+                    (*(tab + i*size + j)).r.type[1] = 1;
+                }
+                else if(cards[alea] == 'B'){
+                    (*(tab + i*size + j)).r.type[0] = 1;
+                }
+                else if(cards[alea] == 'G'){
+                    (*(tab + i*size + j)).r.type[2] = 1;
+                }
+                else if(cards[alea] == 'D'){
+                    (*(tab + i*size + j)).r.type[3] = 1;
+                }
+                //portail
+                else if(cards[alea] == 'P'){
+                    (*(tab + i*size + j)).type[2] = 1;
+                }
+                
+                else {
+                    printf(" OUPS ! Le jeu n'a pas pu être créé. La carte générée aléatoirement n'est pas dans le paquet.\n");
+                    exit(1);
+                }
+                cards[alea] = cards[remaining_card-1];
+                remaining_card = remaining_card -1;
+            }
+            else{
+                printf("Toutes les cartes du jeu sont placées !\n");                //est affiché 4 fois car il y a 4 cases vides pour mettre les joueurs
+            }
+        }
+    }
+    invert_card( tab + 1*size + 3 , tab + 6*size + 3);
+    invert_card( tab + 3*size + 6 , tab + 6*size + 5);
+    invert_card( tab + 4*size + 1 , tab + 6*size + 6);
+}
+
+
 
 //#include "Header.h"
 
 //void play();
 //void perso_move(Player* p);
-/*
+
 //Déplace joueur sur une case du tableau
 void perso_move(Player* p, card* tab, int size){
     do{
@@ -70,52 +327,53 @@ void play(){
     perso_move(p);        //p est le player, on aura besoin de ses coordonnées et son arme
 
 }
-*/
+
 
 //AFFICHAGE du JEU
 void show_board(card* tab, int size){
 	for (int i=1 ; i<(size-1) ; i++){						//on affiche cartes par cartes
 		for (int j=1 ; j<(size-1) ; j++){
-			if(*(tab + i*SIZE + j)).hidden == 0){
-				printw("\U000025A0");	//logo carte	
+			move(i*4, j*10);
+			if((*(tab + i*size + j)).hidden == 0){
+				printw("\U000025A0");	//logo carte
 			}
 			else{
-				if(*(tab + i*size + j)).type[0] == 1){			//trésor
+				if((*(tab + i*size + j)).type[0] == 1){			//trésor
 				    printw("\U0001F4B0");
 				}
-				else if(*(tab + i*size + j)).type[1] == 1){		//totem
+				else if((*(tab + i*size + j)).type[1] == 1){		//totem
 				    printw("\U0001F5FF");
 				}
-				else if(*(tab + i*size + j)).type[2] == 1){		//portail
+				else if((*(tab + i*size + j)).type[2] == 1){		//portail
 				    printw("\U000026E9");
 				}
-				else if(*(tab + i*size + j)).type[3] == 1){		//événement
+				else if((*(tab + i*size + j)).type[3] == 1){		//événement
 				    printw("E");
 				}
 				//Les 4 monstres
-				else if(*(tab + i*size + j)).m.type[0] == 1){		//basilique
+				else if((*(tab + i*size + j)).m.type[0] == 1){		//basilique
 				    printw("\U0001F40D");
 				}
-				else if(*(tab + i*size + j)).m.type[1] == 1){		//zombie
+				else if((*(tab + i*size + j)).m.type[1] == 1){		//zombie
 				    printw("\U0001F9DF");
 				}
-				else if(*(tab + i*size + j)).m.type[1] == 1){		//troll
+				else if((*(tab + i*size + j)).m.type[1] == 1){		//troll
 				    printw("\U0001F479");
 				}
-				else if(*(tab + i*size + j)).m.type[1] == 1){		//harpie
+				else if((*(tab + i*size + j)).m.type[1] == 1){		//harpie
 				    printw("\U0001F426");
 				}
 				//Les 4 reliques (armes antiques)
-				else if(*(tab + i*size + j)).r.type[0] == 1){		//baton
+				else if((*(tab + i*size + j)).r.type[0] == 1){		//baton
 				    printw("\U0001F3D1");
 				}
-				else if(*(tab + i*size + j)).r.type[1] == 1){		//épée
+				else if((*(tab + i*size + j)).r.type[1] == 1){		//épée
 				    printw("\U00002694");
 				}
-				else if(*(tab + i*size + j)).r.type[2] == 1){		//grimoire
+				else if((*(tab + i*size + j)).r.type[2] == 1){		//grimoire
 				    printw("\U0001F4D6");
 				}
-				else if(*(tab + i*size + j)).r.type[3] == 1){		//dague
+				else if((*(tab + i*size + j)).r.type[3] == 1){		//dague
 				    printw("\U0001F5E1");
 				}
 				else{
@@ -129,6 +387,9 @@ void show_board(card* tab, int size){
 	
 
 }
+
+/*____________________________________________________________________________*/
+// MAIN
 
 int main(){
     initscr();
@@ -190,16 +451,16 @@ int main(){
     int EXIT = 0;                           // EXIT = false -> on reste dans le menu        EXIT = true -> on va ailleurs que dans le menu
     do{
         int key_pressed = getch();
-        if (key_pressed == (int)'q'){	//en entrant q : on sort du jeu
+        if (key_pressed == (int)'q' || key_pressed == (int)'Q'){	//en entrant q : on sort du jeu
         	endwin();
         	return 0;
         }
-        if (key_pressed == KEY_UP){         //ATTENTION : int key_pressed ?????
+        if (key_pressed == KEY_UP || key_pressed == '8'){         //ATTENTION : int key_pressed ?????
             menu_select --;
             printw("Key_up appuyé\n");
             refresh();
         }
-        if (key_pressed == KEY_DOWN){
+        if (key_pressed == KEY_DOWN || key_pressed == '2'){
             menu_select ++;
             printw("Key_down appuyé\n");
             refresh();
@@ -244,37 +505,53 @@ int main(){
         }
         refresh();
         wrefresh(win_menu);
-        if (key_pressed == '\n'){
+        if (key_pressed == '\n'){			//Le joueur a sélectionné un des 4 menus
             EXIT = 1;
         }
     }while(!EXIT);
-    endwin();
-    return 0;
-}   
     
-    
-    
-/*
-switch(menu_select){
+    clear();
+    card* game;
+    switch(menu_select){
         case 1:
             //a faire
+	    game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
+	    if (game == NULL){
+		printf("Problème d'allocation de mémoire pour la création du tableau du jeu.\n");
+		exit(10);
+	    }
+	    board(game, SIZE);
+	    show_board(game, SIZE);
+	    getch();
             break;
+            
         case 2:
             //a faire
             break;
+            
         case 3:
             //affiche le readme
             break;
+            
         case 4:
             endwin();
-            EXIT = true;
+            return 0;
             break;
-}*/
+            
+	}
     
+    free(game);
+    endwin();
+    return 0;
+}   
+
+
+
+
+
+/*____________________________________________________________________________*/
     
-    
-        
-    
+
     
 
     /*
