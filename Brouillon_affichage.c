@@ -72,48 +72,120 @@ void play(){
 }
 */
 
+//AFFICHAGE du JEU
+void show_board(card* tab, int size){
+	for (int i=1 ; i<(size-1) ; i++){						//on affiche cartes par cartes
+		for (int j=1 ; j<(size-1) ; j++){
+			if(*(tab + i*SIZE + j)).hidden == 0){
+				printw("\U000025A0");	//logo carte	
+			}
+			else{
+				if(*(tab + i*size + j)).type[0] == 1){			//trésor
+				    printw("\U0001F4B0");
+				}
+				else if(*(tab + i*size + j)).type[1] == 1){		//totem
+				    printw("\U0001F5FF");
+				}
+				else if(*(tab + i*size + j)).type[2] == 1){		//portail
+				    printw("\U000026E9");
+				}
+				else if(*(tab + i*size + j)).type[3] == 1){		//événement
+				    printw("E");
+				}
+				//Les 4 monstres
+				else if(*(tab + i*size + j)).m.type[0] == 1){		//basilique
+				    printw("\U0001F40D");
+				}
+				else if(*(tab + i*size + j)).m.type[1] == 1){		//zombie
+				    printw("\U0001F9DF");
+				}
+				else if(*(tab + i*size + j)).m.type[1] == 1){		//troll
+				    printw("\U0001F479");
+				}
+				else if(*(tab + i*size + j)).m.type[1] == 1){		//harpie
+				    printw("\U0001F426");
+				}
+				//Les 4 reliques (armes antiques)
+				else if(*(tab + i*size + j)).r.type[0] == 1){		//baton
+				    printw("\U0001F3D1");
+				}
+				else if(*(tab + i*size + j)).r.type[1] == 1){		//épée
+				    printw("\U00002694");
+				}
+				else if(*(tab + i*size + j)).r.type[2] == 1){		//grimoire
+				    printw("\U0001F4D6");
+				}
+				else if(*(tab + i*size + j)).r.type[3] == 1){		//dague
+				    printw("\U0001F5E1");
+				}
+				else{
+				    printw("ERREUR");
+				}
+			}
+			
+		}
+		printw("\n");
+	}
+	
+
+}
+
 int main(){
     initscr();
     //raw();
     noecho();
     keypad(stdscr, TRUE);            // active la prise en charge des touches spéciales (comme les flèches)
     
-    move(5,0);
-    printw(" @@@@@@@  @@@ @@@             @@@@@@@@@@   @@@@@@@@  @@@@@@@@@@    @@@@@@   @@@@@@@   @@@ @@@     @@@@@@@   @@@@@@@    @@@@@@@@  \n");
-    printw("@@@@@@@@  @@@ @@@             @@@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@ @@@     @@@@@@@@  @@@@@@@@  @@@@@@@@@  \n");
-    printw("!@@       @@! !@@             @@! @@! @@!  @@!       @@! @@! @@!  @@!  @@@  @@!  @@@  @@! !@@     @@!  @@@  @@!  @@@  !@@        \n");
-    printw("!@!       !@! @!!             !@! !@! !@!  !@!       !@! !@! !@!  !@!  @!@  !@!  @!@  !@! @!!     !@!  @!@  !@!  @!@  !@!        \n");
-    printw("!@!        !@!@!   @!@!@!@!@  @!! !!@ @!@  @!!!:!    @!! !!@ @!@  @!@  !@!  @!@!!@!    !@!@!      @!@!!@!   @!@@!@!   !@! @!@!@  \n");
-    printw("!!!         @!!!   !!!@!@!!!  !@!   ! !@!  !!!!!:    !@!   ! !@!  !@!  !!!  !!@!@!      @!!!      !!@!@!    !!@!!!    !!! !!@!!  \n");
-    printw(":!!         !!:               !!:     !!:  !!:       !!:     !!:  !!:  !!!  !!: :!!     !!:       !!: :!!   !!:       :!!   !!:  \n");
-    printw(":!:         :!:               :!:     :!:  :!:       :!:     :!:  :!:  !:!  :!:  !:!    :!:       :!:  !:!  :!:       :!:   !::  \n");
-    printw(" ::: :::     ::               :::     ::    :: ::::  :::     ::   ::::: ::  ::   :::     ::       ::   :::   ::        ::: ::::  \n");
-    printw(" :: :: :     :                 :      :    : :: ::    :      :     : :  :    :   : :     :         :   : :   :         :: :: :\n");
-    refresh();
-    
+    //Mesure Dimensions fenêtre affichage
     int y_max, x_max;                                       // y_max = nbre de lignes de la fenêtre     x_max = nbre de colonnes de la fenêtre
     getmaxyx(stdscr, y_max, x_max);                         // mesure le nbre de lignes (y_max) et de colonnes (x_max) qui peuvent être affichés
+    
+    //move(5,0);
+    //LOGO
+    int height_logo, width_logo, starty_logo, startx_logo;
+    startx_logo = x_max/2 - 65;
+    starty_logo = 5;
+    height_logo = 11;
+    width_logo = 129;
+    WINDOW* win_logo = newwin(height_logo, width_logo, starty_logo, startx_logo);	//cadre du logo
+    
+    		 //128 caractères sur la 1ere ligne et 11 lignes
+    wprintw(win_logo," .d8888b. Y88b   d88P      888b     d888                                                       8888888b.  8888888b.   .d8888b.  \n");
+    wprintw(win_logo,"d88P  Y88b Y88b d88P       8888b   d8888                                                       888   Y88b 888   Y88b d88P  Y88b \n");
+    wprintw(win_logo,"888    888  Y88o88P        88888b.d88888                                                       888    888 888    888 888    888 \n");
+    wprintw(win_logo,"888          Y888P         888Y88888P888  .d88b.  88888b.d88b.   .d88b.  888d888 888  888      888   d88P 888   d88P 888        \n");
+    wprintw(win_logo,"888           888          888 Y888P 888 d8P  Y8b 888 *888 *88b d88**88b 888P*   888  888      8888888P*  8888888P*  888  88888 \n");
+    wprintw(win_logo,"888    888    888   888888 888  Y8P  888 88888888 888  888  888 888  888 888     888  888      888 T88b   888        888    888 \n");
+    wprintw(win_logo,"Y88b  d88P    888          888   *   888 Y8b.     888  888  888 Y88..88P 888     Y88b 888      888  T88b  888        Y88b  d88P \n");
+    wprintw(win_logo," *Y8888P*     888          888       888  *Y8888  888  888  888  *Y88P*  888      *Y88888      888   T88b 888         *Y8888P88 \n");
+    wprintw(win_logo,"                                                                                      888                                       \n");
+    wprintw(win_logo,"                                                                                 Y8b d88P                                       \n");
+    wprintw(win_logo,"                                                                                  *Y88P*\n");
+    refresh();
+    wrefresh(win_logo);
+    
+    
     move(y_max-1, 0);
     printw("Appuyer sur q (minuscule) pour sortir du jeu.\n");
     refresh();
-    move(15,0);						//on replace le curseur après le logo de jeu
+    move(16,0);						//on replace le curseur après le logo de jeu
     
-    int height, width, start_y, start_x;
-    start_x = x_max/2 - 10;
-    start_y = 25;
-    height = 10;
-    width = 30;
+    int height_menu, width_menu, starty_menu, startx_menu;
+    startx_menu = x_max/2 - 10;
+    starty_menu = 25;
+    height_menu = 10;
+    width_menu = 30;
     
     //MENU
-    WINDOW* win = newwin (height, width, start_y, start_x);
+    WINDOW* win_menu = newwin (height_menu, width_menu, starty_menu, startx_menu);
     int menu = 1;                           //menu=1 -> on est ds menu     menu=0 -> on n'est plus ds menu (ds le jeu par ex)
     int menu_select = 1;                    //les menus à sélectionner vont de 1 à 4
-    wprintw(win, "-> NOUVELLE PARTIE <-\n");
-    wprintw(win,"Charger une partie\n");    //ATTENTION : ou Afficher le scoreboard ????
-    wprintw(win,"Règles\n");
-    wprintw(win,"Sortir\n");
+    wprintw(win_menu, "-> NOUVELLE PARTIE <-\n");
+    wprintw(win_menu,"Tableau des scores\n");
+    wprintw(win_menu,"Règles\n");
+    wprintw(win_menu,"Sortir\n");
     //refresh();
-    wrefresh(win);
+    wrefresh(win_menu);
     
     int EXIT = 0;                           // EXIT = false -> on reste dans le menu        EXIT = true -> on va ailleurs que dans le menu
     do{
@@ -138,32 +210,32 @@ int main(){
         if (menu_select >4){
             menu_select = 1;
         }
-        wclear(win);
+        wclear(win_menu);
         // Changement taille texte qd on est dessus
         switch(menu_select){
             case 1 :
-                wprintw(win, "-> NOUVELLE PARTIE <-\n");
-                wprintw(win,"Charger une partie\n");
-                wprintw(win,"Règles\n");
-                wprintw(win,"Sortir\n");
+                wprintw(win_menu, "-> NOUVELLE PARTIE <-\n");
+                wprintw(win_menu,"Tableau des scores\n");
+                wprintw(win_menu,"Règles\n");
+                wprintw(win_menu,"Sortir\n");
                 break;
             case 2 :
-                wprintw(win, "Nouvelle partie\n");
-                wprintw(win,"-> CHARGER UNE PARTIE <-\n");
-                wprintw(win,"Règles\n");
-                wprintw(win,"Sortir\n");
+                wprintw(win_menu, "Nouvelle partie\n");
+                wprintw(win_menu,"-> TABLEAU DES SCORES <-\n");
+                wprintw(win_menu,"Règles\n");
+                wprintw(win_menu,"Sortir\n");
                 break;
             case 3 :
-                wprintw(win, "Nouvelle partie\n");
-                wprintw(win,"Charger une partie\n");
-                wprintw(win,"-> REGLES <-\n");
-                wprintw(win,"Sortir\n");
+                wprintw(win_menu, "Nouvelle partie\n");
+                wprintw(win_menu,"Tableau des scores\n");
+                wprintw(win_menu,"-> REGLES <-\n");
+                wprintw(win_menu,"Sortir\n");
                 break;
             case 4 :
-                wprintw(win, "Nouvelle partie\n");
-                wprintw(win,"Charger une partie\n");
-                wprintw(win,"Règles\n");
-                wprintw(win,"-> SORTIR <-\n");
+                wprintw(win_menu, "Nouvelle partie\n");
+                wprintw(win_menu,"Tableau des scores\n");
+                wprintw(win_menu,"Règles\n");
+                wprintw(win_menu,"-> SORTIR <-\n");
                 break;
             default :
                 printf("ERREUR d'affichage menu.");
@@ -171,7 +243,7 @@ int main(){
                 break;
         }
         refresh();
-        wrefresh(win);
+        wrefresh(win_menu);
         if (key_pressed == '\n'){
             EXIT = 1;
         }
@@ -232,16 +304,15 @@ switch(menu_select){
     */
     
     /*
-    printw(" 
- .d8888b. Y88b   d88P      888b     d888                                                       8888888b.  8888888b.   .d8888b.  
-d88P  Y88b Y88b d88P       8888b   d8888                                                       888   Y88b 888   Y88b d88P  Y88b 
-888    888  Y88o88P        88888b.d88888                                                       888    888 888    888 888    888 
-888          Y888P         888Y88888P888  .d88b.  88888b.d88b.   .d88b.  888d888 888  888      888   d88P 888   d88P 888        
-888           888          888 Y888P 888 d8P  Y8b 888 "888 "88b d88""88b 888P"   888  888      8888888P"  8888888P"  888  88888 
-888    888    888   888888 888  Y8P  888 88888888 888  888  888 888  888 888     888  888      888 T88b   888        888    888 
-Y88b  d88P    888          888   "   888 Y8b.     888  888  888 Y88..88P 888     Y88b 888      888  T88b  888        Y88b  d88P 
- "Y8888P"     888          888       888  "Y8888  888  888  888  "Y88P"  888      "Y88888      888   T88b 888         "Y8888P88 
-                                                                                      888                                       
-                                                                                 Y8b d88P                                       
-                                                                                  "Y88P"");
+
+    printw(" @@@@@@@  @@@ @@@             @@@@@@@@@@   @@@@@@@@  @@@@@@@@@@    @@@@@@   @@@@@@@   @@@ @@@     @@@@@@@   @@@@@@@    @@@@@@@@  \n");
+    printw("@@@@@@@@  @@@ @@@             @@@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@ @@@     @@@@@@@@  @@@@@@@@  @@@@@@@@@  \n");
+    printw("!@@       @@! !@@             @@! @@! @@!  @@!       @@! @@! @@!  @@!  @@@  @@!  @@@  @@! !@@     @@!  @@@  @@!  @@@  !@@        \n");
+    printw("!@!       !@! @!!             !@! !@! !@!  !@!       !@! !@! !@!  !@!  @!@  !@!  @!@  !@! @!!     !@!  @!@  !@!  @!@  !@!        \n");
+    printw("!@!        !@!@!   @!@!@!@!@  @!! !!@ @!@  @!!!:!    @!! !!@ @!@  @!@  !@!  @!@!!@!    !@!@!      @!@!!@!   @!@@!@!   !@! @!@!@  \n");
+    printw("!!!         @!!!   !!!@!@!!!  !@!   ! !@!  !!!!!:    !@!   ! !@!  !@!  !!!  !!@!@!      @!!!      !!@!@!    !!@!!!    !!! !!@!!  \n");
+    printw(":!!         !!:               !!:     !!:  !!:       !!:     !!:  !!:  !!!  !!: :!!     !!:       !!: :!!   !!:       :!!   !!:  \n");
+    printw(":!:         :!:               :!:     :!:  :!:       :!:     :!:  :!:  !:!  :!:  !:!    :!:       :!:  !:!  :!:       :!:   !::  \n");
+    printw(" ::: :::     ::               :::     ::    :: ::::  :::     ::   ::::: ::  ::   :::     ::       ::   :::   ::        ::: ::::  \n");
+    printw(" :: :: :     :                 :      :    : :: ::    :      :     : :  :    :   : :     :         :   : :   :         :: :: :\n");
     */
