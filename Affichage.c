@@ -1,7 +1,7 @@
 // VOIR LE CAS OU JOUR ENTOURE DE 4 MURS/CARTES RETOURNEES -> retour case départ et on retourne les cartes 
 #include <stdio.h>
 #include <stdlib.h>
-#include <ncurses.h> 
+#include <ncurses.h>
 
 #define SIZE 8              //tableau 6x6
 
@@ -100,6 +100,8 @@ void board (card* tab, int size){
 }
 /*_________________________________________________________________________________________________*/
 
+// INITIALISATION du jeu
+
 void init_wall (card* tab, int size){
     if (size<=0){
         exit(1);
@@ -170,6 +172,7 @@ void invert_card(card* card1, card* card2){
     free(transit_card);
 }
 
+// DISTRIBUTION DES CARTES
 void generate_board (card* tab, int size){
     char cards[] = { 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'e' , 'b' , 'b' , 'b' , 'b' , 'z' , 'z' , 'z' , 'z' , 't' , 't' , 't' , 't' , 'h' , 'h' , 'h' , 'h' , 'C' , 'C' , 'T' , 'T' , 'E' , 'B' , 'G' , 'D', 'P' };
     int remaining_card = 32;                               // remaining_card = cartes_restantes
@@ -259,7 +262,12 @@ void generate_board (card* tab, int size){
     invert_card( tab + 4*size + 1 , tab + 6*size + 6);
 }
 
+void return_card(Player* p, card* c){		//le joueur a déjà son arme !
+	(*c).hidden = 1;
+	refresh();
+	
 
+}
 
 //#include "Header.h"
 
@@ -269,56 +277,56 @@ void generate_board (card* tab, int size){
 //Déplace joueur sur une case du tableau
 void perso_move(Player* p, card* tab, int size){
     do{
-        int authorize=1;
+        int forbidden=0;
         // indique si le joueur a le droit de se déplacer sur la case où il veut aller
-        //    authorize = 0       -> c'est un mur ou une carte retournée
-        //    authorize = 1       -> c'est ok
+        //    forbidden = 0       -> c'est ok
+        //    forbidden = 1       -> c'est un mur ou une carte retournée
         
         int key = getch();
         if (key!=KEY_UP && key!=KEY_DOWN && key!=KEY_RIGHT && key!=KEY_LEFT){
-            authorize = 0;
+            forbidden = 1;
         }
             switch (key){           //Vérifie que la saisie de déplacement est correcte (pas de char) et possible (pas vers un wall)
                 case KEY_UP :
                     if ( (*(tab + (p.y+1)*size + p.x)).wall == 1 || (*(tab + (p.y+1)*size + p.x)).hidden == 1 ){        //interdiction de déplacement
-                        authorize = 0;
+                        forbidden = 1;
                     }
                     else{                                                                                               //le joueur va sur la case
-                        (*p).y = (*p).y + 1;
+                        (*p).y ++;
                     }
                     break;
                 case KEY_DOWN :
                     if ( (*(tab + (p.y-1)*size + p.x)).wall == 1 || (*(tab + (p.y-1)*size + p.x)).hidden == 1 ){
-                        authorize = 0;
+                        forbidden = 1;
                     }
                     else{                                                                                               //le joueur va sur la case
-                        (*p).y = (*p).y - 1;
+                        (*p).y --;
                     }
                     break;
                 case KEY_RIGHT :
                     if ( (*(tab + (p.y)*size + p.x+1)).wall == 1 || (*(tab + (p.y)*size + p.x+1)).hidden == 1 ){
-                        authorize = 0;
+                        forbidden = 1;
                     }
                     else{                                                                                               //le joueur va sur la case
-                        (*p).x = (*p).x + 1;
+                        (*p).x ++;
                     }
                     break;
                 case KEY_LEFT :
                     if ( (*(tab + (p.y)*size + p.x-1)).wall == 1 || (*(tab + (p.y)*size + p.x-1)).hidden == 1 ){
-                        authorize = 0;
+                        forbidden = 1;
                     }
                     else{                                                                                               //le joueur va sur la case
-                        (*p).x = (*p).x - 1;
+                        (*p).x --;
                     }
                     break;
                 default :
                     printw("ERREUR au moment de la saisie de déplacement du joueur. Veuillez réessayer avec les flèches haut, bas, droite ou gauche");
                     break;
             }
-    } while(authorize==0);           //tant qu'on ne rencontre pas un mur. ATTENTION au cas où le oueur est coincé entre 4 murs !!! -> le faire mourir.
+    } while(forbidden==1);           //tant qu'on ne rencontre pas un mur. ATTENTION au cas où le oueur est coincé entre 4 murs !!! -> le faire mourir.
     refresh();
 }
-
+/*
 void play(){
     //number of players
     //enter identity
@@ -327,7 +335,7 @@ void play(){
     perso_move(p);        //p est le player, on aura besoin de ses coordonnées et son arme
 
 }
-
+*/
 
 //AFFICHAGE du JEU
 void show_board(card* tab, int size){
@@ -427,7 +435,7 @@ int main(){
     
     
     move(y_max-1, 0);
-    printw("Appuyer sur q (minuscule) pour sortir du jeu.\n");
+    printw("Appuyer sur la touche q pour sortir du jeu.\n");
     refresh();
     move(16,0);						//on replace le curseur après le logo de jeu
     
