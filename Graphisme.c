@@ -44,6 +44,8 @@ printf("\U0001F540");//Spawn emoticon
 printf("\U000026E9");//Portail (Torii (UWU)) emoticon
 printf("\U0001F5FF");//Totem (GIGA Chad Totem) emoticon
 printf("\U0001F4B0");//Trésor (sac d'argent (Dubai)) emoticon
+printf("\U000025A0");//Case caché 
+
 
 //Armes
 printf("\U0001FA93");//Hache (pompier) emoticon
