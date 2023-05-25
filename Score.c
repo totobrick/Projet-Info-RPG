@@ -10,16 +10,29 @@ FILE *fichier = fopen("Score.txt", "a+"); //le mode 'a' ajoute du texte à la fi
     
     if (P.class == 1){
      char job [10];
-      
+        strcpy(job, "Magicien");
     }
-     updateScore(fichier, Player P, );
+   else if (P.class == 2){
+     char job [10];
+        strcpy(job, "Guerrier");
+    }
+    else if (P.class == 3){
+     char job [10];
+        strcpy(job, "Ranger");
+    }
+    else{
+     char job [10];
+        strcpy(job, "Voleur");
+    }
+    
+    
+     updateScore(fichier, Player P, job);
     
       fprintf(fichier, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  P.nom, P.class, P.move, P.reversed, P.slay, P.chest, P.Score_victory);
     
-    
   fclose(fichier);
 
-void updateScore(FILE* fichier, Player P) {
+void updateScore(FILE* fichier, Player P, ) {
     FILE* fichierTemp = fopen("temp.txt", "w");
     if (fichierTemp == NULL) {
         printf("Erreur lors de l'ouverture du fichier temporaire.\n");
