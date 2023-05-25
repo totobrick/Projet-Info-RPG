@@ -56,3 +56,6 @@ int main(){
 	endwin();
 	return 0;
 }
+
+
+wgetnstr(win, (*p1).nom, 99)		//récupère au max 99 caractères -> pas de dépassement
