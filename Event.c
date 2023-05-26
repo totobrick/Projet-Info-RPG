@@ -4,7 +4,7 @@ int e1 = 1, e2 = 1, e3 = 1, e4 = 1, e5 = 1, e6 = 1, e7 = 1, e8 = 1, e9 = 1, e10 
 Player P;
 card c;
 
-void event(card* c, Player* P){
+void event(card* c, Player* P, int e1, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
 
 //if (event == 1){
     do{
