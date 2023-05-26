@@ -103,52 +103,7 @@ for (int i = 0; number_of_players>i; i++){
      while (P.life==1 && P.relic==0 || P.treasure==0){
         printw("%d",game,"\n");
 /*---------------------------------- ETAPE 1 --------------------------------------*/
-                   
-        printw ("Choisissez votre arme : \n");
-        printw ("1. Bouclier\n");
-        printw ("2. Torche\n");
-        printw ("3. Hache\n");
-        printw ("4. Arc\n");
-    
-    
-        do {
-            printw ("Votre choix: ");
-            verif = scanf("%d", &weapon);
-            vide_buffer();
-        } while (weapon != 1 && weapon != 2 && weapon != 3 && weapon != 4 || verif != 1);
-        verif=0;
-
-
-        if (weapon == 1){               //bouclier
-            P.w.type[0] = 1;
-            P.w.type[1] = 0;
-            P.w.type[2] = 0;
-            P.w.type[3] = 0;
-        }
-    
-    
-        else if (weapon == 2){          //Torche
-            P.w.type[0] = 0;
-            P.w.type[1] = 1;
-            P.w.type[2] = 0;
-            P.w.type[3] = 0;
-        }
-    
-    
-        else if (weapon == 3){          //hache
-            P.w.type[0] = 0;
-            P.w.type[1] = 0;
-            P.w.type[2] = 1;
-            P.w.type[3] = 0;
-        }
-    
-    
-        else{                           //arc
-            P.w.type[0] = 0;
-            P.w.type[1] = 0;
-            P.w.type[2] = 0;
-            P.w.type[3] = 1;   
-        }
+      //deja fait dans affichage
     
 /*---------------------------------- ETAPE 2 --------------------------------------*/
         printw ("Enter a direction (2: Down, 8: Up, 4: Left, 6: Right): ");
