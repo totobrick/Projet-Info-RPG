@@ -126,3 +126,18 @@ int main() {
     return 0;
 }
 
+
+
+#include <ncurses.h>
+#include <wchar.h>
+
+int main() {
+    initscr();              // Initialise la bibliothèque ncurses
+    printw("%lc", L'🧙');    // Affiche l'emoji magicien
+    refresh();              // Rafraîchit l'écran
+    getch();                // Attend une saisie de l'utilisateur
+    endwin();               // Ferme la fenêtre ncurses et restaure le terminal
+
+    return 0;
+}
+
