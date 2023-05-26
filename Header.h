@@ -63,6 +63,7 @@ typedef struct{
     int timer;                 //timer du temps du joueur dans une partie
 }Player;
 
+//https://youtu.be/JLsvDPK0GSk
 
 typedef struct{
     int wall;       //1=oui 0=non
