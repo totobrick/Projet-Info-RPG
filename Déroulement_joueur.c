@@ -161,7 +161,7 @@ for (int i = 0; number_of_players>i; i++){
         }
          
         if (c.e==1){
-            event(c, P)
+            event(c, P);
         }
          
         if (c.t==1){
@@ -202,7 +202,7 @@ endTime = time(NULL);
 double elapsedTime = difftime(endTime, startTime);
 P.timer=P.timer + elapsedTime; 
 if (checkTreasure(P)==1){
-    return
+    return;
     }
 else if (checkTreasure(P)==0 && number_of_players_who_played==number_of_players){
     number_of_players_who_played=0;
