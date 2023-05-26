@@ -158,17 +158,21 @@ for (int i = 0; number_of_players>i; i++){
             P.slay++
         }
         
-        if (c.p==1){
+        if (c.type==2){
             Portal(P,c);
         }
          
-        if (c.e==1){
+        if (c.type==3){
             event(c, P);
         }
          
-        if (c.t==1){
+        if (c.type==1){
             Totem(P,c);
             P.life=0;
+        }
+         
+        if (c.type==0){
+            P.treasure=1;
         }
          
         if (c.r==0 && P.class==3){ //Vérifie si la classe Ranger est sur la bonne relique
