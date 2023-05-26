@@ -1,10 +1,9 @@
 #include "Header.h"
 
-void Exchang_Totem (Player P, card c,card new_card,card tempo) {
+        void Exchang_Totem (Player P, card c,card new_card,card tempo) {
     
         do{
- 
- int new_direction_x = 0;
+  int new_direction_x = 0;
   int new_direction_y = 0;
   do{
   printf("Choisissez les coordonnés x, entre 1 et 6, vers laquel le totem va être échanger");
@@ -62,7 +61,5 @@ void Portal (Player* P, card* tab, int size){
 int main {
     card c;
     Player P;
-    card new_card;
-    card tempo;
 
 }
