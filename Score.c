@@ -1,8 +1,4 @@
 #include "Header.h"
-  
-#include <stdio.h>
-#include <stdlib.h>
-  
 void updateScore(FILE* fichier, Player* P,char job []) {
     FILE* fichierTemp = fopen("temp.txt", "w");
     if (fichierTemp == NULL) {
@@ -32,11 +28,12 @@ void updateScore(FILE* fichier, Player* P,char job []) {
           player_score_victory += (*P).score_victory;
            
             fprintf(fichierTemp,  "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  player_name, player_class, player_move, player_reversed, player_slay, player_chest, player_score_victory);
-        } 
-    else {
+        }  
+  }
+  
+   if(player_name != (*P).name){
             fprintf(fichier, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  (*P).nom, job, (*P).move, (*P).reversed, (*P).slay, (*P).chest, (*P).Score_victory);
     }
-  }
     fclose(fichier);
     fclose(fichierTemp);
 
