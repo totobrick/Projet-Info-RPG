@@ -11,6 +11,7 @@ void vide_buffer() {
 int main {
   
   int e1 = 1, e2 = 1, e3 = 1, e4 = 1, e5 = 1, e6 = 1, e7 = 1, e8 = 1, e9 = 1, e10 = 1, e11 = 1;
+  int score_turn = 0;
   int verif = 0;
   int weapon=0;
   int enemy=0;
@@ -218,6 +219,11 @@ printw("%d",game,"\n");
 printf("Le joueur, %s, a gagné",P.nom);
 P.Score_victory++;
     
-    //faire do while
+do {
+            Score_creator(P);
+            score_turn++;
+            P.num++
+        } while ( number_of_players>score_turn || verif != 1);
+        verif=0;
 
 } // main
