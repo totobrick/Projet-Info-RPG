@@ -27,7 +27,10 @@ int main {
   card c;
   card tab;
   Portal p;
-  P.timer=0  
+  P.timer=0;
+  card new_card;
+  card tempo;
+
       
       
     do {
