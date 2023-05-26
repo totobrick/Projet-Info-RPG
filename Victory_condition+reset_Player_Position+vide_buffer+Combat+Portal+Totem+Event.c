@@ -96,7 +96,7 @@
  verif=0
     
 card new_card = tab [new_direction_x] [new_direction_y];
-             }while(new_card.wall == 1 && new_card == [1] [3] && new_card == [4] [1] && new_card == [3] [6] && new_card == [6] [4]);
+             }while(new_card.wall == 1 && new_card == [1] [3] && new_card == [1] [2] && new_card == [1] [4] && new_card == [2] [3] && new_card == [4] [1] && new_card == [4] [2] && new_card == [3] [1]&& new_card == [5] [1] && new_card == [3] [6] && new_card == [3] [5] && new_card == [2] [6] && new_card == [4] [6] && new_card == [6] [4] && new_card == [6] [3] && new_card == [6] [5] && new_card == [5] [4]);
     
     card tempo = card new_card;
     card new_card = card c;
