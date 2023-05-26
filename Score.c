@@ -38,17 +38,23 @@ void updateScore(FILE* fichier, Player P,job ) {
         printf("Erreur lors de l'ouverture du fichier temporaire.\n");
         return;
     }
+        char player_name[100];
 
+        char player_class[10];
+
+        int player_move;
+
+        int player_reversed;
+
+        int player_slay;
+
+        int player_chest;
+
+        int player_score_victory;
     char ligne[100];
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
-        char player_name[100];
-        char player_class[10];
-        int player_move;
-        int player_reversed;
-        int player_slay;
-        int player_chest;
-        int player_score_victory;
-        sscanf(ligne, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  P.nom, job, P.move, P.reversed, P.slay, P.chest, P.Score_victory);
+        
+    sscanf(ligne, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  P.nom, job, P.move, P.reversed, P.slay, P.chest, P.Score_victory);
     
         if (player_name == P.name) {
             fprintf(fichierTemp, "%d %s %.2f\n", id, nomFichier, nouveauSalaire);
