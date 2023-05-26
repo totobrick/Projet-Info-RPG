@@ -216,7 +216,7 @@ if (checkTreasure(P)==0 && number_of_players_who_played==number_of_players){
 show_board (tab,int size);
 printw("%d",game,"\n");
 printf("Le joueur, %s, a gagné",P.nom);
-P.Score_victory++
+P.Score_victory++;
     
     //faire do while
 
