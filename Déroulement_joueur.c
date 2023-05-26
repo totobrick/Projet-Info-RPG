@@ -14,6 +14,10 @@ int main {
   int verif = 0;
   int weapon=0;
   int enemy=0;
+  int Wizard = 0;
+  int Knight = 0;
+  int Ranger = 0;
+  int Rogue = 0;
   time_t startTime, endTime;
   int direction;
   int number_of_players_who_played=0;
@@ -50,6 +54,38 @@ for (int i = 0; number_of_players>i; i++){
             printf("4. Voleur\n");
             printf("Votre choix: ");
             verif = scanf("%d", P.class );
+            if (Wizard == 1){
+                P.class=-1;
+                printf("La classe choisie est déjà prise, veuillez en choisir une autre");
+                }
+            else if (P.class == 1 && Wizard ==0){
+                Wizard =1;
+                }
+            if (Knight == 1){
+
+                P.class=-1;
+                printf("La classe choisie est déjà prise, veuillez en choisir une autre");
+                }
+
+            else if (P.class == 2 && Knight ==0){
+
+                Knight =1;
+
+                }
+            if (Ranger == 1){
+                P.class=-1;
+                printf("La classe choisie est déjà prise, veuillez en choisir une autre");
+                }
+            else if (P.class == 3 && Ranger ==0){
+                Ranger =1;
+                }
+            if (Rogue == 1){
+                P.class=-1;
+                printf("La classe choisie est déjà prise, veuillez en choisir une autre");
+                }
+            else if (P.class == 4 && Rogue ==0){
+                Rogue =1;
+                }
             vide_buffer();
         } while (P.class != 1 && P.class != 2 && P.class != 3 && P.class != 4 || verif != 1);
         verif=0;
