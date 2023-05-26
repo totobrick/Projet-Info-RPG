@@ -13,7 +13,7 @@
     }
 }
 
-                              void combat(Player P, card c) {
+                          /*    void combat(Player P, card c) {
     if (c.m.type[0] == 1){
     
     if(P.w.type[0] == 1){
@@ -56,7 +56,7 @@
     }
     }
     }
-
+*/
 
 
 // Fonction pour vérifier si le joueur a obtenu le trésor et la relique 
