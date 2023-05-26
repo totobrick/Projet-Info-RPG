@@ -15,6 +15,7 @@ void combat(Player P, card c) {
     
     if(P.w.type[0] == 1){
      printf("Le Basilic est vaincu !\n");
+        P.slay++;
     }
     else{
      printf("Game Over ! Le Basilic vous a tué.\n");
@@ -24,6 +25,7 @@ void combat(Player P, card c) {
     else if (c.m.type[1] == 1){
     if(P.w.type[1] == 1){
      printf("Le Zombie est vaincu !\n");
+        P.slay++;
     }
     else{
      printf("Game Over ! Le Zombie vous a tué.\n");
@@ -33,6 +35,7 @@ void combat(Player P, card c) {
     else if (c.m.type[2] == 1){
     if(P.w.type[2] == 1){
      printf("Le Troll est vaincu !\n");
+        P.slay++;
     }
     else{
      printf("Game Over ! Le Troll vous a tué.\n");
@@ -42,6 +45,7 @@ void combat(Player P, card c) {
     else{
     if(P.w.type[3] == 1){
      printf("La Harpie est vaincu !\n");
+        P.slay++;
     }
     else{
      printf("Game Over ! La Harpie vous a tué.\n");
