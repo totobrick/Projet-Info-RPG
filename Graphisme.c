@@ -81,3 +81,29 @@ int main() {
 
     return 0;
 }
+
+
+
+
+#include <ncurses.h>
+#include <wchar.h>
+
+int main() {
+    initscr();      // Initialise la bibliothèque ncurses
+    cbreak();       // Désactive la mise en mémoire tampon de ligne
+    noecho();       // Désactive l'affichage automatique des caractères saisis
+    curs_set(0);    // Masque le curseur
+
+    wchar_t emoji = L'\u2665';  // Code Unicode de l'emoji
+    cchar_t wc;
+    setcchar(&wc, &emoji, 0);   // Initialise la structure cchar_t avec l'emoji
+
+    add_wch(&wc);   // Ajoute le caractère large à la fenêtre
+
+    refresh();      // Rafraîchit l'écran
+    getch();        // Attend une saisie de l'utilisateur
+    endwin();       // Ferme la fenêtre ncurses et restaure le terminal
+
+    return 0;
+}
+
