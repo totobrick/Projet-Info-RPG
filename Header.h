@@ -43,6 +43,7 @@ typedef struct{
 } event;*/
 
 typedef struct{
+    int num;                  //de 1 à 4
     char nom[100];            //ATTENTION depasement tableau
     int class;                //Magicien, guerrier, ranger, voleur
     weapons w;                //1=Bouclier, 1=Torche, 2=Hache, 3=Arc
