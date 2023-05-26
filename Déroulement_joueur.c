@@ -104,15 +104,15 @@ for (int i = 0; number_of_players>i; i++){
         printw("%d",game,"\n");
 /*---------------------------------- ETAPE 1 --------------------------------------*/
                    
-        printf("Choisissez votre arme : \n");
-        printf("1. Bouclier\n");
-        printf("2. Torche\n");
-        printf("3. Hache\n");
-        printf("4. Arc\n");
+        printw ("Choisissez votre arme : \n");
+        printw ("1. Bouclier\n");
+        printw ("2. Torche\n");
+        printw ("3. Hache\n");
+        printw ("4. Arc\n");
     
     
         do {
-            printf("Votre choix: ");
+            printw ("Votre choix: ");
             verif = scanf("%d", &weapon);
             vide_buffer();
         } while (weapon != 1 && weapon != 2 && weapon != 3 && weapon != 4 || verif != 1);
@@ -151,59 +151,62 @@ for (int i = 0; number_of_players>i; i++){
         }
     
 /*---------------------------------- ETAPE 2 --------------------------------------*/
-        printf("Enter a direction (2: Down, 8: Up, 4: Left, 6: Right): ");
+        printw ("Enter a direction (2: Down, 8: Up, 4: Left, 6: Right): ");
         scanf("%d", &direction);
         move(table, &posX, &posY, direction);
-        printf("%d",game,"\n");
+        printw ("%d",game,"\n");
        
  /*---------------------------------- ETAPE 3 --------------------------------------*/
         if (c.m==1){
             combat(P,c);
         }
         
-        if (c.type==2){
+        if (c.type[2]==1){
             Portal(P,c);
         }
          
-        if (c.type==3){
+        if (c.type[3]==1){
             event(c, P, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
         }
          
-        if (c.type==1){
+        if (c.type[1]==1){
             Totem(P,c);
             P.life=0;
         }
          
-        if (c.type==0){
+        if (c.type[0]==1){
             P.treasure=1;
         }
          
         if (c.r==0 && P.class==3){ //Vérifie si la classe Ranger est sur la bonne relique
             P.relic=1;
-            printf("Le joueur vient de trouver sa relique");
+            printw ("Le joueur vient de trouver sa relique");
         }
          
-        if (c.r==1 && P.class==2){ //Vérifie si la classe Guerrier est sur la bonne relique
+        else if (c.r==1 && P.class==2){ //Vérifie si la classe Guerrier est sur la bonne relique
             P.relic=1;
-            printf("Le joueur vient de trouver sa relique");
+            printw ("Le joueur vient de trouver sa relique");
         }
          
-         if (c.r==2 && P.class==1){ //Vérifie si la classe Magicien est sur la bonne relique
+        else if (c.r==2 && P.class==1){ //Vérifie si la classe Magicien est sur la bonne relique
             P.relic=1;
-            printf("Le joueur vient de trouver sa relique");
+            printw ("Le joueur vient de trouver sa relique");
         }
          
-         if (c.r==3 && P.class==4){ //Vérifie si la classe Voleur est sur la bonne relique
+        else if (c.r==3 && P.class==4){ //Vérifie si la classe Voleur est sur la bonne relique
             P.relic=1;
-            printf("Le joueur vient de trouver sa relique");
+            printw ("Le joueur vient de trouver sa relique");
         }
+         else{
+          printw ("Oups! Ceci n'est pas ta relique... /n");   
+         }
         if (checkTreasure(P)==1){
         break;
         }
          
          if ( (*(tab + (P.y-1)*size + P.x)).wall=1 && (*(tab + (P.y+1)*size + P.x)).wall=1 && (*(tab + P.y*size + P.x-1)).wall=1 && (*(tab + (P.y)*size + P.x+1)).wall=1){
             P.life=0;
-            printf("Game Over");
+            printw ("Game Over");
          }
          
         P.move++;
@@ -219,7 +222,7 @@ if (checkTreasure(P)==0 && number_of_players_who_played==number_of_players){
 } //while manche
 show_board (tab,int size);
 printw("%d",game,"\n");
-printf("Le joueur, %s, a gagné",P.nom);
+printw ("Le joueur, %s, a gagné",P.nom);
 P.Score_victory++;
     
 do {
