@@ -202,7 +202,7 @@ for (int i = 0; number_of_players>i; i++){
             printf("Game Over");
          }
          
-        P.move++
+        P.move++;
       } // while joueur
 P.life=1;
 endTime = time(NULL);
