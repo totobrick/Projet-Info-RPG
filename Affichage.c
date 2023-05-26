@@ -1,7 +1,10 @@
 // VOIR LE CAS OU JOUR ENTOURE DE 4 MURS/CARTES RETOURNEES -> retour case départ et on retourne les cartes 
 #include <stdio.h>
-#include <stdlib.h>
 #include <ncurses.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include <unistd.h>         //pour la musique
 
 #define SIZE 8              //tableau 6x6
 
@@ -92,7 +95,10 @@ void create_player(Player* p);
 // DURANT LE JEU
 void choose_weapon(Player* p, WINDOW* win);
 void return_card(Player* p, card* c)
+void interaction_card(Player* p, card* c);
+void combat(Player* p, card* c);
 void perso_move(Player* p, card* tab, int size, int key);		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
+void play(Player* p, card* tab, int size, WINDOW* win);
 void show_board (card* tab, int size);
 
 void resetPlayerPosition(Player* p);
@@ -220,16 +226,16 @@ void generate_board (card* tab, int size){
                 }
                 //Les 4 monstres
                 else if(cards[alea] == 'b'){
-                    (*(tab + i*size + j)).m.type[3] = 1;
-                }
-                else if(cards[alea] == 'z'){
                     (*(tab + i*size + j)).m.type[0] = 1;
                 }
-                else if(cards[alea] == 't'){
+                else if(cards[alea] == 'z'){
                     (*(tab + i*size + j)).m.type[1] = 1;
                 }
-                else if(cards[alea] == 'h'){
+                else if(cards[alea] == 't'){
                     (*(tab + i*size + j)).m.type[2] = 1;
+                }
+                else if(cards[alea] == 'h'){
+                    (*(tab + i*size + j)).m.type[3] = 1;
                 }
                 // coffre et totem
                 else if(cards[alea] == 'C'){
@@ -332,6 +338,7 @@ void return_card(Player* p, card* c){		//le joueur a déjà son arme !
 }
 
 void choose_weapon(Player* p, WINDOW* win){
+        wclear(win);
         wprintw(win, "Choisissez votre arme : \n");
         wprintw(win, "    1. Bouclier\n");
         wprintw(win, "    2. Torche\n");
@@ -380,11 +387,13 @@ void play(Player* p, card* tab, int size, WINDOW* win){
 	//CHOISIT OU IL VEUT SE DEPLACER
 	wclear(win);
 	
+	choose_weapon(p, win);
+	
 	int key;		//récupèrera la touche appuyée
 	
 	//si le joeur est coincé entre 4 murs (ou cartes dévoilé) -> MORT
-	if (  ( (*(tab + (P.y-1)*size + P.x)).wall == 1 || (*(tab + (P.y-1)*size + P.x)).hidden == 1 )  &&  ( (*(tab + (P.y+1)*size + P.x)).wall == 1 || (*(tab + (P.y+1)*size + P.x)).hidden == 1 )  &&  ( (*(tab + (P.y)*size + P.x-1)).wall == 1 || (*(tab + (P.y)*size + P.x-1)).hidden == 1 )  &&  ( (*(tab + (P.y)*size + P.x+1)).wall == 1 || (*(tab + (P.y)*size + P.x+1)).hidden == 1)  ){
-            p.life=0;
+	if (  ( (*(tab + ((*p).y-1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y-1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y+1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y+1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x-1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x-1)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x+1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x+1)).hidden == 1)  ){
+            (*p).life=0;
             wprintw(win, "Game Over ! Le %s est mort\n", (*p).nom);
             wrefresh(win);
         }
@@ -408,25 +417,25 @@ void play(Player* p, card* tab, int size, WINDOW* win){
 			
 			switch(key){
 				case KEY_UP:
-					if ( (*(tab + (P.y-1)*size + P.x)).wall == 1 || (*(tab + (P.y-1)*size + P.x)).hidden == 1){
+					if ( (*(tab + ((*p).y-1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y-1)*size + (*p).x)).hidden == 1){
 						forbidden = 1;
 					}
 					break;
 				
 				case KEY_DOWN:
-					if ( (*(tab + (P.y+1)*size + P.x)).wall == 1 || (*(tab + (P.y+1)*size + P.x)).hidden == 1){
+					if ( (*(tab + ((*p).y+1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y+1)*size + (*p).x)).hidden == 1){
 						forbidden = 1;
 					}
 					break;
 				
 				case KEY_RIGHT:
-					if ( (*(tab + (P.y)*size + P.x+1)).wall == 1 || (*(tab + (P.y)*size + P.x+1)).hidden == 1){
+					if ( (*(tab + ((*p).y)*size + (*p).x+1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x+1)).hidden == 1){
 						forbidden = 1;
 					}
 					break;
 				
 				case KEY_LEFT:
-					if ( (*(tab + (P.y)*size + P.x-1)).wall == 1 || (*(tab + (P.y)*size + P.x-1)).hidden == 1){
+					if ( (*(tab + ((*p).y)*size + (*p).x-1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x-1)).hidden == 1){
 						forbidden = 1;
 					}
 					break;
@@ -438,48 +447,88 @@ void play(Player* p, card* tab, int size, WINDOW* win){
 			}
 		} while(forbidden == 1);
 	}
-	
-	perso_move( p, tab, size, key);
+	//créer var "newcard" qui récupère la carte ou on va
+	show_board(tab, size);
+	refresh();
+	sleep(3);
+	combat(p, newcard);
+	//bouger que si on gagne : void interaction_card(Player* p, card* c);
+	perso_move(p, tab, size, key);
 
 }
-//void perso_move(Player* p);
+
+
+void interaction_card(Player* p, card* c){
+	//COMBAT AVEC LE MONSTRE
+	
+	}
+
+}
+
+void combat(Player* p, card* c) {
+
+    if ((*c).m.type[0] == 1){
+	    if((*p).w.type[0] == 1){
+	     printw ("Le Basilic est vaincu !\n");
+		(*p).slay++;
+	    }
+	    else{
+	     printw ("Game Over ! Le Basilic vous a tué.\n");
+	     resetPlayerPosition(p);
+	    }
+    }
+    else if ((*c).m.type[1] == 1){
+	    if((*p).w.type[1] == 1){
+	     printw ("Le Zombie est vaincu !\n");
+		(*p).slay++;
+	    }
+	    else{
+	     printw ("Game Over ! Le Zombie vous a tué.\n");
+	     resetPlayerPosition(p);
+	    }
+    }
+    else if ((*c).m.type[2] == 1){
+	    if((*p).w.type[2] == 1){
+	     printw ("Le Troll est vaincu !\n");
+		(*p).slay++;
+	    }
+	    else{
+	     printw ("Game Over ! Le Troll vous a tué.\n");
+	     resetPlayerPosition(p);
+	    }
+    }
+    else if ((*c).m.type[3] == 1){
+	    if((*p).w.type[3] == 1){
+	     printw ("La Harpie est vaincu !\n");
+		(*p).slay++;
+	    }
+	    else{
+	     printw ("Game Over ! La Harpie vous a tué.\n");
+	     resetPlayerPosition(p);
+	    }
+    }
+}
 
 //Déplace joueur sur une case du tableau
 void perso_move(Player* p, card* tab, int size, int key){		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
     
             switch (key){           //Vérifie que la saisie de déplacement est correcte (pas de char) et possible (pas vers un wall)
                 case KEY_UP :
-                    if ( (*(tab + (p.y+1)*size + p.x)).wall == 1 || (*(tab + (p.y+1)*size + p.x)).hidden == 1 ){        //interdiction de déplacement
-                        forbidden = 1;
-                    }
-                    else{                                                                                               //le joueur va sur la case
-                        (*p).y ++;
-                    }
+                    (*p).y ++;					//le joueur va sur la case
                     break;
+                    
                 case KEY_DOWN :
-                    if ( (*(tab + (p.y-1)*size + p.x)).wall == 1 || (*(tab + (p.y-1)*size + p.x)).hidden == 1 ){
-                        forbidden = 1;
-                    }
-                    else{                                                                                               //le joueur va sur la case
-                        (*p).y --;
-                    }
+                    (*p).y --;					//le joueur va sur la case
                     break;
+                    
                 case KEY_RIGHT :
-                    if ( (*(tab + (p.y)*size + p.x+1)).wall == 1 || (*(tab + (p.y)*size + p.x+1)).hidden == 1 ){
-                        forbidden = 1;
-                    }
-                    else{                                                                                               //le joueur va sur la case
-                        (*p).x ++;
-                    }
+                    (*p).x ++;					//le joueur va sur la case
                     break;
+                    
                 case KEY_LEFT :
-                    if ( (*(tab + (p.y)*size + p.x-1)).wall == 1 || (*(tab + (p.y)*size + p.x-1)).hidden == 1 ){
-                        forbidden = 1;
-                    }
-                    else{                                                                                               //le joueur va sur la case
-                        (*p).x --;
-                    }
+                    (*p).x --;					//le joueur va sur la case
                     break;
+                    
                 default :
                     printw("ERREUR au moment de la saisie de déplacement du joueur. Veuillez réessayer avec les flèches haut, bas, droite ou gauche");
                     break;
@@ -578,7 +627,7 @@ int main(){
     width_logo = 129;
     WINDOW* win_logo = newwin(height_logo, width_logo, starty_logo, startx_logo);	//cadre du logo
     
-    		 //128 caractères sur la 1ere ligne et 11 lignes
+    		 //128 caractèrp1, p2, p3, p4es sur la 1ere ligne et 11 lignes
     wprintw(win_logo," .d8888b. Y88b   d88P      888b     d888                                                       8888888b.  8888888b.   .d8888b.  \n");
     wprintw(win_logo,"d88P  Y88b Y88b d88P       8888b   d8888                                                       888   Y88b 888   Y88b d88P  Y88b \n");
     wprintw(win_logo,"888    888  Y88o88P        88888b.d88888                                                       888    888 888    888 888    888 \n");
@@ -616,7 +665,7 @@ int main(){
     //refresh();
     wrefresh(win_menu);
     
-    int EXIT = 0;                           // EXIT = false -> on reste dans le menu        EXIT = true -> on va ailleurs que dans le menu
+    int EXIT = 0;                           // EXIT = 0 -> on reste dans le menu        EXIT = 1 -> on va ailleurs que dans le menu
     do{
         int key_pressed = getch();
         if (key_pressed == (int)'q' || key_pressed == (int)'Q'){	//en entrant q : on sort du jeu
@@ -722,6 +771,7 @@ int main(){
 		}
         
         WINDOW* win_game = newwin(20,100, 5, 15);           //fenêtre du plateau de jeu
+        WINDOW* win_interface = newwin(20, 100, 5, 40);
         card* game;
         game = malloc(SIZE*SIZE*sizeof(card));            //game est notre plateau de jeu (tableau)
 	if (game == NULL){
@@ -733,12 +783,12 @@ int main(){
 	do{
 		r++;
 		r = r%4;
-		(*tab_player[r]).life = 1;
+		(*(tab_player[r])).life = 1;
 		do{
-		//play(tab_player[r]);      -> créer procédure "JOUER"  -> *tab_player[r]).life==0
-		} while( (*tab_player[r]).life==1 );		// ET TANT QU'IL N'EST PAS COINCE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			play(tab_player[r], game, SIZE, win_interface);			// INTERACTION JOUEUR
+		} while( (*(tab_player[r])).life==1 );
         
-	} while ( (*tab_player[r]).relic!=1 || (*tab_player[r]).treasure!=1 );      //condition de victoire d'un joueur
+	} while ( (*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1 );      //condition de victoire
 	    
 	board(game, SIZE);
 	show_board(game, SIZE);
@@ -749,16 +799,16 @@ int main(){
             
     else if (menu_select==2){
 
-    	}
+    }
             
-        else if (menu_select==3){
+    else if (menu_select==3){
 		//affiche le readme
-    	}
+    }
             
-        else{						//SORTIR du jeu
+    else{						//SORTIR du jeu
             endwin();
             return 0;
-	}
+    }
     
     free(game);
     endwin();
