@@ -62,3 +62,22 @@ printf("\U0001F3C6");//Trophée (victoire) emoticon
 
 
 
+#include <ncurses.h>
+#include <wchar.h>
+
+int main() {
+    initscr();      // Initialise la bibliothèque ncurses
+    cbreak();       // Désactive la mise en mémoire tampon de ligne
+    noecho();       // Désactive l'affichage automatique des caractères saisis
+    curs_set(0);    // Masque le curseur
+
+    wchar_t emoji = L'\U0001F9D9';   // Code Unicode de l'emoji
+
+    addwch(emoji);  // Affiche l'emoji en utilisant addwch()
+
+    refresh();      // Rafraîchit l'écran
+    getch();        // Attend une saisie de l'utilisateur
+    endwin();       // Ferme la fenêtre ncurses et restaure le terminal
+
+    return 0;
+}
