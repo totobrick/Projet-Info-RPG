@@ -1,4 +1,4 @@
-// VOIR LE CAS OU JOUR ENTOURE DE 4 MURS/CARTES RETOURNEES -> retour case départ et on retourne les cartes 
+// voir void event, portal et totem pour intercation_card
 #include <stdio.h>
 #include <ncurses.h>
 #include <string.h>
@@ -81,27 +81,30 @@ typedef struct{
 } card;
 
 // INITIALISATION DU JEU
+void board (card* tab, int size);
 void init_wall (card* tab, int size);
 void init_board (card* tab, int size);
 void init_card(card* card1);
 void invert_card(card* card1, card* card2);
 void generate_board (card* tab, int size);
-void board (card* tab, int size);
+
+void resetPlayerPosition(Player* p);
 
 // AVANT DE JOUER
 int nb_player (WINDOW* win);
 void create_player(Player* p);
 
 // DURANT LE JEU
-void choose_weapon(Player* p, WINDOW* win);
 void return_card(Player* p, card* c)
-void interaction_card(Player* p, card* c);
-void combat(Player* p, card* c);
+void Portal (Player* P, card* tab, int size);
+
 void perso_move(Player* p, card* tab, int size, int key);		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
 void play(Player* p, card* tab, int size, WINDOW* win);
+void choose_weapon(Player* p, WINDOW* win);
+void interaction_card(Player* p, card* c, int key);
+void combat(Player* p, card* c);
 void show_board (card* tab, int size);
 
-void resetPlayerPosition(Player* p);
 //void move(int table[ROWS][COLS], int* posX, int* posY, int direction);
 //void event(card* c, Player* P);
 int checkTreasure(Player player);
@@ -279,6 +282,14 @@ void generate_board (card* tab, int size){
     invert_card( tab + 4*size + 1 , tab + 6*size + 6);
 }
 
+
+				//RETOUR CASE DEPART
+void resetPlayerPosition(Player* p) {
+    (*p).x = (*p).x_init;
+    (*p).y = (*p).y_init;
+    printw ("Position du joueur %s réinitialisé.\n",(*p).nom);
+}
+
 /*_________________________________________________________________________________________________*/
 				// AVANT DE JOUER
 				
@@ -336,6 +347,129 @@ void return_card(Player* p, card* c){		//le joueur a déjà son arme !
 	
 
 }
+//REVOIR fonctionnement portal
+void Portal (Player* p, card* tab, int size, WINDOW* win){
+    do{
+	wclear(win);
+        int new_direction_x = 0;
+        int new_direction_y = 0;
+        do{
+            wprintw(win, "\nChoisissez les coordonnés x, entre 1 et 6, vers lesquels vous voulez allez!");
+            wrefresh(win);
+            new_direction_x = getch();
+        }while (new_direction_x < '1' || new_direction_x > '6');
+
+        do{
+            wprintw(win,"\nChoisissez les coordonnés y, entre 1 et 6, vers lesquels vous voulez allez!");
+            wrefresh(win);
+            new_direction_y = getch();
+        }while (new_direction_y < '1' || new_direction_y > '6');
+
+        card* new_card = tab + new_direction_y*size + new_direction_x;
+
+    } while ((*new_card).wall == 1 || (*new_card).hidden == 1 || (new_direction_y==1 && new_direction_x==3) || (new_direction_y==3 && new_direction_x==6) || (new_direction_y==4 && new_direction_x==1)  || (new_direction_y==6 && new_direction_x==4) );
+    
+    choose_weapon(p, win);
+    refresh();
+    sleep(3);
+    interaction_card(p, newcard);
+    //bouger que si on gagne : void interaction_card(Player* p, card* c);
+    
+    (*p).x = new_direction_x;
+    (*p).y = new_direction_y;
+    refresh();
+
+}
+
+
+void play(Player* p, card* tab, int size, WINDOW* win){
+	//CHOISIT OU IL VEUT SE DEPLACER
+	wclear(win);
+	
+	choose_weapon(p, win);
+	int key;		//récupèrera la touche appuyée
+	
+	//si le joueur est coincé entre 4 murs (ou cartes dévoilé) -> MORT
+	if (  ( (*(tab + ((*p).y-1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y-1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y+1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y+1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x-1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x-1)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x+1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x+1)).hidden == 1)  ){
+            (*p).life=0;
+            wprintw(win, "Game Over ! Le %s est mort\n", (*p).nom);
+            wrefresh(win);
+        }
+        
+        card* newcard;				// newcard : pointe vers la carte ou on veut aller
+        else {
+		do{
+			int forbidden=0;
+			// indique si le joueur a le droit de se déplacer sur la case où il veut aller
+				//    forbidden = 0       -> c'est ok
+				//    forbidden = 1       -> c'est un mur ou une carte retournée
+			do{
+				wprintw(win, "Où voulez-vous vous déplacer (utilisez les flèches de votre clavier): ");
+				wrefresh(win);
+				forbidden=0;
+				key = getch();
+				if (key!=KEY_UP && key!=KEY_DOWN && key!=KEY_RIGHT && key!=KEY_LEFT){
+				    forbidden = 1;
+				    wprintw(win, "\nMouvement entré invalide, veuillez réessayer.");
+				}
+			} while(forbidden==1);           //tant qu'on ne rencontre pas un mur. ATTENTION au cas où le joueur est coincé entre 4 murs !!! -> le faire mourir.
+			
+			switch(key){
+				case KEY_UP:
+					if ( (*(tab + ((*p).y-1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y-1)*size + (*p).x)).hidden == 1){
+						forbidden = 1;
+					}
+					else{
+						newcard = (tab + ((*p).y-1)*size + (*p).x);
+					}
+					break;
+				
+				case KEY_DOWN:
+					if ( (*(tab + ((*p).y+1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y+1)*size + (*p).x)).hidden == 1){
+						forbidden = 1;
+					}
+					else{
+						newcard = (tab + ((*p).y+1)*size + (*p).x);
+					}
+					break;
+				
+				case KEY_RIGHT:
+					if ( (*(tab + ((*p).y)*size + (*p).x+1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x+1)).hidden == 1){
+						forbidden = 1;
+					}
+					else{
+						newcard = (tab + ((*p).y)*size + (*p).x+1);
+					}
+					break;
+				
+				case KEY_LEFT:
+					if ( (*(tab + ((*p).y)*size + (*p).x-1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x-1)).hidden == 1){
+						forbidden = 1;
+					}
+					else{
+						newcard = (tab + ((*p).y)*size + (*p).x-1);
+					}
+					break;
+				
+				default:
+					
+					break;
+			
+			}
+		} while(forbidden == 1);
+	}
+	
+	show_board(tab, size);
+	refresh();
+	sleep(3);
+	interaction_card(p, newcard, key);
+	//bouger que si on gagne : void interaction_card(Player* p, card* c);
+	perso_move(p, tab, size, key);
+
+}
+
+
+
 
 void choose_weapon(Player* p, WINDOW* win){
         wclear(win);
@@ -382,86 +516,70 @@ void choose_weapon(Player* p, WINDOW* win){
         }
 }
 
-
-void play(Player* p, card* tab, int size, WINDOW* win){
-	//CHOISIT OU IL VEUT SE DEPLACER
-	wclear(win);
+void interaction_card(Player* p, card* c, int key){
+	//COMBAT AVEC LE MONSTRE fait (si il y en a)
+	combat(p, newcard);
 	
-	choose_weapon(p, win);
-	
-	int key;		//récupèrera la touche appuyée
-	
-	//si le joeur est coincé entre 4 murs (ou cartes dévoilé) -> MORT
-	if (  ( (*(tab + ((*p).y-1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y-1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y+1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y+1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x-1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x-1)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x+1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x+1)).hidden == 1)  ){
-            (*p).life=0;
-            wprintw(win, "Game Over ! Le %s est mort\n", (*p).nom);
-            wrefresh(win);
+	if ((*c).type[0]==1){
+            (*p).treasure=1;
         }
         
-        else {
-		do{
-			int forbidden=0;
-			// indique si le joueur a le droit de se déplacer sur la case où il veut aller
-				//    forbidden = 0       -> c'est ok
-				//    forbidden = 1       -> c'est un mur ou une carte retournée
-			do{
-				wprintw(win, "Où voulez-vous vous déplacer (utilisez les flèches de votre clavier): ");
-				wrefresh(win);
-				forbidden=0;
-				key = getch();
-				if (key!=KEY_UP && key!=KEY_DOWN && key!=KEY_RIGHT && key!=KEY_LEFT){
-				    forbidden = 1;
-				    wprintw(win, "\nMouvement entré invalide, veuillez réessayer.");
-				}
-			} while(forbidden==1);           //tant qu'on ne rencontre pas un mur. ATTENTION au cas où le joueur est coincé entre 4 murs !!! -> le faire mourir.
-			
-			switch(key){
-				case KEY_UP:
-					if ( (*(tab + ((*p).y-1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y-1)*size + (*p).x)).hidden == 1){
-						forbidden = 1;
-					}
-					break;
-				
-				case KEY_DOWN:
-					if ( (*(tab + ((*p).y+1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y+1)*size + (*p).x)).hidden == 1){
-						forbidden = 1;
-					}
-					break;
-				
-				case KEY_RIGHT:
-					if ( (*(tab + ((*p).y)*size + (*p).x+1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x+1)).hidden == 1){
-						forbidden = 1;
-					}
-					break;
-				
-				case KEY_LEFT:
-					if ( (*(tab + ((*p).y)*size + (*p).x-1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x-1)).hidden == 1){
-						forbidden = 1;
-					}
-					break;
-				
-				default:
-					
-					break;
-			
-			}
-		} while(forbidden == 1);
-	}
-	//créer var "newcard" qui récupère la carte ou on va
-	show_board(tab, size);
-	refresh();
-	sleep(3);
-	combat(p, newcard);
-	//bouger que si on gagne : void interaction_card(Player* p, card* c);
-	perso_move(p, tab, size, key);
-
-}
-
-
-void interaction_card(Player* p, card* c){
-	//COMBAT AVEC LE MONSTRE
-	
-	}
+        else if ((*c).r.type[0]==1){ //Vérifie si la classe Ranger est sur la bonne relique
+            if ((*p).class==3){
+                (*p).relic=1;
+                printw ("Le joueur vient de trouver sa relique.\n");
+                }
+            else{
+                printw ("Oups! Ceci n'est pas ta relique... \n");  
+            }
+        }
+        
+        else if ((*c).r.type[1]==1){ //Vérifie si la classe Guerrier est sur la bonne relique
+            if ((*p).class==2){
+                (*p).relic=1;
+                printw ("Le joueur vient de trouver sa relique.\n");
+            }
+            else{
+                printw ("Oups! Ceci n'est pas ta relique... \n");  
+            }
+        }
+        
+        else if ((*c).r.type[2]==1){ //Vérifie si la classe Magicien est sur la bonne relique
+            if((*p).class==1){
+                (*p).relic=1;
+                printw ("Le joueur vient de trouver sa relique.");
+            }
+            else{
+                printw ("Oups! Ceci n'est pas ta relique... \n");  
+            }
+        }
+        
+        else if ((*c).r.type[3]==1){ //Vérifie si la classe Voleur est sur la bonne relique
+            if((*p).class==4){
+                (*p).relic=1;
+                printw ("Le joueur vient de trouver sa relique.");
+            }
+            else{
+                printw ("Oups! Ceci n'est pas ta relique... \n");
+            }
+        }
+        
+        
+	if ((*c).type[3]==1){
+            event(c, p, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);		// cf PROCEDURE ALEXIS ATTENTION INITIALISATION EVENT
+        }
+        else if ((*c).type[2]==1){
+            Portal(p,c);
+        }
+        
+        else if ((*c).type[1]==1){
+            Totem(p,c);
+            (*p).life=0;
+        }
+        
+        if (checkTreasure(P)==1){
+            break;
+        }
 
 }
 
@@ -470,7 +588,7 @@ void combat(Player* p, card* c) {
     if ((*c).m.type[0] == 1){
 	    if((*p).w.type[0] == 1){
 	     printw ("Le Basilic est vaincu !\n");
-		(*p).slay++;
+		(*p).slay++;				//nbre de monstres tués
 	    }
 	    else{
 	     printw ("Game Over ! Le Basilic vous a tué.\n");
@@ -535,16 +653,7 @@ void perso_move(Player* p, card* tab, int size, int key){		//key = KEY_UP ou KEY
             }
     refresh();
 }
-/*
-void play(){
-    //number of players
-    //enter identity
-    //création tableau
-    //choose arm
-    perso_move(p);        //p est le player, on aura besoin de ses coordonnées et son arme
 
-}
-*/
 
 //AFFICHAGE du JEU
 void show_board(card* tab, int size){
