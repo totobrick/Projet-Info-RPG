@@ -56,24 +56,5 @@ void move(int table[ROWS][COLS], int* posX, int* posY, int direction) {
     } else {
         printf("Mouvement Invalide!\n");
     }
-//}
 
-//void playGame() 
-    /*
-    int posX = 0; // Initial X coordinate
-    int posY = 0; // Initial Y coordinate
-    */
-    
-    displayTable(table);
-    
-        do {
-        printf("entrer un direction (2: Bas, 8: Haut, 4: Gauche, 6: Droite): ");
-        verif = scanf("%d", &direction);
-        vide_buffer();
-    } while (direction != 2 && direction != 4 && direction != 6 && direction != 8 || verif != 1);
-    
-        // Move basé sur la direction choisi du joueur
-        move(table, &posX, &posY, direction);
-        //displayTable(table);
-//}
 
