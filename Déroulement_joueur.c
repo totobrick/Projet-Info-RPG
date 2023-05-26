@@ -155,7 +155,6 @@ for (int i = 0; number_of_players>i; i++){
  /*---------------------------------- ETAPE 3 --------------------------------------*/
         if (c.m==1){
             combat(P,c);
-            P.slay++
         }
         
         if (c.type==2){
@@ -194,17 +193,22 @@ for (int i = 0; number_of_players>i; i++){
             P.relic=1;
             printf("Le joueur vient de trouver sa relique");
         }
+        if (checkTreasure(P)==1){
+        break;
+        }
          
-        P.life=1;
+         if ( (*(tab + (P.y-1)*size + P.x)).wall=1 && (*(tab + (P.y+1)*size + P.x)).wall=1 && (*(tab + P.y*size + P.x-1)).wall=1 && (*(tab + (P.y)*size + P.x+1)).wall=1){
+            P.life=0;
+            printf("Game Over");
+         }
+         
         P.move++
       } // while joueur
+P.life=1;
 endTime = time(NULL);
 double elapsedTime = difftime(endTime, startTime);
 P.timer=P.timer + elapsedTime; 
-if (checkTreasure(P)==1){
-    return;
-    }
-else if (checkTreasure(P)==0 && number_of_players_who_played==number_of_players){
+if (checkTreasure(P)==0 && number_of_players_who_played==number_of_players){
     number_of_players_who_played=0;
     }
     number_of_players_who_played++;
@@ -213,5 +217,7 @@ show_board (tab,int size);
 printw("%d",game,"\n");
 printf("Le joueur, %s, a gagné",P.nom);
 P.Score_victory++
+    
+    //faire do while
 
 } // main
