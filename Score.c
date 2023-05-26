@@ -1,5 +1,35 @@
 #include "Header.h"
   
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fichier;
+
+    // Ouverture du fichier en mode lecture
+    fichier = fopen("donnees.txt", "r");
+
+    if (fichier == NULL) {
+        printf("Erreur lors de l'ouverture du fichier.\n");
+        return 1;
+    }
+
+    // Détermination de la taille du fichier
+    fseek(fichier, 0, SEEK_END);
+    long taille_fichier = ftell(fichier);
+
+    // Vérification si le fichier est vide
+    if (taille_fichier == 0) {
+        printf("Le fichier est vide.\n");
+    } else {
+        printf("Le fichier n'est pas vide.\n");
+    }
+
+    // Fermeture du fichier
+    fclose(fichier);
+
+
+
   void Score_creator(Player P){
 FILE *fichier = fopen("Score.txt", "a+"); //le mode 'a' ajoute du texte à la fin du fichier
 
