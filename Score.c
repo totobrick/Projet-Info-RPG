@@ -28,11 +28,11 @@ FILE *fichier = fopen("Score.txt", "a+"); //le mode 'a' ajoute du texte à la fi
     
      updateScore(fichier, Player P, job);
     
-      fprintf(fichier, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  P.nom, P.class, P.move, P.reversed, P.slay, P.chest, P.Score_victory);
+      fprintf(fichier, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  P.nom, job, P.move, P.reversed, P.slay, P.chest, P.Score_victory);
     
   fclose(fichier);
 
-void updateScore(FILE* fichier, Player P, ) {
+void updateScore(FILE* fichier, Player P,job ) {
     FILE* fichierTemp = fopen("temp.txt", "w");
     if (fichierTemp == NULL) {
         printf("Erreur lors de l'ouverture du fichier temporaire.\n");
@@ -48,8 +48,8 @@ void updateScore(FILE* fichier, Player P, ) {
         int player_slay;
         int player_chest;
         int player_score_victory;
-        sscanf(ligne, ""%s /t %d /t %d /t %d /t %d /t %d /t %d /n", &idFichier, nomFichier, &salaireFichier);
-
+        sscanf(ligne, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  P.nom, job, P.move, P.reversed, P.slay, P.chest, P.Score_victory);
+    
         if (player_name == P.name) {
             fprintf(fichierTemp, "%d %s %.2f\n", id, nomFichier, nouveauSalaire);
         } else {
