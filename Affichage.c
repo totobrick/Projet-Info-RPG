@@ -95,13 +95,14 @@ int nb_player (WINDOW* win);
 void create_player(Player* p);
 
 // DURANT LE JEU
-void return_card(Player* p, card* c)
-void Portal (Player* P, card* tab, WINDOW* win);
+void return_card(Player* p, card* c);
+void Portal (Player* P, card* tab, int size, WINDOW* win);
+void Event(card* c, Player* p, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 
 void perso_move(Player* p, card* tab, int size, int key);		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
 void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void choose_weapon(Player* p, WINDOW* win);
-void interaction_card(Player* p, card* c, int key, WINDOW* win);
+void interaction_card(Player* p, card* c, int key, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11, int size);
 void combat(Player* p, card* c);
 void show_board (card* tab, int size);
 
@@ -293,11 +294,13 @@ void resetPlayerPosition(Player* p) {
 				// AVANT DE JOUER
 				
 int nb_player (WINDOW* win){
+	int choice = 0;
 	do{
+		choice = 0;
 		wprintw(win, "Combien de joueurs êtes-vous (entre 2 et 4) : ");
 		wrefresh(win);
-		int choice = getch();
-	} while(choice=!2 && choice=!3 && choice=!4);
+		choice = getch();
+	} while(choice!='2' && choice!='3' && choice!='4');
 	return choice;
 }
 
@@ -309,9 +312,11 @@ void create_player(Player* p){
 	WINDOW* win = newwin(height, width, start_y, start_x);
 	wprintw(win, "Entrez votre pseudo : ");
 	wrefresh(win);
-	wgetnstr(win, (*p).nom, 99)		//récupère au max 99 caractères -> pas de dépassement
+	wgetnstr(win, (*p).nom, 99);		//récupère au max 99 caractères -> pas de dépassement
 	wclear(win);
+	int c = 0;
 	do {
+            c = 0;
             wprintw(win,"Choisissez votre Classe : \n");
             wprintw(win,"    1. Magicien\n");
             wprintw(win,"    2. Guerrier\n");
@@ -319,7 +324,7 @@ void create_player(Player* p){
             wprintw(win,"    4. Voleur\n");
             wprintw(win,"Votre choix: ");
 	    wrefresh(win);
-            int c = getch();
+            c = getch();
     } while (c != '1' && c != '2' && c != '3' && c != '4');
     (*p).class = c;
     (*p).relic = 0;                //0,1
@@ -347,7 +352,7 @@ void return_card(Player* p, card* c){		//le joueur a déjà son arme !
 
 }
 //REVOIR fonctionnement portal
-void Portal (Player* p, card* tab, WINDOW* win){
+void Portal (Player* p, card* tab, int size, WINDOW* win){
     int new_direction_x = 0;
     int new_direction_y = 0;
     card* new_card = NULL;
@@ -466,7 +471,7 @@ void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, i
 	show_board(tab, size);
 	refresh();
 	sleep(3);
-	interaction_card(p, newcard, key, win, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
+	interaction_card(p, newcard, key, win, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, size);
 	//bouger que si on gagne : void interaction_card(Player* p, card* c);
 	perso_move(p, tab, size, key);
 
@@ -522,9 +527,9 @@ void choose_weapon(Player* p, WINDOW* win){
         }
 }
 
-void interaction_card(Player* p, card* c, int key, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
+void interaction_card(Player* p, card* c, int key, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11, int size){
 	//COMBAT AVEC LE MONSTRE fait (si il y en a)
-	combat(p, newcard);
+	combat(p, c);
 	
 	if ((*c).type[0]==1){
             (*p).treasure=1;
@@ -572,14 +577,14 @@ void interaction_card(Player* p, card* c, int key, WINDOW* win, int e1, int e2, 
         
         
 	if ((*c).type[3]==1){
-            event(c, p, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);		// cf PROCEDURE ALEXIS ATTENTION INITIALISATION EVENT
+            Event(c, p, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);		// cf PROCEDURE ALEXIS ATTENTION INITIALISATION EVENT
         }
         else if ((*c).type[2]==1){
-            Portal(p,c, win);
+            Portal(p,c, size, win);
         }
         
         else if ((*c).type[1]==1){
-            Totem(p,c);
+            //Totem(p,c); -> Exchang_Totem (Player P, card c,card new_card,card tempo);
             (*p).life=0;
         }
         
