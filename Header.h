@@ -37,10 +37,10 @@ typedef struct{
         */           
 } relic;
 
-typedef struct{
+/*typedef struct{
     int neutral;    // 0=non et 1=oui 
     int malus;      // 0=non et 1=oui 
-} event;
+} event;*/
 
 typedef struct{
     char nom[100];            //ATTENTION depasement tableau
