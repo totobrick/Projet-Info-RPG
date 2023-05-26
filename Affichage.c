@@ -42,6 +42,7 @@ typedef struct{
 } event;
 
 typedef struct{
+    int num;			// de 1 à 4 => n° du joueur
     char nom[100];            //ATTENTION depasement tableau
     int class;                //Magicien, guerrier, ranger, voleur
     weapons w;                //1=Bouclier, 1=Torche, 2=Hache, 3=Arc
@@ -375,21 +376,75 @@ void choose_weapon(Player* p, WINDOW* win){
 }
 
 
-//void play();
+void play(Player* p, card* tab, int size, WINDOW* win){
+	//CHOISIT OU IL VEUT SE DEPLACER
+	wclear(win);
+	
+	//si le joeur est coincé entre 4 murs (ou cartes dévoilé) -> MORT
+	if (  ( (*(tab + (P.y-1)*size + P.x)).wall == 1 || (*(tab + (P.y-1)*size + P.x)).hidden == 1 )  &&  ( (*(tab + (P.y+1)*size + P.x)).wall == 1 || (*(tab + (P.y+1)*size + P.x)).hidden == 1 )  &&  ( (*(tab + (P.y)*size + P.x-1)).wall == 1 || (*(tab + (P.y)*size + P.x-1)).hidden == 1 )  &&  ( (*(tab + (P.y)*size + P.x+1)).wall == 1 || (*(tab + (P.y)*size + P.x+1)).hidden == 1)  ){
+            p.life=0;
+            wprintw(win, "Game Over ! Le %s est mort\n", (*p).nom);
+            wrefresh(win);
+        }
+        
+        else {
+		do{
+			int forbidden=0;
+			// indique si le joueur a le droit de se déplacer sur la case où il veut aller
+				//    forbidden = 0       -> c'est ok
+				//    forbidden = 1       -> c'est un mur ou une carte retournée
+			do{
+				wprintw(win, "Où voulez-vous vous déplacer (utilisez les flèches de votre clavier): ");
+				wrefresh(win);
+				forbidden=0;
+				int key = getch();
+				if (key!=KEY_UP && key!=KEY_DOWN && key!=KEY_RIGHT && key!=KEY_LEFT){
+				    forbidden = 1;
+				    wprintw(win, "\nMouvement entré invalide, veuillez réessayer.");
+				}
+			} while(forbidden==1);           //tant qu'on ne rencontre pas un mur. ATTENTION au cas où le joueur est coincé entre 4 murs !!! -> le faire mourir.
+			
+			switch(key){
+				case KEY_UP:
+					if ( (*(tab + (P.y-1)*size + P.x)).wall == 1 || (*(tab + (P.y-1)*size + P.x)).hidden == 1){
+						forbidden = 1;
+					}
+					break;
+				
+				case KEY_DOWN:
+					if ( (*(tab + (P.y+1)*size + P.x)).wall == 1 || (*(tab + (P.y+1)*size + P.x)).hidden == 1){
+						forbidden = 1;
+					}
+					break;
+				
+				case KEY_RIGHT:
+					if ( (*(tab + (P.y)*size + P.x+1)).wall == 1 || (*(tab + (P.y)*size + P.x+1)).hidden == 1){
+						forbidden = 1;
+					}
+					break;
+				
+				case KEY_LEFT:
+					if ( (*(tab + (P.y)*size + P.x-1)).wall == 1 || (*(tab + (P.y)*size + P.x-1)).hidden == 1){
+						forbidden = 1;
+					}
+					break;
+				
+				default:
+					
+					break;
+			
+			}
+		} while(forbidden == 1);
+	}
+	
+	
+
+}
 //void perso_move(Player* p);
 
 //Déplace joueur sur une case du tableau
 void perso_move(Player* p, card* tab, int size){
-    do{
-        int forbidden=0;
-        // indique si le joueur a le droit de se déplacer sur la case où il veut aller
-        //    forbidden = 0       -> c'est ok
-        //    forbidden = 1       -> c'est un mur ou une carte retournée
-        
-        int key = getch();
-        if (key!=KEY_UP && key!=KEY_DOWN && key!=KEY_RIGHT && key!=KEY_LEFT){
-            forbidden = 1;
-        }
+    
             switch (key){           //Vérifie que la saisie de déplacement est correcte (pas de char) et possible (pas vers un wall)
                 case KEY_UP :
                     if ( (*(tab + (p.y+1)*size + p.x)).wall == 1 || (*(tab + (p.y+1)*size + p.x)).hidden == 1 ){        //interdiction de déplacement
@@ -427,7 +482,6 @@ void perso_move(Player* p, card* tab, int size){
                     printw("ERREUR au moment de la saisie de déplacement du joueur. Veuillez réessayer avec les flèches haut, bas, droite ou gauche");
                     break;
             }
-    } while(forbidden==1);           //tant qu'on ne rencontre pas un mur. ATTENTION au cas où le oueur est coincé entre 4 murs !!! -> le faire mourir.
     refresh();
 }
 /*
@@ -630,14 +684,16 @@ int main(){
         Player* p1, p2, p3, p4;
 	
         //INITIALISATION DES 4 JOUEURS
-		create__player (p1);				//Crée l'identité d'1 joueur
+		create_player (p1);		//Créée l'identité du joueur 1
+		(*p1).num = 1;
 		(*p1).life = 1;                 // 0=mort 1=vivant
 		(*p1).x = 3;                    // place x dans le tableau entre 1 et 6
 		(*p1).y = 1;                    // place y dans le tableau entre 1 et 6
 		(*p1).x_init = 3;                //place initiale
 		(*p1).y_init = 1;                //place initiale
 	    	
-        create__player (p2);				//Crée l'identité d'1 joueur
+		create_player (p2);		//Créée l'identité du joueur 2
+		(*p2).num = 2;
 		(*p2).life = 0;                 // 0=mort 1=vivant
 		(*p2).x = 1;                    // place x dans le tableau entre 1 et 6
 		(*p2).y = 4;                    // place y dans le tableau entre 1 et 6
@@ -645,7 +701,8 @@ int main(){
 		(*p2).y_init = 4;                //place initiale
 		
 		if (nmb_player >= 3){
-			create__player (p3);				//Crée l'identité d'1 joueur
+			create_player (p3);		//Créée l'identité du joueur 3
+			(*p3).num = 3;
 			(*p3).life = 0;                 // 0=mort 1=vivant
 			(*p3).x = 4;                    // place x dans le tableau entre 1 et 6
 			(*p3).y = 6;                    // place y dans le tableau entre 1 et 6
@@ -653,16 +710,13 @@ int main(){
 			(*p3).y_init = 6;                //place initiale
 		}
 		if (nmb_player == 4){
-			create__player (p4);				//Crée l'identité d'1 joueur
+			create_player (p4);		//Créée l'identité du joueur 4
+			(*p4).num = 4;
 			(*p4).life = 0;                 // 0=mort 1=vivant
 			(*p4).x = 4;                    // place x dans le tableau entre 1 et 6
 			(*p4).y = 6;                    // place y dans le tableau entre 1 et 6
 			(*p4).x_init = 4;                //place initiale
 			(*p4).y_init = 6;                //place initiale
-		}
-	    	
-		for (int i=0 ; i<nmb_player ; i++){
-			
 		}
         
         WINDOW* win_game = newwin(20,100, 5, 15);           //fenêtre du plateau de jeu
@@ -672,17 +726,17 @@ int main(){
 	    printf("Problème d'allocation de mémoire pour la création du tableau du jeu.\n");
 	    exit(10);
 	}
-    Player* tab_player[] = {p1, p2, p3, p4}             //tableau où il y a les 4 joueurs
-    int r=-1                                             //rang dans le tableau
+	Player* tab_player[] = {p1, p2, p3, p4};             //tableau où il y a les 4 joueurs
+	int r=-1;
 	do{
-        r++;
-        r = r%4;
-        (*tab_player[r]).life = 1;
-        do{
-        //play(tab_player[r]);      -> créer procédure "JOUER"  -> *tab_player[r]).life==0
-        } while( (*tab_player[r]).life==1 );		// ET TANT QU'IL N'EST PAS COINCE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		r++;
+		r = r%4;
+		(*tab_player[r]).life = 1;
+		do{
+		//play(tab_player[r]);      -> créer procédure "JOUER"  -> *tab_player[r]).life==0
+		} while( (*tab_player[r]).life==1 );		// ET TANT QU'IL N'EST PAS COINCE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
-    } while ( (*tab_player[r]).relic!=1 || (*tab_player[r]).treasure!=1 );      //condition de victoire d'un joueur
+	} while ( (*tab_player[r]).relic!=1 || (*tab_player[r]).treasure!=1 );      //condition de victoire d'un joueur
 	    
 	board(game, SIZE);
 	show_board(game, SIZE);
