@@ -168,6 +168,33 @@ for (int i = 0; number_of_players>i; i++){
             Totem(P,c);
             P.life=0;
         }
+         
+        if (c.r==0 && P.class==3){ //Vérifie si la classe Ranger est sur la bonne relique
+            P.relic=1
+            printf("Le joueur vient de trouver sa relique")
+
+        }
+         
+        if (c.r==1 && P.class==2){ //Vérifie si la classe Guerrier est sur la bonne relique
+            P.relic=1
+            printf("Le joueur vient de trouver sa relique")
+
+        }
+         
+         if (c.r==2 && P.class==1){ //Vérifie si la classe Magicien est sur la bonne relique
+
+            P.relic=1
+
+            printf("Le joueur vient de trouver sa relique")
+
+        }
+         
+         if (c.r==3 && P.class==4){ //Vérifie si la classe Voleur est sur la bonne relique
+            P.relic=1
+            printf("Le joueur vient de trouver sa relique")
+
+        }
+         
         P.life=1;
         P.move++
       } // while joueur
