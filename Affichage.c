@@ -92,7 +92,7 @@ void create_player(Player* p);
 // DURANT LE JEU
 void choose_weapon(Player* p, WINDOW* win);
 void return_card(Player* p, card* c)
-void perso_move(Player* p, card* tab, int size);
+void perso_move(Player* p, card* tab, int size, int key);		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
 void show_board (card* tab, int size);
 
 void resetPlayerPosition(Player* p);
@@ -380,6 +380,8 @@ void play(Player* p, card* tab, int size, WINDOW* win){
 	//CHOISIT OU IL VEUT SE DEPLACER
 	wclear(win);
 	
+	int key;		//récupèrera la touche appuyée
+	
 	//si le joeur est coincé entre 4 murs (ou cartes dévoilé) -> MORT
 	if (  ( (*(tab + (P.y-1)*size + P.x)).wall == 1 || (*(tab + (P.y-1)*size + P.x)).hidden == 1 )  &&  ( (*(tab + (P.y+1)*size + P.x)).wall == 1 || (*(tab + (P.y+1)*size + P.x)).hidden == 1 )  &&  ( (*(tab + (P.y)*size + P.x-1)).wall == 1 || (*(tab + (P.y)*size + P.x-1)).hidden == 1 )  &&  ( (*(tab + (P.y)*size + P.x+1)).wall == 1 || (*(tab + (P.y)*size + P.x+1)).hidden == 1)  ){
             p.life=0;
@@ -397,7 +399,7 @@ void play(Player* p, card* tab, int size, WINDOW* win){
 				wprintw(win, "Où voulez-vous vous déplacer (utilisez les flèches de votre clavier): ");
 				wrefresh(win);
 				forbidden=0;
-				int key = getch();
+				key = getch();
 				if (key!=KEY_UP && key!=KEY_DOWN && key!=KEY_RIGHT && key!=KEY_LEFT){
 				    forbidden = 1;
 				    wprintw(win, "\nMouvement entré invalide, veuillez réessayer.");
@@ -437,13 +439,13 @@ void play(Player* p, card* tab, int size, WINDOW* win){
 		} while(forbidden == 1);
 	}
 	
-	
+	perso_move( p, tab, size, key);
 
 }
 //void perso_move(Player* p);
 
 //Déplace joueur sur une case du tableau
-void perso_move(Player* p, card* tab, int size){
+void perso_move(Player* p, card* tab, int size, int key){		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
     
             switch (key){           //Vérifie que la saisie de déplacement est correcte (pas de char) et possible (pas vers un wall)
                 case KEY_UP :
