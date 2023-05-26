@@ -1,3 +1,6 @@
+ #include Header.h
+
+
 void resetPlayerPosition(Player* p) {
     (*p).x = (*p).x_init;
     (*p).y = (*p).y_init;
@@ -53,30 +56,3 @@ void combat(Player P, card c) {
     }
     }
     }
-  
-    
-        if (enemy == 1){
-        c.m.type[0] = 1;
-        c.m.type[1] = 0;
-        c.m.type[2] = 0;
-        c.m.type[3] = 0;
-    }
-    else if (enemy == 2){
-        c.m.type[0] = 0;
-        c.m.type[1] = 1;
-        c.m.type[2] = 0;
-        c.m.type[3] = 0;
-    }
-    else if (enemy == 3){
-        c.m.type[0] = 0;
-        c.m.type[1] = 0;
-        c.m.type[2] = 1;
-        c.m.type[3] = 0;
-    }
-    else{
-        c.m.type[0] = 0;
-        c.m.type[1] = 0;
-        c.m.type[2] = 0;
-        c.m.type[3] = 1;   
-    }
-
