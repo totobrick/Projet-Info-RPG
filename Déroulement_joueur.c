@@ -162,7 +162,7 @@ for (int i = 0; number_of_players>i; i++){
         }
          
         if (c.type==3){
-            event(c, P);
+            event(c, P, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
         }
          
         if (c.type==1){
