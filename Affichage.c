@@ -96,20 +96,19 @@ void create_player(Player* p);
 
 // DURANT LE JEU
 void return_card(Player* p, card* c)
-void Portal (Player* P, card* tab, int size);
+void Portal (Player* P, card* tab, WINDOW* win);
 
 void perso_move(Player* p, card* tab, int size, int key);		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
-void play(Player* p, card* tab, int size, WINDOW* win);
+void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void choose_weapon(Player* p, WINDOW* win);
-void interaction_card(Player* p, card* c, int key);
+void interaction_card(Player* p, card* c, int key, WINDOW* win);
 void combat(Player* p, card* c);
 void show_board (card* tab, int size);
 
 //void move(int table[ROWS][COLS], int* posX, int* posY, int direction);
 //void event(card* c, Player* P);
-int checkTreasure(Player player);
+int checkTreasure(Player* p);
 void Exchang_Totem (Player P, card c,card new_card,card tempo);
-void Portal (Player* P, card* tab, int size);
 void updateScore(FILE* fichier, Player P);
 
 /*_________________________________________________________________________________________________*/
@@ -348,11 +347,14 @@ void return_card(Player* p, card* c){		//le joueur a déjà son arme !
 
 }
 //REVOIR fonctionnement portal
-void Portal (Player* p, card* tab, int size, WINDOW* win){
+void Portal (Player* p, card* tab, WINDOW* win){
+    int new_direction_x = 0;
+    int new_direction_y = 0;
+    card* new_card = NULL;
     do{
 	wclear(win);
-        int new_direction_x = 0;
-        int new_direction_y = 0;
+        new_direction_x = 0;
+        new_direction_y = 0;
         do{
             wprintw(win, "\nChoisissez les coordonnés x, entre 1 et 6, vers lesquels vous voulez allez!");
             wrefresh(win);
@@ -372,7 +374,7 @@ void Portal (Player* p, card* tab, int size, WINDOW* win){
     choose_weapon(p, win);
     refresh();
     sleep(3);
-    interaction_card(p, newcard);
+    //interaction_card(p, newcard, key, win);
     //bouger que si on gagne : void interaction_card(Player* p, card* c);
     
     (*p).x = new_direction_x;
@@ -382,12 +384,14 @@ void Portal (Player* p, card* tab, int size, WINDOW* win){
 }
 
 
-void play(Player* p, card* tab, int size, WINDOW* win){
+void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
 	//CHOISIT OU IL VEUT SE DEPLACER
 	wclear(win);
 	
 	choose_weapon(p, win);
-	int key;		//récupèrera la touche appuyée
+	int key=0;		//récupèrera la touche appuyée
+	int forbidden=0;
+	card* newcard;				// newcard : pointe vers la carte ou on veut aller
 	
 	//si le joueur est coincé entre 4 murs (ou cartes dévoilé) -> MORT
 	if (  ( (*(tab + ((*p).y-1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y-1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y+1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y+1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x-1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x-1)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x+1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x+1)).hidden == 1)  ){
@@ -396,10 +400,10 @@ void play(Player* p, card* tab, int size, WINDOW* win){
             wrefresh(win);
         }
         
-        card* newcard;				// newcard : pointe vers la carte ou on veut aller
+        
         else {
 		do{
-			int forbidden=0;
+			forbidden=0;
 			// indique si le joueur a le droit de se déplacer sur la case où il veut aller
 				//    forbidden = 0       -> c'est ok
 				//    forbidden = 1       -> c'est un mur ou une carte retournée
@@ -462,7 +466,7 @@ void play(Player* p, card* tab, int size, WINDOW* win){
 	show_board(tab, size);
 	refresh();
 	sleep(3);
-	interaction_card(p, newcard, key);
+	interaction_card(p, newcard, key, win, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
 	//bouger que si on gagne : void interaction_card(Player* p, card* c);
 	perso_move(p, tab, size, key);
 
@@ -480,43 +484,45 @@ void choose_weapon(Player* p, WINDOW* win){
         wprintw(win, "    4. Arc\n");
         wrefresh(win);
     
+        int choice = 0;
         do {
+            choice = 0;
             wprintw(win, "Votre choix : ");
             wrefresh(win);
-            int choice = getch();
+            choice = getch();
         } while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
 
         if (choice == '1'){               //bouclier
-            p.w.type[0] = 1;
-            p.w.type[1] = 0;
-            p.w.type[2] = 0;
-            p.w.type[3] = 0;
+            (*p).w.type[0] = 1;
+            (*p).w.type[1] = 0;
+            (*p).w.type[2] = 0;
+            (*p).w.type[3] = 0;
         }
     
         else if (choice == '2'){          //Torche
-            p.w.type[0] = 0;
-            p.w.type[1] = 1;
-            p.w.type[2] = 0;
-            p.w.type[3] = 0;
+            (*p).w.type[0] = 0;
+            (*p).w.type[1] = 1;
+            (*p).w.type[2] = 0;
+            (*p).w.type[3] = 0;
         }
     
         else if (choice == '3'){          //hache
-            p.w.type[0] = 0;
-            p.w.type[1] = 0;
-            p.w.type[2] = 1;
-            p.w.type[3] = 0;
+            (*p).w.type[0] = 0;
+            (*p).w.type[1] = 0;
+            (*p).w.type[2] = 1;
+            (*p).w.type[3] = 0;
         }
     
     
         else{                           //arc
-            p.w.type[0] = 0;
-            p.w.type[1] = 0;
-            p.w.type[2] = 0;
-            p.w.type[3] = 1;   
+            (*p).w.type[0] = 0;
+            (*p).w.type[1] = 0;
+            (*p).w.type[2] = 0;
+            (*p).w.type[3] = 1;   
         }
 }
 
-void interaction_card(Player* p, card* c, int key){
+void interaction_card(Player* p, card* c, int key, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
 	//COMBAT AVEC LE MONSTRE fait (si il y en a)
 	combat(p, newcard);
 	
@@ -569,7 +575,7 @@ void interaction_card(Player* p, card* c, int key){
             event(c, p, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);		// cf PROCEDURE ALEXIS ATTENTION INITIALISATION EVENT
         }
         else if ((*c).type[2]==1){
-            Portal(p,c);
+            Portal(p,c, win);
         }
         
         else if ((*c).type[1]==1){
@@ -577,8 +583,8 @@ void interaction_card(Player* p, card* c, int key){
             (*p).life=0;
         }
         
-        if (checkTreasure(P)==1){
-            break;
+        if (checkTreasure(p)==1){
+            //break;
         }
 
 }
@@ -661,11 +667,13 @@ void show_board(card* tab, int size){
 		for (int j=1 ; j<(size-1) ; j++){
 			move(i*4, j*10);
 			if((*(tab + i*size + j)).hidden == 0){
-				addch('\u25A0');					// Affiche le caractère du carré plein
+				//addch('\u25A0');					// Affiche le caractère du carré plein
+				printw("\u25A0");
 			}
 			else{
 				if((*(tab + i*size + j)).type[0] == 1){			//trésor
-				    addstr("\u{1F4B0}");
+				    //addstr("\u{1F4B0}");
+				    printw("$");
 				}
 				else if((*(tab + i*size + j)).type[1] == 1){		//totem
 				    printw("\U0001F5FF");
@@ -838,10 +846,14 @@ int main(){
     
     clear();
     
+    int e1=1, e2=1, e3=1, e4=1, e5=1, e6=1, e7=1, e8=1, e9=1, e10=1, e11=1;
     if(menu_select==1){
 		
-        int nmb_player = nb_player(win2);
-        Player* p1, p2, p3, p4;
+        int nmb_player = nb_player(win_menu);
+        Player* p1;
+        Player* p2;
+        Player* p3;
+        Player* p4;
 	
         //INITIALISATION DES 4 JOUEURS
 		create_player (p1);		//Créée l'identité du joueur 1
@@ -894,18 +906,20 @@ int main(){
 		r = r%4;
 		(*(tab_player[r])).life = 1;
 		do{
-			play(tab_player[r], game, SIZE, win_interface);			// INTERACTION JOUEUR
+			play(tab_player[r], game, SIZE, win_interface, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);			// INTERACTION JOUEUR
 		} while( (*(tab_player[r])).life==1 );
         
 	} while ( (*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1 );      //condition de victoire
 	    
 	board(game, SIZE);
 	show_board(game, SIZE);
-	do{
-	    choose_weapon(Player* p, WINDOW* win);
-	    getch();
-	}while(p.life==1);				//tant que joueur en vie et n'a pas gagné
-            
+	//do{
+	    //choose_weapon(Player* p, WINDOW* win);
+	    //getch();
+	//}while(p.life==1);				//tant que joueur en vie et n'a pas gagné
+    
+        free(game);
+    }
     else if (menu_select==2){
 
     }
@@ -919,10 +933,10 @@ int main(){
             return 0;
     }
     
-    free(game);
+    
     endwin();
     return 0;
-}   
+}
 
 
 
