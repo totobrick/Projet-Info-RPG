@@ -127,8 +127,8 @@ card new_card = tab [new_direction_x] [new_direction_y];
         card* new_card = tab + new_direction_y*size + new_direction_x;
 
     }while ((*new_card).wall == 1 || (*new_card).hidden == 1 || (new_direction_y==1 && new_direction_x==3) || (new_direction_y==3 && new_direction_x==6) || (new_direction_y==4 && new_direction_x==1)  || (new_direction_y==6 && new_direction_x==4) );
-    P.x = new_direction_x;
-    P.y = new_direction_y;
+    *P.x = new_direction_x;
+    *P.y = new_direction_y;
 
 }
 
