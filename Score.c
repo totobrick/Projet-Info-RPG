@@ -55,10 +55,13 @@ void updateScore(FILE* fichier, Player P,job ) {
   rewind(fichier);
     while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
         
-    sscanf(ligne, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  P.nom, job, P.move, P.reversed, P.slay, P.chest, P.Score_victory);
+    sscanf(ligne, "%s /t %s /t %d /t %d /t %d /t %d /t %d /n",  player_name, player_class, player_move, player_reversed, player_slay, player_chest, player_score_victory);
     
         if (player_name == P.name) {
-          player_
+         player_move += P.move;
+          player_slay += P.slay;
+          player_chest += P.
+           
             fprintf(fichierTemp, "%d %s %.2f\n", id, nomFichier, nouveauSalaire);
         } else {
             fprintf(fichierTemp, "%d %s %.2f\n", idFichier, nomFichier, salaireFichier);
