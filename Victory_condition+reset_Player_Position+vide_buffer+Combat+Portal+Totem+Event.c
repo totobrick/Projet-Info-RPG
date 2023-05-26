@@ -159,7 +159,7 @@ void event(card* c, Player* P, int e1, int e1, int e2, int e3, int e4, int e5, i
             
     printw ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle.\n");
         c.type[3]=0;
-        c.m.type[2]=1;
+        c.m.type[4]=1;
         //change la case en monstre harpy et lance le combat. la case devient définitivement une harpy.
         e2=0;
             return;
