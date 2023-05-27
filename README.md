@@ -38,23 +38,13 @@ En plus de cette bibliothèque, notre programme est composé de plusieurs fichie
 ## Exemple
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard){        //key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
+    (p).x = x_newcard;
+    (p).y = y_newcard;
+}
 ```
+
+Comme on pourrait s'y attendre, cette fonction est la fonction qui nous permet de pouvoir nous déplacer. c'est grâçe à elle que votre personnage a la possibilité de ce déplacer dans le labyrinthe!
 
 
 ## Documentation
