@@ -65,7 +65,7 @@ Comme marqué précédement dans la rubrique Documentation, nous avons utilisé 
 
 Nous avons donc été à trois à travailler sur ce projet:
 - Thomas
-- Pierre
+- Pierre GUESDON
 - Alexis BERTRAND
 
 Nous tenions tous de même a remercier notre professeur d'informatique, ANSERMIN Eva, qui a su nous aider et répondre dès que nous avions une question.
