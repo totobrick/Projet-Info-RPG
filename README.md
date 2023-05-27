@@ -13,15 +13,15 @@ Grâçe au makefile, rien de plus simple! Il vous suffit d'ouvrir votre terminal
 
 ![alt texte](https://azurplus.fr/wp-content/uploads/1612494018_Comment-commencer-a-utiliser-le-terminal-Linux.png)
 
-Accédez au répertoire contenant le Makefile:
+- Accédez au répertoire contenant le Makefile:
 
 ![alt texte](https://www.jetestelinux.com/wp-content/uploads/2016/03/rmdir.png)
 
-Et de simplement écrire "make" à l'interieur du terminal, le fichier Makefile se chargera de tous, à votre place!
+- Et de simplement écrire "make" à l'interieur du terminal, le fichier Makefile se chargera de tous, à votre place!
 
 ![alt texte](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxGQjtvwVysznhXwRDiexpv8UCTxYQL1rrfA&usqp=CAU)
 
-Enfin, pour executer, il vous suffira d'écrire "./exec_TPA", et le programme se lancera!
+- Enfin, pour executer, il vous suffira d'écrire "./exec_TPA", et le programme se lancera!
 
 
 # Structre de projet
