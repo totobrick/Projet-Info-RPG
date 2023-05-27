@@ -1,3 +1,5 @@
+#include "Header.h"
+
 int main() {
     FILE *fichier;
     char ligne[256];
