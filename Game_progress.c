@@ -265,7 +265,98 @@ void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1,
     }
 }
 
+void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard, int y_newcard, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
+    //COMBAT AVEC LE MONSTRE fait (si il y en a)
 
+    wclear(win);
+    wmove(win, 0, 0);
+    wrefresh(win);
+    card *c = tab + y_newcard*size + x_newcard;
+    combat(p, c, win);
+
+    if ((*c).type[0]==1){
+        (*p).treasure = 1;
+        wprintw(win, "Vous avez trouve un coffre au tresor. Bravo !\n");
+        wrefresh(win);
+        sleep(5);
+        wclear(win);
+        wmove(win, 0, 0);
+        wrefresh(win);
+    }
+
+    else if ((*c).r.type[0]==1){ //Vérifie si la classe Ranger est sur la bonne relique
+        if ((*p).classe==3){
+            (*p).relic=1;
+            wprintw (win, "Le joueur vient de trouver sa relique.\n");
+        }
+        else{
+            wprintw (win, "Oups! Ceci n'est pas ta relique... \n");
+        }
+        wrefresh(win);
+        sleep(5);
+        wclear(win);
+        wmove(win, 0, 0);
+        wrefresh(win);
+    }
+
+    else if ((*c).r.type[1]==1){ //Vérifie si la classe Guerrier est sur la bonne relique
+        if ((*p).classe==2){
+            (*p).relic=1;
+            wprintw (win, "Le joueur vient de trouver sa relique.\n");
+        }
+        else{
+            wprintw (win, "Oups! Ceci n'est pas ta relique... \n");
+        }
+        wrefresh(win);
+        sleep(5);
+        wclear(win);
+        wmove(win, 0, 0);
+        wrefresh(win);
+    }
+
+    else if ((*c).r.type[2]==1){ //Vérifie si la classe Magicien est sur la bonne relique
+        if((*p).classe==1){
+            (*p).relic=1;
+            wprintw (win, "Le joueur vient de trouver sa relique.");
+        }
+        else{
+            wprintw (win, "Oups! Ceci n'est pas ta relique... \n");
+        }
+        wrefresh(win);
+        sleep(5);
+        wclear(win);
+        wmove(win, 0, 0);
+        wrefresh(win);
+    }
+
+    else if ((*c).r.type[3]==1){ //Vérifie si la classe Voleur est sur la bonne relique
+        if((*p).classe==4){
+            (*p).relic=1;
+            wprintw (win, "Le joueur vient de trouver sa relique.");
+        }
+        else{
+            wprintw (win, "Oups! Ceci n'est pas ta relique... \n");
+        }
+        wrefresh(win);
+        sleep(5);
+        wclear(win);
+        wmove(win, 0, 0);
+        wrefresh(win);
+    }
+
+    else if ((*c).type[3]==1){
+        Event(c, p, win, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
+    }
+    else if ((*c).type[2]==1){
+        Portal (p, tab, size, win, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
+    }
+
+    else if ((*c).type[1]==1){
+        Exchang_Totem (p, c, tab, size, win);
+        (*p).life=0;
+    }
+    wrefresh(win);
+}
 
 
 void choose_weapon(Player* p, WINDOW* win, WINDOW* win_game){
