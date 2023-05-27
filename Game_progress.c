@@ -9,6 +9,7 @@ void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard){		
 void resetPlayerPosition(Player *p) {
   (*p).x = (*p).x_init;
   (*p).y = (*p).y_init;
+  move(1,0);
   printw("Position du joueur %s reinitialisee.\n", (*p).nom);
 }
 void updateScore(FILE* fichier, Player* P, char job[]) {
