@@ -45,7 +45,7 @@ typedef struct {
 typedef struct {
   int num;       // de 1 à 4 => n° du joueur
   char nom[100]; // ATTENTION depasement tableau
-  int class;     // Magicien, guerrier, ranger, voleur
+  int classe;     // Magicien, guerrier, ranger, voleur
   weapons w;     // 1=Bouclier, 1=Torche, 2=Hache, 3=Arc
   int relic;     // 0,1
   int treasure;  // 0=non, 1=oui
@@ -106,7 +106,7 @@ void Event(card *c, Player *p, WINDOW* win, int e1, int e2, int e3, int e4, int 
 
 void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard); // key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
 void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
-void choose_weapon(Player *p, WINDOW *win);
+void choose_weapon(Player *p, WINDOW *win, WINDOW* win_game);
 void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard, int y_newcard, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void combat(Player *p, card *c, WINDOW* win);
 void show_board(card *tab, int size, WINDOW* win_game);
@@ -168,11 +168,11 @@ void Score_creator(Player* P) {
     }
 
     char job[10];
-    if ((*P).class == 1) {
+    if ((*P).classe == 1) {
         strcpy(job, "Magicien");
-    } else if ((*P).class == 2) {
+    } else if ((*P).classe == 2) {
         strcpy(job, "Guerrier");
-    } else if ((*P).class == 3) {
+    } else if ((*P).classe == 3) {
         strcpy(job, "Ranger");
     } else {
         strcpy(job, "Voleur");
@@ -374,6 +374,7 @@ void generate_board(card *tab, int size) {
 void resetPlayerPosition(Player *p) {
   (*p).x = (*p).x_init;
   (*p).y = (*p).y_init;
+  move(1,0);
   printw("Position du joueur %s reinitialisee.\n", (*p).nom);
 }
 
@@ -421,7 +422,7 @@ void create_player(Player *p, WINDOW *win, int c1, int c2, int c3, int c4) {
     c = getch();
   } while (c != '1' && c != '2' && c != '3' && c != '4');
     wprintw(win, "%d", c-'0');
-    (*p).class = c;
+    (*p).classe = c - '0';
     (*p).w.type[0] = 0;
     (*p).w.type[1] = 0;
     (*p).w.type[2] = 0;
@@ -454,7 +455,8 @@ void return_card(card* c){		//le joueur a déjà son arme !
 void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
     int new_direction_x = 0;
     int new_direction_y = 0;
-    card* new_card = NULL;
+    card new_card;
+    card* pnew_card = &new_card;
     do{
         wclear(win);
         new_direction_x = 0;
@@ -463,21 +465,22 @@ void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3
             wmove(win, 0, 0);
             wprintw(win, "\nChoisissez les coordonnees x, entre 1 et 6, vers lesquels vous voulez allez!");
             wrefresh(win); new_direction_x = getch();
-        }while (new_direction_x < '1' || new_direction_x > '6');
+        }while (new_direction_x!='1' && new_direction_x!='2' && new_direction_x!='3' && new_direction_x!='4' && new_direction_x!='5' && new_direction_x!='6');
         new_direction_x = new_direction_x - '0' ;
         
         do{
             wmove(win, 2, 0);
             wprintw(win,"\nChoisissez les coordonnees y, entre 1 et 6, vers lesquels vous voulez allez!");
             wrefresh(win); new_direction_y = getch();
-        }while (new_direction_y < '1' || new_direction_y > '6');
+        }while (new_direction_y!='1' && new_direction_y!='2' && new_direction_y!='3' && new_direction_y!='4' && new_direction_y!='5' && new_direction_y!='6');
         new_direction_y = new_direction_y - '0' ;
 
-        card* new_card = tab + new_direction_y*size + new_direction_x;
+        pnew_card = tab + new_direction_y*size + new_direction_x;
 
-    } while ((*new_card).wall == 1 || (*new_card).hidden == 1 || (new_direction_y==1 && new_direction_x==3) || (new_direction_y==3 && new_direction_x==6) || (new_direction_y==4 && new_direction_x==1)  || (new_direction_y==6 && new_direction_x==4) );
+    } while (new_card.wall == 1 || new_card.hidden == 1 || (new_direction_y==1 && new_direction_x==3) || (new_direction_y==3 && new_direction_x==6) || (new_direction_y==4 && new_direction_x==1)  || (new_direction_y==6 && new_direction_x==4) );
 
-    return_card(new_card);
+    return_card(pnew_card);
+    show_board(tab, size, win);
     refresh();
     wmove(win,0, 0);
     wclear(win);
@@ -651,11 +654,15 @@ void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1,
     move(1,0);
     wclear(win);
     wmove(win, 0, 0);
-    choose_weapon(p, win);
+    show_board(tab, size, win_game);
+    choose_weapon(p, win, win_game);
+    show_board(tab, size, win_game);
+    move(1,0);
+    wclear(win_game);
     int key = 0;		            //récupèrera la touche appuyée
     int forbidden = 0;
     card newcard;
-    card* pnewcard = & newcard;				// pnewcard : pointe vers la carte ou on veut aller
+    card* pnewcard = &newcard;				// pnewcard : pointe vers la carte ou on veut aller
     int x_newcard = 0;
     int y_newcard = 0;
 
@@ -664,6 +671,7 @@ void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1,
         (*p).life = 0;
         wprintw(win, "Game Over ! %s est mort\n", (*p).nom);
         wrefresh(win);
+        sleep(5);
     }
 
     else {
@@ -750,7 +758,7 @@ void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1,
 
 
 
-void choose_weapon(Player* p, WINDOW* win){
+void choose_weapon(Player* p, WINDOW* win, WINDOW* win_game){
     wclear(win);
     wmove(win, 0, 0);
     wprintw(win, "Choisissez votre arme : \n");
@@ -759,6 +767,8 @@ void choose_weapon(Player* p, WINDOW* win){
     wprintw(win, "    3. Hache\n");
     wprintw(win, "    4. Arc\n");
     wrefresh(win);
+    wrefresh(win_game);
+    move(1,0);
 
     int choice = 0;
     do {
@@ -811,7 +821,7 @@ void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard
 
     if ((*c).type[0]==1){
         (*p).treasure = 1;
-        wprintw(win, "Vous avez trouvé un cofrre au tresor. Bravo !\n");
+        wprintw(win, "Vous avez trouve un coffre au tresor. Bravo !\n");
         wrefresh(win);
         sleep(5);
         wclear(win);
@@ -820,7 +830,7 @@ void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard
     }
 
     else if ((*c).r.type[0]==1){ //Vérifie si la classe Ranger est sur la bonne relique
-        if ((*p).class==3){
+        if ((*p).classe==3){
             (*p).relic=1;
             wprintw (win, "Le joueur vient de trouver sa relique.\n");
         }
@@ -835,7 +845,7 @@ void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard
     }
 
     else if ((*c).r.type[1]==1){ //Vérifie si la classe Guerrier est sur la bonne relique
-        if ((*p).class==2){
+        if ((*p).classe==2){
             (*p).relic=1;
             wprintw (win, "Le joueur vient de trouver sa relique.\n");
         }
@@ -850,7 +860,7 @@ void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard
     }
 
     else if ((*c).r.type[2]==1){ //Vérifie si la classe Magicien est sur la bonne relique
-        if((*p).class==1){
+        if((*p).classe==1){
             (*p).relic=1;
             wprintw (win, "Le joueur vient de trouver sa relique.");
         }
@@ -865,7 +875,7 @@ void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard
     }
 
     else if ((*c).r.type[3]==1){ //Vérifie si la classe Voleur est sur la bonne relique
-        if((*p).class==4){
+        if((*p).classe==4){
             (*p).relic=1;
             wprintw (win, "Le joueur vient de trouver sa relique.");
         }
@@ -1280,10 +1290,10 @@ int main() {
       sleep(2);
       p4.num = 4;
       p4.life = 0;   // 0=mort 1=vivant
-      p4.x = 4;      // place x dans le tableau entre 1 et 6
-      p4.y = 6;      // place y dans le tableau entre 1 et 6
-      p4.x_init = 4; // place initiale
-      p4.y_init = 6; // place initiale
+      p4.x = 6;      // place x dans le tableau entre 1 et 6
+      p4.y = 3;      // place y dans le tableau entre 1 et 6
+      p4.x_init = 6; // place initiale
+      p4.y_init = 3; // place initiale
       clear();
       refresh();
     }
@@ -1314,13 +1324,19 @@ int main() {
             (*(tab_player[r])).move ++;
         } while( (*(tab_player[r])).life==1 && ((*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1));
         e1=1, e2=1, e3=1, e4=1, e5=1, e6=1, e7=1, e8=1, e9=1, e10=1, e11=1;
+        resetPlayerPosition(tab_player[r]);
     } while ( (*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1 );        //condition de VICTOIRE
 
       show_board(game, SIZE, win_game);
       clear();
       move(0,0);
       printw("BRAVO !\n %s a brillamment gagne en %d tours.\n Dommage pour les autres !", (*(tab_player[r])).nom, (*(tab_player[r])).move);
-      
+      refresh();
+      sleep(5);
+      for(int i=0; i<nmb_player ; i++){
+          Score_creator(tab_player[i]); 
+      }
+
         
     // do{
     // choose_weapon(Player* p, WINDOW* win);
@@ -1355,6 +1371,7 @@ int main() {
   endwin();
   return 0;
 }
+
 
 /*____________________________________________________________________________*/
     
