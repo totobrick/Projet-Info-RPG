@@ -85,6 +85,7 @@ void Score_creator(Player* P);
 
 // INITIALISATION DU JEU
 void board(card *tab, int size, WINDOW* win_game);
+void hide_board(card *tab, int size, WINDOW* win_game);
 void init_wall(card *tab, int size);
 void init_board(card *tab, int size);
 void init_card(card *card1);
@@ -197,6 +198,15 @@ void board(card *tab, int size, WINDOW* win_game) {
     wclear(win_game);
     show_board(tab, size, win_game);
     
+}
+
+void hide_board(card *tab, int size, WINDOW* win_game){
+    for(int i=0; i<(size-1) ; i++){
+        for(int j=0; j<(size-1) ; j++){
+            (*(tab + i*size + j)).hidden = 0;        //on retourne toutes les cases du jeu
+        }
+    }
+    show_board(tab, size, win_game);
 }
 /*_________________________________________________________________________________________________*/
 
@@ -801,7 +811,7 @@ void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard
 
     if ((*c).type[0]==1){
         (*p).treasure = 1;
-        wprint(win, "Vous avez trouvé un cofrre au tresor. Bravo !\n");
+        wprintw(win, "Vous avez trouvé un cofrre au tresor. Bravo !\n");
         wrefresh(win);
         sleep(5);
         wclear(win);
@@ -995,12 +1005,12 @@ void show_board(card *tab, int size, WINDOW* win_game) {
                 wprintw(win_game, "ZO");
                 wattroff(win_game, COLOR_PAIR(1));
             }
-            else if ((*(tab + i * size + j)).m.type[1] == 1) { // troll
+            else if ((*(tab + i * size + j)).m.type[2] == 1) { // troll
                 wattron(win_game, COLOR_PAIR(1));
                 wprintw(win_game, "TR");
                 wattroff(win_game, COLOR_PAIR(1));
             }
-            else if ((*(tab + i * size + j)).m.type[1] == 1) { // harpie
+            else if ((*(tab + i * size + j)).m.type[3] == 1) { // harpie
                 wattron(win_game, COLOR_PAIR(1));
                 wprintw(win_game, "HA");
                 wattroff(win_game, COLOR_PAIR(1));
@@ -1115,7 +1125,7 @@ int main() {
 
   int height_menu, width_menu, starty_menu, startx_menu;
   startx_menu = x_max / 2 - 10;
-  starty_menu = 16;
+  starty_menu = 22;
   height_menu = 15;
   width_menu = 55;
 
@@ -1292,6 +1302,7 @@ int main() {
     Player* tab_player[] = {pp1, pp2, pp3, pp4};             //tableau où il y a les 4 joueurs
     int r=-1;
     do{
+        hide_board(game, SIZE, win_game);
         r++;
         r = r%nmb_player;
         (*(tab_player[r])).life = 1;
@@ -1344,7 +1355,6 @@ int main() {
   endwin();
   return 0;
 }
-
 
 /*____________________________________________________________________________*/
     
