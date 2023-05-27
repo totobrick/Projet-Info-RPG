@@ -1,3 +1,6 @@
+#include "Header.h"
+
+
 void board(card *tab, int size, WINDOW* win_game) {
     init_wall(tab, size);
     init_board(tab, size);
