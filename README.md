@@ -68,7 +68,12 @@ Nous avons donc été à trois à travailler sur ce projet:
 - Pierre
 - Alexis BERTRAND
 
-Nous tenions tous de même a remercier notre professeur d'informatique, ANSERMIN Eva, qui a su nous aider et nous répondre dès que nous avions une question.
+Nous tenions tous de même a remercier notre professeur d'informatique, ANSERMIN Eva, qui a su nous aider et répondre dès que nous avions une question.
 
 
+## Statut du projet
 
+Notre équipe part du principe qu'un projet n'est jamais complètement fini, en effet, nous pensons qu'on peut toujours tous améliorer. Malgré tous, nous pensons tous aujourd'hui qu'il est préférable pour nous d'avancer et de partir sur un autre projet, qui pourrait nous permettre d'avance encore plus de le monde de la programation.
+
+
+![alt texte](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSipKWizbCNxkO2fYXV8z6HpnDWoDvnmnsWdw&usqp=CAU)
