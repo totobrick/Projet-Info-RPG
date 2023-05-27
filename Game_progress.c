@@ -117,6 +117,7 @@ int nb_player(WINDOW *win) {
     return 4;
 }
 
+
 void create_player(Player *p, WINDOW *win, int c1, int c2, int c3, int c4) {
   wprintw(win, "\nEntrez votre pseudo : ");
   wrefresh(win);
