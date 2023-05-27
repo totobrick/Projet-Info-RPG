@@ -136,7 +136,7 @@ void create_player(Player *p, WINDOW *win, int c1, int c2, int c3, int c4) {
     c = getch();
   } while (c != '1' && c != '2' && c != '3' && c != '4');
     wprintw(win, "%d", c-'0');
-    (*p).class = c;
+    (*p).classe = c - '0';
     (*p).w.type[0] = 0;
     (*p).w.type[1] = 0;
     (*p).w.type[2] = 0;
