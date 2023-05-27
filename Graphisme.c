@@ -1,65 +1,27 @@
   
- if (!has_colors()) {
-        endwin();
-        printf("Le terminal ne prend pas en charge les couleurs.\n");
-        return 1;
-    }
+  void Exchang_Totem (Player P, card c,card new_card,card tempo) {
 
-    // Initialisation des paires de couleurs
-    init_pair(1, COLOR_RED, COLOR_BLACK);
-    init_pair(2, COLOR_GREEN, COLOR_BLACK);
-    init_pair(3, COLOR_BLUE, COLOR_BLACK);
-    init_pair(4, COLOR_YELLOW, COLOR_BLACK);
-    init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
-    init_pair(6, COLOR_CYAN, COLOR_BLACK);
-    init_pair(7, COLOR_WHITE, COLOR_BLACK);
+        do{
+  int new_direction_x = 0;
+  int new_direction_y = 0;
+  do{
+  printf("Choisissez les coordonnés x, entre 1 et 6, vers laquel le totem va être échanger");
+  verif = scanf ("%d", &new_direction_x);
+  vide_buffer();
+  }while ( verif != 1 && new_direction_x<1 && new_direction_x>6);
+ verif=0; 
 
-    // Affichage du texte en couleur
-    attron(COLOR_PAIR(1));
-    printw("HA\n");
-    printw("ZO\n");
-    printw("TR\n");
-    printw("BA\n");
-    attroff(COLOR_PAIR(1));
+ do{
+  printf("Choisissez les coordonnés y, entre 1 et 6, vers laquel le totem va être échanger");
+  verif = scanf ("%d", &new_direction_y);
+  vide_buffer();
+  }while ( verif != 1 && new_direction_y<1 && new_direction_y>6);
+ verif=0
 
-    attron(COLOR_PAIR(2));
-    printw("TO\n");
-    attroff(COLOR_PAIR(2));
+card new_card = tab [new_direction_x] [new_direction_y];
+             }while(new_card.wall == 1 && new_card == [1] [3] && new_card == [1] [2] && new_card == [1] [4] && new_card == [2] [3] && new_card == [4] [1] && new_card == [4] [2] && new_card == [3] [1]&& new_card == [5] [1] && new_card == [3] [6] && new_card == [3] [5] && new_card == [2] [6] && new_card == [4] [6] && new_card == [6] [4] && new_card == [6] [3] && new_card == [6] [5] && new_card == [5] [4]);
 
-    attron(COLOR_PAIR(3));
-    printw("PO\n");
-    attroff(COLOR_PAIR(3));
-
-    attron(COLOR_PAIR(4));
-    printw("$$\n");
-    attroff(COLOR_PAIR(4));
-
-    attron(COLOR_PAIR(5));
-    printw("VO\n");
-    attroff(COLOR_PAIR(5));
-    attron(COLOR_PAIR(5));
-    printw("RA\n");
-    attroff(COLOR_PAIR(5));
-    attron(COLOR_PAIR(5));
-    printw("MA\n");
-    attroff(COLOR_PAIR(5));
-    attron(COLOR_PAIR(5));
-    printw("CH\n");
-    attroff(COLOR_PAIR(5));
-
-    attron(COLOR_PAIR(6));
-    printw("GR\n"); 
-    attroff(COLOR_PAIR(6));
-    attron(COLOR_PAIR(6));
-    printw("EP\n");
-    attroff(COLOR_PAIR(6));
-    attron(COLOR_PAIR(6));
-    printw("DA\n");
-    attroff(COLOR_PAIR(6));
-    attron(COLOR_PAIR(6));
-    printw("BA\n");
-    attroff(COLOR_PAIR(6));
-
-    attron(COLOR_PAIR(7));
-    printw("CARD\n");
-    attroff(COLOR_PAIR(7));
+    card tempo = card new_card;
+    card new_card = card c;
+    card c = card tempo;
+}
