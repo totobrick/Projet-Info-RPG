@@ -96,21 +96,20 @@ void resetPlayerPosition(Player *p);
 
 // AVANT DE JOUER
 int nb_player(WINDOW *win);
-void create_player(Player *p, WINDOW *win);
+void create_player(Player *p, WINDOW *win, int c1, int c2, int c3, int c4);
 
 // DURANT LE JEU
 void return_card(card* c);
 void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
+void Exchang_Totem (Player* p, card* c, card* tab,int size, WINDOW* win);
 void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 
 void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard); // key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
 void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void choose_weapon(Player *p, WINDOW *win);
 void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard, int y_newcard, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
-void combat(Player *p, card *c);
+void combat(Player *p, card *c, WINDOW* win);
 void show_board(card *tab, int size, WINDOW* win_game);
-
-void Exchang_Totem(Player P, card c, card new_card, card tempo);
 
 
 
@@ -383,7 +382,7 @@ int nb_player(WINDOW *win) {
     choice = getch();
     refresh();
   } while (choice != '2' && choice != '3' && choice != '4');
-    wprintw(win, "%d", choice-'0');
+    wprintw(win, "%d", choice -'0');
     wrefresh(win);
     sleep(2);
     if (choice=='2'){
@@ -395,7 +394,7 @@ int nb_player(WINDOW *win) {
     return 4;
 }
 
-void create_player(Player *p, WINDOW *win) {
+void create_player(Player *p, WINDOW *win, int c1, int c2, int c3, int c4) {
   wprintw(win, "\nEntrez votre pseudo : ");
   wrefresh(win);
   wgetnstr(win, (*p).nom,98); // récupère au max 98 caractères -> pas de dépassement
@@ -470,6 +469,8 @@ void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3
 
     return_card(new_card);
     refresh();
+    wmove(win,0, 0);
+    wclear(win);
     wrefresh(win);
     sleep(3);
     
@@ -482,8 +483,35 @@ void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3
     (*p).x = new_direction_x;
     (*p).y = new_direction_y;
     refresh();
-
 }
+
+
+ void Exchang_Totem (Player* p, card* c, card* tab,int size, WINDOW* win) {
+    card* new_card;
+    int new_direction_x = 0;
+    int new_direction_y = 0;
+     do{
+        new_direction_x = 0;
+        new_direction_y = 0;
+        do{
+            wprintw(win, "Choisissez la coordonnee x, entre 1 et 6, vers laquelle le totem va etre echange :");
+            new_direction_x = getch();
+        } while (new_direction_x<'1' && new_direction_x>'6');
+        new_direction_x = new_direction_x - '0';
+        
+        do{
+            wprintw(win, "\nChoisissez la coordonnee y, entre 1 et 6, vers laquelle le totem va etre echangee :");
+            new_direction_y = getch();
+        } while (new_direction_y<'1' && new_direction_y>'6');
+        new_direction_y = new_direction_y - '0';
+        
+        new_card = tab + new_direction_y*size + new_direction_x;
+    } while ((*new_card).wall == 1 || (*new_card).hidden == 1 || (new_direction_y==1 && new_direction_x==3) || (new_direction_y==1 && new_direction_x==2) || (new_direction_y==1 && new_direction_x==4) || (new_direction_y==2 && new_direction_x==3) || (new_direction_y==4 && new_direction_x==1) || (new_direction_y==3 && new_direction_x==1) || (new_direction_y==4 && new_direction_x==2) || (new_direction_y==5 && new_direction_x==1) || (new_direction_y==6 && new_direction_x==4) || (new_direction_y==6 && new_direction_x==3) || (new_direction_y==6 && new_direction_x==5) || (new_direction_y==5 && new_direction_x==4) || (new_direction_y==3 && new_direction_x==6) || (new_direction_y==3 && new_direction_x==5) || (new_direction_y==2 && new_direction_x==6) || (new_direction_y==4 && new_direction_x==6));
+     //on ne peut pas choisir : murs, cases départs des joueurs, les cases qui touchent les cases de départ des joueurs
+     
+     invert_card(c, new_card);
+}
+
 
 void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
     //if (event == 1){
@@ -597,6 +625,7 @@ void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1,
                     //    forbidden = 0       -> c'est ok
                     //    forbidden = 1       -> c'est un mur ou une carte retournée 
             do{
+                wclear(win);
                 wmove(win, 0, 0);
                 wprintw(win, "Ou voulez-vous vous deplacer (utilisez les fleches de votre clavier) : ");
                 wrefresh(win);
@@ -717,12 +746,14 @@ void choose_weapon(Player* p, WINDOW* win){
         (*p).w.type[2] = 0;
         (*p).w.type[3] = 1;
     }
+    wclear(win);
+    wmove(win, 0, 0);
 }
 
 void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard, int y_newcard, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
     //COMBAT AVEC LE MONSTRE fait (si il y en a)
     card *c = tab + y_newcard*size + x_newcard;
-    combat(p, c);
+    combat(p, c, win);
 
     if ((*c).type[0]==1){
         (*p).treasure = 1;
@@ -776,56 +807,63 @@ void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard
     }
 
     else if ((*c).type[1]==1){
-        //Totem(p,c); -> Exchang_Totem (Player P, card c,card new_card,card tempo);
+        Exchang_Totem (p, c, tab, size, win);
         (*p).life=0;
     }
 }
 
-void combat(Player* p, card* c) {
+void combat(Player* p, card* c, WINDOW* win) {
+    wclear(win);
+    wmove(win,0,0);
+    wrefresh(win);
     if ((*c).m.type[0] == 1){
             if((*p).w.type[0] == 1){
-                printw ("Le Basilic est vaincu !\n");
+                wprintw (win, "Le Basilic est vaincu !\n");
                 (*p).slay++;				//nbre de monstres tués
             }
             else{
-                printw ("Game Over ! Le Basilic vous a tue.\n");
+                wprintw (win, "Game Over ! Le Basilic vous a tue.\n");
                 (*p).life = 0;
              resetPlayerPosition(p);
             }
     }
     else if ((*c).m.type[1] == 1){
             if((*p).w.type[1] == 1){
-                printw ("Le Zombie est vaincu !\n");
+                wprintw (win, "Le Zombie est vaincu !\n");
                 (*p).slay++;
             }
             else{
-                printw ("Game Over ! Le Zombie vous a tue.\n");
+                wprintw (win, "Game Over ! Le Zombie vous a tue.\n");
                 (*p).life = 0;
              resetPlayerPosition(p);
             }
     }
     else if ((*c).m.type[2] == 1){
             if((*p).w.type[2] == 1){
-                printw ("Le Troll est vaincu !\n");
+                wprintw (win, "Le Troll est vaincu !\n");
                 (*p).slay++;
             }
             else{
-                printw ("Game Over ! Le Troll vous a tue.\n");
+                wprintw (win, "Game Over ! Le Troll vous a tue.\n");
                 (*p).life = 0;
                 resetPlayerPosition(p);
             }
     }
     else if ((*c).m.type[3] == 1){
             if((*p).w.type[3] == 1){
-                printw ("La Harpie est vaincu !\n");
+                wprintw (win,"La Harpie est vaincu !\n");
                 (*p).slay++;
             }
             else{
-                printw ("Game Over ! La Harpie vous a tue.\n");
+                wprintw (win, "Game Over ! La Harpie vous a tue.\n");
                 (*p).life = 0;
                 resetPlayerPosition(p);
             }
     }
+    wrefresh(win);
+    sleep(3);
+    wclear(win);
+    wmove(win,0,0);
 }
 
 //Déplace joueur sur une case du tableau
@@ -837,49 +875,95 @@ void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard){		
 
 // AFFICHAGE du JEU
 void show_board(card *tab, int size, WINDOW* win_game) {
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    init_pair(3, COLOR_BLUE, COLOR_BLACK);
+    init_pair(4, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(6, COLOR_CYAN, COLOR_BLACK);
+    init_pair(7, COLOR_WHITE, COLOR_BLACK);
     wclear(win_game);
-  for (int i = 1; i < (size - 1); i++) { // on affiche cartes par cartes
-    for (int j = 1; j < (size - 1); j++) {
-      wmove(win_game, i * 4, j * 10);
-      if ((*(tab + i * size + j)).hidden == 0) {
-        wprintw(win_game, "card");                //carte face cachée
-      } else {
-        if ((*(tab + i * size + j)).type[0] == 1) { // trésor
-          // addstr("\u{1F4B0}");
-          wprintw(win_game, "$");
-        } else if ((*(tab + i * size + j)).type[1] == 1) { // totem
-          wprintw(win_game, "totem");
-        } else if ((*(tab + i * size + j)).type[2] == 1) { // portail
-          wprintw(win_game,"portail");
-        } else if ((*(tab + i * size + j)).type[3] == 1) { //événement
-          wprintw(win_game, "Even.");
+    
+      for (int i = 1; i < (size - 1); i++) {        // on affiche cartes par cartes
+        for (int j = 1; j < (size - 1); j++) {
+          wmove(win_game, i * 4, j * 10);
+          if ((*(tab + i * size + j)).hidden == 0) {
+                wattron(win_game, COLOR_PAIR(7));
+                wprintw(win_game, "CARD");                //carte face cachée
+                wattroff(win_game, COLOR_PAIR(7));
+          }
+          else {
+            if ((*(tab + i * size + j)).type[0] == 1) { // trésor
+                wattron(win_game, COLOR_PAIR(4));
+                wprintw(win_game, "$$");
+                wattroff(win_game, COLOR_PAIR(4));
+            }
+            else if ((*(tab + i * size + j)).type[1] == 1) { // totem
+                wattron(win_game, COLOR_PAIR(2));
+                wprintw(win_game, "TO");
+                wattroff(win_game, COLOR_PAIR(2));
+            }
+            else if ((*(tab + i * size + j)).type[2] == 1) { // portail
+                wattron(win_game, COLOR_PAIR(3));
+                wprintw(win_game, "PO");
+                wattroff(win_game, COLOR_PAIR(3));
+            }
+            else if ((*(tab + i * size + j)).type[3] == 1) { //événement
+                wattron(win_game, COLOR_PAIR(2));
+                wprintw(win_game, "EV");
+                wattroff(win_game, COLOR_PAIR(2));
+            }
+            // Les 4 monstres
+            else if ((*(tab + i * size + j)).m.type[0] == 1) { // basilique
+                wattron(win_game, COLOR_PAIR(1));
+                wprintw(win_game, "BA");
+                wattroff(win_game, COLOR_PAIR(1));
+            }
+            else if ((*(tab + i * size + j)).m.type[1] == 1) { // zombie
+                wattron(win_game, COLOR_PAIR(1));
+                wprintw(win_game, "ZO");
+                wattroff(win_game, COLOR_PAIR(1));
+            }
+            else if ((*(tab + i * size + j)).m.type[1] == 1) { // troll
+                wattron(win_game, COLOR_PAIR(1));
+                wprintw(win_game, "TR");
+                wattroff(win_game, COLOR_PAIR(1));
+            }
+            else if ((*(tab + i * size + j)).m.type[1] == 1) { // harpie
+                wattron(win_game, COLOR_PAIR(1));
+                wprintw(win_game, "HA");
+                wattroff(win_game, COLOR_PAIR(1));
+            }
+            // Les 4 reliques (armes antiques)
+            else if ((*(tab + i * size + j)).r.type[0] == 1) { // baton
+                wattron(win_game, COLOR_PAIR(6));
+                wprintw(win_game, "BA");
+                wattroff(win_game, COLOR_PAIR(6));
+            }
+            else if ((*(tab + i * size + j)).r.type[1] == 1) { //épée
+                wattron(win_game, COLOR_PAIR(6));
+                wprintw(win_game, "EP");
+                wattroff(win_game, COLOR_PAIR(6));
+            }
+            else if ((*(tab + i * size + j)).r.type[2] == 1) { // grimoire
+                wattron(win_game, COLOR_PAIR(6));
+                wprintw(win_game, "GR");
+                wattroff(win_game, COLOR_PAIR(6));
+            }
+            else if ((*(tab + i * size + j)).r.type[3] == 1) { // dague
+                wattron(win_game, COLOR_PAIR(6));
+                wprintw(win_game, "DA");
+                wattroff(win_game, COLOR_PAIR(6));
+            }
+            else {
+                wattron(win_game, COLOR_PAIR(7));
+                wprintw(win_game, "ERREUR");
+                wattroff(win_game, COLOR_PAIR(7));
+            }
+          }
         }
-        // Les 4 monstres
-        else if ((*(tab + i * size + j)).m.type[0] == 1) { // basilique
-          wprintw(win_game, "basilique");
-        } else if ((*(tab + i * size + j)).m.type[1] == 1) { // zombie
-          wprintw(win_game, "zombie");
-        } else if ((*(tab + i * size + j)).m.type[1] == 1) { // troll
-          wprintw(win_game, "troll");
-        } else if ((*(tab + i * size + j)).m.type[1] == 1) { // harpie
-          wprintw(win_game, "harpie");
-        }
-        // Les 4 reliques (armes antiques)
-        else if ((*(tab + i * size + j)).r.type[0] == 1) { // baton
-          wprintw(win_game, "baton");
-        } else if ((*(tab + i * size + j)).r.type[1] == 1) { //épée
-          wprintw(win_game, "epee");
-        } else if ((*(tab + i * size + j)).r.type[2] == 1) { // grimoire
-          wprintw(win_game, "grimoire");
-        } else if ((*(tab + i * size + j)).r.type[3] == 1) { // dague
-          wprintw(win_game, "dague");
-        } else {
-          wprintw(win_game, "ERREUR");
-        }
+        printw("\n");
       }
-    }
-    printw("\n");
-  }
     wrefresh(win_game);
 }
 
@@ -887,16 +971,24 @@ void show_board(card *tab, int size, WINDOW* win_game) {
 // MAIN
 
 int main() {
-  initscr();
-  // raw();
-  //noecho();
-  keypad(stdscr, TRUE); // active la prise en charge des touches spéciales
+    FILE *fichier;
+    char ligne[256];
+    initscr();
+    // raw();
+    //noecho();
+
+    start_color();            //active la couleur
+    if (!has_colors()) {
+        endwin();
+        printf("Le terminal ne prend pas en charge les couleurs.\n");
+    }
+    keypad(stdscr, TRUE); // active la prise en charge des touches spéciales
                         // (comme les flèches)
 
-  // Mesure Dimensions fenêtre affichage
-  int y_max, x_max; // y_max = nbre de lignes de la fenêtre     x_max = nbre de
+    // Mesure Dimensions fenêtre affichage
+    int y_max, x_max; // y_max = nbre de lignes de la fenêtre     x_max = nbre de
                     // colonnes de la fenêtre
-  getmaxyx(stdscr, y_max, x_max); // mesure le nbre de lignes (y_max) et de
+    getmaxyx(stdscr, y_max, x_max); // mesure le nbre de lignes (y_max) et de
                                   // colonnes (x_max) qui peuvent être affichés
 
   // move(5,0);
@@ -965,27 +1057,26 @@ int main() {
   wprintw(win_menu, "Tableau des scores\n");
   wprintw(win_menu, "Regles\n");
   wprintw(win_menu, "Sortir\n");
-  // refresh();
+  refresh();
   wrefresh(win_menu);
 
   int EXIT = 0; // EXIT = 0 -> on reste dans le menu        EXIT = 1 -> on va
                 // ailleurs que dans le menu
+  int key_pressed = 0;
   do {
-    int key_pressed = getch();
-    if (key_pressed == (int)'q' ||
-        key_pressed == (int)'Q') { // en entrant q : on sort du jeu
+    key_pressed = getch();
+    if (key_pressed == (int)'q' || key_pressed == (int)'Q') { // en entrant q : on sort du jeu
       endwin();
       return 0;
     }
-    if (key_pressed == KEY_UP ||
-        key_pressed == '8') { // ATTENTION : int key_pressed ?????
-      menu_select--;
-      printw("Key_up appuye\n");
-      refresh();
+    if (key_pressed == KEY_UP || key_pressed == '8') {
+        menu_select--;
+        //printw("Key_up appuye\n");
+        refresh();
     }
     if (key_pressed == KEY_DOWN || key_pressed == '2') {
       menu_select++;
-      printw("Key_down appuye\n");
+      //printw("Key_down appuye\n");
       refresh();
     }
     if (menu_select <= 0) {
@@ -997,36 +1088,36 @@ int main() {
     wclear(win_menu);
     // Changement taille texte qd on est dessus
     switch (menu_select) {
-    case 1:
-      wprintw(win_menu, "-> NOUVELLE PARTIE <-\n");
-      wprintw(win_menu, "Tableau des scores\n");
-      wprintw(win_menu, "Regles\n");
-      wprintw(win_menu, "Sortir\n");
-      break;
-    case 2:
-      wprintw(win_menu, "Nouvelle partie\n");
-      wprintw(win_menu, "-> TABLEAU DES SCORES <-\n");
-      wprintw(win_menu, "Regles\n");
-      wprintw(win_menu, "Sortir\n");
-      break;
-    case 3:
-      wprintw(win_menu, "Nouvelle partie\n");
-      wprintw(win_menu, "Tableau des scores\n");
-      wprintw(win_menu, "-> REGLES <-\n");
-      wprintw(win_menu, "Sortir\n");
-      break;
-    case 4:
-      wprintw(win_menu, "Nouvelle partie\n");
-      wprintw(win_menu, "Tableau des scores\n");
-      wprintw(win_menu, "Regles\n");
-      wprintw(win_menu, "-> SORTIR <-\n");
-      break;
-    default:
-      printf("ERREUR d'affichage menu.");
-      exit(103);
-      break;
+        case 1:
+          wprintw(win_menu, "-> NOUVELLE PARTIE <-\n");
+          wprintw(win_menu, "Tableau des scores\n");
+          wprintw(win_menu, "Regles\n");
+          wprintw(win_menu, "Sortir\n");
+          break;
+        case 2:
+          wprintw(win_menu, "Nouvelle partie\n");
+          wprintw(win_menu, "-> TABLEAU DES SCORES <-\n");
+          wprintw(win_menu, "Regles\n");
+          wprintw(win_menu, "Sortir\n");
+          break;
+        case 3:
+          wprintw(win_menu, "Nouvelle partie\n");
+          wprintw(win_menu, "Tableau des scores\n");
+          wprintw(win_menu, "-> REGLES <-\n");
+          wprintw(win_menu, "Sortir\n");
+          break;
+        case 4:
+          wprintw(win_menu, "Nouvelle partie\n");
+          wprintw(win_menu, "Tableau des scores\n");
+          wprintw(win_menu, "Regles\n");
+          wprintw(win_menu, "-> SORTIR <-\n");
+          break;
+        default:
+          printf("ERREUR d'affichage menu.");
+          exit(103);
+          break;
     }
-    refresh();
+    //refresh();
     wrefresh(win_menu);
     if (key_pressed == '\n') { // Le joueur a sélectionné un des 4 menus
       EXIT = 1;
@@ -1036,6 +1127,7 @@ int main() {
   clear();
 
   int e1 = 1, e2 = 1, e3 = 1, e4 = 1, e5 = 1, e6 = 1, e7 = 1, e8 = 1, e9 = 1, e10 = 1, e11 = 1;
+    
   if (menu_select == 1) {
     wmove(win_menu, 0, 0);
     int nmb_player = nb_player(win_menu);
@@ -1048,9 +1140,14 @@ int main() {
     Player *pp2 = &p2;
     Player *pp3 = &p3;
     Player *pp4 = &p4;
+    int c1=1, c2=1, c3=1, c4=1;
 
     // INITIALISATION DES 4 JOUEURS
-    create_player(pp1, win_menu); // Créée l'identité du joueur 1
+    WINDOW* win_name = newwin(1, 120, 0, 0);    // fenêtre affichage nom joueur
+    wclear(win_name);
+    wprintw(win_name, "Joueur n°1");
+    wrefresh(win_name);
+    create_player(pp1, win_menu, c1, c2, c3, c4); // Créée l'identité du joueur 1
     sleep(2);
     p1.num = 1;
     p1.life = 1;   // 0=mort 1=vivant
@@ -1059,8 +1156,10 @@ int main() {
     p1.x_init = 3; // place initiale
     p1.y_init = 1; // place initiale
     
-      
-    create_player(pp2, win_menu); // Créée l'identité du joueur 2
+    wclear(win_name);
+    wprintw(win_name, "Joueur n°2");
+    wrefresh(win_name);
+    create_player(pp2, win_menu, c1, c2, c3, c4); // Créée l'identité du joueur 2
     sleep(2);
     p2.num = 2;
     p2.life = 0;   // 0=mort 1=vivant
@@ -1070,7 +1169,10 @@ int main() {
     p2.y_init = 4; // place initiale
 
     if (nmb_player >= 3) {
-      create_player(pp3, win_menu); // Créée l'identité du joueur 3
+      wclear(win_name);
+      wprintw(win_name, "Joueur n°3");
+      wrefresh(win_name);
+      create_player(pp3, win_menu, c1, c2, c3, c4); // Créée l'identité du joueur 3
       sleep(2);
       p3.num = 3;
       p3.life = 0;   // 0=mort 1=vivant
@@ -1080,7 +1182,10 @@ int main() {
       p3.y_init = 6; // place initiale
     }
     if (nmb_player == 4) {
-      create_player(pp4, win_menu); // Créée l'identité du joueur 4
+      wclear(win_name);
+      wprintw(win_name, "Joueur n°4");
+      wrefresh(win_name);
+      create_player(pp4, win_menu, c1, c2, c3, c4); // Créée l'identité du joueur 4
       sleep(2);
       p4.num = 4;
       p4.life = 0;   // 0=mort 1=vivant
@@ -1091,14 +1196,13 @@ int main() {
     }
 
     srand(time(NULL));
-    WINDOW* win_name = newwin(1, 120, 0, 0);    // fenêtre affichage nom joueur
     WINDOW *win_game = newwin(30, 100, 5, 10);    // fenêtre du plateau de jeu
     WINDOW *win_interface = newwin(20, 100, 30, 40);
     card *game;
     game = malloc(SIZE * SIZE *sizeof(card)); // game est notre plateau de jeu (tableau)
     if (game == NULL) {
-      printf("Problème d'allocation de memoire pour la creation du tableau du jeu.\n");
-      exit(10);
+        printf("Problème d'allocation de memoire pour la creation du tableau du jeu.\n");
+        exit(10);
     }
     board(game, SIZE, win_game);
     
@@ -1109,11 +1213,11 @@ int main() {
         r = r%nmb_player;
         (*(tab_player[r])).life = 1;
         do{
+            wclear(win_name);
             wprintw(win_name, "A vous de jouer %s.", (*(tab_player[r])).nom);
             wrefresh(win_name);
             play(tab_player[r], game, SIZE, win_interface, win_game, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);			// INTERACTION JOUEUR
             (*(tab_player[r])).move ++;
-            wclear(win_name);
         } while( (*(tab_player[r])).life==1 && ((*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1));
         e1=1, e2=1, e3=1, e4=1, e5=1, e6=1, e7=1, e8=1, e9=1, e10=1, e11=1;
     } while ( (*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1 );        //condition de VICTOIRE
@@ -1132,7 +1236,17 @@ int main() {
 
     free(game);
   } else if (menu_select == 2) {
-
+        // Ouvrir le fichier en mode lecture
+        fichier = fopen("Score.txt", "r");
+        if (fichier == NULL) {
+            fprintf(stderr, "Impossible d'ouvrir le fichier\n");
+            return 1;
+        }
+        while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+            printw("%s", ligne);
+        }
+        getch();
+        fclose(fichier);
   }
 
   else if (menu_select == 3) {
@@ -1147,7 +1261,6 @@ int main() {
   endwin();
   return 0;
 }
-
 
 
 /*____________________________________________________________________________*/
