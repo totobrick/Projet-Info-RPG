@@ -6,5 +6,12 @@ Notre projet est un Memory, dans lequel vous incarnez un des quatres personnage 
 Dans ce jeux, vous pourrez vous déplacez, de bas en haut, et de gauche à droite, mais attention! Vous devrez vous souvenir des cases vu par vous et le autres joueurs, car elles deviendront invisible à chaque fois que l'un d'entre vous perd et retourne à son point de départ!
 
 # Compilation
-Grâçe au makefile, rien de plus simple! Il vous suffit d'ouvrir votre terminal.
+Grâçe au makefile, rien de plus simple! Il vous suffit d'ouvrir votre terminal:
+
 ![alt texte](https://azurplus.fr/wp-content/uploads/1612494018_Comment-commencer-a-utiliser-le-terminal-Linux.png)
+
+Accédez au répertoire contenant le Makefile:
+
+![alt texte](https://www.jetestelinux.com/wp-content/uploads/2016/03/rmdir.png)
+
+Et de simplement écrire "make" à l'interieur
