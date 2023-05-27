@@ -24,4 +24,4 @@ Enfin, pour executer, il vous suffira d'écrire "./exec_TPA", et le programme se
 
 # Structre de projet
 
-Notre projet utilise la bibliothèque ncurses, qui permet d'avoir un affichage graphique bien plus propre et bien plus agréable. En plus de cette bibliothèque, notre programme est composé de plusieurs fichier fonctionnant tous ensemble, mais ne vous en faite pas, comme dis précédement, le Makefile 
+Notre projet utilise la bibliothèque ncurses, qui permet d'avoir un affichage graphique bien plus propre et bien plus agréable. En plus de cette bibliothèque, notre programme est composé de plusieurs fichier fonctionnant tous ensemble, mais ne vous en faite pas, comme dis précédement, le Makefile s'occupe de toute la partie compilation!
