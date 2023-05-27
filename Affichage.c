@@ -99,11 +99,11 @@ void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3
 void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 
 void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard); // key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
-void play(Player *p, card *tab, int size, WINDOW *win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
+void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void choose_weapon(Player *p, WINDOW *win);
 void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard, int y_newcard, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void combat(Player *p, card *c);
-void show_board(card *tab, int size);
+void show_board(card *tab, int size, WINDOW* win_game);
 
 void Exchang_Totem(Player P, card c, card new_card, card tempo);
 void updateScore(FILE *fichier, Player P);
@@ -136,7 +136,7 @@ void init_wall(card *tab, int size) {
   for (int j = 0; j < size; j++) {
     (*(tab + (size - 1) * size + j)).wall = 1;
   }
-  printf("Initialisation des murs terminée.\n");
+  printf("Initialisation des murs terminee.\n");
 }
 
 void init_board(card *tab, int size) {
@@ -148,7 +148,7 @@ void init_board(card *tab, int size) {
       init_card(tab + i * size + j);
     }
   }
-  printf("Initialisation des cartes terminée.\n");
+  printf("Initialisation des cartes terminee.\n");
 }
 
 void init_card(card *card1) {
@@ -256,7 +256,7 @@ void generate_board(card *tab, int size) {
         }
 
         else {
-          printf(" OUPS ! Le jeu n'a pas pu être créé. La carte générée aléatoirement n'est pas dans le paquet.\n");
+          printf(" OUPS ! Le jeu n'a pas pu etre cree. La carte generee aleatoirement n'est pas dans le paquet.\n");
           exit(1);
         }
         cards[alea] = cards[remaining_card - 1];
@@ -264,7 +264,7 @@ void generate_board(card *tab, int size) {
       }
       else {
         clear();
-        printw("Toutes les cartes du jeu sont placées !\n"); // est affiché 4 fois
+        printw("Toutes les cartes du jeu sont placees !\n"); // est affiché 4 fois
                                                           // car il y a 4 cases
                                                           // vides pour mettre
                                                           // les joueurs
@@ -281,7 +281,7 @@ void generate_board(card *tab, int size) {
 void resetPlayerPosition(Player *p) {
   (*p).x = (*p).x_init;
   (*p).y = (*p).y_init;
-  printw("Position du joueur %s réinitialisé.\n", (*p).nom);
+  printw("Position du joueur %s reinitialisee.\n", (*p).nom);
 }
 
 /*_________________________________________________________________________________________________*/
@@ -296,8 +296,11 @@ int nb_player(WINDOW *win) {
     wprintw(win, "Combien de joueurs etes-vous (entre 2 et 4) : ");
     wrefresh(win);
     choice = getch();
+    refresh();
   } while (choice != '2' && choice != '3' && choice != '4');
-    sleep(1);
+    wprintw(win, "%d", choice-'0');
+    wrefresh(win);
+    sleep(2);
     if (choice=='2'){
         return 2;
     }
@@ -320,10 +323,11 @@ void create_player(Player *p, WINDOW *win) {
     wprintw(win, "    2. Guerrier\n");
     wprintw(win, "    3. Ranger\n");
     wprintw(win, "    4. Voleur\n");
-    wprintw(win, "Votre choix: ");
+    wprintw(win, "Votre choix : ");
     wrefresh(win);
     c = getch();
   } while (c != '1' && c != '2' && c != '3' && c != '4');
+    wprintw(win, "%d", c-'0');
     (*p).class = c;
     (*p).w.type[0] = 0;
     (*p).w.type[1] = 0;
@@ -364,13 +368,13 @@ void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3
         new_direction_x = 0;
         new_direction_y = 0;
         do{
-            wprintw(win, "\nChoisissez les coordonnées x, entre 1 et 6, vers lesquels vous voulez allez!");
+            wprintw(win, "\nChoisissez les coordonnees x, entre 1 et 6, vers lesquels vous voulez allez!");
             wrefresh(win); new_direction_x = getch();
         }while (new_direction_x < '1' || new_direction_x > '6');
         new_direction_x = new_direction_x - delta_ascii ;
         
         do{
-            wprintw(win,"\nChoisissez les coordonnées y, entre 1 et 6, vers lesquels vous voulez allez!");
+            wprintw(win,"\nChoisissez les coordonnees y, entre 1 et 6, vers lesquels vous voulez allez!");
             wrefresh(win); new_direction_y = getch();
         }while (new_direction_y < '1' || new_direction_y > '6');
         new_direction_y = new_direction_y - delta_ascii ;
@@ -401,7 +405,7 @@ void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, i
     do{
         int randevent = rand() %11;
         if (randevent == 0 && e1==1){
-            printw(" ... /n/n Sérieusement...?/n ");
+            printw(" ... /n/n Serieusement...?/n ");
             const char* rickRollURL = "https://youtu.be/xLGktQmtR5A";        // Lien vers la vidéo de Rick Astley en 8 bit
             const char* browser = "xdg-open";                                // Commande pour ouvrir l'URL avec le navigateur par défaut sur Linux
             execlp(browser, browser, rickRollURL, NULL);                    // Lancement du navigateur avec l'URL du Rick Roll
@@ -410,7 +414,7 @@ void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, i
         }
         
         if (randevent == 1 && e2==1){
-            printw ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle.\n");
+            printw ("Une harpie sauvage apparait! « It's over Anakin, I have the highground! », dit-elle.\n");
             (*c).type[3]=0;
             (*c).m.type[3]=1;
             //change la case en monstre harpy et lance le combat. la case devient définitivement une harpy.
@@ -419,7 +423,7 @@ void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, i
         }
         
         if (randevent == 2 && e3==1){
-            printw ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tous à coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!! À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, malgré tout avec l'honneur d'un grand guerrier!\n");
+            printw ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tout a coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!! A cause de cette action, vous vous retrouvez sous une maree draconique, et mourrez, malgre tout avec l'honneur d'un grand guerrier!\n");
             (*p).life = 0;
             printw("Game over!\n");
             resetPlayerPosition(p);
@@ -427,7 +431,7 @@ void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, i
             return;
         }
         if (randevent == 3 && e4==1){
-            printw ("Vous croisez une espèce de grosse tortue avec plein de pics sur sa carapace, et qui crache du feu. Elle vous regarde, et vous demande si vous n'avez pas vu une princesse blonde en robe rose. Vous lui dites que non, et par colère, il vous vole 10 petites étoiles! (si vous possédiez votre relique, elle est retournée à son point d'emplacement)\n");
+            printw ("Vous croisez une espece de grosse tortue avec plein de pics sur sa carapace, et qui crache du feu. Elle vous regarde, et vous demande si vous n'avez pas vu une princesse blonde en robe rose. Vous lui dites que non, et par colere, il vous vole 10 petites etoiles! (si vous possediez votre relique, elle est retournee à son point d'emplacement)\n");
             if ((*p).relic == 1){
                 (*p).relic = 0; 
             }
@@ -435,42 +439,42 @@ void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, i
             return;
         }
         if (randevent==4 && e5==1){
-            printw ("Un spectacle d'horreur se déroule devant vous ! Un pauvre poisson-clown hors de l'eau semble pleurer tout en ne pouvant pas respirer.\n Il semble répéter sans cesse ces mêmes mots :\n   « Vous n'avez pas vu mon fils ?\n Vous n'avez pas vu mon fils ?\n Vous n'avez pas vu mon... » \nLe manque d'oxygen a eu raison de lui. Vous avez désormais un nouvel objectif : après être sorti victorieux de ce labyrinthe infernal, vous vous mettrez à la recherche de ce fameux « fils ».\n");
+            printw ("Un spectacle d'horreur se deroule devant vous ! Un pauvre poisson-clown hors de l'eau semble pleurer tout en ne pouvant pas respirer.\n Il semble repeter sans cesse ces memes mots :\n   « Vous n'avez pas vu mon fils ?\n Vous n'avez pas vu mon fils ?\n Vous n'avez pas vu mon... » \nLe manque d'oxygen a eu raison de lui. Vous avez desormais un nouvel objectif : apres etre sorti victorieux de ce labyrinthe infernal, vous vous mettrez a la recherche de ce fameux « fils ».\n");
             e5 = 0;
             return;
         }
         if (randevent==5 && e6==1){
-            printw ("Vous croisez un énorme tuyau fait de métal. Intrigué, vous vous approchez et entendez une étrange voix dans votre tête : Il faut suivre le conduit. Ne sachant ce qu'est ce fameux « conduit », vous continuez votre route.\n");
+            printw ("Vous croisez un enorme tuyau fait de metal. Intrigue, vous vous approchez et entendez une etrange voix dans votre tete : Il faut suivre le conduit. Ne sachant ce qu'est ce fameux « conduit », vous continuez votre route.\n");
             e6 = 0;
             return;
         }
         
         if (randevent==6 && e7==1){
-            printw ("Un homme au loin vous demande comment rejoindre le « Sunny ». Il a les cheveux verts, comme si de la mousse lui avait poussé sur la tête. Il porte trois sabres au niveau de la ceinture, il paraît vraiment louche. Vous lui montrez une direction aléatoire en espérant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle étrange rencontre !\n");
+            printw ("Un homme au loin vous demande comment rejoindre le « Sunny ». Il a les cheveux verts, comme si de la mousse lui avait pousse sur la tete. Il porte trois sabres au niveau de la ceinture, il paraît vraiment louche. Vous lui montrez une direction aleatoire en esperant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle etrange rencontre !\n");
             e7=0;
             return;
         }
              
         if (randevent==7 && e8==1){
-            printw ("Vous voyez une sorte de scientifique au loin. En essayant de vous approcher, vous voyez une sorte d'écran apparaître avec marqué dessus : « Fun value invalid ». \nVoyant que vous ne pouvez pas continuer, vous décidez d'abandonner et de continuer votre périple.\n");
+            printw ("Vous voyez une sorte de scientifique au loin. En essayant de vous approcher, vous voyez une sorte d'ecran apparaitre avec marque dessus : « Fun value invalid ». \nVoyant que vous ne pouvez pas continuer, vous decidez d'abandonner et de continuer votre periple.\n");
             e8=0;
             return;
         }
     
         if (randevent==8 && e9==1){
-            printw ("En vous baladant, vous tombez sur une étrange famille de deux squelettes. L'un petit, portant des habits rouge et blanc. Son frère, plus petit, porte un sweet à capuche bleu et un pantalon noir. Pour éviter tout combat inutile, vous attendez un peu que le temps passe.\n");
+            printw ("En vous baladant, vous tombez sur une etrange famille de deux squelettes. L'un petit, portant des habits rouge et blanc. Son frere, plus petit, porte un sweet à capuche bleu et un pantalon noir. Pour eviter tout combat inutile, vous attendez un peu que le temps passe.\n");
             e9 = 0;
             return;
         }
     
         if (randevent==9 && e10==1){
-            printw ("Vous trouvez un parchemin ancien ! Quel secret cache t-il ? \nVous l'ouvrez et le contemplez. Il est écrit : « Seul Link peut vaincre Ganon. ». Du fait que vous ne vous nommez ni Link, ni Ganon, vous jetez ce torchon inutile.\n");
+            printw ("Vous trouvez un parchemin ancien ! Quel secret cache t-il ? \nVous l'ouvrez et le contemplez. Il est ecrit : « Seul Link peut vaincre Ganon. ». Du fait que vous ne vous nommez ni Link, ni Ganon, vous jetez ce torchon inutile.\n");
             e10 = 0;
             return;
         }
             
         if (randevent==10 && e11==1){
-            printw ("Vous rencontrez au détour de ce labyrinthe un vieil homme. Il prétend être le directeur d'un lycée spécialisé en magie très connu : le Lycée Magique George Pompidou. Il exprime même l'envie de vous faire entrer dans son lycée, dans la classe de « Nintendor ». Vous acceptez, et par conséquent, il se mit à hurler : « 100.000 points pour Nintendor! »\n.");
+            printw ("Vous rencontrez au detour de ce labyrinthe un vieil homme. Il pretend etre le directeur d'un lycee specialise en magie tres connu : le Lycee Magique George Pompidou. Il exprime même l'envie de vous faire entrer dans son lycee, dans la classe de « Nintendor ». Vous acceptez, et par consequent, il se mit a hurler : « 100.000 points pour Nintendor! »\n.");
             e11 = 0;
             return;
         }
@@ -482,7 +486,7 @@ void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, i
 }
 
 
-void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
+void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
     
     wclear(win);
     wmove(win, 0, 0);
@@ -509,13 +513,13 @@ void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, i
                     //    forbidden = 1       -> c'est un mur ou une carte retournée 
             do{
                 wmove(win, 0, 0);
-                wprintw(win, "Où voulez-vous vous déplacer (utilisez les flèches de votre clavier) : ");
+                wprintw(win, "Ou voulez-vous vous deplacer (utilisez les fleches de votre clavier) : ");
                 wrefresh(win);
                 forbidden = 0;
                 key = getch();
                 if(key!=KEY_UP && key!=KEY_DOWN && key!=KEY_RIGHT && key!=KEY_LEFT){
                     forbidden = 1;
-                    wprintw(win, "\nMouvement entré invalide, veuillez réessayer.");
+                    wprintw(win, "\nMouvement entre invalide, veuillez reessayer.");
                 }
             } while(forbidden==1);           //tant qu'on ne rencontre pas un mur. ATTENTION au cas où le joueur est coincé entre 4 murs !!! -> le faire mourir.
 
@@ -570,7 +574,7 @@ void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, i
         } while(forbidden == 1);
     }
     return_card(pnewcard);        //retourne la carte ou on va pdt 3s
-    show_board(tab, size);
+    show_board(tab, size, win_game);
     refresh();
     sleep(3);
     interaction_card(p, tab, size, win, x_newcard, y_newcard, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
@@ -699,7 +703,7 @@ void combat(Player* p, card* c) {
                 (*p).slay++;				//nbre de monstres tués
             }
             else{
-                printw ("Game Over ! Le Basilic vous a tué.\n");
+                printw ("Game Over ! Le Basilic vous a tue.\n");
                 (*p).life = 0;
              resetPlayerPosition(p);
             }
@@ -710,7 +714,7 @@ void combat(Player* p, card* c) {
                 (*p).slay++;
             }
             else{
-                printw ("Game Over ! Le Zombie vous a tué.\n");
+                printw ("Game Over ! Le Zombie vous a tue.\n");
                 (*p).life = 0;
              resetPlayerPosition(p);
             }
@@ -721,7 +725,7 @@ void combat(Player* p, card* c) {
                 (*p).slay++;
             }
             else{
-                printw ("Game Over ! Le Troll vous a tué.\n");
+                printw ("Game Over ! Le Troll vous a tue.\n");
                 (*p).life = 0;
                 resetPlayerPosition(p);
             }
@@ -732,7 +736,7 @@ void combat(Player* p, card* c) {
                 (*p).slay++;
             }
             else{
-                printw ("Game Over ! La Harpie vous a tué.\n");
+                printw ("Game Over ! La Harpie vous a tue.\n");
                 (*p).life = 0;
                 resetPlayerPosition(p);
             }
@@ -747,46 +751,46 @@ void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard){		
 
 
 // AFFICHAGE du JEU
-void show_board(card *tab, int size) {
+void show_board(card *tab, int size, WINDOW* win_game) {
   for (int i = 1; i < (size - 1); i++) { // on affiche cartes par cartes
     for (int j = 1; j < (size - 1); j++) {
-      move(i * 4, j * 10);
+      wmove(win_game, i * 4, j * 10);
       if ((*(tab + i * size + j)).hidden == 0) {
         // addch('\u25A0');					// Affiche le caractère du
         // carré plein
-        printw("\u25A0");
+        wprintw(win_game, "\u25A0");
       } else {
         if ((*(tab + i * size + j)).type[0] == 1) { // trésor
           // addstr("\u{1F4B0}");
-          printw("$");
+          wprintw(win_game, "$");
         } else if ((*(tab + i * size + j)).type[1] == 1) { // totem
-          printw("\U0001F5FF");
+          wprintw(win_game, "\U0001F5FF");
         } else if ((*(tab + i * size + j)).type[2] == 1) { // portail
-          printw("\U000026E9");
+          wprintw(win_game,"\U000026E9");
         } else if ((*(tab + i * size + j)).type[3] == 1) { //événement
-          printw("E");
+          wprintw(win_game, "E");
         }
         // Les 4 monstres
         else if ((*(tab + i * size + j)).m.type[0] == 1) { // basilique
-          printw("\U0001F40D");
+          wprintw(win_game, "\U0001F40D");
         } else if ((*(tab + i * size + j)).m.type[1] == 1) { // zombie
-          printw("\U0001F9DF");
+          wprintw(win_game, "\U0001F9DF");
         } else if ((*(tab + i * size + j)).m.type[1] == 1) { // troll
-          printw("\U0001F479");
+          wprintw(win_game, "\U0001F479");
         } else if ((*(tab + i * size + j)).m.type[1] == 1) { // harpie
-          printw("\U0001F426");
+          wprintw(win_game, "\U0001F426");
         }
         // Les 4 reliques (armes antiques)
         else if ((*(tab + i * size + j)).r.type[0] == 1) { // baton
-          printw("\U0001F3D1");
+          wprintw(win_game, "\U0001F3D1");
         } else if ((*(tab + i * size + j)).r.type[1] == 1) { //épée
-          printw("\U00002694");
+          wprintw(win_game, "\U00002694");
         } else if ((*(tab + i * size + j)).r.type[2] == 1) { // grimoire
-          printw("\U0001F4D6");
+          wprintw(win_game, "\U0001F4D6");
         } else if ((*(tab + i * size + j)).r.type[3] == 1) { // dague
-          printw("\U0001F5E1");
+          wprintw(win_game, "\U0001F5E1");
         } else {
-          printw("ERREUR");
+          wprintw(win_game, "ERREUR");
         }
       }
     }
@@ -865,7 +869,7 @@ int main() {
   startx_menu = x_max / 2 - 10;
   starty_menu = 16;
   height_menu = 15;
-  width_menu = 50;
+  width_menu = 55;
 
   // MENU
   WINDOW *win_menu = newwin(height_menu, width_menu, starty_menu, startx_menu);
@@ -891,12 +895,12 @@ int main() {
     if (key_pressed == KEY_UP ||
         key_pressed == '8') { // ATTENTION : int key_pressed ?????
       menu_select--;
-      printw("Key_up appuyé\n");
+      printw("Key_up appuye\n");
       refresh();
     }
     if (key_pressed == KEY_DOWN || key_pressed == '2') {
       menu_select++;
-      printw("Key_down appuyé\n");
+      printw("Key_down appuye\n");
       refresh();
     }
     if (menu_select <= 0) {
@@ -946,10 +950,9 @@ int main() {
 
   clear();
 
-  int e1 = 1, e2 = 1, e3 = 1, e4 = 1, e5 = 1, e6 = 1, e7 = 1, e8 = 1, e9 = 1,
-      e10 = 1, e11 = 1;
+  int e1 = 1, e2 = 1, e3 = 1, e4 = 1, e5 = 1, e6 = 1, e7 = 1, e8 = 1, e9 = 1, e10 = 1, e11 = 1;
   if (menu_select == 1) {
-
+    wmove(win_menu, 0, 0);
     int nmb_player = nb_player(win_menu);
 
     Player p1;
@@ -1002,12 +1005,14 @@ int main() {
       p4.y_init = 6; // place initiale
     }
 
-    WINDOW *win_game = newwin(20, 100, 5, 15); // fenêtre du plateau de jeu
-    WINDOW *win_interface = newwin(20, 100, 5, 40);
+    srand(time(NULL));
+    WINDOW* win_name = newwin(1, 120, 0, 0);    // fenêtre affichage nom joueur
+    WINDOW *win_game = newwin(30, 100, 5, 10);    // fenêtre du plateau de jeu
+    WINDOW *win_interface = newwin(20, 100, 20, 40);
     card *game;
     game = malloc(SIZE * SIZE *sizeof(card)); // game est notre plateau de jeu (tableau)
     if (game == NULL) {
-      printf("Problème d'allocation de mémoire pour la création du tableau du jeu.\n");
+      printf("Problème d'allocation de memoire pour la creation du tableau du jeu.\n");
       exit(10);
     }
     board(game, SIZE);
@@ -1019,16 +1024,19 @@ int main() {
         r = r%nmb_player;
         (*(tab_player[r])).life = 1;
         do{
-            play(tab_player[r], game, SIZE, win_interface, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);			// INTERACTION JOUEUR
+            wprintw(win_name, "A vous de jouer %s.", (*(tab_player[r])).nom);
+            wrefresh(win_name);
+            play(tab_player[r], game, SIZE, win_interface, win_game, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);			// INTERACTION JOUEUR
             (*(tab_player[r])).move ++;
+            wclear(win_name);
         } while( (*(tab_player[r])).life==1 && ((*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1));
         e1=1, e2=1, e3=1, e4=1, e5=1, e6=1, e7=1, e8=1, e9=1, e10=1, e11=1;
     } while ( (*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1 );        //condition de VICTOIRE
 
-      show_board(game, SIZE);
+      show_board(game, SIZE, win_game);
       clear();
       move(0,0);
-      printw("BRAVO !\n %s a brillamment gagné en %d tours.\n Dommage pour les autres !", (*(tab_player[r])).nom, (*(tab_player[r])).move);
+      printw("BRAVO !\n %s a brillamment gagne en %d tours.\n Dommage pour les autres !", (*(tab_player[r])).nom, (*(tab_player[r])).move);
       
         
     // do{
