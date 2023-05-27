@@ -36,15 +36,27 @@
 
     attron(COLOR_PAIR(5));
     printw("VO\n");
+    attroff(COLOR_PAIR(5));
+    attron(COLOR_PAIR(5));
     printw("RA\n");
+    attroff(COLOR_PAIR(5));
+    attron(COLOR_PAIR(5));
     printw("MA\n");
+    attroff(COLOR_PAIR(5));
+    attron(COLOR_PAIR(5));
     printw("CH\n");
     attroff(COLOR_PAIR(5));
 
     attron(COLOR_PAIR(6));
     printw("GR\n"); 
+    attroff(COLOR_PAIR(6));
+    attron(COLOR_PAIR(6));
     printw("EP\n");
+    attroff(COLOR_PAIR(6));
+    attron(COLOR_PAIR(6));
     printw("DA\n");
+    attroff(COLOR_PAIR(6));
+    attron(COLOR_PAIR(6));
     printw("BA\n");
     attroff(COLOR_PAIR(6));
 
