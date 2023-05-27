@@ -59,3 +59,16 @@ Afin que vous compreniez mieux comment fonctionne la bibliothèque ncurses, voic
 Comme marqué précédement dans la rubrique Documentation, nous avons utilisé la bibliothèque ncurses, alors voici le lien vers le site officiel:
 
 [texte](https://invisible-island.net/ncurses/)
+
+
+## Auteurs et remerciments
+
+Nous avons donc été à trois à travailler sur ce projet:
+- Thomas
+- Pierre
+- Alexis BERTRAND
+
+Nous tenions tous de même a remercier notre professeur d'informatique, ANSERMIN Eva, qui a su nous aider et nous répondre dès que nous avions une question.
+
+
+
