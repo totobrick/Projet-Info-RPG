@@ -95,7 +95,7 @@ void create_player(Player *p, WINDOW *win);
 
 // DURANT LE JEU
 void return_card(card* c);
-void Portal(Player *p, card *tab, int size, WINDOW *win);
+void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 
 void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard); // key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
