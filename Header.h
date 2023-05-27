@@ -1,3 +1,7 @@
+#ifndef HEADER_H
+#define HEADER_H
+
+
 #include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -110,3 +114,6 @@ void choose_weapon(Player *p, WINDOW *win, WINDOW* win_game);
 void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard, int y_newcard, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void combat(Player *p, card *c, WINDOW* win);
 void show_board(card *tab, int size, WINDOW* win_game);
+
+
+#endif 
