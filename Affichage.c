@@ -95,13 +95,13 @@ void create_player(Player *p, WINDOW *win);
 
 // DURANT LE JEU
 void return_card(card* c);
-void Portal(Player *P, card *tab, int size, WINDOW *win);
+void Portal(Player *p, card *tab, int size, WINDOW *win);
 void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 
-void perso_move(Player *p, card *tab, int size, int key); // key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
+void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard); // key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
 void play(Player *p, card *tab, int size, WINDOW *win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void choose_weapon(Player *p, WINDOW *win);
-void interaction_card(Player *p, card *c, int key, WINDOW *win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11, int size);
+void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard, int y_newcard, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 void combat(Player *p, card *c);
 void show_board(card *tab, int size);
 
@@ -357,10 +357,11 @@ void return_card(card* c){		//le joueur a déjà son arme !
 }
 
 //REVOIR fonctionnement portal
-void Portal (Player* p, card* tab, int size, WINDOW* win){
+void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
     int new_direction_x = 0;
     int new_direction_y = 0;
     card* new_card = NULL;
+    int delta_ascii = '1' - 1;
     do{
         wclear(win);
         new_direction_x = 0;
@@ -368,23 +369,25 @@ void Portal (Player* p, card* tab, int size, WINDOW* win){
         do{
             wprintw(win, "\nChoisissez les coordonnées x, entre 1 et 6, vers lesquels vous voulez allez!");
             wrefresh(win); new_direction_x = getch();
-        }while
-(new_direction_x < '1' || new_direction_x > '6');
-
+        }while (new_direction_x < '1' || new_direction_x > '6');
+        new_direction_x = new_direction_x - delta_ascii ;
+        
         do{
             wprintw(win,"\nChoisissez les coordonnées y, entre 1 et 6, vers lesquels vous voulez allez!");
             wrefresh(win); new_direction_y = getch();
-        }while
-(new_direction_y < '1' || new_direction_y > '6');
+        }while (new_direction_y < '1' || new_direction_y > '6');
+        new_direction_y = new_direction_y - delta_ascii ;
 
         card* new_card = tab + new_direction_y*size + new_direction_x;
 
-    } while ((*new_card).wall == 1 || (*new_card).hidden == 1 ||
-(new_direction_y==1 && new_direction_x==3) || (new_direction_y==3 &&
-new_direction_x==6) || (new_direction_y==4 && new_direction_x==1)  ||
-(new_direction_y==6 && new_direction_x==4) );
+    } while ((*new_card).wall == 1 || (*new_card).hidden == 1 || (new_direction_y==1 && new_direction_x==3) || (new_direction_y==3 && new_direction_x==6) || (new_direction_y==4 && new_direction_x==1)  || (new_direction_y==6 && new_direction_x==4) );
 
-    choose_weapon(p, win);
+    return_card(new_card);
+    refresh();
+    wrefresh(win);
+    sleep(3);
+    
+    interaction_card(p, tab, size, win, new_direction_x, new_direction_y, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
     refresh();
     sleep(3);
     //interaction_card(p, newcard, key, win);
@@ -394,6 +397,91 @@ new_direction_x==6) || (new_direction_y==4 && new_direction_x==1)  ||
     (*p).y = new_direction_y;
     refresh();
 
+}
+
+void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
+    //if (event == 1){
+    do{
+        int randevent = rand() %11;
+        if (randevent == 0 && e1==1){
+            printw(" ... /n/n Sérieusement...?/n ");
+            const char* rickRollURL = "https://youtu.be/xLGktQmtR5A";        // Lien vers la vidéo de Rick Astley en 8 bit
+            const char* browser = "xdg-open";                                // Commande pour ouvrir l'URL avec le navigateur par défaut sur Linux
+            execlp(browser, browser, rickRollURL, NULL);                    // Lancement du navigateur avec l'URL du Rick Roll
+            e1 = 0;
+            return ;
+        }
+        
+        if (randevent == 1 && e2==1){
+            printw ("Une harpie sauvage apparaît! « It's over Anakin, I have the highground! », dit-elle.\n");
+            (*c).type[3]=0;
+            (*c).m.type[3]=1;
+            //change la case en monstre harpy et lance le combat. la case devient définitivement une harpy.
+            e2 = 0;
+            return;
+        }
+        
+        if (randevent == 2 && e3==1){
+            printw ("Vous voyez au loin un homme qui ne bouge pas. Vous vous approchez en pensant qu'il pourrait avoir besoin d'aide. Tous à coup, vous le voyez courrir en hurlant: LEEROY JENKINS!!! À cause de cette action, vous vous retrouvez sous une marée draconique, et mourrez, malgré tout avec l'honneur d'un grand guerrier!\n");
+            (*p).life = 0;
+            printw("Game over!\n");
+            resetPlayerPosition(p);
+            e3 = 0;
+            return;
+        }
+        if (randevent == 3 && e4==1){
+            printw ("Vous croisez une espèce de grosse tortue avec plein de pics sur sa carapace, et qui crache du feu. Elle vous regarde, et vous demande si vous n'avez pas vu une princesse blonde en robe rose. Vous lui dites que non, et par colère, il vous vole 10 petites étoiles! (si vous possédiez votre relique, elle est retournée à son point d'emplacement)\n");
+            if ((*p).relic == 1){
+                (*p).relic = 0; 
+            }
+            e4 = 0;
+            return;
+        }
+        if (randevent==4 && e5==1){
+            printw ("Un spectacle d'horreur se déroule devant vous ! Un pauvre poisson-clown hors de l'eau semble pleurer tout en ne pouvant pas respirer.\n Il semble répéter sans cesse ces mêmes mots :\n   « Vous n'avez pas vu mon fils ?\n Vous n'avez pas vu mon fils ?\n Vous n'avez pas vu mon... » \nLe manque d'oxygen a eu raison de lui. Vous avez désormais un nouvel objectif : après être sorti victorieux de ce labyrinthe infernal, vous vous mettrez à la recherche de ce fameux « fils ».\n");
+            e5 = 0;
+            return;
+        }
+        if (randevent==5 && e6==1){
+            printw ("Vous croisez un énorme tuyau fait de métal. Intrigué, vous vous approchez et entendez une étrange voix dans votre tête : Il faut suivre le conduit. Ne sachant ce qu'est ce fameux « conduit », vous continuez votre route.\n");
+            e6 = 0;
+            return;
+        }
+        
+        if (randevent==6 && e7==1){
+            printw ("Un homme au loin vous demande comment rejoindre le « Sunny ». Il a les cheveux verts, comme si de la mousse lui avait poussé sur la tête. Il porte trois sabres au niveau de la ceinture, il paraît vraiment louche. Vous lui montrez une direction aléatoire en espérant qu'il vous laisse enfin tranquille. Il part dans la direction inverse complète. Quelle étrange rencontre !\n");
+            e7=0;
+            return;
+        }
+             
+        if (randevent==7 && e8==1){
+            printw ("Vous voyez une sorte de scientifique au loin. En essayant de vous approcher, vous voyez une sorte d'écran apparaître avec marqué dessus : « Fun value invalid ». \nVoyant que vous ne pouvez pas continuer, vous décidez d'abandonner et de continuer votre périple.\n");
+            e8=0;
+            return;
+        }
+    
+        if (randevent==8 && e9==1){
+            printw ("En vous baladant, vous tombez sur une étrange famille de deux squelettes. L'un petit, portant des habits rouge et blanc. Son frère, plus petit, porte un sweet à capuche bleu et un pantalon noir. Pour éviter tout combat inutile, vous attendez un peu que le temps passe.\n");
+            e9 = 0;
+            return;
+        }
+    
+        if (randevent==9 && e10==1){
+            printw ("Vous trouvez un parchemin ancien ! Quel secret cache t-il ? \nVous l'ouvrez et le contemplez. Il est écrit : « Seul Link peut vaincre Ganon. ». Du fait que vous ne vous nommez ni Link, ni Ganon, vous jetez ce torchon inutile.\n");
+            e10 = 0;
+            return;
+        }
+            
+        if (randevent==10 && e11==1){
+            printw ("Vous rencontrez au détour de ce labyrinthe un vieil homme. Il prétend être le directeur d'un lycée spécialisé en magie très connu : le Lycée Magique George Pompidou. Il exprime même l'envie de vous faire entrer dans son lycée, dans la classe de « Nintendor ». Vous acceptez, et par conséquent, il se mit à hurler : « 100.000 points pour Nintendor! »\n.");
+            e11 = 0;
+            return;
+        }
+        //else{
+        //    printw ("Continuez votre route brave combattant !\n");
+        //    return ;
+        //}
+    } while(e1==1 || e2==1 || e3==1 || e4==1 || e5==1 || e6==1 || e7==1 || e8==1 || e9==1 || e10==1 || e11==1);          
 }
 
 
@@ -406,10 +494,12 @@ void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, i
     int forbidden = 0;
     card newcard;
     card* pnewcard = & newcard;				// pnewcard : pointe vers la carte ou on veut aller
+    int x_newcard = 0;
+    int y_newcard = 0;
 
     //si le joueur est coincé entre 4 murs (ou cartes dévoilé) -> MORT
     if (  ( (*(tab + ((*p).y-1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y-1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y+1)*size + (*p).x)).wall == 1 || (*(tab + ((*p).y+1)*size + (*p).x)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x-1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x-1)).hidden == 1 )  &&  ( (*(tab + ((*p).y)*size + (*p).x+1)).wall == 1 || (*(tab + ((*p).y)*size + (*p).x+1)).hidden == 1)  ){
-        (*p).life=0;
+        (*p).life = 0;
         wprintw(win, "Game Over ! %s est mort\n", (*p).nom);
         wrefresh(win);
     }
@@ -439,6 +529,8 @@ void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, i
                     }
                     else{
                         pnewcard = (tab + ((*p).y-1)*size + (*p).x);
+                        x_newcard = (*p).x;
+                        y_newcard = ((*p).y-1);
                     }
                     break;
 
@@ -448,6 +540,8 @@ void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, i
                     }
                     else{
                         pnewcard = (tab + ((*p).y+1)*size + (*p).x);
+                        x_newcard = (*p).x;
+                        y_newcard = ((*p).y+1);
                     }
                     break;
 
@@ -457,6 +551,8 @@ void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, i
                     }
                     else{
                         pnewcard = (tab + ((*p).y)*size + (*p).x+1);
+                        x_newcard = (*p).x+1;
+                        y_newcard = ((*p).y);
                     }
                     break;
 
@@ -466,6 +562,8 @@ void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, i
                     }
                     else{
                         pnewcard = (tab + ((*p).y)*size + (*p).x-1);
+                        x_newcard = (*p).x-1;
+                        y_newcard = ((*p).y);
                     }
                     break;
 
@@ -477,10 +575,12 @@ void play(Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, i
     return_card(pnewcard);        //retourne la carte ou on va pdt 3s
     show_board(tab, size);
     refresh();
-    sleep(3);                    //ON S'EST ARRETE LA 13h05
-    interaction_card(p, pnewcard, key, win, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, size);
+    sleep(3);
+    interaction_card(p, tab, size, win, x_newcard, y_newcard, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
     //bouger que si on gagne : void interaction_card(Player* p, card* c);
-    perso_move(p, tab, size, key);
+    if ((*p).life == 1){
+        perso_move(p, tab, size, x_newcard, y_newcard);
+    }
 }
 
 
@@ -533,8 +633,9 @@ void choose_weapon(Player* p, WINDOW* win){
     }
 }
 
-void interaction_card(Player* p, card* c, int key, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11, int size){
+void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard, int y_newcard, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
     //COMBAT AVEC LE MONSTRE fait (si il y en a)
+    card *c = tab + y_newcard*size + x_newcard;
     combat(p, c);
 
     if ((*c).type[0]==1){
@@ -582,10 +683,10 @@ void interaction_card(Player* p, card* c, int key, WINDOW* win, int e1, int e2, 
     }
 
     else if ((*c).type[3]==1){
-        Event(c, p, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);		//cf PROCEDURE ALEXIS ATTENTION INITIALISATION EVENT
+        Event(c, p, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
     }
     else if ((*c).type[2]==1){
-        Portal(p,c, size, win);
+        Portal(p, c, size, win);
     }
 
     else if ((*c).type[1]==1){
@@ -647,25 +748,9 @@ void combat(Player* p, card* c) {
 }
 
 //Déplace joueur sur une case du tableau
-void perso_move(Player* p, card* tab, int size, int key){		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
-
-    switch (key){           //Vérifie que la saisie de déplacement est correcte (pas de char) et possible (pas vers un wall) case KEY_UP :
-            (*p).y ++;					//le joueur va sur la case break;
-
-        case KEY_DOWN :
-            (*p).y --;					//le joueur va sur la case break;
-
-        case KEY_RIGHT :
-            (*p).x ++;					//le joueur va sur la case break;
-
-        case KEY_LEFT :
-            (*p).x --;					//le joueur va sur la case break;
-
-        default :
-            printw("ERREUR au moment de la saisie de déplacement du joueur. Veuillez réessayer avec les flèches haut, bas, droite ou gauche");
-            break;
-    }
-    refresh();
+void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard){		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
+    (*p).x = x_newcard;
+    (*p).y = y_newcard;
 }
 
 
@@ -946,7 +1031,7 @@ int main() {
             (*(tab_player[r])).move ++;
         } while( (*(tab_player[r])).life==1 && ((*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1));
         e1=1, e2=1, e3=1, e4=1, e5=1, e6=1, e7=1, e8=1, e9=1, e10=1, e11=1;
-     } while ( (*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1 );        //condition de VICTOIRE
+    } while ( (*(tab_player[r])).relic!=1 || (*(tab_player[r])).treasure!=1 );        //condition de VICTOIRE
 
       show_board(game, SIZE);
       clear();
