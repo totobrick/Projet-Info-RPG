@@ -79,8 +79,13 @@ typedef struct {
   relic r;
 } card;
 
+
+//FICHIER
+void updateScore(FILE* fichier, Player* P,char job []);
+void Score_creator(Player* P);
+
 // INITIALISATION DU JEU
-void board(card *tab, int size);
+void board(card *tab, int size, WINDOW* win_game);
 void init_wall(card *tab, int size);
 void init_board(card *tab, int size);
 void init_card(card *card1);
@@ -106,14 +111,94 @@ void combat(Player *p, card *c);
 void show_board(card *tab, int size, WINDOW* win_game);
 
 void Exchang_Totem(Player P, card c, card new_card, card tempo);
-void updateScore(FILE *fichier, Player P);
+
+
+
+
 
 /*_________________________________________________________________________________________________*/
-void board(card *tab, int size) {
-  init_wall(tab, size);
-  init_board(tab, size);
-  generate_board(tab, size);
-  // show_board (tab, size);
+                        // FICHIER
+void updateScore(FILE* fichier, Player* P, char job[]) {
+    FILE* fichierTemp = fopen("temp.txt", "w");
+    if (fichierTemp == NULL) {
+        printf("Erreur lors de l'ouverture du fichier temporaire.\n");
+        return;
+    }
+
+    char player_name[100];
+    char player_class[10];
+    strcpy(player_class, job);
+    int player_move;
+    int player_reversed;
+    int player_slay;
+    int player_chest;
+    int player_score_victory;
+    char ligne[100];
+  
+    rewind(fichier);
+  
+    while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
+        sscanf(ligne, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", player_name, player_class, &player_move, &player_reversed, &player_slay, &player_chest, &player_score_victory);
+
+        if (strcmp(player_name, (*P).nom) == 0) {
+            player_move += (*P).move;
+            player_reversed += (*P).reversed;
+            player_slay += (*P).slay;
+            player_chest += (*P).chest;
+            player_score_victory += (*P).Score_victory;
+
+            fprintf(fichierTemp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", player_name, player_class, player_move, player_reversed, player_slay, player_chest, player_score_victory);
+        } else {
+            fprintf(fichierTemp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", player_name, player_class, player_move, player_reversed, player_slay, player_chest, player_score_victory);
+        }
+    }
+
+    fclose(fichier);
+    fclose(fichierTemp);
+
+    remove("Score.txt");
+    rename("temp.txt", "Score.txt");
+}
+
+void Score_creator(Player* P) {
+    FILE* fichier = fopen("Score.txt", "a+");
+
+    if (fichier == NULL) {
+        printf("Erreur lors de l'ouverture du fichier.\n");
+        return;
+    }
+
+    char job[10];
+    if ((*P).class == 1) {
+        strcpy(job, "Magicien");
+    } else if ((*P).class == 2) {
+        strcpy(job, "Guerrier");
+    } else if ((*P).class == 3) {
+        strcpy(job, "Ranger");
+    } else {
+        strcpy(job, "Voleur");
+    }
+
+    fseek(fichier, 0, SEEK_END);
+    long file_weight = ftell(fichier);
+
+    if (file_weight == 0) {
+        fprintf(fichier, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", (*P).nom, job, (*P).move, (*P).reversed, (*P).slay,(*P).chest, (*P).Score_victory);
+    } else {
+        updateScore(fichier, P, job);
+    }
+
+    fclose(fichier);
+}
+
+/*_________________________________________________________________________________________________*/
+void board(card *tab, int size, WINDOW* win_game) {
+    init_wall(tab, size);
+    init_board(tab, size);
+    generate_board(tab, size);
+    wclear(win_game);
+    show_board(tab, size, win_game);
+    
 }
 /*_________________________________________________________________________________________________*/
 
@@ -752,43 +837,42 @@ void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard){		
 
 // AFFICHAGE du JEU
 void show_board(card *tab, int size, WINDOW* win_game) {
+    wclear(win_game);
   for (int i = 1; i < (size - 1); i++) { // on affiche cartes par cartes
     for (int j = 1; j < (size - 1); j++) {
       wmove(win_game, i * 4, j * 10);
       if ((*(tab + i * size + j)).hidden == 0) {
-        // addch('\u25A0');					// Affiche le caractère du
-        // carré plein
-        wprintw(win_game, "\u25A0");
+        wprintw(win_game, "card");                //carte face cachée
       } else {
         if ((*(tab + i * size + j)).type[0] == 1) { // trésor
           // addstr("\u{1F4B0}");
           wprintw(win_game, "$");
         } else if ((*(tab + i * size + j)).type[1] == 1) { // totem
-          wprintw(win_game, "\U0001F5FF");
+          wprintw(win_game, "totem");
         } else if ((*(tab + i * size + j)).type[2] == 1) { // portail
-          wprintw(win_game,"\U000026E9");
+          wprintw(win_game,"portail");
         } else if ((*(tab + i * size + j)).type[3] == 1) { //événement
-          wprintw(win_game, "E");
+          wprintw(win_game, "Even.");
         }
         // Les 4 monstres
         else if ((*(tab + i * size + j)).m.type[0] == 1) { // basilique
-          wprintw(win_game, "\U0001F40D");
+          wprintw(win_game, "basilique");
         } else if ((*(tab + i * size + j)).m.type[1] == 1) { // zombie
-          wprintw(win_game, "\U0001F9DF");
+          wprintw(win_game, "zombie");
         } else if ((*(tab + i * size + j)).m.type[1] == 1) { // troll
-          wprintw(win_game, "\U0001F479");
+          wprintw(win_game, "troll");
         } else if ((*(tab + i * size + j)).m.type[1] == 1) { // harpie
-          wprintw(win_game, "\U0001F426");
+          wprintw(win_game, "harpie");
         }
         // Les 4 reliques (armes antiques)
         else if ((*(tab + i * size + j)).r.type[0] == 1) { // baton
-          wprintw(win_game, "\U0001F3D1");
+          wprintw(win_game, "baton");
         } else if ((*(tab + i * size + j)).r.type[1] == 1) { //épée
-          wprintw(win_game, "\U00002694");
+          wprintw(win_game, "epee");
         } else if ((*(tab + i * size + j)).r.type[2] == 1) { // grimoire
-          wprintw(win_game, "\U0001F4D6");
+          wprintw(win_game, "grimoire");
         } else if ((*(tab + i * size + j)).r.type[3] == 1) { // dague
-          wprintw(win_game, "\U0001F5E1");
+          wprintw(win_game, "dague");
         } else {
           wprintw(win_game, "ERREUR");
         }
@@ -796,6 +880,7 @@ void show_board(card *tab, int size, WINDOW* win_game) {
     }
     printw("\n");
   }
+    wrefresh(win_game);
 }
 
 /*____________________________________________________________________________*/
@@ -1008,14 +1093,14 @@ int main() {
     srand(time(NULL));
     WINDOW* win_name = newwin(1, 120, 0, 0);    // fenêtre affichage nom joueur
     WINDOW *win_game = newwin(30, 100, 5, 10);    // fenêtre du plateau de jeu
-    WINDOW *win_interface = newwin(20, 100, 20, 40);
+    WINDOW *win_interface = newwin(20, 100, 30, 40);
     card *game;
     game = malloc(SIZE * SIZE *sizeof(card)); // game est notre plateau de jeu (tableau)
     if (game == NULL) {
       printf("Problème d'allocation de memoire pour la creation du tableau du jeu.\n");
       exit(10);
     }
-    board(game, SIZE);
+    board(game, SIZE, win_game);
     
     Player* tab_player[] = {pp1, pp2, pp3, pp4};             //tableau où il y a les 4 joueurs
     int r=-1;
