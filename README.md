@@ -19,6 +19,8 @@ Accédez au répertoire contenant le Makefile:
 
 Et de simplement écrire "make" à l'interieur du terminal, le fichier Makefile se chargera de tous, à votre place!
 
+![alt texte](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRGsbghQW4T18ZHLBUvr0dpVF-PAfpZ-XIeg&usqp=CAU)
+
 Enfin, pour executer, il vous suffira d'écrire "./exec_TPA", et le programme se lancera!
 
 
