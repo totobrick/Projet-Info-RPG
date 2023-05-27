@@ -1,22 +1,98 @@
   
 Couleur:
-
-#include "Header.h"
+#include <ncurses.h>
 
 int main() {
-    // Séquence d'échappement ANSI pour définir la couleur du texte en rouge
-    printf("\033[31mTexte en rouge\033[0m\n");
+    // Initialisation de NCurses
+    initscr();
+    start_color();
 
-    // Séquence d'échappement ANSI pour définir la couleur du fond en bleu et la couleur du texte en blanc
-    printf("\033[44;37mTexte sur fond bleu\033[0m\n");
+    // Vérification de la prise en charge des couleurs
+    if (!has_colors()) {
+        endwin();
+        printf("Le terminal ne prend pas en charge les couleurs.\n");
+        return 1;
+    }
+
+    // Initialisation des paires de couleurs
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    init_pair(3, COLOR_BLUE, COLOR_BLACK);
+    init_pair(4, COLOR_YELLOW, COLOR_BLACK);
+    init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
+    init_pair(6, COLOR_CYAN, COLOR_BLACK);
+    init_pair(7, COLOR_WHITE, COLOR_BLACK);
+    init_pair(8, COLOR_BLACK, COLOR_RED);
+    init_pair(9, COLOR_BLACK, COLOR_GREEN);
+    init_pair(10, COLOR_BLACK, COLOR_BLUE);
+    init_pair(11, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(12, COLOR_BLACK, COLOR_MAGENTA);
+    init_pair(13, COLOR_BLACK, COLOR_CYAN);
+
+    // Affichage du texte en couleur
+    attron(COLOR_PAIR(1));
+    printw("Texte en rouge\n");
+    attroff(COLOR_PAIR(1));
+
+    attron(COLOR_PAIR(2));
+    printw("Texte en vert\n");
+    attroff(COLOR_PAIR(2));
+
+    attron(COLOR_PAIR(3));
+    printw("Texte en bleu\n");
+    attroff(COLOR_PAIR(3));
+
+    attron(COLOR_PAIR(4));
+    printw("Texte en jaune\n");
+    attroff(COLOR_PAIR(4));
+
+    attron(COLOR_PAIR(5));
+    printw("Texte en magenta\n");
+    attroff(COLOR_PAIR(5));
+
+    attron(COLOR_PAIR(6));
+    printw("Texte en cyan\n");
+    attroff(COLOR_PAIR(6));
+
+    attron(COLOR_PAIR(7));
+    printw("Texte en blanc\n");
+    attroff(COLOR_PAIR(7));
+
+    attron(COLOR_PAIR(8));
+    printw("Texte noir sur fond rouge\n");
+    attroff(COLOR_PAIR(8));
+
+    attron(COLOR_PAIR(9));
+    printw("Texte noir sur fond vert\n");
+    attroff(COLOR_PAIR(9));
+
+    attron(COLOR_PAIR(10));
+    printw("Texte noir sur fond bleu\n");
+    attroff(COLOR_PAIR(10));
+
+    attron(COLOR_PAIR(11));
+    printw("Texte noir sur fond jaune\n");
+    attroff(COLOR_PAIR(11));
+
+    attron(COLOR_PAIR(12));
+    printw("Texte noir sur fond magenta\n");
+    attroff(COLOR_PAIR(12));
+
+    attron(COLOR_PAIR(13));
+    printw("Texte noir sur fond cyan\n");
+    attroff(COLOR_PAIR(13));
+
+    // Rafraîchissement de l'écran
+    refresh();
+
+    // Attendre une touche pour quitter
+    getch();
+
+    // Restaurer les paramètres par défaut de NCurses et quitter
+    endwin();
 
     return 0;
 }
-
-/*Dans cet exemple, nous utilisons la séquence d'échappement \033[ pour indiquer le début d'une séquence d'échappement ANSI. Ensuite, nous utilisons des codes spécifiques pour définir les attributs de texte,
-tels que la couleur du texte et du fond. Le code 31 indique la couleur rouge, le code 44 indique le fond bleu et le code 37 indique le texte blanc. La séquence d'échappement \033[0m est utilisée pour réinitialiser
-les attributs de texte par défaut.*/
-
 
 
 //Joueur
@@ -59,85 +135,3 @@ printf("\U0001F3C6");//Trophée (victoire) emoticon
 
 
 // site : https://unicode-explorer.com/emoji/
-
-
-
-#include <ncurses.h>
-#include <wchar.h>
-
-int main() {
-    initscr();      // Initialise la bibliothèque ncurses
-    cbreak();       // Désactive la mise en mémoire tampon de ligne
-    noecho();       // Désactive l'affichage automatique des caractères saisis
-    curs_set(0);    // Masque le curseur
-
-    wchar_t emoji = L'\U0001F9D9';   // Code Unicode de l'emoji
-
-    addwch(emoji);  // Affiche l'emoji en utilisant addwch()
-
-    refresh();      // Rafraîchit l'écran
-    getch();        // Attend une saisie de l'utilisateur
-    endwin();       // Ferme la fenêtre ncurses et restaure le terminal
-
-    return 0;
-}
-
-
-
-
-#include <ncurses.h>
-#include <wchar.h>
-
-int main() {
-    initscr();      // Initialise la bibliothèque ncurses
-    cbreak();       // Désactive la mise en mémoire tampon de ligne
-    noecho();       // Désactive l'affichage automatique des caractères saisis
-    curs_set(0);    // Masque le curseur
-
-    wchar_t emoji = L'\u2665';  // Code Unicode de l'emoji
-    cchar_t wc;
-    setcchar(&wc, &emoji, 0);   // Initialise la structure cchar_t avec l'emoji
-
-    add_wch(&wc);   // Ajoute le caractère large à la fenêtre
-
-    refresh();      // Rafraîchit l'écran
-    getch();        // Attend une saisie de l'utilisateur
-    endwin();       // Ferme la fenêtre ncurses et restaure le terminal
-
-    return 0;
-}
-
-#include <ncurses.h>
-#include <wchar.h>
-
-int main() {
-    initscr();                  // Initialise la bibliothèque ncurses
-    cbreak();                   // Désactive la mise en mémoire tampon de ligne
-    noecho();                   // Désactive l'affichage automatique des caractères saisis
-    curs_set(0);                // Masque le curseur
-
-    wchar_t wide_char = L'♥';    // Caractère large Unicode (U+2665)
-    add_wch(&wide_char);        // Ajoute le caractère large à la fenêtre
-
-    refresh();                  // Rafraîchit l'écran
-    getch();                    // Attend une saisie de l'utilisateur
-    endwin();                   // Ferme la fenêtre ncurses et restaure le terminal
-
-    return 0;
-}
-
-
-
-#include <ncurses.h>
-#include <wchar.h>
-
-int main() {
-    initscr();              // Initialise la bibliothèque ncurses
-    printw("%lc", L'🧙');    // Affiche l'emoji magicien
-    refresh();              // Rafraîchit l'écran
-    getch();                // Attend une saisie de l'utilisateur
-    endwin();               // Ferme la fenêtre ncurses et restaure le terminal
-
-    return 0;
-}
-
