@@ -56,4 +56,6 @@ Afin que vous compreniez mieux comment fonctionne la bibliothèque ncurses, voic
 
 ## Contributions tiers et License
 
-Comme marqué précédement dans la rubrique Documentation, nous avons utilisé la bibliothèque 
+Comme marqué précédement dans la rubrique Documentation, nous avons utilisé la bibliothèque ncurses, alors voici le lien vers le site officiel:
+
+[texte](https://invisible-island.net/ncurses/)
