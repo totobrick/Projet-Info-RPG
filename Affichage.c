@@ -148,6 +148,13 @@ void updateScore(FILE* fichier, Player* P, char job[]) {
 
             fprintf(fichierTemp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", player_name, player_class, player_move, player_reversed, player_slay, player_chest, player_score_victory);
         } else {
+            // Mettre à jour les valeurs des variables dans la branche else
+            player_move = player_move;
+            player_reversed = player_reversed;
+            player_slay = player_slay;
+            player_chest = player_chest;
+            player_score_victory = player_score_victory;
+            
             fprintf(fichierTemp, "%s\t%s\t%d\t%d\t%d\t%d\t%d\n", player_name, player_class, player_move, player_reversed, player_slay, player_chest, player_score_victory);
         }
     }
@@ -158,6 +165,7 @@ void updateScore(FILE* fichier, Player* P, char job[]) {
     remove("Score.txt");
     rename("temp.txt", "Score.txt");
 }
+
 
 void Score_creator(Player* P) {
     FILE* fichier = fopen("Score.txt", "a+");
