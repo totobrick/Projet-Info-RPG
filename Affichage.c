@@ -166,7 +166,6 @@ void updateScore(FILE* fichier, Player* P, char job[]) {
     rename("temp.txt", "Score.txt");
 }
 
-
 void Score_creator(Player* P) {
     FILE* fichier = fopen("Score.txt", "a+");
 
@@ -1154,7 +1153,6 @@ int main() {
   int menu_select = 1; // les menus à sélectionner vont de 1 à 4
   wprintw(win_menu, "-> NOUVELLE PARTIE <-\n");
   wprintw(win_menu, "Tableau des scores\n");
-  wprintw(win_menu, "Regles\n");
   wprintw(win_menu, "Sortir\n");
   refresh();
   wrefresh(win_menu);
@@ -1179,9 +1177,9 @@ int main() {
       refresh();
     }
     if (menu_select <= 0) {
-      menu_select = 4;
+      menu_select = 3;
     }
-    if (menu_select > 4) {
+    if (menu_select > 3) {
       menu_select = 1;
     }
     wclear(win_menu);
@@ -1190,25 +1188,16 @@ int main() {
         case 1:
           wprintw(win_menu, "-> NOUVELLE PARTIE <-\n");
           wprintw(win_menu, "Tableau des scores\n");
-          wprintw(win_menu, "Regles\n");
           wprintw(win_menu, "Sortir\n");
           break;
         case 2:
           wprintw(win_menu, "Nouvelle partie\n");
           wprintw(win_menu, "-> TABLEAU DES SCORES <-\n");
-          wprintw(win_menu, "Regles\n");
           wprintw(win_menu, "Sortir\n");
           break;
         case 3:
           wprintw(win_menu, "Nouvelle partie\n");
           wprintw(win_menu, "Tableau des scores\n");
-          wprintw(win_menu, "-> REGLES <-\n");
-          wprintw(win_menu, "Sortir\n");
-          break;
-        case 4:
-          wprintw(win_menu, "Nouvelle partie\n");
-          wprintw(win_menu, "Tableau des scores\n");
-          wprintw(win_menu, "Regles\n");
           wprintw(win_menu, "-> SORTIR <-\n");
           break;
         default:
@@ -1367,10 +1356,6 @@ int main() {
         fclose(fichier);
   }
 
-  else if (menu_select == 3) {
-    // affiche le readme
-  }
-
   else { // SORTIR du jeu
     endwin();
     return 0;
@@ -1379,7 +1364,6 @@ int main() {
   endwin();
   return 0;
 }
-
 
 /*____________________________________________________________________________*/
     
