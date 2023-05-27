@@ -1,3 +1,5 @@
+#include "Header.h"
+
 //Déplace joueur sur une case du tableau
 void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard){		//key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
     (*p).x = x_newcard;
