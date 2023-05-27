@@ -105,9 +105,6 @@ void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard
 void combat(Player *p, card *c);
 void show_board(card *tab, int size);
 
-// void move(int table[ROWS][COLS], int* posX, int* posY, int direction);
-// void event(card* c, Player* P);
-int checkTreasure(Player *p);
 void Exchang_Totem(Player P, card c, card new_card, card tempo);
 void updateScore(FILE *fichier, Player P);
 
@@ -686,18 +683,13 @@ void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard
         Event(c, p, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
     }
     else if ((*c).type[2]==1){
-        Portal(p, c, size, win);
+        Portal (p, tab, size, win, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
     }
 
     else if ((*c).type[1]==1){
         //Totem(p,c); -> Exchang_Totem (Player P, card c,card new_card,card tempo);
         (*p).life=0;
     }
-
-    if (checkTreasure(p)==1){
-        //break;
-    }
-
 }
 
 void combat(Player* p, card* c) {
