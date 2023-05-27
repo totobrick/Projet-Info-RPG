@@ -30,6 +30,8 @@ Notre projet utilise la bibliothèque "ncurses", qui permet d'avoir un affichage
 
 En plus de cette bibliothèque, notre programme est composé de plusieurs fichier fonctionnant tous ensemble, mais ne vous en faite pas, comme dis précédement, le Makefile s'occupe de toute la partie compilation!
 
+![alt texte](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.malekal.com%2Fcomment-creer-un-fichier-sur-linux-terminal-ligne-de-commandes%2F&psig=AOvVaw0TUxKFMz2bmH85FcevQtAH&ust=1685298690074000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCMiq04CRlv8CFQAAAAAdAAAAABBZ)
+
 
 # Exemple
 
