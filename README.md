@@ -3,13 +3,13 @@
 
 ## Description brève
 
-Notre projet est un Memory, dans lequel vous incarnez un des quatre personnages disponibles, à la recherche d'une relique mythique, et d'un ancien trésore caché. Lors de votre recherche, vous devrez combattre de nombreux monstres et serez confrontez a de nombreux dangers! 
-Dans ce jeux, vous pourrez vous déplacez, de bas en haut, et de gauche à droite, mais attention! Vous devrez vous souvenir des cases vu par vous et le autres joueurs, car elles deviendront invisible à chaque fois que l'un d'entre vous perd et retourne à son point de départ!
+Notre projet est un Memory, dans lequel vous incarnez un des quatre personnages disponibles, à la recherche d'une relique mythique, et d'un ancien trésor caché. Lors de votre recherche, vous devrez combattre de nombreux monstres et serez confrontés à de nombreux dangers! 
+Dans ce jeu, vous pourrez vous déplacez, de bas en haut, et de gauche à droite, mais attention! Vous devrez vous souvenir des cases vu par vous et le autres joueurs, car elles deviendront invisibles à chaque fois que l'un d'entre vous perd et retourne à son point de départ!
 
 
 ## Compilation et execution
 
-Grâçe au makefile, rien de plus simple! Il vous suffit d'ouvrir votre terminal:
+Grace au makefile, rien de plus simple! Il vous suffit d'ouvrir votre terminal:
 
 ![alt texte](https://azurplus.fr/wp-content/uploads/1612494018_Comment-commencer-a-utiliser-le-terminal-Linux.png)
 
@@ -17,7 +17,7 @@ Grâçe au makefile, rien de plus simple! Il vous suffit d'ouvrir votre terminal
 
 ![alt texte](https://www.jetestelinux.com/wp-content/uploads/2016/03/rmdir.png)
 
-2. Et de simplement écrire "make" à l'interieur du terminal, le fichier Makefile se chargera de tous, à votre place!
+2. Et de simplement écrire "make" à l'intérieur du terminal, le fichier Makefile se chargera de tous, à votre place!
 
 ![alt texte](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxGQjtvwVysznhXwRDiexpv8UCTxYQL1rrfA&usqp=CAU)
 
@@ -49,31 +49,31 @@ Comme on pourrait s'y attendre, cette fonction est la fonction qui nous permet d
 
 ## Documentation
 
-Afin que vous compreniez mieux comment fonctionne la bibliothèque ncurses, voici un lien vous enmenant vers un site vous expliquant comment cette bibliothèque foctionne et comment l'obtenir et lu'tilisé si besoin:
+Afin que vous compreniez mieux comment fonctionne la bibliothèque ncurses, voici un lien vous enmenant vers un site vous expliquant comment cette bibliothèque fonctionne et comment l'obtenir et l'utiliser si besoin :
 
 [texte](https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/)
 
 
 ## Contributions tiers et License
 
-Comme marqué précédement dans la rubrique Documentation, nous avons utilisé la bibliothèque ncurses, alors voici le lien vers le site officiel:
+Comme marqué précédement dans la rubrique Documentation, nous avons utilisé la bibliothèque ncurses, alors voici le lien vers le site officiel :
 
 [texte](https://invisible-island.net/ncurses/)
 
 
 ## Auteurs et remerciments
 
-Nous avons donc été à trois à travailler sur ce projet:
-- Thomas
+Nous avons donc été trois à travailler sur ce projet:
+- Thomas RYKACZEWSKI
 - Pierre GUESDON
 - Alexis BERTRAND
 
-Nous tenions tous de même a remercier notre professeur d'informatique, ANSERMIN Eva, qui a su nous aider et répondre dès que nous avions une question.
+Nous tenions tous de même à remercier notre professeur d'informatique, ANSERMIN Eva, qui a su nous aider et répondre dès que nous avions une question.
 
 
 ## Statut du projet
 
-Notre équipe part du principe qu'un projet n'est jamais complètement fini, en effet, nous pensons qu'on peut toujours tous améliorer. Malgré tous, nous pensons tous aujourd'hui qu'il est préférable pour nous d'avancer et de partir sur un autre projet, qui pourrait nous permettre d'avance encore plus de le monde de la programation.
+Notre équipe part du principe qu'un projet n'est jamais complètement fini, en effet, nous pensons qu'on peut toujours tout améliorer. Malgré tout, nous pensons tous aujourd'hui qu'il est préférable pour nous d'avancer et de partir sur un autre projet, qui pourrait nous permettre d'avance encore plus de le monde de la programmation.
 
 
 ![alt texte](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSipKWizbCNxkO2fYXV8z6HpnDWoDvnmnsWdw&usqp=CAU)
