@@ -159,13 +159,18 @@ void create_player(Player *p, WINDOW *win, int c1, int c2, int c3, int c4) {
 
 void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11){
     
+    move(1,0);
     wclear(win);
     wmove(win, 0, 0);
-    choose_weapon(p, win);
+    show_board(tab, size, win_game);
+    choose_weapon(p, win, win_game);
+    show_board(tab, size, win_game);
+    move(1,0);
+    wclear(win_game);
     int key = 0;		            //récupèrera la touche appuyée
     int forbidden = 0;
     card newcard;
-    card* pnewcard = & newcard;				// pnewcard : pointe vers la carte ou on veut aller
+    card* pnewcard = &newcard;				// pnewcard : pointe vers la carte ou on veut aller
     int x_newcard = 0;
     int y_newcard = 0;
 
@@ -174,6 +179,7 @@ void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1,
         (*p).life = 0;
         wprintw(win, "Game Over ! %s est mort\n", (*p).nom);
         wrefresh(win);
+        sleep(5);
     }
 
     else {
@@ -247,6 +253,7 @@ void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1,
     }
     return_card(pnewcard);        //retourne la carte ou on va pdt 3s
     show_board(tab, size, win_game);
+    move(0,1);
     refresh();
     sleep(3);
     interaction_card(p, tab, size, win, x_newcard, y_newcard, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11);
@@ -259,7 +266,7 @@ void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1,
 
 
 
-void choose_weapon(Player* p, WINDOW* win){
+void choose_weapon(Player* p, WINDOW* win, WINDOW* win_game){
     wclear(win);
     wmove(win, 0, 0);
     wprintw(win, "Choisissez votre arme : \n");
@@ -268,10 +275,13 @@ void choose_weapon(Player* p, WINDOW* win){
     wprintw(win, "    3. Hache\n");
     wprintw(win, "    4. Arc\n");
     wrefresh(win);
+    wrefresh(win_game);
+    move(1,0);
 
     int choice = 0;
     do {
         choice = 0;
+        wmove(win, 6, 0);
         wprintw(win, "Votre choix : ");
         wrefresh(win);
         choice = getch();
