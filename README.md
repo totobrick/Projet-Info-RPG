@@ -37,9 +37,32 @@ En plus de cette bibliothèque, notre programme est composé de plusieurs fichie
 
 ## Exemple
 
+(''')
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(''')
 
 
 ## Documentation
 
+Afin que vous compreniez mieux comment fonctionne la bibliothèque ncurses, voici un lien vous enmenant vers un site vous expliquant comment cette bibliothèque foctionne et comment l'obtenir et lu'tilisé si besoin:
+
 [texte](https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/)
+
+
+## Contributions tiers et License
+
