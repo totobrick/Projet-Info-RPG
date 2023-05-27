@@ -37,7 +37,7 @@ En plus de cette bibliothèque, notre programme est composé de plusieurs fichie
 
 ## Exemple
 
-(''')
+```
 
 
 
@@ -54,7 +54,7 @@ En plus de cette bibliothèque, notre programme est composé de plusieurs fichie
 
 
 
-(''')
+```
 
 
 ## Documentation
