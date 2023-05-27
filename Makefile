@@ -4,7 +4,7 @@ LDFLAGS = -lncurses
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-EXECUTABLE = exec
+EXECUTABLE = exec_TPA
 
 all: $(EXECUTABLE)
 
