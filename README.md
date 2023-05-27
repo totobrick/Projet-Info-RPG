@@ -30,7 +30,7 @@ Notre projet utilise la bibliothèque "ncurses", qui permet d'avoir un affichage
 
 En plus de cette bibliothèque, notre programme est composé de plusieurs fichier fonctionnant tous ensemble, mais ne vous en faite pas, comme dis précédement, le Makefile s'occupe de toute la partie compilation!
 
-![alt texte](https://www.malekal.com/wp-content/uploads/2022/03/Creer-plusieurs-fichiers-commande-touch-Linux.jpg)
+![alt texte](https://user.oc-static.com/upload/2019/07/03/15621610186591_ls%20-la.PNG)
 
 
 # Exemple
