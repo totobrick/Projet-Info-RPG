@@ -45,7 +45,7 @@ typedef struct {
 typedef struct {
   int num;       // de 1 à 4 => n° du joueur
   char nom[100]; // ATTENTION depasement tableau
-  int class;     // Magicien, guerrier, ranger, voleur
+  int classe;     // Magicien, guerrier, ranger, voleur
   weapons w;     // 1=Bouclier, 1=Torche, 2=Hache, 3=Arc
   int relic;     // 0,1
   int treasure;  // 0=non, 1=oui
@@ -78,8 +78,14 @@ typedef struct {
   relic r;
 } card;
 
+
+//FICHIER
+void updateScore(FILE* fichier, Player* P,char job []);
+void Score_creator(Player* P);
+
 // INITIALISATION DU JEU
-void board(card *tab, int size);
+void board(card *tab, int size, WINDOW* win_game);
+void hide_board(card *tab, int size, WINDOW* win_game);
 void init_wall(card *tab, int size);
 void init_board(card *tab, int size);
 void init_card(card *card1);
@@ -90,28 +96,17 @@ void resetPlayerPosition(Player *p);
 
 // AVANT DE JOUER
 int nb_player(WINDOW *win);
-void create_player(Player *p, WINDOW *win);
+void create_player(Player *p, WINDOW *win, int c1, int c2, int c3, int c4);
 
 // DURANT LE JEU
 void return_card(card* c);
 void Portal (Player* p, card* tab, int size, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
-void Event(card *c, Player *p, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
+void Exchang_Totem (Player* p, card* c, card* tab,int size, WINDOW* win);
+void Event(card *c, Player *p, WINDOW* win, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
 
 void perso_move(Player* p, card* tab, int size, int x_newcard, int y_newcard); // key = KEY_UP ou KEY_DOWN ou KEY_RIGHT ou KEY_LEFT
 void play(Player* p, card* tab, int size, WINDOW* win, WINDOW* win_game, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
-void choose_weapon(Player *p, WINDOW *win);
+void choose_weapon(Player *p, WINDOW *win, WINDOW* win_game);
 void interaction_card(Player *p, card* tab, int size, WINDOW *win, int x_newcard, int y_newcard, int e1, int e2, int e3, int e4, int e5, int e6, int e7, int e8, int e9, int e10, int e11);
-void combat(Player *p, card *c);
+void combat(Player *p, card *c, WINDOW* win);
 void show_board(card *tab, int size, WINDOW* win_game);
-
-void Exchang_Totem(Player P, card c, card new_card, card tempo);
-void updateScore(FILE *fichier, Player P);
-
-/*_________________________________________________________________________________________________*/
-void board(card *tab, int size) {
-  init_wall(tab, size);
-  init_board(tab, size);
-  generate_board(tab, size);
-  // show_board (tab, size);
-}
-/*_________________________________________________________________________________________________*/
