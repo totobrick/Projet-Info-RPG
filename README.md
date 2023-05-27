@@ -56,3 +56,4 @@ Afin que vous compreniez mieux comment fonctionne la bibliothèque ncurses, voic
 
 ## Contributions tiers et License
 
+Comme marqué précédement dans la rubrique Documentation, nous avons utilisé la bibliothèque 
